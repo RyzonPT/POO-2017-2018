@@ -10,6 +10,7 @@ public class Faturas
      * natureza da despesa, isto é, a actividade económica a que diz respeito;
      * valor da despesa.
     */
+   private int faturaID;
    private String nomeEmpresa;
    private String moradaEmpresa;
    private String emailEmpresa;
@@ -26,6 +27,7 @@ public class Faturas
    private int nifCliente;
    
    public Faturas(){
+       faturaID = 0;
        nomeEmpresa = "n/a";
        moradaEmpresa = "n/a";
        emailEmpresa = "n/a";
@@ -42,8 +44,9 @@ public class Faturas
        nifCliente = 0;
     }
     
-    public Faturas(String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, LocalDate data, String nomeProduto, int quantidadeProduto, String actividadeEconomica, 
+    public Faturas(int faturaID,String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, LocalDate data, String nomeProduto, int quantidadeProduto, String actividadeEconomica, 
     double valor, double deducao, String nomeCliente, String moradaCliente, String emailCliente, int nifCliente){
+       this.faturaID= faturaID;
        this.nomeEmpresa = nomeEmpresa;
        this.moradaEmpresa = moradaEmpresa;
        this.emailEmpresa = emailEmpresa;
@@ -61,20 +64,25 @@ public class Faturas
     }
     
     public Faturas(Faturas c){
-       nomeEmpresa = getnomeEmpresa();
-       moradaEmpresa = getmoradaEmpresa();
-       emailEmpresa = getemailEmpresa();
-       nifEmpresa = getnifEmpresa();
+       faturaID = c.getfaturaID();
+       nomeEmpresa = c.getnomeEmpresa();
+       moradaEmpresa = c.getmoradaEmpresa();
+       emailEmpresa = c.getemailEmpresa();
+       nifEmpresa = c.getnifEmpresa();
        data = LocalDate.now();
-       nomeProduto = getnomeProduto();
-       quantidadeProduto = getquantidadeProduto();
-       actividadeEconomica = getactividadeEconomica();
-       valor = getvalor();
-       deducao = getdeducao();
-       nomeCliente = getnomeCliente();
-       moradaCliente = getmoradaCliente();
-       emailCliente = getemailCliente();
-       nifCliente = getnifCliente();
+       nomeProduto = c.getnomeProduto();
+       quantidadeProduto = c.getquantidadeProduto();
+       actividadeEconomica = c.getactividadeEconomica();
+       valor = c.getvalor();
+       deducao = c.getdeducao();
+       nomeCliente = c.getnomeCliente();
+       moradaCliente = c.getmoradaCliente();
+       emailCliente = c.getemailCliente();
+       nifCliente = c.getnifCliente();
+    }
+    
+    public int getfaturaID(){
+        return this.faturaID;
     }
     
     public String getnomeEmpresa(){
@@ -131,6 +139,9 @@ public class Faturas
     
     public int getnifCliente(){
         return nifCliente;
+    }
+    public void setfaturaID(int faturaID){
+        this.faturaID= faturaID;
     }
 
     public void setnomeEmpresa(String nomeEmpresa){
