@@ -1,4 +1,4 @@
-
+import java.time.LocalDate;
 public class EntidadeEmpresas extends FichaCliente
 {
     /**
@@ -11,7 +11,7 @@ public class EntidadeEmpresas extends FichaCliente
      * valor da despesa.
     */
    private String designacao;
-   private int data;
+   private LocalDate data;
    private int numeroFiscalCliente;
    private String descricaoDaDespesa;
    private String actividadeEconomica;
@@ -20,7 +20,7 @@ public class EntidadeEmpresas extends FichaCliente
    
    public EntidadeEmpresas(){
        this.designacao = "";
-       this.data = 0;
+       this.data = LocalDate.now();
        this.numeroFiscalCliente = 0;
        this.descricaoDaDespesa = "";
        this.actividadeEconomica = "";
@@ -28,7 +28,7 @@ public class EntidadeEmpresas extends FichaCliente
        this.deducao = 0;
     }
     
-    public EntidadeEmpresas(String designacao, int data, int numeroFiscalCliente, String descricaoDaDespesa, String actividadeEconomica, int valor, int deducao){
+    public EntidadeEmpresas(String designacao, LocalDate data, int numeroFiscalCliente, String descricaoDaDespesa, String actividadeEconomica, int valor, int deducao){
        this.designacao = designacao;
        this.data = data;
        this.numeroFiscalCliente = numeroFiscalCliente;
@@ -52,7 +52,7 @@ public class EntidadeEmpresas extends FichaCliente
         return this.designacao;
     }
     
-    public int getData(){
+    public LocalDate getData(){
         return this.data;
     }
     
@@ -80,7 +80,7 @@ public class EntidadeEmpresas extends FichaCliente
         this.designacao = designacao;
     }
     
-    public void setData(int data){
+    public void setData(LocalDate data){
         this.data = data;
     }
     
@@ -112,11 +112,11 @@ public class EntidadeEmpresas extends FichaCliente
         if(obj==this) return true;
         if(obj==null || obj.getClass() != this.getClass()) return false;
         EntidadeEmpresas le = (EntidadeEmpresas) obj;
-        return le.getDesignacao()==this.designacao &&
-               le.getData()==this.data &&
+        return designacao.equals(le.getDesignacao()) &&
+               data.equals(le.getData()) &&
                le.getNumeroFiscalCliente()==this.numeroFiscalCliente &&
-               le.getDescricaoDaDespesa()==this.descricaoDaDespesa &&
-               le.getActividadeEconomica()==this.actividadeEconomica &&
+               descricaoDaDespesa.equals(le.getDescricaoDaDespesa()) &&
+               actividadeEconomica.equals(le.getActividadeEconomica()) &&
                le.getValor()==this.valor &&
                le.getDeducao()==this.deducao;
     }

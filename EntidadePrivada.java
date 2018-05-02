@@ -33,7 +33,6 @@ public class EntidadePrivada extends FichaCliente
     }
 
     public ArrayList<int[]> getNumerosFiscais(){
-        
         return (ArrayList<int[]>)numerosFiscais.clone();
     }
     
@@ -43,8 +42,9 @@ public class EntidadePrivada extends FichaCliente
     }
 
     public ArrayList<int[]> getCodigosAtividades(){
-        return this.codigosAtividades;
+        return (ArrayList<int[]>)codigosAtividades.clone();
     }
+    
 
     public void setAgregadoFamiliar(int AgregadoFamiliar){
         this.agregadoFamiliar = agregadoFamiliar;
@@ -59,7 +59,7 @@ public class EntidadePrivada extends FichaCliente
     }
 
     public void setCodigosAtividades(ArrayList<int[]> codigosAtividades){
-        this.codigosAtividades=codigosAtividades;
+        this.codigosAtividades=(ArrayList<int[]>)codigosAtividades.clone();
     }
 
     public EntidadePrivada clone() {
@@ -71,8 +71,8 @@ public class EntidadePrivada extends FichaCliente
         if(obj==null || obj.getClass() != this.getClass()) return false;
         EntidadePrivada le = (EntidadePrivada) obj;
         return le.getAgregadoFamiliar() == this.agregadoFamiliar &&
-        le.getNumerosFiscais()==this.numerosFiscais &&
+        this.numerosFiscais.equals(le.getNumerosFiscais()) &&
         le.getCoeficienteFiscal()==this.coeficienteFiscal &&
-              le.getCodigosAtividades()== this.codigosAtividades;
+        this.codigosAtividades.equals(le.getCodigosAtividades());
     }
 }
