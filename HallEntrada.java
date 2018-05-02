@@ -3,7 +3,7 @@
 public class HallEntrada
 {
     private String entryPassword;
-    private String entryUsername;
+    private String entryUsername; 
     
     public HallEntrada(){
         entryPassword = "n/a";
