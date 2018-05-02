@@ -36,4 +36,23 @@ public class GestaoFichas
         this.fichas.remove(nif);
     }
     
+    public String toString() {
+     StringBuffer sb = new StringBuffer();
+     for (FichaCliente e: this.fichas.values())
+       sb.append(e.toString() + "\n");
+     return sb.toString(); 
+   }
+    
+    public boolean equals( Object a ){
+        if(this==a)
+        return true;
+        if((a==null) || (this.getClass() != a.getClass()))
+        return false;
+        GestaoFichas b = (GestaoFichas) a;
+        return this.fichas.equals(b.getfichas());
+    }
+    
+    public GestaoFichas clone(){
+        return new GestaoFichas(this);
+    }
 }

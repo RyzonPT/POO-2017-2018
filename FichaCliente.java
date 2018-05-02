@@ -80,6 +80,17 @@ public class FichaCliente
         this.password = password;
     }
     
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Ficha Cliente : [");
+        sb.append("NIF: ").append(this.nif);
+        sb.append("Email: ").append(this.email);
+        sb.append("nome: ").append(this.nome);
+        sb.append("Morada: ").append(this.morada);
+        sb.append("Password: ").append(this.password);
+        return sb.toString();
+    }
+    
     public FichaCliente clone(){
         return new FichaCliente(this);
     }
@@ -87,11 +98,11 @@ public class FichaCliente
     public boolean equals(Object obj) {
         if(obj==this) return true;
         if(obj==null || obj.getClass() != this.getClass()) return false;
-        FichaCliente le = (FichaCliente) obj;
-        return le.getnif()==this.nif &&
-               le.getEmail()==this.email &&
-               le.getNome()==this.nome &&
-               le.getMorada()==this.morada &&
-               le.getPassword()==this.password;
+        FichaCliente a = (FichaCliente) obj;
+        return a.getnif()==this.nif &&
+               email.equals(a.getEmail()) &&
+               nome.equals(a.getNome()) &&
+               morada.equals(a.getMorada()) &&
+               password.equals(a.getPassword());
     }
 }
