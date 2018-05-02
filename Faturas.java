@@ -1,5 +1,5 @@
 import java.time.LocalDate;
-public class EntidadeEmpresas extends FichaCliente
+public class Faturas
 {
     /**
      * número scal do emitente;
@@ -10,46 +10,53 @@ public class EntidadeEmpresas extends FichaCliente
      * natureza da despesa, isto é, a actividade económica a que diz respeito;
      * valor da despesa.
     */
-   private String designacao;
+   private String nomeEmpresa;
+   private String moradaEmpresa;
+   private String emailEmpresa;
+   private int nifEmpresa;
    private LocalDate data;
-   private int numeroFiscalCliente;
-   private String descricaoDaDespesa;
+   private String nomeProduto;
+   private int quantidadeProduto;
    private String actividadeEconomica;
-   private int valor;
-   private int deducao;
+   private double valor;
+   private double deducao;
+   private String nomeCliente;
+   private String moradaCliente;
+   private String emailCliente;
+   private int nifCliente;
    
-   public EntidadeEmpresas(){
-       this.designacao = "";
+   public Faturas(){
+       this.nomeEmpresa = "";
        this.data = LocalDate.now();
-       this.numeroFiscalCliente = 0;
-       this.descricaoDaDespesa = "";
+       this.nifCliente = 0;
+       this.nomeProduto = "";
        this.actividadeEconomica = "";
        this.valor = 0;
        this.deducao = 0;
     }
     
-    public EntidadeEmpresas(String designacao, LocalDate data, int numeroFiscalCliente, String descricaoDaDespesa, String actividadeEconomica, int valor, int deducao){
-       this.designacao = designacao;
+    public Faturas(String nomeEmpresa, LocalDate data, int numeroFiscalCliente, String nomeProduto, String actividadeEconomica, int valor, int deducao){
+       this.nomeEmpresa = nomeEmpresa;
        this.data = data;
        this.numeroFiscalCliente = numeroFiscalCliente;
-       this.descricaoDaDespesa = descricaoDaDespesa;
+       this.nomeProduto = nomeProduto;
        this.actividadeEconomica = actividadeEconomica;
        this.valor = valor;
        this.deducao = deducao;
     }
     
-    public EntidadeEmpresas(EntidadeEmpresas c){
-        this.designacao = c.getDesignacao();
+    public Faturas(Faturas c){
+        this.nomeEmpresa = c.getnomeEmpresa();
         this.data = c.getData();
         this.numeroFiscalCliente = getNumeroFiscalCliente();
-        this.descricaoDaDespesa = getDescricaoDaDespesa();
+        this.nomeProduto = getnomeProduto();
         this.actividadeEconomica = getActividadeEconomica();
         this.valor = getValor();
         this.deducao = getDeducao();
     }
     
-    public String getDesignacao(){
-        return this.designacao;
+    public String getnomeEmpresa(){
+        return this.nomeEmpresa;
     }
     
     public LocalDate getData(){
@@ -60,24 +67,24 @@ public class EntidadeEmpresas extends FichaCliente
         return this.numeroFiscalCliente;
     }
     
-    public String getDescricaoDaDespesa(){
-        return this.descricaoDaDespesa;
+    public String getnomeProduto(){
+        return this.nomeProduto;
     }
     
     public String getActividadeEconomica(){
         return this.actividadeEconomica;
     }
     
-    public int getValor(){
+    public double getValor(){
         return this.valor;
     }
     
-    public int getDeducao(){
+    public double getDeducao(){
         return this.deducao;
     }
     
-    public void setDesignacao(String designacao){
-        this.designacao = designacao;
+    public void setnomeEmpresa(String nomeEmpresa){
+        this.nomeEmpresa = nomeEmpresa;
     }
     
     public void setData(LocalDate data){
@@ -88,8 +95,8 @@ public class EntidadeEmpresas extends FichaCliente
         this.numeroFiscalCliente = numeroFiscalCliente;
     }
     
-    public void setDescricaoDaDespesa(String descricaoDaDespesa){
-        this.descricaoDaDespesa = descricaoDaDespesa;
+    public void setnomeProduto(String nomeProduto){
+        this.nomeProduto = nomeProduto;
     }
     
     public void setActividadeEconomica(String actividadeEconomica){
@@ -104,18 +111,18 @@ public class EntidadeEmpresas extends FichaCliente
         this.deducao = deducao;
     }
     
-    public EntidadeEmpresas clone(){
-        return new EntidadeEmpresas(this);
+    public Faturas clone(){
+        return new Faturas(this);
     }
     
     public boolean equals(Object obj) {
         if(obj==this) return true;
         if(obj==null || obj.getClass() != this.getClass()) return false;
-        EntidadeEmpresas le = (EntidadeEmpresas) obj;
-        return designacao.equals(le.getDesignacao()) &&
+        Faturas le = (Faturas) obj;
+        return nomeEmpresa.equals(le.getnomeEmpresa()) &&
                data.equals(le.getData()) &&
                le.getNumeroFiscalCliente()==this.numeroFiscalCliente &&
-               descricaoDaDespesa.equals(le.getDescricaoDaDespesa()) &&
+               nomeProduto.equals(le.getnomeProduto()) &&
                actividadeEconomica.equals(le.getActividadeEconomica()) &&
                le.getValor()==this.valor &&
                le.getDeducao()==this.deducao;
