@@ -44,6 +44,6 @@ public class HallEntrada
         if(o==this) return true;
         if(o==null || o.getClass() != this.getClass()) return false;
         HallEntrada c = (HallEntrada) o;
-        return c.getentryPassword()==this.entryPassword && c.getentryUsername()==this.entryUsername;
+        return entryPassword.equals(c.getentryPassword()) && entryUsername.equals(c.getentryUsername());
     }
 }
