@@ -13,64 +13,66 @@ public class EntidadePrivada extends FichaCliente
         this.coeficienteFiscal =0;
         this.codigosAtividades = new ArrayList<>();
     }
-    
+
     public EntidadePrivada(int numeroFiscal, String email, String nome, String morada, String password, int agregadoFamiliar, ArrayList<int[]> numerosFiscais, int coeficienteFiscal,ArrayList<int[]> codigosAtividade){
         this.agregadoFamiliar =agregadoFamiliar;
         this.numerosFiscais = numerosFiscais;
         this.coeficienteFiscal = coeficienteFiscal;
         this.codigosAtividades = codigosAtividades;        
     }
-    
+
     public EntidadePrivada( EntidadePrivada c){
         this.agregadoFamiliar =c.getAgregadoFamiliar();
         this.numerosFiscais = c.getNumerosFiscais();
         this.coeficienteFiscal = c.getCoeficienteFiscal();
         this.codigosAtividades = c.getCodigosAtividades(); 
     }
-    
+
     public int getAgregadoFamiliar(){
         return this.agregadoFamiliar;
     }
-    
-    public int[] getNumerosFiscais(){
-        return this.numerosFiscais;
+
+    public ArrayList<int[]> getNumerosFiscais(){
+        
+        return (ArrayList<int[]>)numerosFiscais.clone();
     }
     
+
     public int getCoeficienteFiscal(){
         return this.coeficienteFiscal;
     }
-    
-    public int[] getCodigosAtividades(){
+
+    public ArrayList<int[]> getCodigosAtividades(){
         return this.codigosAtividades;
     }
-    
+
     public void setAgregadoFamiliar(int AgregadoFamiliar){
         this.agregadoFamiliar = agregadoFamiliar;
     }
-    
-    public void setNumerosFiscais(int[] numerosFiscais){
-        this.numerosFiscais= numerosFiscais;
+
+    public void setNumerosFiscais(ArrayList<int[]> numerosFiscais){
+        this.numerosFiscais= (ArrayList<int[]>)numerosFiscais.clone();
     }
-    
+
     public void setCoeficienteFiscal(int coeficienteFiscal){
         this.coeficienteFiscal=coeficienteFiscal;
     }
-    
-    public void setCodigosAtividades(int[] codigosAtividades){
+
+    public void setCodigosAtividades(ArrayList<int[]> codigosAtividades){
         this.codigosAtividades=codigosAtividades;
     }
-    
+
     public EntidadePrivada clone() {
         return new EntidadePrivada(this);
     }
-    
+
     public boolean equals(Object obj) {
         if(obj==this) return true;
         if(obj==null || obj.getClass() != this.getClass()) return false;
         EntidadePrivada le = (EntidadePrivada) obj;
         return le.getAgregadoFamiliar() == this.agregadoFamiliar &&
-              le.getNumerosFiscais()==this.numerosFiscais &&
-              le.getCoeficienteFiscal()==this.coeficienteFiscal &&
+        le.getNumerosFiscais()==this.numerosFiscais &&
+        le.getCoeficienteFiscal()==this.coeficienteFiscal &&
               le.getCodigosAtividades()== this.codigosAtividades;
     }
 }
