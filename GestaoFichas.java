@@ -31,4 +31,9 @@ public class GestaoFichas
     public void addFicha ( FichaCliente a){
         this.fichas.put(a.getnif(),a.clone());
     }
+    
+    public void removeFicha (Integer nif){
+        this.fichas.remove(nif);
+    }
+    
 }
