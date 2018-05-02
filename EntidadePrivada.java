@@ -2,19 +2,19 @@ import java.util.ArrayList;
 public class EntidadePrivada extends FichaCliente
 {
     private int agregadoFamiliar;
-    private ArrayList<String> numerosFiscais;
+    private ArrayList<int[]> numerosFiscais;
     private int coeficienteFiscal;
-    private int[] codigosAtividades;
+    private ArrayList<int[]> codigosAtividades;
     //private Faturas Faturas;
     public EntidadePrivada()
     {
         this.agregadoFamiliar = 0;
-        this.numerosFiscais = new int[0];
+        this.numerosFiscais = new ArrayList<>();
         this.coeficienteFiscal =0;
-        this.codigosAtividades = new int[0];
+        this.codigosAtividades = new ArrayList<>();
     }
     
-    public EntidadePrivada(int numeroFiscal, String email, String nome, String morada, String password, int agregadoFamiliar, int[] numerosFiscais, int coeficienteFiscal,int[] codigosAtividade){
+    public EntidadePrivada(int numeroFiscal, String email, String nome, String morada, String password, int agregadoFamiliar, ArrayList<int[]> numerosFiscais, int coeficienteFiscal,ArrayList<int[]> codigosAtividade){
         this.agregadoFamiliar =agregadoFamiliar;
         this.numerosFiscais = numerosFiscais;
         this.coeficienteFiscal = coeficienteFiscal;
