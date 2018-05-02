@@ -17,7 +17,7 @@ public class GestaoFichas
     }
     
     public GestaoFichas(Map<Integer,FichaCliente> fch) {
-       this.fichas = fch.values().stream().collect(Collectors.toMap((e) -> e.getNumeroFiscal(),(e) -> e.clone()));
+       this.fichas = fch.values().stream().collect(Collectors.toMap((e) -> e.getnif(),(e) -> e.clone()));
     }
     
     public GestaoFichas(GestaoFichas a){
@@ -25,10 +25,10 @@ public class GestaoFichas
     }
     
     public Map<Integer,FichaCliente> getfichas(){
-        return this.fichas.values().stream().collect(Collectors.toMap((e)->e.getNumeroFiscal(),(e)->e.clone()));
+        return this.fichas.values().stream().collect(Collectors.toMap((e)->e.getnif(),(e)->e.clone()));
     }
     
     public void addFicha ( FichaCliente a){
-        this.fichas.put(a.getNumeroFiscal(),a.clone());
+        this.fichas.put(a.getnif(),a.clone());
     }
 }

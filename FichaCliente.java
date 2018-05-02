@@ -10,14 +10,14 @@ public class FichaCliente
      * natureza da despesa, isto é, a actividade económica a que diz respeito;
      * valor da despesa.
     */
-   private int numeroFiscal;
+   private int nif;
    private String email;
    private String nome;
    private String morada;
    private String password;
    
    public FichaCliente(){
-       this.numeroFiscal = 0;
+       this.nif = 0;
        this.email = "";
        this.nome = "";
        this.morada = "";
@@ -25,7 +25,7 @@ public class FichaCliente
     }
     
     public FichaCliente(int numeroFiscal, String email, String nome, String morada, String password){
-       this.numeroFiscal = numeroFiscal;
+       this.nif = numeroFiscal;
        this.email = email;
        this.nome = nome;
        this.morada = morada;
@@ -33,15 +33,15 @@ public class FichaCliente
     }
     
     public FichaCliente(FichaCliente c){
-        this.numeroFiscal = c.getNumeroFiscal();
+        this.nif = c.getnif();
         this.email = getEmail();
         this.nome = getNome();
         this.morada = getMorada();
         this.password = getPassword();
     }
     
-    public int getNumeroFiscal(){
-        return this.numeroFiscal;
+    public int getnif(){
+        return this.nif;
     }
     
     public String getEmail(){
@@ -60,8 +60,8 @@ public class FichaCliente
         return this.password;
     }
     
-    public void setNumeroFiscal(int numeroFiscal){
-        this.numeroFiscal = numeroFiscal;
+    public void setnif(int numeroFiscal){
+        this.nif = numeroFiscal;
     }
     
     public void setEmail(String email){
@@ -88,7 +88,7 @@ public class FichaCliente
         if(obj==this) return true;
         if(obj==null || obj.getClass() != this.getClass()) return false;
         FichaCliente le = (FichaCliente) obj;
-        return le.getNumeroFiscal()==this.numeroFiscal &&
+        return le.getnif()==this.nif &&
                le.getEmail()==this.email &&
                le.getNome()==this.nome &&
                le.getMorada()==this.morada &&
