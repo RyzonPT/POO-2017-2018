@@ -36,6 +36,10 @@ public class GestaoFichas
         this.fichas.remove(nif);
     }
     
+    public FichaCliente getFicha(Integer nif){
+        return (this.fichas.get(nif)).clone();
+    }
+    
     public String toString() {
      StringBuffer sb = new StringBuffer();
      for (FichaCliente e: this.fichas.values())
