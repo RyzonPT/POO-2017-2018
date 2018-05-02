@@ -43,7 +43,7 @@ public class EntidadePrivada extends FichaCliente
     }
 
     public ArrayList<int[]> getCodigosAtividades(){
-        return this.codigosAtividades;
+        return (ArrayList<int[]>)codigosAtividades.clone();
     }
 
     public void setAgregadoFamiliar(int AgregadoFamiliar){
@@ -59,7 +59,7 @@ public class EntidadePrivada extends FichaCliente
     }
 
     public void setCodigosAtividades(ArrayList<int[]> codigosAtividades){
-        this.codigosAtividades=codigosAtividades;
+        this.codigosAtividades=(ArrayList<int[]>)codigosAtividades.clone();
     }
 
     public EntidadePrivada clone() {
