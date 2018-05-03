@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 
 public class HallEntrada
 {
@@ -45,5 +45,21 @@ public class HallEntrada
         if(o==null || o.getClass() != this.getClass()) return false;
         HallEntrada c = (HallEntrada) o;
         return entryPassword.equals(c.getentryPassword()) && entryUsername.equals(c.getentryUsername());
+    }
+    
+    public static void main (String [] args) {
+        Scanner scan1 = new Scanner (System.in);
+        System.out.println("Escreva o username...");
+        Scanner scanner1 = new Scanner(System.in);
+        String username = scanner1.nextLine();
+        System.out.println("O seu username é " + username);
+        Scanner scan2 = new Scanner (System.in);
+        System.out.println("Escreva a password...");
+        Scanner scanner2 = new Scanner(System.in);
+        String password = scanner2.nextLine();
+        System.out.println("A sua password é " + password);
+        
+        //setentryPassword(password);
+        //setentryUsername(username);
     }
 }
