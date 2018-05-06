@@ -1,4 +1,8 @@
 import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 public class HallEntrada
 {
@@ -10,7 +14,7 @@ public class HallEntrada
         entryUsername= "n/a";
     }
     
-    public HallEntrada(String entryPassword, String entryUsername){
+    public HallEntrada(String entryPassword, String entryUsername,GestaoFichas fichas){
         this.entryPassword = entryPassword;
         this.entryUsername = entryUsername;
     }
@@ -58,7 +62,6 @@ public class HallEntrada
         Scanner scanner2 = new Scanner(System.in);
         String password = scanner2.nextLine();
         System.out.println("A sua password é " + password);
-        
         //setentryPassword(password);
         //setentryUsername(username);
     }

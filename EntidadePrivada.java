@@ -5,7 +5,6 @@ public class EntidadePrivada extends FichaCliente
     private ArrayList<int[]> numerosFiscais;
     private int coeficienteFiscal;
     private ArrayList<int[]> codigosAtividades;
-    //private Faturas Faturas;
     public EntidadePrivada()
     {
         this.agregadoFamiliar = 0;

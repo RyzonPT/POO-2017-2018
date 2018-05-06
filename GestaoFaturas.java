@@ -37,7 +37,7 @@ public class GestaoFaturas
         return (this.faturas.get(faturaID)).clone();
     }
     
-    public Map<Integer,Faturas> getFaturasUser(){
+    public Map<Integer,Faturas> getFaturasUser(Integer nifCliente){
         return this.faturas.values().stream().collect(Collectors.toMap((e)->e.getnifCliente(),(e)->e.clone()));
     }
     public GestaoFaturas clone(){

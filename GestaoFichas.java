@@ -32,8 +32,24 @@ public class GestaoFichas
         this.fichas.put(a.getnif(),a.clone());
     }
     
+    public List<FichaCliente> getfichas2() {
+        List<FichaCliente> l = new ArrayList<>();
+        for(FichaCliente h : fichas.values()) {
+            l.add(h.clone());
+        }
+        return l;
+    }
+    
     public void removeFicha (Integer nif){
         this.fichas.remove(nif);
+    }
+    
+    public boolean existeFicha(int nif){
+       return fichas.containsKey(nif);
+    }
+    
+    public int quantasFichas(){
+        return fichas.size();
     }
     
     public FichaCliente getFicha(Integer nif){

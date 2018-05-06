@@ -1,4 +1,12 @@
-
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.ArrayList;
 public class FichaCliente
 {
     /**
@@ -24,8 +32,8 @@ public class FichaCliente
        this.password = "";
     }
     
-    public FichaCliente(int numeroFiscal, String email, String nome, String morada, String password){
-       this.nif = numeroFiscal;
+    public FichaCliente(int nif, String email, String nome, String morada, String password){
+       this.nif = nif;
        this.email = email;
        this.nome = nome;
        this.morada = morada;
@@ -34,10 +42,10 @@ public class FichaCliente
     
     public FichaCliente(FichaCliente c){
         this.nif = c.getnif();
-        this.email = getEmail();
-        this.nome = getNome();
-        this.morada = getMorada();
-        this.password = getPassword();
+        this.email = c.getEmail();
+        this.nome = c.getNome();
+        this.morada = c.getMorada();
+        this.password = c.getPassword();
     }
     
     public int getnif(){
