@@ -1,15 +1,5 @@
-
 public class EntidadeEmpresas extends FichaCliente
 {
-    /**
-     * número scal do emitente;
-     * designação do emitente;
-     * data da despesa;
-     * número scal do cliente;
-     * descrição da despesa;
-     * natureza da despesa, isto é, a actividade económica a que diz respeito;
-     * valor da despesa.
-    */
    private String actividadeEconomica;
    private int deducaoFiscal;
    

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+
 public class EntidadePrivada extends FichaCliente
 {
     private int agregadoFamiliar;
@@ -46,7 +47,7 @@ public class EntidadePrivada extends FichaCliente
     
 
     public void setAgregadoFamiliar(int AgregadoFamiliar){
-        this.agregadoFamiliar = agregadoFamiliar;
+        this.agregadoFamiliar = AgregadoFamiliar;
     }
 
     public void setNumerosFiscais(ArrayList<int[]> numerosFiscais){

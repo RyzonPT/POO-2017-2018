@@ -1,23 +1,5 @@
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Stream;
-import java.util.stream.Collectors;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.ArrayList;
 public class FichaCliente
 {
-    /**
-     * número scal do emitente;
-     * designação do emitente;
-     * data da despesa;
-     * número scal do cliente;
-     * descrição da despesa;
-     * natureza da despesa, isto é, a actividade económica a que diz respeito;
-     * valor da despesa.
-    */
    private int nif;
    private String email;
    private String nome;

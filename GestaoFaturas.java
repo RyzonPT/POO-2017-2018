@@ -5,7 +5,8 @@ import java.util.stream.Collectors;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
-public class GestaoFaturas
+
+public class GestaoFaturas extends Faturas
 {
     private Map<Integer,Faturas> faturas;
     public GestaoFaturas()
