@@ -184,7 +184,6 @@ public class HallEntrada extends GestaoFichas
     }
 
     public void run (String[] args) throws Exception {
-        GestaoFichas gestao = new GestaoFichas();
         System.out.println("Escrever 'r' para registar um novo user...");
         System.out.println("Ou escrever 'l' para iniciar o login...");
         Scanner scanner0 = new Scanner(System.in);
@@ -195,16 +194,21 @@ public class HallEntrada extends GestaoFichas
             System.out.println("Escreva o NIF...");
             Scanner scanner1 = new Scanner(System.in);
             entryNif = scanner1.nextInt();
-            //Verificar se este nif existe...
-            if (!existeFicha(entryNif)) {
-                System.out.println("Nif não registado");
-                break;
-            }
             System.out.println("Escreva a password...");
             Scanner scanner2 = new Scanner(System.in);
             entryPassword = scanner2.nextLine();
             setentryPassword(entryPassword);
             setentryNif(entryNif);
+            //Verificar se este nif existe...
+            if (!existeFicha(entryNif)){
+                System.out.println("Nif não registado");
+                break;
+            }//Verificar se esta password está correta...
+            else if(!entryPassword.equals(getPassword(getFicha(entryNif)))){
+                System.out.println("Password inválida");
+                break;
+            }
+            System.out.println("Login => sucesso!");
             break;
         }else if(entryLetter.equals("r")){
             /** Registo */
@@ -244,36 +248,16 @@ public class HallEntrada extends GestaoFichas
             System.out.println("Escreva a password...");
             Scanner s7 = new Scanner(System.in);
             entryPassword = s7.nextLine();
+            //Inserir na estrutura...
+            //GestaoFichas gestao = new GestaoFichas();
+            FichaCliente novaFicha = new FichaCliente(entryNif, entryEmail, entryNome, entryMorada, entryPassword);
+            addFicha(novaFicha);
+            System.out.println("Registo => sucesso!");
             break;
         }else{
             System.out.println("Inválido. Escrever 'r' ou 'l'...");
             Scanner scanner = new Scanner(System.in);
             entryLetter = scanner.nextLine();
         }}
-        
-        
-        /**
-        Map<String, Integer> fruits = new HashMap<>();
-        fruits.put("apple", 1);
-        fruits.put("orange", 2);
-        fruits.put("banana", 3);
-        fruits.put("watermelon", null);
-
-        System.out.println("1. Is key 'apple' exists?");
-        if (fruits.containsKey("apple")) {
-            //key exists
-            System.out.println("yes! - " + fruits.get("apple"));
-        } else {
-            //key does not exists
-            System.out.println("no!");
-        }
-
-        System.out.println("\n2. Is key 'watermelon' exists?");
-        if (fruits.containsKey("watermelon")) {
-            System.out.println("yes! - " + fruits.get("watermelon"));
-        } else {
-            System.out.println("no!");
-        }*/
-        
     }
 }

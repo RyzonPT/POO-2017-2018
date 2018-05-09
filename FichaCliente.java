@@ -50,6 +50,10 @@ public class FichaCliente
         return this.password;
     }
     
+    public String getPassword(FichaCliente a){
+        return a.password;
+    }
+    
     public void setnif(int numeroFiscal){
         this.nif = numeroFiscal;
     }
