@@ -13,7 +13,7 @@ public class GestaoFichas
     
     public GestaoFichas()
     {
-        this.fichas = new HashMap<>();
+        this.fichas = new HashMap<Integer,FichaCliente>();
     }
     
     public GestaoFichas(Map<Integer,FichaCliente> fch) {
