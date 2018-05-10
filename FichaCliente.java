@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class FichaCliente
+public class FichaCliente extends GestaoFaturas
 {
    private int nif;
    private String email;
