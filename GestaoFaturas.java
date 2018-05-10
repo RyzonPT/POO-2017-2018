@@ -6,9 +6,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 
-public class GestaoFaturas extends Faturas
+public class GestaoFaturas
 {
     private Map<Integer,Faturas> faturas;
+    
     public GestaoFaturas()
     {
         this.faturas = new HashMap<>();

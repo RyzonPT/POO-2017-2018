@@ -15,7 +15,8 @@ public class EntidadePrivada extends FichaCliente
     }
 
     public EntidadePrivada(int numeroFiscal, String email, String nome, String morada, String password, int agregadoFamiliar, ArrayList<int[]> numerosFiscais, int coeficienteFiscal,ArrayList<int[]> codigosAtividade){
-        this.agregadoFamiliar =agregadoFamiliar;
+        super(numeroFiscal,email,nome,morada,password);
+        this.agregadoFamiliar = agregadoFamiliar;
         this.numerosFiscais = numerosFiscais;
         this.coeficienteFiscal = coeficienteFiscal;
         this.codigosAtividades = codigosAtividades;        

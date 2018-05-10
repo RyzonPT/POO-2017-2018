@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 import java.util.List;
 import java.util.ArrayList;
 
-public class GestaoFichas extends FichaCliente
+public class GestaoFichas
 {
     private Map<Integer,FichaCliente> fichas;
     

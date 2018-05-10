@@ -184,6 +184,16 @@ public class HallEntrada extends GestaoFichas
     }
 
     public void run (String[] args) throws Exception {
+        GestaoFichas gestorFichas = new GestaoFichas();
+        FichaCliente ficha = new FichaCliente();
+        EntidadePrivada fichaPrivada = new EntidadePrivada();
+        EntidadeEmpresas fichaEmpresa = new EntidadeEmpresas();
+        /**Pré-população de registos: 2 users com Nif 0 e 1 que têm password = "" */
+        EntidadePrivada fichaPrivada0 = new EntidadePrivada();
+        gestorFichas.addFicha(fichaPrivada0);
+        EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1, "email", "nome", "morada", "password", "saude", 0);
+        gestorFichas.addFicha(fichaEmpresa0);
+        /**Início do User Interface*/
         System.out.println("Escrever 'r' para registar um novo user...");
         System.out.println("Ou escrever 'l' para iniciar o login...");
         Scanner scanner0 = new Scanner(System.in);
@@ -197,14 +207,13 @@ public class HallEntrada extends GestaoFichas
             System.out.println("Escreva a password...");
             Scanner scanner2 = new Scanner(System.in);
             entryPassword = scanner2.nextLine();
-            setentryPassword(entryPassword);
-            setentryNif(entryNif);
             //Verificar se este nif existe...
-            if (!existeFicha(entryNif)){
+            if (!gestorFichas.existeFicha(entryNif)){
                 System.out.println("Nif não registado");
                 break;
-            }//Verificar se esta password está correta...
-            else if(!entryPassword.equals(getPassword(getFicha(entryNif)))){
+            }
+            FichaCliente fichaEncontrada = gestorFichas.getFicha(entryNif);
+            if(!entryPassword.equals(fichaEncontrada.getPassword())){
                 System.out.println("Password inválida");
                 break;
             }
@@ -217,15 +226,67 @@ public class HallEntrada extends GestaoFichas
             String escolha = scanner1.nextLine();
             while(1==1){
                 if(escolha.equals("e")){
+                    System.out.println("Escreva o NIF...");
+                    Scanner s3 = new Scanner(System.in);
+                    entryNif = s3.nextInt();
+                    if(gestorFichas.existeFicha(entryNif)){
+                        System.out.println("Nif já registado...");
+                        break;
+                    }
+                    fichaEmpresa.setnif(entryNif);
                     System.out.println("Escreva a actividade economica...");
                     Scanner s1 = new Scanner(System.in);
                     entryActividadeEconomica = s1.nextLine();
+                    fichaEmpresa.setActividadeEconomica(entryActividadeEconomica);
+                    System.out.println("Escreva o email...");
+                    Scanner s4 = new Scanner(System.in);
+                    entryEmail = s4.nextLine();
+                    fichaEmpresa.setEmail(entryEmail);
+                    System.out.println("Escreva o nome...");
+                    Scanner s5 = new Scanner(System.in);
+                    entryNome = s5.nextLine();
+                    fichaEmpresa.setNome(entryNome);
+                    System.out.println("Escreva a morada...");
+                    Scanner s6 = new Scanner(System.in);
+                    entryMorada = s6.nextLine();
+                    fichaEmpresa.setMorada(entryMorada);
+                    System.out.println("Escreva a password...");
+                    Scanner s7 = new Scanner(System.in);
+                    entryPassword = s7.nextLine();
+                    fichaEmpresa.setPassword(entryPassword);
+                    gestorFichas.addFicha(fichaEmpresa);
                     break;
                     // a deduçao fiscal nao é o user que escreve por isso nao está aqui!
                 }else if(escolha.equals("i")){
+                    System.out.println("Escreva o NIF...");
+                    Scanner s3 = new Scanner(System.in);
+                    entryNif = s3.nextInt();
+                    if(gestorFichas.existeFicha(entryNif)){
+                        System.out.println("Nif já registado...");
+                        break;
+                    }
+                    fichaPrivada.setnif(entryNif);
                     System.out.println("Escreva o agregado familiar...");
                     Scanner s2 = new Scanner(System.in);
                     entryAgregadoFamiliar = s2.nextInt();
+                    fichaPrivada.setAgregadoFamiliar(entryAgregadoFamiliar);
+                    System.out.println("Escreva o email...");
+                    Scanner s4 = new Scanner(System.in);
+                    entryEmail = s4.nextLine();
+                    fichaPrivada.setEmail(entryEmail);
+                    System.out.println("Escreva o nome...");
+                    Scanner s5 = new Scanner(System.in);
+                    entryNome = s5.nextLine();
+                    fichaPrivada.setNome(entryNome);
+                    System.out.println("Escreva a morada...");
+                    Scanner s6 = new Scanner(System.in);
+                    entryMorada = s6.nextLine();
+                    fichaPrivada.setMorada(entryMorada);
+                    System.out.println("Escreva a password...");
+                    Scanner s7 = new Scanner(System.in);
+                    entryPassword = s7.nextLine();
+                    fichaPrivada.setPassword(entryPassword);
+                    gestorFichas.addFicha(fichaPrivada);
                     break;
                     //... acrescentar aqui os outros parametros de um individuo
                 }else{
@@ -233,27 +294,8 @@ public class HallEntrada extends GestaoFichas
                     Scanner scanner = new Scanner(System.in);
                     escolha = scanner.nextLine();
             }}
-            System.out.println("Escreva o NIF...");
-            Scanner s3 = new Scanner(System.in);
-            entryNif = s3.nextInt();
-            System.out.println("Escreva o email...");
-            Scanner s4 = new Scanner(System.in);
-            entryEmail = s4.nextLine();
-            System.out.println("Escreva o nome...");
-            Scanner s5 = new Scanner(System.in);
-            entryNome = s5.nextLine();
-            System.out.println("Escreva a morada...");
-            Scanner s6 = new Scanner(System.in);
-            entryMorada = s6.nextLine();
-            System.out.println("Escreva a password...");
-            Scanner s7 = new Scanner(System.in);
-            entryPassword = s7.nextLine();
-            //Inserir na estrutura...
-            GestaoFichas estrutura = new GestaoFichas();
-            FichaCliente novaFicha = new FichaCliente(entryNif, entryEmail, entryNome, entryMorada, entryPassword);
-            estrutura.addFicha(novaFicha);
-            if(estrutura.existeFicha(entryNif)){
-                System.out.println("Registo => sucesso!");
+            if(gestorFichas.existeFicha(entryNif)){
+                System.out.println("Concluido!");
             }
             break;
         }else{
@@ -263,8 +305,3 @@ public class HallEntrada extends GestaoFichas
         }}
     }
 }
-
-/** 
- * Requesito 1 done - registar um user empresa ou individuo.
- * 
-*/
