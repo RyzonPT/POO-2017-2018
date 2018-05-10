@@ -249,10 +249,18 @@ public class HallEntrada extends GestaoFichas
             Scanner s7 = new Scanner(System.in);
             entryPassword = s7.nextLine();
             //Inserir na estrutura...
-            //GestaoFichas gestao = new GestaoFichas();
-            FichaCliente novaFicha = new FichaCliente(entryNif, entryEmail, entryNome, entryMorada, entryPassword);
-            addFicha(novaFicha);
-            System.out.println("Registo => sucesso!");
+            GestaoFichas estrutura = new GestaoFichas();
+            if(escolha.equals("e")){
+                FichaCliente novaFicha = new FichaCliente(entryNif, entryEmail, entryNome, entryMorada, entryPassword, entryActividadeEconomica, entryDeducaoFiscal);
+                estrutura.addFicha(novaFicha);
+            }
+            else{
+                FichaCliente novaFicha = new FichaCliente(entryNif, entryEmail, entryNome, entryMorada, entryPassword, entryAgregadoFamiliar, entryNumerosFiscais, entryCoeficienteFiscal, entryCodigosAtividades);
+                estrutura.addFicha(novaFicha);
+            }
+            if(estrutura.existeFicha(entryNif)){
+                System.out.println("Registo => sucesso!");
+            }
             break;
         }else{
             System.out.println("Inválido. Escrever 'r' ou 'l'...");
@@ -261,3 +269,10 @@ public class HallEntrada extends GestaoFichas
         }}
     }
 }
+
+
+/** Notas para não esquecer no final, ao verificar as queries
+ * Requesito 1: o registo está a dar "nullpointerexception" quando é uma empresa; adicionar e testar os parâmetros que faltam dos individuos (onde está comentado)
+ * Requesito 2: pré-popular a estrutura dos users primeiro para verificar se conseguimos registar e depois dar login
+ * Requesito 3: ...
+*/
