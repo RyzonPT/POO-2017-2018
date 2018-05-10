@@ -4,6 +4,7 @@ public class EntidadeEmpresas extends FichaCliente
    private int deducaoFiscal;
    
    public EntidadeEmpresas(){
+       super();
        this.actividadeEconomica = "";
        this.deducaoFiscal = 0;
     }
@@ -15,6 +16,7 @@ public class EntidadeEmpresas extends FichaCliente
     }
     
     public EntidadeEmpresas(EntidadeEmpresas c){
+        super(c);
         this.actividadeEconomica = getActividadeEconomica();
         this.deducaoFiscal = getDeducaoFiscal();
     }

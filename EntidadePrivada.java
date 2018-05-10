@@ -8,6 +8,7 @@ public class EntidadePrivada extends FichaCliente
     private ArrayList<int[]> codigosAtividades;
     public EntidadePrivada()
     {
+        super();
         this.agregadoFamiliar = 0;
         this.numerosFiscais = new ArrayList<>();
         this.coeficienteFiscal =0;
@@ -23,6 +24,7 @@ public class EntidadePrivada extends FichaCliente
     }
 
     public EntidadePrivada( EntidadePrivada c){
+        super(c);
         this.agregadoFamiliar =c.getAgregadoFamiliar();
         this.numerosFiscais = c.getNumerosFiscais();
         this.coeficienteFiscal = c.getCoeficienteFiscal();
