@@ -251,7 +251,7 @@ public class HallEntrada extends GestaoFichas
             //Inserir na estrutura...
             GestaoFichas estrutura = new GestaoFichas();
             FichaCliente novaFicha = new FichaCliente(entryNif, entryEmail, entryNome, entryMorada, entryPassword);
-            addFicha(novaFicha);
+            estrutura.addFicha(novaFicha);
             if(estrutura.existeFicha(entryNif)){
                 System.out.println("Registo => sucesso!");
             }
