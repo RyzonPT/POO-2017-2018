@@ -42,7 +42,7 @@ public class GUI_Login extends JFrame {
         contentPane.setBackground(new Color(192,192,192));
 
 
-        PasswordBox = new JPasswordField();
+        PasswordBox = new JPasswordField(); 
         PasswordBox.setBounds(196,176,110,30);
         PasswordBox.setBackground(new Color(214,217,223));
         PasswordBox.setForeground(new Color(0,0,0));

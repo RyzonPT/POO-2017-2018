@@ -5,6 +5,7 @@ public class FichaCliente
    private String nome;
    private String morada;
    private String password;
+   private GestaoFaturas gestorfaturas;
    
    public FichaCliente(){
        this.nif = 0;

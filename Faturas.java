@@ -19,6 +19,7 @@ public class Faturas
    private String nomeProduto;
    private int quantidadeProduto;
    private String actividadeEconomica;
+   private double valorUnitario;
    private double valor;
    private double deducao;
    private String nomeCliente;
