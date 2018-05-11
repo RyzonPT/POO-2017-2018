@@ -139,18 +139,11 @@ public class GUI_Login extends JFrame {
 
     //Method mouseClicked for button1
     private void onLoginButtonClicked (MouseEvent evt) {
-                        nif = Integer.parseInt(olas);
-                        System.out.println("Login => entrodosf!");
-             if (!gestorfichas.existeFicha(nif)){
-                System.out.println("Nif não registado");
-                return;
+            FichaCliente fichaEncontrada = gestorfichas.autenticacao(password,nif);
+                if(fichaEncontrada != null){
+                dispose();
+                GUI_FichaCliente fichagui = new GUI_FichaCliente(fichaEncontrada);
             }
-            FichaCliente fichaEncontrada = gestorfichas.getFicha(nif);
-            if(!password.equals(fichaEncontrada.getPassword())){
-                System.out.println("Password inválida");
-                return;
-            }
-            System.out.println("Login => sucesso!");
     }
 
     //method for generate menu

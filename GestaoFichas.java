@@ -72,4 +72,27 @@ public class GestaoFichas
     public GestaoFichas clone(){
         return new GestaoFichas(this);
     }
+    
+    public boolean testaautenticacao(String password, int nif){
+                     if (!this.existeFicha(nif)){
+                System.out.println("Nif não registado");
+                return false;
+            }
+            FichaCliente fichaEncontrada = this.getFicha(nif);
+            if(!password.equals(fichaEncontrada.getPassword())){
+                System.out.println("Password inválida");
+                return false;
+            }
+            System.out.println("Login => sucesso!");
+            return true;
+    }
+    
+    public FichaCliente autenticacao(String password, int nif){
+        if(testaautenticacao(password,nif)){
+            FichaCliente fichaEncontrada = this.getFicha(nif);
+            return fichaEncontrada;
+        }
+        return null;
+    }
+            
 }

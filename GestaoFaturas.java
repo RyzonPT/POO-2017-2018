@@ -8,14 +8,14 @@ import java.util.ArrayList;
 
 public class GestaoFaturas
 {
-    private Map<Integer,Faturas> faturas;
+    private Map<Integer,Fatura> faturas;
     
     public GestaoFaturas()
     {
         this.faturas = new HashMap<>();
     }
     
-    public GestaoFaturas(Map<Integer,Faturas> fat) {
+    public GestaoFaturas(Map<Integer,Fatura> fat) {
        this.faturas = fat.values().stream().collect(Collectors.toMap((e) -> e.getfaturaID(),(e) -> e.clone()));
     }
     
@@ -23,11 +23,11 @@ public class GestaoFaturas
         this.faturas = a.getFaturas();
     }
     
-    public Map<Integer,Faturas> getFaturas(){
+    public Map<Integer,Fatura> getFaturas(){
         return this.faturas.values().stream().collect(Collectors.toMap((e)->e.getfaturaID(),(e)->e.clone()));
     }
     
-    public void addFaturas(Faturas a){
+    public void addFaturas(Fatura a){
         this.faturas.put(a.getfaturaID(),a.clone());  
     }
     
@@ -35,11 +35,11 @@ public class GestaoFaturas
         this.faturas.remove(faturaID);
     }
     
-    public Faturas getFatura(Integer faturaID) {
+    public Fatura getFatura(Integer faturaID) {
         return (this.faturas.get(faturaID)).clone();
     }
     
-    public Map<Integer,Faturas> getFaturasUser(Integer nifCliente){
+    public Map<Integer,Fatura> getFaturasUser(Integer nifCliente){
         return this.faturas.values().stream().collect(Collectors.toMap((e)->e.getnifCliente(),(e)->e.clone()));
     }
     public GestaoFaturas clone(){

@@ -14,7 +14,7 @@ public class Interface
             HallentradaGUI hall = new HallentradaGUI();
             EntidadePrivada fichaPrivada0 = new EntidadePrivada();
             gestorFichas.addFicha(fichaPrivada0);
-            EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1, "email", "nome", "morada", "password", "saude", 0);
+            EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1,"email", "nome", "morada", "password", "saude", 0);
             gestorFichas.addFicha(fichaEmpresa0);
             hall.gestorfichas= gestorFichas;
             hall.setVisible(true);

@@ -2,17 +2,19 @@ public class EntidadeEmpresas extends FichaCliente
 {
    private String actividadeEconomica;
    private int deducaoFiscal;
-   
+
    public EntidadeEmpresas(){
        super();
        this.actividadeEconomica = "";
        this.deducaoFiscal = 0;
     }
     
-    public EntidadeEmpresas(int nif, String email, String nome, String morada, String password, String actividadeEconomica, int deducaoFiscal){
+    public EntidadeEmpresas(int nif,String email, String nome, String morada, String password, String actividadeEconomica, int deducaoFiscal){
        super(nif,email,nome,morada,password);
        this.actividadeEconomica = actividadeEconomica;
        this.deducaoFiscal = deducaoFiscal;
+       FichaCliente ola = (FichaCliente) this;
+       ola.setfichaType(1);
     }
     
     public EntidadeEmpresas(EntidadeEmpresas c){

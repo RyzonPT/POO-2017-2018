@@ -6,6 +6,7 @@ public class FichaCliente
    private String morada;
    private String password;
    private GestaoFaturas gestorfaturas;
+   private int fichaType;
    
    public FichaCliente(){
        this.nif = 0;
@@ -13,6 +14,7 @@ public class FichaCliente
        this.nome = "";
        this.morada = "";
        this.password = "";
+       this.fichaType = -1;
     }
     
     public FichaCliente(int nif, String email, String nome, String morada, String password){
@@ -21,6 +23,13 @@ public class FichaCliente
        this.nome = nome;
        this.morada = morada;
        this.password = password;
+       EntidadeEmpresas fichaE = (EntidadeEmpresas) this;
+       if(fichaE != null){
+       this.fichaType = 1;
+       }
+       else{ 
+       this.fichaType = 0;
+       }
     }
     
     public FichaCliente(FichaCliente c){
@@ -29,10 +38,15 @@ public class FichaCliente
         this.nome = c.getNome();
         this.morada = c.getMorada();
         this.password = c.getPassword();
+        this.fichaType = c.getfichaType();
     }
     
     public int getnif(){
         return this.nif;
+    }
+      
+    public int getfichaType(){
+        return this.fichaType;
     }
     
     public String getEmail(){
@@ -58,6 +72,11 @@ public class FichaCliente
     public void setnif(int numeroFiscal){
         this.nif = numeroFiscal;
     }
+    
+    public void setfichaType(int fichatype){
+        this.fichaType = fichatype;
+    }
+    
     
     public void setEmail(String email){
         this.email = email;

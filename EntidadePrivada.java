@@ -3,9 +3,9 @@ import java.util.ArrayList;
 public class EntidadePrivada extends FichaCliente
 {
     private int agregadoFamiliar;
-    private ArrayList<int[]> numerosFiscais;
+    private ArrayList<Integer> numerosFiscais;
     private int coeficienteFiscal;
-    private ArrayList<int[]> codigosAtividades;
+    private ArrayList<Integer> codigosAtividades;
     public EntidadePrivada()
     {
         super();
@@ -15,7 +15,7 @@ public class EntidadePrivada extends FichaCliente
         this.codigosAtividades = new ArrayList<>();
     }
 
-    public EntidadePrivada(int numeroFiscal, String email, String nome, String morada, String password, int agregadoFamiliar, ArrayList<int[]> numerosFiscais, int coeficienteFiscal,ArrayList<int[]> codigosAtividade){
+    public EntidadePrivada(int numeroFiscal, String email, String nome, String morada, String password, int agregadoFamiliar, ArrayList<Integer> numerosFiscais, int coeficienteFiscal,ArrayList<Integer> codigosAtividade){
         super(numeroFiscal,email,nome,morada,password);
         this.agregadoFamiliar = agregadoFamiliar;
         this.numerosFiscais = numerosFiscais;
@@ -35,8 +35,8 @@ public class EntidadePrivada extends FichaCliente
         return this.agregadoFamiliar;
     }
 
-    public ArrayList<int[]> getNumerosFiscais(){
-        return (ArrayList<int[]>)numerosFiscais.clone();
+    public ArrayList<Integer> getNumerosFiscais(){
+        return (ArrayList<Integer>)numerosFiscais.clone();
     }
     
 
@@ -44,8 +44,8 @@ public class EntidadePrivada extends FichaCliente
         return this.coeficienteFiscal;
     }
 
-    public ArrayList<int[]> getCodigosAtividades(){
-        return (ArrayList<int[]>)codigosAtividades.clone();
+    public ArrayList<Integer> getCodigosAtividades(){
+        return (ArrayList<Integer>)codigosAtividades.clone();
     }
     
 
@@ -54,15 +54,15 @@ public class EntidadePrivada extends FichaCliente
     }
 
     public void setNumerosFiscais(ArrayList<int[]> numerosFiscais){
-        this.numerosFiscais= (ArrayList<int[]>)numerosFiscais.clone();
+        this.numerosFiscais= (ArrayList<Integer>)numerosFiscais.clone();
     }
 
     public void setCoeficienteFiscal(int coeficienteFiscal){
         this.coeficienteFiscal=coeficienteFiscal;
     }
 
-    public void setCodigosAtividades(ArrayList<int[]> codigosAtividades){
-        this.codigosAtividades=(ArrayList<int[]>)codigosAtividades.clone();
+    public void setCodigosAtividades(ArrayList<Integer> codigosAtividades){
+        this.codigosAtividades=(ArrayList<Integer>)codigosAtividades.clone();
     }
 
     public EntidadePrivada clone() {

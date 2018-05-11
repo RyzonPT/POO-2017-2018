@@ -1,5 +1,6 @@
 import java.time.LocalDate;
-public class Faturas
+import java.util.ArrayList;
+public class Fatura
 {
     /**
      * número scal do emitente;
@@ -16,28 +17,28 @@ public class Faturas
    private String emailEmpresa;
    private int nifEmpresa;
    private LocalDate data;
-   private String nomeProduto;
+   private ArrayList<String> produto;
    private int quantidadeProduto;
    private String actividadeEconomica;
    private double valorUnitario;
-   private double valor;
+   private double valortotal;
    private double deducao;
    private String nomeCliente;
    private String moradaCliente;
    private String emailCliente;
    private int nifCliente;
    
-   public Faturas(){
+   public Fatura(){
        faturaID = 0;
        nomeEmpresa = "n/a";
        moradaEmpresa = "n/a";
        emailEmpresa = "n/a";
        nifEmpresa = 0;
        data = LocalDate.now();
-       nomeProduto = "n/a";
+       produto = new ArrayList<>();
        quantidadeProduto = 0;
        actividadeEconomica ="n/a";
-       valor= 0.0;
+       valortotal= 0.0;
        deducao = 0.0;
        nomeCliente = "n/a";
        moradaCliente = "n/a";
@@ -45,7 +46,7 @@ public class Faturas
        nifCliente = 0;
     }
     
-    public Faturas(int faturaID,String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, LocalDate data, String nomeProduto, int quantidadeProduto, String actividadeEconomica, 
+    public Fatura(int faturaID,String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, LocalDate data, ArrayList<String> produto, int quantidadeProduto, String actividadeEconomica, 
     double valor, double deducao, String nomeCliente, String moradaCliente, String emailCliente, int nifCliente){
        this.faturaID= faturaID;
        this.nomeEmpresa = nomeEmpresa;
@@ -53,10 +54,10 @@ public class Faturas
        this.emailEmpresa = emailEmpresa;
        this.nifEmpresa = nifEmpresa;
        this.data = data;
-       this.nomeProduto = nomeProduto;
+       this.produto = produto;
        this.quantidadeProduto = quantidadeProduto;
        this.actividadeEconomica = actividadeEconomica;
-       this.valor = valor;
+       this.valortotal = valor;
        this.deducao = deducao;
        this.nomeCliente = nomeCliente;
        this.moradaCliente = moradaCliente;
@@ -64,17 +65,17 @@ public class Faturas
        this.nifCliente = nifCliente;
     }
     
-    public Faturas(Faturas c){
+    public Fatura(Fatura c){
        faturaID = c.getfaturaID();
        nomeEmpresa = c.getnomeEmpresa();
        moradaEmpresa = c.getmoradaEmpresa();
        emailEmpresa = c.getemailEmpresa();
        nifEmpresa = c.getnifEmpresa();
        data = LocalDate.now();
-       nomeProduto = c.getnomeProduto();
+       produto = c.getProduto();
        quantidadeProduto = c.getquantidadeProduto();
        actividadeEconomica = c.getactividadeEconomica();
-       valor = c.getvalor();
+       valortotal = c.getvalortotal();
        deducao = c.getdeducao();
        nomeCliente = c.getnomeCliente();
        moradaCliente = c.getmoradaCliente();
@@ -106,8 +107,8 @@ public class Faturas
         return this.data;
     }
     
-        public String getnomeProduto(){
-        return this.nomeProduto;
+        public ArrayList<String> getProduto(){
+        return (ArrayList<String>)produto.clone();
     }
     
     public int getquantidadeProduto(){
@@ -118,8 +119,8 @@ public class Faturas
         return actividadeEconomica;
     }
   
-    public double getvalor(){
-        return valor;
+    public double getvalortotal(){
+        return valortotal;
     }
     
     public double getdeducao(){
@@ -165,8 +166,8 @@ public class Faturas
         this.data = data;
     }
     
-    public void setnomeProduto(String nomeProduto){
-        this.nomeProduto = nomeProduto;
+    public void setProduto(ArrayList<String> produto){
+        this.produto = (ArrayList<String>)produto.clone();
     }
     
     public void setquantidadeProduto(int quantidadeProduto){
@@ -177,8 +178,8 @@ public class Faturas
         this.actividadeEconomica = actividadeEconomica;
     }
     
-    public void setvalor(double valor){
-        this.valor = valor;
+    public void setvalortotal(double valor){
+        this.valortotal = valor;
     }
     
     public void setdeducao(double deducao){
@@ -201,23 +202,23 @@ public class Faturas
         this.nifCliente = nifCliente;
     }
     
-    public Faturas clone(){
-        return new Faturas(this);
+    public Fatura clone(){
+        return new Fatura(this);
     }
     
     public boolean equals(Object obj) {
         if(obj==this) return true;
         if(obj==null || obj.getClass() != this.getClass()) return false;
-        Faturas c = (Faturas) obj;
+        Fatura c = (Fatura) obj;
         return nomeEmpresa.equals(c.getnomeEmpresa()) &&
                moradaEmpresa.equals(c.getmoradaEmpresa()) &&
                emailEmpresa.equals(c.getemailEmpresa()) &&
                nifEmpresa == c.getnifEmpresa() &&
                data.equals(c.getData()) &&
-               nomeProduto.equals(c.getnomeProduto()) &&
+               produto.equals(c.getProduto()) &&
                quantidadeProduto == c.getquantidadeProduto() &&
                actividadeEconomica.equals(c.getactividadeEconomica()) &&
-               c.getvalor()==valor &&
+               c.getvalortotal()==valortotal &&
                c.getdeducao()==deducao &&
                nomeCliente.equals(c.getnomeCliente()) &&
                moradaCliente.equals(c.getmoradaCliente()) &&
