@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Fatura
 {
@@ -16,7 +17,7 @@ public class Fatura
    private String moradaEmpresa;
    private String emailEmpresa;
    private int nifEmpresa;
-   private String data;
+   private LocalDate data;
    private ArrayList<String> produto;
    private int quantidadeProduto;
    private String actividadeEconomica;
@@ -34,7 +35,7 @@ public class Fatura
        moradaEmpresa = "n/a";
        emailEmpresa = "n/a";
        nifEmpresa = 0;
-       data = "";
+       data = LocalDate.now();
        produto = new ArrayList<>();
        quantidadeProduto = 0;
        actividadeEconomica ="n/a";
@@ -46,17 +47,17 @@ public class Fatura
        nifCliente = 0;
     }
     
-    public Fatura(int faturaID,String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, String data, ArrayList<String> produto, int quantidadeProduto, String actividadeEconomica, 
+    public Fatura(int faturaID,String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, ArrayList<String> produto, int quantidadeProduto, String actividadeEconomica, 
     double valor, double deducao, String nomeCliente, String moradaCliente, String emailCliente, int nifCliente){
        this.faturaID= faturaID;
        this.nomeEmpresa = nomeEmpresa;
        this.moradaEmpresa = moradaEmpresa;
        this.emailEmpresa = emailEmpresa;
        this.nifEmpresa = nifEmpresa;
-       this.data = data;
        this.produto = produto;
        this.quantidadeProduto = quantidadeProduto;
        this.actividadeEconomica = actividadeEconomica;
+       this.data = LocalDate.now();
        this.valortotal = valor;
        this.deducao = deducao;
        this.nomeCliente = nomeCliente;
@@ -103,8 +104,8 @@ public class Fatura
         return nifEmpresa;
     }
     
-    public String getData(){
-        return this.data;
+    public LocalDate getData(){
+        return LocalDate.now();
     }
     
         public ArrayList<String> getProduto(){
@@ -162,8 +163,8 @@ public class Fatura
         this.nifEmpresa = nifEmpresa;
     }
     
-    public void setData(String data){
-        this.data = data;
+    public void setData(LocalDate data){
+        this.data = LocalDate.now();
     }
     
     public void setProduto(ArrayList<String> produto){

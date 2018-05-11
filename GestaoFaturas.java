@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class GestaoFaturas
 {
     private Map<Integer,Fatura> faturas;
+    public int numerofaturas = 0;
     
     public GestaoFaturas()
     {
@@ -28,7 +29,8 @@ public class GestaoFaturas
     }
     
     public void addFaturas(Fatura a){
-        this.faturas.put(a.getfaturaID(),a.clone());  
+        this.faturas.put(a.getfaturaID(),a.clone()); 
+        this.numerofaturas++;
     }
     
     public boolean existeFatura(int id){

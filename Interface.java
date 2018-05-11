@@ -89,60 +89,64 @@ public class Interface
                  System.out.println("Password inválida");
                  break;
             }
-            /** Criar fatura */
-            System.out.println("Escrever 'c' para criar fatura ou qualquer outro char para sair");
-            Scanner scannerC = new Scanner(System.in);
-            String escolha = scannerC.nextLine();
-            if(escolha.equals("c")){
-                System.out.println("Escreva o nome da empresa...");
-                Scanner s10 = new Scanner(System.in);
-                faturaNomeEmpresa = s10.nextLine();
-                System.out.println("Escreva a morada da empresa...");
-                Scanner s21 = new Scanner(System.in);
-                faturaMoradaEmpresa = s21.nextLine();
-                System.out.println("Escreva o email da empresa...");
-                Scanner s22 = new Scanner(System.in);
-                faturaEmailEmpresa = s22.nextLine();
-                System.out.println("Escreva a data (em formato: AAAA-MM-DD)...");
-                Scanner s12 = new Scanner(System.in);
-                faturaData = s12.nextLine();
-                System.out.println("Escreva o nome dos produtos...(Escrever 'next' para prosseguir para o proximo parametro");
-                Scanner s13 = new Scanner(System.in);
-                ArrayList<String> nomesArrayList = new ArrayList<String>();
-                while(s13.hasNextLine()){
-                    String line = s13.nextLine();
-                    if(line.equals("next")) {
-                        break;
+            System.out.println("Login com sucesso!");
+            //verificar primeiro se é uma empresa
+            FichaCliente fichaX = new FichaCliente();
+            fichaX = gestorFichas.getFicha(entryNif);
+            if(fichaX.getfichaType()==1){
+                /** Criar fatura */
+                System.out.println("Escrever 'c' para criar fatura ou qualquer outro char para sair");
+                Scanner scannerC = new Scanner(System.in);
+                String escolha = scannerC.nextLine();
+                if(escolha.equals("c")){
+                    System.out.println("Escreva o nome da empresa...");
+                    Scanner s10 = new Scanner(System.in);
+                    faturaNomeEmpresa = s10.nextLine();
+                    System.out.println("Escreva a morada da empresa...");
+                    Scanner s21 = new Scanner(System.in);
+                    faturaMoradaEmpresa = s21.nextLine();
+                    System.out.println("Escreva o email da empresa...");
+                    Scanner s22 = new Scanner(System.in);
+                    faturaEmailEmpresa = s22.nextLine();
+                    System.out.println("Escreva o nome dos produtos...(Escrever 'next' para prosseguir para o proximo parametro");
+                    ArrayList<String> nomesArrayList = new ArrayList<String>(); 
+                    String nome;
+                    Scanner s13 = new Scanner(System.in);
+                    while(s13.hasNextLine()){
+                        nome = s13.nextLine();
+                        if(nome.equals("next")) {
+                            break;
+                        }
+                        else nomesArrayList.add(nome);
                     }
-                    nomesArrayList.add(s13.nextLine());
-                }
-                System.out.println("Escreva a quantidade de produto...");
-                Scanner s14 = new Scanner(System.in);
-                faturaQuantidadeProduto = s14.nextInt();
-                System.out.println("Escreva a actividade economica...");
-                Scanner s15 = new Scanner(System.in);
-                faturaActividadeEconomica = s15.nextLine();
-                System.out.println("Escreva o valor total...");
-                Scanner s17 = new Scanner(System.in);
-                faturaValor = s17.nextDouble();
-                System.out.println("Escreva o nome do cliente ...");
-                Scanner s19 = new Scanner(System.in);
-                faturaNomeCliente = s19.nextLine();
-                System.out.println("Escreva a morada do cliente...");
-                Scanner s20 = new Scanner(System.in);
-                faturaMoradaCliente = s20.nextLine();
-                System.out.println("Escreva o email do cliente...");
-                Scanner s23 = new Scanner(System.in);
-                faturaEmailCliente = s23.nextLine();
-                System.out.println("Escreva o Nif do cliente...");
-                Scanner s24 = new Scanner(System.in);
-                faturaNifCliente = s24.nextInt();
-                Fatura fatura = new Fatura(0, faturaNomeEmpresa, faturaMoradaEmpresa, faturaEmailEmpresa, entryNif, faturaData, nomesArrayList, faturaQuantidadeProduto, faturaActividadeEconomica, 
-                                             faturaValor, 0, faturaNomeCliente, faturaMoradaCliente, faturaEmailCliente, faturaNifCliente);
-                GestaoFaturas gestorFaturas = new GestaoFaturas();
-                gestorFaturas.addFaturas(fatura);
-                if(gestorFaturas.existeFatura(0)){
-                    System.out.println("Fatura criada com sucesso!");
+                    System.out.println("Escreva a quantidade de produto...");
+                    Scanner s14 = new Scanner(System.in);
+                    faturaQuantidadeProduto = s14.nextInt();
+                    System.out.println("Escreva a actividade economica...");
+                    Scanner s15 = new Scanner(System.in);
+                    faturaActividadeEconomica = s15.nextLine();
+                    System.out.println("Escreva o valor total...");
+                    Scanner s17 = new Scanner(System.in);
+                    faturaValor = s17.nextDouble();
+                    System.out.println("Escreva o nome do cliente ...");
+                    Scanner s19 = new Scanner(System.in);
+                    faturaNomeCliente = s19.nextLine();
+                    System.out.println("Escreva a morada do cliente...");
+                    Scanner s20 = new Scanner(System.in);
+                    faturaMoradaCliente = s20.nextLine();
+                    System.out.println("Escreva o email do cliente...");
+                    Scanner s23 = new Scanner(System.in);
+                    faturaEmailCliente = s23.nextLine();
+                    System.out.println("Escreva o Nif do cliente...");
+                    Scanner s24 = new Scanner(System.in);
+                    faturaNifCliente = s24.nextInt();
+                    GestaoFaturas gestorFaturas = new GestaoFaturas();
+                    Fatura fatura = new Fatura(gestorFaturas.numerofaturas,faturaNomeEmpresa, faturaMoradaEmpresa, faturaEmailEmpresa, entryNif, nomesArrayList, faturaQuantidadeProduto, faturaActividadeEconomica, 
+                                               faturaValor, 0, faturaNomeCliente, faturaMoradaCliente, faturaEmailCliente, faturaNifCliente);
+                                               gestorFaturas.addFaturas(fatura);
+                    if(gestorFaturas.existeFatura(gestorFaturas.numerofaturas - 1)){
+                        System.out.println("Fatura criada com sucesso!");
+                    }
                 }
             }
             break;
