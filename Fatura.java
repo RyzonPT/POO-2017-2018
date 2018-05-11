@@ -1,5 +1,5 @@
-import java.time.LocalDate;
 import java.util.ArrayList;
+
 public class Fatura
 {
     /**
@@ -16,7 +16,7 @@ public class Fatura
    private String moradaEmpresa;
    private String emailEmpresa;
    private int nifEmpresa;
-   private LocalDate data;
+   private String data;
    private ArrayList<String> produto;
    private int quantidadeProduto;
    private String actividadeEconomica;
@@ -34,7 +34,7 @@ public class Fatura
        moradaEmpresa = "n/a";
        emailEmpresa = "n/a";
        nifEmpresa = 0;
-       data = LocalDate.now();
+       data = "";
        produto = new ArrayList<>();
        quantidadeProduto = 0;
        actividadeEconomica ="n/a";
@@ -46,7 +46,7 @@ public class Fatura
        nifCliente = 0;
     }
     
-    public Fatura(int faturaID,String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, LocalDate data, ArrayList<String> produto, int quantidadeProduto, String actividadeEconomica, 
+    public Fatura(int faturaID,String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, String data, ArrayList<String> produto, int quantidadeProduto, String actividadeEconomica, 
     double valor, double deducao, String nomeCliente, String moradaCliente, String emailCliente, int nifCliente){
        this.faturaID= faturaID;
        this.nomeEmpresa = nomeEmpresa;
@@ -71,7 +71,7 @@ public class Fatura
        moradaEmpresa = c.getmoradaEmpresa();
        emailEmpresa = c.getemailEmpresa();
        nifEmpresa = c.getnifEmpresa();
-       data = LocalDate.now();
+       data = c.getData();
        produto = c.getProduto();
        quantidadeProduto = c.getquantidadeProduto();
        actividadeEconomica = c.getactividadeEconomica();
@@ -103,7 +103,7 @@ public class Fatura
         return nifEmpresa;
     }
     
-    public LocalDate getData(){
+    public String getData(){
         return this.data;
     }
     
@@ -162,7 +162,7 @@ public class Fatura
         this.nifEmpresa = nifEmpresa;
     }
     
-    public void setData(LocalDate data){
+    public void setData(String data){
         this.data = data;
     }
     

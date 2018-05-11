@@ -1,27 +1,29 @@
-import java.util.Scanner;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Interface
 {
-    
+    /**NOTAS/ToDo
+       No registo de privados, falta os NumerosFiscais, CoeficienteFiscal e CodigosAtividades*/
     public static void main (String[] args)
     {
         try
         {
-            GestaoFichas gestorFichas = new GestaoFichas();
+            /**GestaoFichas gestorFichas = new GestaoFichas();
             HallentradaGUI hall = new HallentradaGUI();
             EntidadePrivada fichaPrivada0 = new EntidadePrivada();
             gestorFichas.addFicha(fichaPrivada0);
-            EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1,"email", "nome", "morada", "password", "saude", 0);
+            EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1, "email", "nome", "morada", "password", "saude", 0);
             gestorFichas.addFicha(fichaEmpresa0);
             hall.gestorfichas= gestorFichas;
             hall.setVisible(true);
             
-            
             Interface obj = new Interface ();
-            //obj.run (gestorFichas);
+            //obj.run (gestorFichas);*/
+            
+            //para testar a query 3
+            GestaoFichas gestorFichas = new GestaoFichas();
+            Interface obj = new Interface();
+            obj.run(gestorFichas);
         }
         catch (Exception e)
         {
@@ -42,12 +44,23 @@ public class Interface
     private static ArrayList<int[]> entryNumerosFiscais;
     private static int entryCoeficienteFiscal;
     private static ArrayList<int[]> entryCodigosAtividades;
+    private static String faturaNomeEmpresa;
+    private static String faturaMoradaEmpresa;
+    private static String faturaEmailEmpresa;
+    private static String faturaData;
+    private static int faturaQuantidadeProduto;
+    private static String faturaActividadeEconomica;
+    private static double faturaValor;
+    private static String faturaNomeCliente;
+    private static String faturaMoradaCliente;
+    private static String faturaEmailCliente;
+    private static int faturaNifCliente;
     
-        public void run (GestaoFichas gestorFichas) throws Exception {
+    public void run (GestaoFichas gestorFichas) throws Exception {
         FichaCliente ficha = new FichaCliente();
         EntidadePrivada fichaPrivada = new EntidadePrivada();
         EntidadeEmpresas fichaEmpresa = new EntidadeEmpresas();
-        /**Pré-população de registos: 2 users com Nif 0 e 1 que têm password = "" */
+        /**Pré-população de registos: 2 users com Nif 0 e 1 que têm password = "" e "password" respectivamente */
         EntidadePrivada fichaPrivada0 = new EntidadePrivada();
         gestorFichas.addFicha(fichaPrivada0);
         EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1, "email", "nome", "morada", "password", "saude", 0);
@@ -67,7 +80,71 @@ public class Interface
             Scanner scanner2 = new Scanner(System.in);
             entryPassword = scanner2.nextLine();
             //Verificar se este nif existe...
-
+            if (!gestorFichas.existeFicha(entryNif)){
+                 System.out.println("Nif não registado");
+                 break;
+            }
+            FichaCliente fichaEncontrada = gestorFichas.getFicha(entryNif);
+            if(!entryPassword.equals(fichaEncontrada.getPassword())){
+                 System.out.println("Password inválida");
+                 break;
+            }
+            /** Criar fatura */
+            System.out.println("Escrever 'c' para criar fatura ou qualquer outro char para sair");
+            Scanner scannerC = new Scanner(System.in);
+            String escolha = scannerC.nextLine();
+            if(escolha.equals("c")){
+                System.out.println("Escreva o nome da empresa...");
+                Scanner s10 = new Scanner(System.in);
+                faturaNomeEmpresa = s10.nextLine();
+                System.out.println("Escreva a morada da empresa...");
+                Scanner s21 = new Scanner(System.in);
+                faturaMoradaEmpresa = s21.nextLine();
+                System.out.println("Escreva o email da empresa...");
+                Scanner s22 = new Scanner(System.in);
+                faturaEmailEmpresa = s22.nextLine();
+                System.out.println("Escreva a data (em formato: AAAA-MM-DD)...");
+                Scanner s12 = new Scanner(System.in);
+                faturaData = s12.nextLine();
+                System.out.println("Escreva o nome dos produtos...(Escrever 'next' para prosseguir para o proximo parametro");
+                Scanner s13 = new Scanner(System.in);
+                ArrayList<String> nomesArrayList = new ArrayList<String>();
+                while(s13.hasNextLine()){
+                    String line = s13.nextLine();
+                    if(line.equals("next")) {
+                        break;
+                    }
+                    nomesArrayList.add(s13.nextLine());
+                }
+                System.out.println("Escreva a quantidade de produto...");
+                Scanner s14 = new Scanner(System.in);
+                faturaQuantidadeProduto = s14.nextInt();
+                System.out.println("Escreva a actividade economica...");
+                Scanner s15 = new Scanner(System.in);
+                faturaActividadeEconomica = s15.nextLine();
+                System.out.println("Escreva o valor total...");
+                Scanner s17 = new Scanner(System.in);
+                faturaValor = s17.nextDouble();
+                System.out.println("Escreva o nome do cliente ...");
+                Scanner s19 = new Scanner(System.in);
+                faturaNomeCliente = s19.nextLine();
+                System.out.println("Escreva a morada do cliente...");
+                Scanner s20 = new Scanner(System.in);
+                faturaMoradaCliente = s20.nextLine();
+                System.out.println("Escreva o email do cliente...");
+                Scanner s23 = new Scanner(System.in);
+                faturaEmailCliente = s23.nextLine();
+                System.out.println("Escreva o Nif do cliente...");
+                Scanner s24 = new Scanner(System.in);
+                faturaNifCliente = s24.nextInt();
+                Fatura fatura = new Fatura(0, faturaNomeEmpresa, faturaMoradaEmpresa, faturaEmailEmpresa, entryNif, faturaData, nomesArrayList, faturaQuantidadeProduto, faturaActividadeEconomica, 
+                                             faturaValor, 0, faturaNomeCliente, faturaMoradaCliente, faturaEmailCliente, faturaNifCliente);
+                GestaoFaturas gestorFaturas = new GestaoFaturas();
+                gestorFaturas.addFaturas(fatura);
+                if(gestorFaturas.existeFatura(0)){
+                    System.out.println("Fatura criada com sucesso!");
+                }
+            }
             break;
         }else if(entryLetter.equals("r")){
             /** Registo */
@@ -105,8 +182,10 @@ public class Interface
                     entryPassword = s7.nextLine();
                     fichaEmpresa.setPassword(entryPassword);
                     gestorFichas.addFicha(fichaEmpresa);
+                    if(gestorFichas.existeFicha(entryNif)){
+                        System.out.println("Registo com sucesso!");
+                    }
                     break;
-                    // a deduçao fiscal nao é o user que escreve por isso nao está aqui!
                 }else if(escolha.equals("i")){
                     System.out.println("Escreva o NIF...");
                     Scanner s3 = new Scanner(System.in);
@@ -137,6 +216,9 @@ public class Interface
                     entryPassword = s7.nextLine();
                     fichaPrivada.setPassword(entryPassword);
                     gestorFichas.addFicha(fichaPrivada);
+                    if(gestorFichas.existeFicha(entryNif)){
+                        System.out.println("Registo com sucesso!");
+                    }
                     break;
                     //... acrescentar aqui os outros parametros de um individuo
                 }else{
@@ -144,9 +226,6 @@ public class Interface
                     Scanner scanner = new Scanner(System.in);
                     escolha = scanner.nextLine();
             }}
-            if(gestorFichas.existeFicha(entryNif)){
-                System.out.println("Concluido!");
-            }
             break;
         }else{
             System.out.println("Inválido. Escrever 'r' ou 'l'...");

@@ -31,6 +31,10 @@ public class GestaoFaturas
         this.faturas.put(a.getfaturaID(),a.clone());  
     }
     
+    public boolean existeFatura(int id){
+       return faturas.containsKey(id);
+    }
+    
     public void removeFaturas(Integer faturaID) {
         this.faturas.remove(faturaID);
     }
