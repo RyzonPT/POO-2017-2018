@@ -8,22 +8,33 @@ public class Interface
     {
         try
         {
-            /**GestaoFichas gestorFichas = new GestaoFichas();
+            ArrayList<Integer> lolis = new ArrayList<Integer>();
+                lolis.add(100);
+                lolis.add(32432423);
+                lolis.add(423423424);
+                
+                ArrayList<String> lolis2 = new ArrayList<String>();
+                lolis2.add("ola");
+                lolis2.add("ole");
+                lolis2.add("cmi-te");
+                
+            ArrayList<Integer> olas= new ArrayList<Integer>();
+            GestaoFichas gestorFichas = new GestaoFichas();
+            GestaoFaturas gestorfaturas = new GestaoFaturas();
             HallentradaGUI hall = new HallentradaGUI();
-            EntidadePrivada fichaPrivada0 = new EntidadePrivada();
+            //0,"email","nome","morada","",3,ola,434,olas
+            Fatura ola = new Fatura(4937289,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2, 4324, null, 0, 0, null, null, null, 0);
+            gestorfaturas.addFaturas(ola);
+            EntidadePrivada fichaPrivada0 = new EntidadePrivada(0,"email","nome","morada","",3,lolis,0,lolis,gestorfaturas);
             gestorFichas.addFicha(fichaPrivada0);
-            EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1, "email", "nome", "morada", "password", "saude", 0);
+            EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1,"email", "nome", "morada","12345", "saude", 0,gestorfaturas);
             gestorFichas.addFicha(fichaEmpresa0);
             hall.gestorfichas= gestorFichas;
             hall.setVisible(true);
             
-            Interface obj = new Interface ();
-            //obj.run (gestorFichas);*/
             
-            //para testar a query 3
-            GestaoFichas gestorFichas = new GestaoFichas();
-            Interface obj = new Interface();
-            obj.run(gestorFichas);
+            Interface obj = new Interface ();
+            //obj.run (gestorFichas);
         }
         catch (Exception e)
         {
@@ -63,8 +74,8 @@ public class Interface
         /**Pré-população de registos: 2 users com Nif 0 e 1 que têm password = "" e "password" respectivamente */
         EntidadePrivada fichaPrivada0 = new EntidadePrivada();
         gestorFichas.addFicha(fichaPrivada0);
-        EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1, "email", "nome", "morada", "password", "saude", 0);
-        gestorFichas.addFicha(fichaEmpresa0);
+       // EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1, "email", "nome", "morada", "password", "saude", 0);
+       // gestorFichas.addFicha(fichaEmpresa0);
         /**Início do User Interface*/
         System.out.println("Escrever 'r' para registar um novo user...");
         System.out.println("Ou escrever 'l' para iniciar o login...");

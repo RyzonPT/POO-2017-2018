@@ -1,6 +1,5 @@
-import java.util.ArrayList;
 import java.time.LocalDate;
-
+import java.util.ArrayList;
 public class Fatura
 {
     /**
@@ -54,10 +53,10 @@ public class Fatura
        this.moradaEmpresa = moradaEmpresa;
        this.emailEmpresa = emailEmpresa;
        this.nifEmpresa = nifEmpresa;
+       this.data = LocalDate.now();
        this.produto = produto;
        this.quantidadeProduto = quantidadeProduto;
        this.actividadeEconomica = actividadeEconomica;
-       this.data = LocalDate.now();
        this.valortotal = valor;
        this.deducao = deducao;
        this.nomeCliente = nomeCliente;
@@ -72,7 +71,7 @@ public class Fatura
        moradaEmpresa = c.getmoradaEmpresa();
        emailEmpresa = c.getemailEmpresa();
        nifEmpresa = c.getnifEmpresa();
-       data = c.getData();
+       data = LocalDate.now();
        produto = c.getProduto();
        quantidadeProduto = c.getquantidadeProduto();
        actividadeEconomica = c.getactividadeEconomica();
@@ -105,11 +104,11 @@ public class Fatura
     }
     
     public LocalDate getData(){
-        return LocalDate.now();
+        return this.data;
     }
     
         public ArrayList<String> getProduto(){
-        return (ArrayList<String>)produto.clone();
+        return (ArrayList<String>) produto.clone();
     }
     
     public int getquantidadeProduto(){
@@ -164,7 +163,7 @@ public class Fatura
     }
     
     public void setData(LocalDate data){
-        this.data = LocalDate.now();
+        this.data = data;
     }
     
     public void setProduto(ArrayList<String> produto){

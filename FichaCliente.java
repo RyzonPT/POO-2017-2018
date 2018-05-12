@@ -1,3 +1,5 @@
+import java.util.List;
+import java.util.ArrayList;
 public class FichaCliente
 {
    private int nif;
@@ -15,17 +17,20 @@ public class FichaCliente
        this.morada = "";
        this.password = "";
        this.fichaType = -1;
+       this.gestorfaturas = new GestaoFaturas();
     }
     
-    public FichaCliente(int nif, String email, String nome, String morada, String password){
+    public FichaCliente(int nif, String email, String nome, String morada, String password,GestaoFaturas gestorfaturas){
        this.nif = nif;
        this.email = email;
        this.nome = nome;
        this.morada = morada;
+       this.gestorfaturas = gestorfaturas;
+       System.out.println(password);
        this.password = password;
-       EntidadeEmpresas fichaE = (EntidadeEmpresas) this;
-       if(fichaE != null){
-       this.fichaType = 1;
+
+        if(this instanceof EntidadeEmpresas){
+        this.fichaType = 1;
        }
        else{ 
        this.fichaType = 0;
@@ -44,7 +49,21 @@ public class FichaCliente
     public int getnif(){
         return this.nif;
     }
-      
+    
+    public List<Fatura> getmyfaturas(){
+        List<Fatura> aux = new ArrayList<>();
+        System.out.println("ole");
+        System.out.println("size" + gestorfaturas.getFaturas().size());
+        for(Fatura h : gestorfaturas.getFaturas().values()){
+            System.out.println(h.getnifCliente()+"olaesd");
+            if(h.getnifCliente()==nif){
+                        System.out.println("ola");
+            aux.add(h.clone());
+        }
+        }
+        return aux;
+    }
+    
     public int getfichaType(){
         return this.fichaType;
     }
@@ -76,7 +95,6 @@ public class FichaCliente
     public void setfichaType(int fichatype){
         this.fichaType = fichatype;
     }
-    
     
     public void setEmail(String email){
         this.email = email;

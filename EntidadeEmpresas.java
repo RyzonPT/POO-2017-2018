@@ -9,8 +9,8 @@ public class EntidadeEmpresas extends FichaCliente
        this.deducaoFiscal = 0;
     }
     
-    public EntidadeEmpresas(int nif,String email, String nome, String morada, String password, String actividadeEconomica, int deducaoFiscal){
-       super(nif,email,nome,morada,password);
+    public EntidadeEmpresas(int nif,String email, String nome, String morada, String password, String actividadeEconomica, int deducaoFiscal,GestaoFaturas gestorfaturas){
+       super(nif,email,nome,morada,password,gestorfaturas);
        this.actividadeEconomica = actividadeEconomica;
        this.deducaoFiscal = deducaoFiscal;
        FichaCliente ola = (FichaCliente) this;

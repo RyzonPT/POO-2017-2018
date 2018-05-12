@@ -78,7 +78,9 @@ public class GestaoFichas
                 System.out.println("Nif não registado");
                 return false;
             }
+
             FichaCliente fichaEncontrada = this.getFicha(nif);
+
             if(!password.equals(fichaEncontrada.getPassword())){
                 System.out.println("Password inválida");
                 return false;

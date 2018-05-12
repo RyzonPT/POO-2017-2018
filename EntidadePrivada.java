@@ -10,18 +10,20 @@ public class EntidadePrivada extends FichaCliente
     {
         super();
         this.agregadoFamiliar = 0;
-        this.numerosFiscais = new ArrayList<>();
+        this.numerosFiscais = new ArrayList<Integer>();
         this.coeficienteFiscal =0;
-        this.codigosAtividades = new ArrayList<>();
+        this.codigosAtividades = new ArrayList<Integer>();
     }
 
-    public EntidadePrivada(int numeroFiscal, String email, String nome, String morada, String password, int agregadoFamiliar, ArrayList<Integer> numerosFiscais, int coeficienteFiscal,ArrayList<Integer> codigosAtividade){
-        super(numeroFiscal,email,nome,morada,password);
+    public EntidadePrivada(int numeroFiscal, String email, String nome, String morada, String password, int agregadoFamiliar, ArrayList<Integer> numerosFiscais,
+    int coeficienteFiscal,ArrayList<Integer> codigosAtividade,GestaoFaturas gestorfaturas){
+        super(numeroFiscal,email,nome,morada,password,gestorfaturas);
         this.agregadoFamiliar = agregadoFamiliar;
         this.numerosFiscais = numerosFiscais;
         this.coeficienteFiscal = coeficienteFiscal;
-        this.codigosAtividades = codigosAtividades;        
+        this.codigosAtividades = codigosAtividade;        
     }
+    
 
     public EntidadePrivada( EntidadePrivada c){
         super(c);
@@ -36,7 +38,7 @@ public class EntidadePrivada extends FichaCliente
     }
 
     public ArrayList<Integer> getNumerosFiscais(){
-        return (ArrayList<Integer>)numerosFiscais.clone();
+        return new ArrayList<Integer> (numerosFiscais);
     }
     
 
@@ -45,7 +47,7 @@ public class EntidadePrivada extends FichaCliente
     }
 
     public ArrayList<Integer> getCodigosAtividades(){
-        return (ArrayList<Integer>)codigosAtividades.clone();
+        return new ArrayList<Integer>(codigosAtividades);
     }
     
 

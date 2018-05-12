@@ -23,9 +23,9 @@ public class GUI_Login extends JFrame {
     private JLabel label1;
     private JLabel label2;
     private int nif;
-    private String password;
+    private String password ="";
     public GestaoFichas gestorfichas;
-    private String olas;
+    private String save = "";
 
     //Constructor 
     public GUI_Login(){
@@ -133,13 +133,14 @@ public class GUI_Login extends JFrame {
     
     //Method keyTyped for TextBox
         private void onNifKeyTyped (KeyEvent evt) {
-            olas = TextBox.getText();
-            System.out.println(olas);
+            save = TextBox.getText();
     }
 
     //Method mouseClicked for button1
     private void onLoginButtonClicked (MouseEvent evt) {
+            int nif = Integer.parseInt(save);
             FichaCliente fichaEncontrada = gestorfichas.autenticacao(password,nif);
+
                 if(fichaEncontrada != null){
                 dispose();
                 GUI_FichaCliente fichagui = new GUI_FichaCliente(fichaEncontrada);
