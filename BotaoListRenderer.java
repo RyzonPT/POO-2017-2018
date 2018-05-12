@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;  
 
-class ButtonListRenderer extends JButton implements ListCellRenderer
+class BotaoListRenderer extends JButton implements ListCellRenderer
   {
     public Component getListCellRendererComponent(JList comp, Object value, int index,
                                                   boolean isSelected, boolean hasFocus)

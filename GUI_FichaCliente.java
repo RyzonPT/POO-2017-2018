@@ -43,7 +43,7 @@ public class GUI_FichaCliente extends JFrame {
     private JLabel listaAgregadotext;
     private JLabel moradaText;
     private JTable table;
-    private JList jlist;
+    private JScrollPane listScroller;
 
 
     //Constructor 
@@ -233,38 +233,18 @@ public class GUI_FichaCliente extends JFrame {
         defaultdeducaotext.setText("Coeficiente Fiscal:");
         defaultdeducaotext.setVisible(true);
 
-   
+    FichaCliente ola =(FichaCliente)fichaP;
        List <Fatura> faturaslist = new ArrayList<>();
        faturaslist = fichaP.getmyfaturas();
-       Object[] items = new ButtonItem[faturaslist.size()];
-       int i = 0;
+       Object[] butoes = new Botao[faturaslist.size()];
+      
+     int i = 0;
        for(Fatura h : faturaslist){
-           items[i] = new ButtonItem(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa());
+           butoes[i] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h);
            i++;
         }
        
-    
-
-    jlist = new JList(items);
-    jlist.setCellRenderer(new ButtonListRenderer());
-    jlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-    jlist.setVisibleRowCount(5);
-           jlist.setBounds(400,200,300,35);
-        jlist.setBackground(new Color(214,217,223));
-        jlist.setForeground(new Color(0,0,0));
-    jlist.addMouseListener(new MouseAdapter()
-    {
-      @Override
-      public void mouseClicked(MouseEvent event)
-      {
-        clickButtonAt(event.getPoint());
-      }
-    });
-       JScrollPane scroll = new JScrollPane(); 
-       scroll.getViewport().setBorder(null);
-       scroll.getViewport().add(jlist); 
-       scroll.setSize(450, 450);
-       scroll.setVisible(true);
+ 
         
         
        /* ListaAgregadoFamiliar = new JList(fichaP.getNumerosFiscais().toArray());
@@ -275,16 +255,16 @@ public class GUI_FichaCliente extends JFrame {
         ListaAgregadoFamiliar.setFont(new Font("sansserif",0,12));
         ListaAgregadoFamiliar.setVisible(true);*/
 
-        ListaCodigos = new JList(items);
+        ListaCodigos = new JList(butoes);
         ListaCodigos.setBounds(449,588,222,147);
         ListaCodigos.setBackground(new Color(255,255,255));
         ListaCodigos.setForeground(new Color(0,0,0));
         ListaCodigos.setEnabled(true);
         ListaCodigos.setFont(new Font("sansserif",0,12));
         ListaCodigos.setVisible(true);
-            ListaCodigos.setCellRenderer(new ButtonListRenderer());
-    ListaCodigos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-          ListaCodigos.addMouseListener(new MouseAdapter()
+        ListaCodigos.setCellRenderer(new BotaoListRenderer());
+        ListaCodigos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        ListaCodigos.addMouseListener(new MouseAdapter()
     {
       @Override
       public void mouseClicked(MouseEvent event)
@@ -292,7 +272,18 @@ public class GUI_FichaCliente extends JFrame {
         clickButtonAt(event.getPoint());
       }
     });
-
+    
+        //JScrollPane scroll = new JScrollPane(ListaCodigos); 
+      // scroll.getViewport().setBorder(null);
+       //scroll.getViewport().add(ListaCodigos); 
+       //scroll.setSize(450, 450);
+       //scroll.setVisible(true);
+                listScroller = new JScrollPane();
+                listScroller.setViewportView(ListaCodigos);
+                ListaCodigos.setLayoutOrientation(JList.VERTICAL);
+                listScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+                
+                
         
         codigosText = new JLabel();
         codigosText.setBounds(465,550,300,35);
@@ -329,6 +320,8 @@ public class GUI_FichaCliente extends JFrame {
         list1.setVisible(true);
 
         //adding components to contentPane panel
+        contentPane.add(listScroller);
+
         contentPane.add(AtividadeEconoagregadoText);
         contentPane.add(DeducaoqueficienteFiscalText);
         contentPane.add(EmailText);
@@ -344,7 +337,6 @@ public class GUI_FichaCliente extends JFrame {
         contentPane.add(label6);
         contentPane.add(list1);
         contentPane.add(moradaText);
-        contentPane.add(table);
 
         //adding panel to JFrame and seting of window position and close operation
         this.add(contentPane);
@@ -356,8 +348,8 @@ public class GUI_FichaCliente extends JFrame {
 
 private void clickButtonAt(Point point)
   {
-    int index = jlist.locationToIndex(point);
-    ButtonItem item = (ButtonItem) jlist.getModel().getElementAt(index);
+    int index =  ListaCodigos.locationToIndex(point);
+    Botao item = (Botao) ListaCodigos.getModel().getElementAt(index);
     item.getButton().doClick();
 }
     //method for generate menu

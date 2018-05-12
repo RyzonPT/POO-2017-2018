@@ -7,7 +7,7 @@ public class FichaCliente
    private String nome;
    private String morada;
    private String password;
-   private GestaoFaturas gestorfaturas;
+   public GestaoFaturas gestorfaturas;
    private int fichaType;
    
    public FichaCliente(){
@@ -44,13 +44,19 @@ public class FichaCliente
         this.morada = c.getMorada();
         this.password = c.getPassword();
         this.fichaType = c.getfichaType();
+        this.gestorfaturas = c.getgestorfaturas();
     }
     
     public int getnif(){
         return this.nif;
     }
     
+    public GestaoFaturas getgestorfaturas(){
+         return gestorfaturas.clone();
+    }
+    
     public List<Fatura> getmyfaturas(){
+
         List<Fatura> aux = new ArrayList<>();
         System.out.println("ole");
         System.out.println("size" + gestorfaturas.getFaturas().size());

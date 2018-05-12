@@ -2,31 +2,31 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;    
 
-public class ButtonItem
+public class Botao
   {
-    private JButton button;
+    private JButton Botao;
 
-    public ButtonItem(String name)
+    public Botao(String name,Fatura fatura)
     {
-      this.button = new JButton(name);
-      button.addActionListener(new ActionListener()
+      this.Botao = new JButton(name);
+      Botao.addActionListener(new ActionListener()
       {
         @Override
         public void actionPerformed(ActionEvent e)
         {
-          System.out.println(button.getText() + " was clicked.");
+          GUI_Fatura faturagui = new GUI_Fatura(fatura);
         }
       });
     }
 
     public JButton getButton()
     {
-      return button;
+      return Botao;
     }
 
     @Override
     public String toString()
     {
-      return button.getText();
+      return Botao.getText();
     }
   }

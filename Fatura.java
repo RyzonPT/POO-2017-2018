@@ -1,5 +1,9 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.time.format.DateTimeFormatter;
 public class Fatura
 {
     /**
@@ -118,9 +122,13 @@ public class Fatura
     public String getactividadeEconomica(){
         return actividadeEconomica;
     }
-  
+
     public double getvalortotal(){
         return valortotal;
+    }
+    
+        public double getvalorUnitario(){
+        return  valorUnitario;
     }
     
     public double getdeducao(){
@@ -224,5 +232,11 @@ public class Fatura
                moradaCliente.equals(c.getmoradaCliente()) &&
                emailCliente.equals(c.getemailCliente()) &&
                nifCliente == c.getnifCliente();
+    }
+    
+    public String getdatastring(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        String formattedString = data.format(formatter);
+        return formattedString;
     }
 }
