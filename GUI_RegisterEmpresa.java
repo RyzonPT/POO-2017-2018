@@ -93,7 +93,7 @@ public class GUI_RegisterEmpresa extends JFrame {
 		RNome.setText("");
 		RNome.setVisible(true);
 
-		RPassword = new JTextField();
+		RPassword = new JPasswordField();
 		RPassword.setBounds(199,122,90,35);
 		RPassword.setBackground(new Color(255,255,255));
 		RPassword.setForeground(new Color(0,0,0));

@@ -119,7 +119,7 @@ public class GUI_CriaFatura extends JFrame {
             }
         });
         
-         removerbotao = new JButton();
+        removerbotao = new JButton();
         removerbotao.setBounds(460,410,90,35);
         removerbotao.setBackground(new Color(214,217,223));
         removerbotao.setForeground(new Color(0,0,0));
