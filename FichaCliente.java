@@ -16,7 +16,12 @@ public class FichaCliente
        this.nome = "";
        this.morada = "";
        this.password = "";
-       this.fichaType = -1;
+               if(this instanceof EntidadeEmpresas){
+        this.fichaType = 1;
+       }
+       else{ 
+       this.fichaType = 0;
+       }
        this.gestorfaturas = new GestaoFaturas();
     }
     
@@ -26,7 +31,6 @@ public class FichaCliente
        this.nome = nome;
        this.morada = morada;
        this.gestorfaturas = gestorfaturas;
-       System.out.println(password);
        this.password = password;
 
         if(this instanceof EntidadeEmpresas){
@@ -44,7 +48,7 @@ public class FichaCliente
         this.morada = c.getMorada();
         this.password = c.getPassword();
         this.fichaType = c.getfichaType();
-        this.gestorfaturas = c.getgestorfaturas();
+        this.gestorfaturas = c.gestorfaturas;
     }
     
     public int getnif(){
@@ -59,8 +63,8 @@ public class FichaCliente
 
         List<Fatura> aux = new ArrayList<>();
         System.out.println("ole");
-        System.out.println("size" + gestorfaturas.getFaturas().size());
-        for(Fatura h : gestorfaturas.getFaturas().values()){
+        System.out.println("size" + gestorfaturas.getMapFaturas().size());
+        for(Fatura h : gestorfaturas.getMapFaturas().values()){
             System.out.println(h.getnifCliente()+"olaesd");
             if(h.getnifCliente()==nif){
                         System.out.println("ola");

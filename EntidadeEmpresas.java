@@ -1,15 +1,17 @@
+import java.util.ArrayList;
+
 public class EntidadeEmpresas extends FichaCliente
 {
-   private String actividadeEconomica;
+   private ArrayList<String> actividadeEconomica;
    private int deducaoFiscal;
 
    public EntidadeEmpresas(){
        super();
-       this.actividadeEconomica = "";
+       this.actividadeEconomica = new ArrayList<>();
        this.deducaoFiscal = 0;
     }
     
-    public EntidadeEmpresas(int nif,String email, String nome, String morada, String password, String actividadeEconomica, int deducaoFiscal,GestaoFaturas gestorfaturas){
+    public EntidadeEmpresas(int nif,String email, String nome, String morada, String password, ArrayList<String> actividadeEconomica, int deducaoFiscal,GestaoFaturas gestorfaturas){
        super(nif,email,nome,morada,password,gestorfaturas);
        this.actividadeEconomica = actividadeEconomica;
        this.deducaoFiscal = deducaoFiscal;
@@ -23,15 +25,15 @@ public class EntidadeEmpresas extends FichaCliente
         this.deducaoFiscal = getDeducaoFiscal();
     }
     
-    public String getActividadeEconomica(){
-        return this.actividadeEconomica;
+    public ArrayList<String> getActividadeEconomica(){
+        return (ArrayList<String>) actividadeEconomica.clone();
     }
     
     public int getDeducaoFiscal(){
         return this.deducaoFiscal;
     }
 
-    public void setActividadeEconomica(String actividadeEconomica){
+    public void setActividadeEconomica(ArrayList<String> actividadeEconomica){
         this.actividadeEconomica = actividadeEconomica;
     }
 

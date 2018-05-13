@@ -40,6 +40,7 @@ public class GUI_Fatura extends JFrame {
     private JLabel label17;
     private JLabel label18;
     private JLabel label19;
+    private JLabel label20;
     private JLabel label2;
     private JLabel label36;
     private JLabel label4;
@@ -138,6 +139,16 @@ public class GUI_Fatura extends JFrame {
         MoradaEmpresaText.setFont(new Font("sansserif",0,12));
         MoradaEmpresaText.setText(fatura.getmoradaEmpresa());
         MoradaEmpresaText.setVisible(true);
+        
+        
+        label20 = new JLabel();
+        label20.setBounds(15,222,300,35);
+        label20.setBackground(new Color(214,217,223));
+        label20.setForeground(new Color(0,0,0));
+        label20.setEnabled(true);
+        label20.setFont(new Font("sansserif",0,12));
+        label20.setText("Morada da Empresa:");
+        label20.setVisible(true);
 
         NifClienteText = new JLabel();
         NifClienteText.setBounds(139,378,300,35);
@@ -369,6 +380,7 @@ public class GUI_Fatura extends JFrame {
         contentPane.add(label4);
         contentPane.add(label5);
         contentPane.add(label7);
+        contentPane.add(label20 );
         contentPane.add(label8);
         contentPane.add(label9);
         contentPane.add(scrollProdutos);

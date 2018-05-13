@@ -144,7 +144,8 @@ public class GUI_Login extends JFrame {
                 if(fichaEncontrada != null){
                 dispose();
                 GUI_FichaCliente fichagui = new GUI_FichaCliente(fichaEncontrada);
-                System.out.println("sizessdsdsdsd" + fichaEncontrada.gestorfaturas.getFaturas().size());
+                fichagui.setgestorfichas(gestorfichas);
+                System.out.println(fichaEncontrada.getgestorfaturas().getMapFaturas().size() +" ola");
             }
     }
 

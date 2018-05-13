@@ -24,7 +24,8 @@ public class GUI_CriaFatura extends JFrame {
 
     private JMenuBar menuBar;
     private JButton AdicionarButton;
-        private JButton removerbotao;
+    private JButton removerbotao;
+    private JButton testanifButton;
     private JButton CriarFacturaButton;
     private JLabel TextAtividadeEco;
     private JLabel TextData;
@@ -67,6 +68,7 @@ public class GUI_CriaFatura extends JFrame {
     private String quantidade;
     private String preco;
     private FichaCliente ficha;
+    private GestaoFichas gestorfichas;
     private ArrayList<Triple> produtos;
     private String[] colunas = {"Produto","Quantidade","Preço(€)"}; 
     private DefaultTableModel dtm = new DefaultTableModel(null,colunas){    
@@ -77,15 +79,16 @@ public class GUI_CriaFatura extends JFrame {
 };
     
     //Constructor 
-    public GUI_CriaFatura(FichaCliente ficha){
-        faturaID = "0";
+    public GUI_CriaFatura(FichaCliente ficha,GestaoFichas gestorfichas){
+        this.gestorfichas = gestorfichas;
+        faturaID = "";
         nomeCliente = "n/a";
         moradaCliente = "n/a";
         emailCliente = "n/a";
-        nifCliente = "0";
-        produto = "n/a";
-        quantidade = "0";
-        preco = "0";
+        nifCliente = "";
+        produto = "";
+        quantidade = "";
+        preco = "";
         produtos = new ArrayList<Triple>();
         this.ficha=ficha;
        
@@ -101,8 +104,25 @@ public class GUI_CriaFatura extends JFrame {
         JPanel contentPane = new JPanel(null);
         contentPane.setPreferredSize(new Dimension(695,664));
         contentPane.setBackground(new Color(192,192,192));
-
-
+       
+        
+        testanifButton = new JButton();
+        testanifButton.setBounds(314,452,90,35);
+        testanifButton.setBackground(new Color(214,217,223));
+        testanifButton.setForeground(new Color(0,0,0));
+        testanifButton.setEnabled(true);
+        testanifButton.setFont(new Font("sansserif",0,12));
+        testanifButton.setText("Testar Nif");
+        testanifButton.setVisible(true);
+        //Set methods for mouse events
+        //Call defined methods
+        testanifButton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                OnTestaNif(evt);
+            }
+        });
+        
+        
         AdicionarButton = new JButton();
         AdicionarButton.setBounds(587,509,90,35);
         AdicionarButton.setBackground(new Color(214,217,223));
@@ -119,7 +139,7 @@ public class GUI_CriaFatura extends JFrame {
             }
         });
         
-        removerbotao = new JButton();
+         removerbotao = new JButton();
         removerbotao.setBounds(460,410,90,35);
         removerbotao.setBackground(new Color(214,217,223));
         removerbotao.setForeground(new Color(0,0,0));
@@ -158,7 +178,7 @@ public class GUI_CriaFatura extends JFrame {
         TextAtividadeEco.setForeground(new Color(0,0,0));
         TextAtividadeEco.setEnabled(true);
         TextAtividadeEco.setFont(new Font("sansserif",0,12));
-        TextAtividadeEco.setText(fichaE.getActividadeEconomica());
+      //  TextAtividadeEco.setText(fichaE.getActividadeEconomica());
         TextAtividadeEco.setVisible(true);
 
         
@@ -190,6 +210,7 @@ public class GUI_CriaFatura extends JFrame {
         TextFEmailCliente.setFont(new Font("sansserif",0,12));
         TextFEmailCliente.setText("");
         TextFEmailCliente.setVisible(true);
+        TextFEmailCliente.setEditable(false);
         //Set action for key events
         //Call defined method
         TextFEmailCliente.addKeyListener(new KeyAdapter() {
@@ -207,6 +228,7 @@ public class GUI_CriaFatura extends JFrame {
         TextFMoradaCliente.setFont(new Font("sansserif",0,12));
         TextFMoradaCliente.setText("");
         TextFMoradaCliente.setVisible(true);
+        TextFMoradaCliente.setEditable(false);
         //Set action for key events
         //Call defined method
         TextFMoradaCliente.addKeyListener(new KeyAdapter() {
@@ -241,6 +263,7 @@ public class GUI_CriaFatura extends JFrame {
         TextFNomeCliente.setFont(new Font("sansserif",0,12));
         TextFNomeCliente.setText("");
         TextFNomeCliente.setVisible(true);
+        TextFNomeCliente.setEditable(false);
         //Set action for key events
         //Call defined method
         TextFNomeCliente.addKeyListener(new KeyAdapter() {
@@ -557,6 +580,7 @@ public class GUI_CriaFatura extends JFrame {
         contentPane.add(scrollProdutos);
         contentPane.add(textfield2);
         contentPane.add(removerbotao);
+        contentPane.add(testanifButton);
 
         //adding panel to JFrame and seting of window position and close operation
         this.add(contentPane);
@@ -571,9 +595,44 @@ public class GUI_CriaFatura extends JFrame {
         String formattedString = LocalDate.now().format(formatter);
         return formattedString;
     }
-
+    
+    private void OnTestaNif(MouseEvent evt){
+        if(!nifCliente.matches("[0-9]+") || nifCliente == ""){
+            GUI_Warning warning =  new GUI_Warning(null,"Nif de Cliente Invalido!"); 
+            return;
+        }
+        int nif = Integer.parseInt(nifCliente);
+        if(gestorfichas.existeFicha(nif)){
+            FichaCliente fichaEncontrada = gestorfichas.getFicha(nif);
+            nomeCliente=fichaEncontrada.getNome();
+            emailCliente = fichaEncontrada.getEmail();
+            moradaCliente = fichaEncontrada.getMorada();
+            TextFNomeCliente.setText(nomeCliente);
+            TextFMoradaCliente.setText(moradaCliente);
+            TextFEmailCliente.setText(emailCliente);
+        }
+        else{
+            GUI_Warning warning =  new GUI_Warning(null,"Nif de Cliente Nao Registado!"); 
+        }
+    }
     //Method mouseClicked for AdicionarButton
     private void OnProdutoAddedd (MouseEvent evt) {
+        if(produto == ""){
+            GUI_Warning warning =  new GUI_Warning(null,"Produto Invalido."); 
+            return;
+        }
+        
+        if(!quantidade.matches("[0-9]+") || quantidade == ""){
+            GUI_Warning warning =  new GUI_Warning(null,"Quantidade Invalida."); 
+            return;
+        }
+
+        if(!preco.matches("\\d*\\.?\\d*") || preco == ""){
+            GUI_Warning warning =  new GUI_Warning(null,"Preco Invalido."); 
+            return;
+        }
+        
+
         Triple h = new Triple (produto,Integer.parseInt(quantidade),Double.parseDouble(preco));
         produtos.add(h);
         
@@ -581,6 +640,9 @@ public class GUI_CriaFatura extends JFrame {
         table.setValueAt(produto,table.getRowCount()-1,0);
         table.setValueAt(quantidade,table.getRowCount()-1,1);
         table.setValueAt(preco,table.getRowCount()-1,2);
+        produto = "";
+        quantidade ="";
+        preco = "";
         TextFProduto.setText("");
         TextFQuantidade.setText("");
         TextFPreco.setText("");
@@ -598,10 +660,20 @@ public class GUI_CriaFatura extends JFrame {
 
     //Method mouseClicked for CriarFacturaButton
     private void OnClickedCriarFatura (MouseEvent evt) {
+        if(!faturaID.matches("[0-9]+")){
+            GUI_Warning warning =  new GUI_Warning(null,"faturaID invalida."); 
+            return;
+    }
+        if(!nifCliente.matches("[0-9]+")){
+            GUI_Warning warning =  new GUI_Warning(null,"Nif de Cliente Invalido."); 
+            return;
+    }
         EntidadeEmpresas fichaE = (EntidadeEmpresas) ficha;   
-        Fatura c = new Fatura (Integer.parseInt(faturaID), ficha.getNome(), ficha.getMorada(), ficha.getEmail(),ficha.getnif(),  produtos,fichaE.getActividadeEconomica(),0,0, nomeCliente, moradaCliente, emailCliente, Integer.parseInt(nifCliente));
+        /*Fatura c = new Fatura (Integer.parseInt(faturaID), ficha.getNome(), ficha.getMorada(), ficha.getEmail(),ficha.getnif(),  produtos,fichaE.getActividadeEconomica(),0,0, nomeCliente, moradaCliente, emailCliente, Integer.parseInt(nifCliente));
         ficha.gestorfaturas.addFaturas(c);
-        
+         System.out.println(ficha.getgestorfaturas().getMapFaturas().size() +" ola");
+         GUI_Warning warning =  new GUI_Warning(this,"Fatura criada com sucesso!"); 
+        */
     }
     
 
@@ -678,7 +750,7 @@ public class GUI_CriaFatura extends JFrame {
         System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new GUI_CriaFatura(null);
+                new GUI_CriaFatura(null,null);
             }
         });
     }

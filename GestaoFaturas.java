@@ -9,45 +9,45 @@ import java.io.Serializable;
 
 public class GestaoFaturas implements Serializable
 {
-    private Map<Integer,Fatura> faturas;
+    private Map<Integer,Fatura> mapfaturas;
     public int numerofaturas = 0;
     
     public GestaoFaturas()
     {
-        this.faturas = new HashMap<>();
+        this.mapfaturas = new HashMap<>();
     }
     
     public GestaoFaturas(Map<Integer,Fatura> fat) {
-       this.faturas = fat.values().stream().collect(Collectors.toMap((e) -> e.getfaturaID(),(e) -> e.clone()));
+       this.mapfaturas = fat.values().stream().collect(Collectors.toMap((e) -> e.getfaturaID(),(e) -> e.clone()));
     }
     
     public GestaoFaturas(GestaoFaturas a){
-        this.faturas = a.getFaturas();
+        this.mapfaturas = a.getMapFaturas();
     }
     
-    public Map<Integer,Fatura> getFaturas(){
-        return this.faturas.values().stream().collect(Collectors.toMap((e)->e.getfaturaID(),(e)->e.clone()));
+    public Map<Integer,Fatura> getMapFaturas(){
+        return this.mapfaturas.values().stream().collect(Collectors.toMap((e)->e.getfaturaID(),(e)->e.clone()));
     }
     
     public void addFaturas(Fatura a){
-        this.faturas.put(a.getfaturaID(),a.clone()); 
+        this.mapfaturas.put(a.getfaturaID(),a.clone()); 
         this.numerofaturas++;
     }
     
     public boolean existeFatura(int id){
-       return faturas.containsKey(id);
+       return mapfaturas.containsKey(id);
     }
     
     public void removeFaturas(Integer faturaID) {
-        this.faturas.remove(faturaID);
+        this.mapfaturas.remove(faturaID);
     }
     
     public Fatura getFatura(Integer faturaID) {
-        return (this.faturas.get(faturaID)).clone();
+        return (this.mapfaturas.get(faturaID)).clone();
     }
     
     public Map<Integer,Fatura> getFaturasUser(Integer nifCliente){
-        return this.faturas.values().stream().collect(Collectors.toMap((e)->e.getnifCliente(),(e)->e.clone()));
+        return this.mapfaturas.values().stream().collect(Collectors.toMap((e)->e.getnifCliente(),(e)->e.clone()));
     }
     public GestaoFaturas clone(){
         return new GestaoFaturas(this);

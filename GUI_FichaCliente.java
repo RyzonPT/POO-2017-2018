@@ -43,7 +43,9 @@ public class GUI_FichaCliente extends JFrame {
     private JLabel moradaText;
     private JScrollPane listScroller;
     private JButton button1;
+    private JButton logOutbutton;
     private FichaCliente ficha;
+    private GestaoFichas gestorfichas;
 
     //Constructor 
     public GUI_FichaCliente(FichaCliente fichas){
@@ -155,6 +157,25 @@ public class GUI_FichaCliente extends JFrame {
         moradaText.setText(fichas.getMorada());
         moradaText.setVisible(true);
         
+        
+        
+        logOutbutton = new JButton();
+        logOutbutton.setBounds(520,730,90,35);
+        logOutbutton.setBackground(new Color(214,217,223));
+        logOutbutton.setForeground(new Color(0,0,0));
+        logOutbutton.setEnabled(true);
+        logOutbutton.setFont(new Font("sansserif",0,12));
+        logOutbutton.setText("Logout");
+        logOutbutton.setVisible(true);
+        
+       logOutbutton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                onlogOutButtonClicked(evt);
+            }
+        });
+        
+        
+        
         if(fichas.getfichaType() == 1){
         EntidadeEmpresas fichaE = (EntidadeEmpresas) fichas;
         AtividadeEconoagregadoText = new JLabel();
@@ -163,7 +184,7 @@ public class GUI_FichaCliente extends JFrame {
         AtividadeEconoagregadoText.setForeground(new Color(0,0,0));
         AtividadeEconoagregadoText.setEnabled(true);
         AtividadeEconoagregadoText.setFont(new Font("sansserif",0,12));
-        AtividadeEconoagregadoText.setText(fichaE.getActividadeEconomica());
+        //AtividadeEconoagregadoText.setText(fichaE.getActividadeEconomica());
         AtividadeEconoagregadoText.setVisible(true);
         
         DeducaoqueficienteFiscalText = new JLabel();
@@ -196,7 +217,7 @@ public class GUI_FichaCliente extends JFrame {
         
         
         button1 = new JButton();
-        button1.setBounds(435,374,236,117);
+        button1.setBounds(490,480,150,60);
         button1.setBackground(new Color(214,217,223));
         button1.setForeground(new Color(0,0,0));
         button1.setEnabled(true);
@@ -210,6 +231,7 @@ public class GUI_FichaCliente extends JFrame {
             }
         });
         contentPane.add(button1);
+        
     }
     else{
         EntidadePrivada fichaP = (EntidadePrivada) fichas;
@@ -270,16 +292,16 @@ public class GUI_FichaCliente extends JFrame {
         ListaCodigos.setForeground(new Color(0,0,0));
         ListaCodigos.setEnabled(true);
         ListaCodigos.setFont(new Font("sansserif",0,12));
-        ListaCodigos.setVisible(true);
         
         JScrollPane scrollListaCodigos = new JScrollPane();
         scrollListaCodigos.setViewportView(ListaCodigos);
         scrollListaCodigos.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollListaCodigos.setBounds(449,588,222,147);
+        scrollListaCodigos.setBounds(449,560,222,147);
+
     
                
         codigosText = new JLabel();
-        codigosText.setBounds(465,550,300,35);
+        codigosText.setBounds(465,530,300,35);
         codigosText.setBackground(new Color(214,217,223));
         codigosText.setForeground(new Color(0,0,0));
         codigosText.setEnabled(true);
@@ -351,6 +373,7 @@ public class GUI_FichaCliente extends JFrame {
         contentPane.add(label5);
         contentPane.add(label6);
         contentPane.add(moradaText);
+        contentPane.add(logOutbutton);
 
         //adding panel to JFrame and seting of window position and close operation
         this.add(contentPane);
@@ -362,18 +385,26 @@ public class GUI_FichaCliente extends JFrame {
         this.setVisible(true);
     }
 
-private void clickButtonAt(Point point)
-  {
-    int index =  list1.locationToIndex(point);
-    Botao item = (Botao) list1.getModel().getElementAt(index);
-    item.getButton().doClick();
-}
+    private void clickButtonAt(Point point){
+        int index =  list1.locationToIndex(point);
+        Botao item = (Botao) list1.getModel().getElementAt(index);
+        item.getButton().doClick();
+    }
 
-    private void onCriarFaturaButtonClicked (MouseEvent evt) {
-            
-         GUI_CriaFatura criafaturagui = new GUI_CriaFatura(ficha);
-
-           
+    private void onCriarFaturaButtonClicked (MouseEvent evt) {          
+         GUI_CriaFatura criafaturagui = new GUI_CriaFatura(ficha,gestorfichas);
+    }
+    
+    private void onlogOutButtonClicked (MouseEvent evt) {      
+         GUI_Login login = new GUI_Login();
+         login.gestorfichas = gestorfichas;
+         login.setVisible(true);
+         dispose();
+    }
+    
+    
+    public void setgestorfichas(GestaoFichas a){
+        gestorfichas = a;
     }
     //method for generate menu
     public void generateMenu(){

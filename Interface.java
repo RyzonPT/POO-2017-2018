@@ -30,16 +30,16 @@ public class Interface
                 lolis2.add(triple);
                 lolis2.add(triple1);
                 lolis2.add(triple2);
-                ObjectInputStream in = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
-                GestaoFaturas gestorfaturass = (GestaoFaturas) in.readObject();
+                //ObjectInputStream in = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
+                //GestaoFaturas gestorfaturass = (GestaoFaturas) in.readObject();
 
             ArrayList<Integer> olas= new ArrayList<Integer>();
             GestaoFichas gestorFichas = new GestaoFichas();
             GestaoFaturas gestorfaturas = new GestaoFaturas();
             HallentradaGUI hall = new HallentradaGUI();
-           
+            
             //0,"email","nome","morada","",3,ola,434,olas
-            /*Fatura ola = new Fatura(4937289,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  null, 0, 0, null, null, null, 0);
+            Fatura ola = new Fatura(4937289,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  null, 0, 0, null, null, null, 0);
             gestorfaturas.addFaturas(ola);
                         Fatura dam = new Fatura(4937289,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  null, 0, 0, null, null, null, 0);
             gestorfaturas.addFaturas(dam);
@@ -62,12 +62,13 @@ public class Interface
             
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("gestorfaturas.txt"));
             out.writeObject(gestorfaturas);
-            */
-            EntidadePrivada fichaPrivada0 = new EntidadePrivada(0,"email","nome","morada","",3,lolis,0,lolis,gestorfaturass);
-            System.out.println("si" + fichaPrivada0.gestorfaturas.getFaturas().size());
+            
+            EntidadePrivada fichaPrivada0 = new EntidadePrivada(0,"email","nome","morada","",3,lolis,0,lolis,gestorfaturas);
+            System.out.println("si" + fichaPrivada0.gestorfaturas.getMapFaturas().size());
+            
             gestorFichas.addFicha(fichaPrivada0);
-            EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1,"ratuinho@hotmail.com", "PedreiroLDA", "SantoTiso","12345", "saude", 0,gestorfaturass);
-            gestorFichas.addFicha(fichaEmpresa0);
+           // EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1,"ratuinho@hotmail.com", "PedreiroLDA", "SantoTiso","12345", "saude", 0,gestorfaturas);
+           // gestorFichas.addFicha(fichaEmpresa0);
             
             
             
@@ -84,7 +85,7 @@ public class Interface
         }
     }
     
-    
+    /*
     private static String entryPassword;
     private static int entryNif;
     private static String entryLetter;
@@ -114,19 +115,19 @@ public class Interface
         EntidadePrivada fichaPrivada = new EntidadePrivada();
         EntidadeEmpresas fichaEmpresa = new EntidadeEmpresas();
         /**Pré-população de registos: 2 users com Nif 0 e 1 que têm password = "" e "password" respectivamente */
-        EntidadePrivada fichaPrivada0 = new EntidadePrivada();
+       /* EntidadePrivada fichaPrivada0 = new EntidadePrivada();
         gestorFichas.addFicha(fichaPrivada0);
        // EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1, "email", "nome", "morada", "password", "saude", 0);
        // gestorFichas.addFicha(fichaEmpresa0);
         /**Início do User Interface*/
-        System.out.println("Escrever 'r' para registar um novo user...");
+       /* System.out.println("Escrever 'r' para registar um novo user...");
         System.out.println("Ou escrever 'l' para iniciar o login...");
         Scanner scanner0 = new Scanner(System.in);
         entryLetter = scanner0.nextLine();
         while(1==1){
         if(entryLetter.equals("l")){
             /** Login */
-            System.out.println("Escreva o NIF...");
+         /*   System.out.println("Escreva o NIF...");
             Scanner scanner1 = new Scanner(System.in);
             entryNif = scanner1.nextInt();
             System.out.println("Escreva a password...");
@@ -148,7 +149,7 @@ public class Interface
             fichaX = gestorFichas.getFicha(entryNif);
             if(fichaX.getfichaType()==1){
                 /** Criar fatura */
-                System.out.println("Escrever 'c' para criar fatura ou qualquer outro char para sair");
+            /*    System.out.println("Escrever 'c' para criar fatura ou qualquer outro char para sair");
                 Scanner scannerC = new Scanner(System.in);
                 String escolha = scannerC.nextLine();
                 if(escolha.equals("c")){
@@ -205,7 +206,7 @@ public class Interface
             break;
         }else if(entryLetter.equals("r")){
             /** Registo */
-            System.out.println("É empresa ou indivíduo? ('e' / 'i')...");
+         /*   System.out.println("É empresa ou indivíduo? ('e' / 'i')...");
             Scanner scanner1 = new Scanner(System.in);
             String escolha = scanner1.nextLine();
             while(1==1){
@@ -291,7 +292,7 @@ public class Interface
         }}
     }
     
-    public Interface(){
+    public Run(){
         entryPassword = "n/a";
         entryNif= 0;
         entryEmail="";
@@ -305,7 +306,7 @@ public class Interface
         entryCodigosAtividades = new ArrayList<>();
     }
     
-    public Interface(String entryPassword, int entryNif, String entryEmail, String entryNome, String entryMorada, String entryActividadeEconomica, int entryDeducaoFiscal, int entryAgregadoFamiliar, ArrayList<int[]> entryNumerosFiscais, int entryCoeficienteFiscal,ArrayList<int[]> entryCodigosAtividade){
+    public Run(String entryPassword, int entryNif, String entryEmail, String entryNome, String entryMorada, String entryActividadeEconomica, int entryDeducaoFiscal, int entryAgregadoFamiliar, ArrayList<int[]> entryNumerosFiscais, int entryCoeficienteFiscal,ArrayList<int[]> entryCodigosAtividade){
         this.entryPassword = entryPassword;
         this.entryNif = entryNif;
         this.entryEmail = entryEmail;
@@ -319,7 +320,7 @@ public class Interface
         this.entryCodigosAtividades = entryCodigosAtividades;
     }
     
-    public Interface(Interface c){
+    public Run(Run c){
         entryPassword = c.getentryPassword();
         entryNif = c.getentryNif();
         entryEmail = c.getentryEmail();
@@ -441,6 +442,6 @@ public class Interface
                && entryCoeficienteFiscal==(c.getentryCoeficienteFiscal())
                && entryCodigosAtividades.equals(c.getentryCodigosAtividades());
     }
-
+*/
 
 }
