@@ -19,7 +19,7 @@ public class HallentradaGUI extends JFrame {
     private JButton Forgotten;
     private JButton Login;
     private JButton Register;
-    public GestaoFichas gestorfichas;
+    private GestaoFichas gestorfichas;
     //Constructor 
     public HallentradaGUI(){
 
@@ -94,6 +94,11 @@ public class HallentradaGUI extends JFrame {
         this.pack();
         this.setVisible(true);
     }
+    
+    public void setgestorfichas(GestaoFichas a){
+        gestorfichas = a;
+    }
+
     //Method mouseClicked for Forgotten
     private void forgottenPass (MouseEvent evt) {
 

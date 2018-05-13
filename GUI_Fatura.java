@@ -13,7 +13,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import javax.swing.border.Border;
 import javax.swing.*;
-
+import javafx.util.Pair;
 
 public class GUI_Fatura extends JFrame {
 
@@ -30,16 +30,13 @@ public class GUI_Fatura extends JFrame {
     private JLabel NifEmpresaText;
     private JLabel NomeClienteText;
     private JLabel NomeProdutoText;
-    private JLabel QuantidadeText;
     private JLabel ValorTotalText;
-    private JLabel ValorUnitarioText;
     private JLabel label10;
     private JLabel label11;
     private JLabel label12;
     private JLabel label13;
     private JLabel label14;
     private JLabel label15;
-    private JLabel label16;
     private JLabel label17;
     private JLabel label18;
     private JLabel label19;
@@ -178,15 +175,6 @@ public class GUI_Fatura extends JFrame {
         ValorTotalText.setText(String.valueOf(fatura.getvalortotal()));
         ValorTotalText.setVisible(true);
 
-        ValorUnitarioText = new JLabel();
-        ValorUnitarioText.setBounds(139,514,300,35);
-        ValorUnitarioText.setBackground(new Color(214,217,223));
-        ValorUnitarioText.setForeground(new Color(0,0,0));
-        ValorUnitarioText.setEnabled(true);
-        ValorUnitarioText.setFont(new Font("sansserif",0,12));
-        ValorUnitarioText.setText(String.valueOf(fatura.getvalorUnitario()));
-        ValorUnitarioText.setVisible(true);
-
         label10 = new JLabel();
         label10.setBounds(24,403,150,35);
         label10.setBackground(new Color(214,217,223));
@@ -232,14 +220,6 @@ public class GUI_Fatura extends JFrame {
         label15.setText("Nome de Cliente:");
         label15.setVisible(true);
 
-        label16 = new JLabel();
-        label16.setBounds(47,514,90,35);
-        label16.setBackground(new Color(214,217,223));
-        label16.setForeground(new Color(0,0,0));
-        label16.setEnabled(true);
-        label16.setFont(new Font("sansserif",0,12));
-        label16.setText("Valor Unitario:");
-        label16.setVisible(true);
 
         label17 = new JLabel();
         label17.setBounds(27,330,150,35);
@@ -330,21 +310,30 @@ public class GUI_Fatura extends JFrame {
         label9.setText("Data:");
         label9.setVisible(true);
 
-        String[] produtos = new String[fatura.getProduto().size()];
+        String[][] produtos = new String[fatura.getProduto().size()][3];
         int i = 0;
-        for(String h : fatura.getProduto()){
-                produtos[i]=h;
-                i++;
+
+        for(Triple a  : fatura.getProduto()){
+            produtos[i][0] = a.getproduto();
+            produtos[i][1] = Integer.toString(a.getquantidade());
+            produtos[i][2] = Double.toString(a.getprecounitario());  
+            i++;
           }
+          
+        String[] colunas = {"Produto","Quantidade","Preço(€)"};
         
-        
-        list5 = new JList(produtos);
-        list5.setBounds(139,417,200,100);
-        list5.setBackground(new Color(255,255,255));
-        list5.setForeground(new Color(0,0,0));
-        list5.setEnabled(true);
-        list5.setFont(new Font("sansserif",0,12));
-        list5.setVisible(true);
+        JTable table = new JTable(produtos, colunas);
+        table.setBackground(new Color(255,255,255));
+        table.setForeground(new Color(0,0,0));
+        table.setEnabled(false);
+        table.setFont(new Font("sansserif",0,12));
+        table.setVisible(true);
+        table.getTableHeader().setReorderingAllowed(false);
+
+        JScrollPane scrollProdutos = new JScrollPane();
+        scrollProdutos.setViewportView(table);
+        scrollProdutos.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollProdutos.setBounds(139,417,220,100);
 
         nomeEmpresaText = new JLabel();
         nomeEmpresaText.setBounds(143,171,300,35);
@@ -368,29 +357,26 @@ public class GUI_Fatura extends JFrame {
         contentPane.add(NifEmpresaText);
         contentPane.add(NomeClienteText);
         contentPane.add(ValorTotalText);
-        contentPane.add(ValorUnitarioText);
         contentPane.add(label10);
         contentPane.add(label12);
         contentPane.add(label13);
         contentPane.add(label14);
         contentPane.add(label15);
-        contentPane.add(label16);
         contentPane.add(label17);
         contentPane.add(label18);
         contentPane.add(label19);
         contentPane.add(label2);
         contentPane.add(label4);
         contentPane.add(label5);
-        contentPane.add(label6);
         contentPane.add(label7);
         contentPane.add(label8);
         contentPane.add(label9);
-        contentPane.add(list5);
+        contentPane.add(scrollProdutos);
         contentPane.add(nomeEmpresaText);
 
         //adding panel to JFrame and seting of window position and close operation
         this.add(contentPane);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.pack();
         this.setVisible(true);

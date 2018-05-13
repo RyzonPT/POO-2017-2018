@@ -15,8 +15,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import javax.swing.border.Border;
 import javax.swing.*;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+
 import java.util.List;
 
 
@@ -26,7 +25,7 @@ public class GUI_FichaCliente extends JFrame {
     private JLabel AtividadeEconoagregadoText;
     private JLabel DeducaoqueficienteFiscalText;
     private JLabel EmailText;
-    //private JList ListaAgregadoFamiliar;
+    private JList ListaAgregadoFamiliar;
     private JList ListaCodigos;
     private JLabel NameText;
     private JLabel NifText;
@@ -42,12 +41,13 @@ public class GUI_FichaCliente extends JFrame {
     private JList list1;
     private JLabel listaAgregadotext;
     private JLabel moradaText;
-    private JTable table;
     private JScrollPane listScroller;
-
+    private JButton button1;
+    private FichaCliente ficha;
 
     //Constructor 
     public GUI_FichaCliente(FichaCliente fichas){
+        ficha=fichas;
         this.setTitle("GUI_FichaCliente");
         this.setSize(796,798);
         //menu generate method
@@ -65,7 +65,7 @@ public class GUI_FichaCliente extends JFrame {
         EmailText.setForeground(new Color(0,0,0));
         EmailText.setEnabled(true);
         EmailText.setFont(new Font("sansserif",0,12));
-        EmailText.setText("label");
+        EmailText.setText(fichas.getEmail());
         EmailText.setVisible(true);
 
 
@@ -76,7 +76,7 @@ public class GUI_FichaCliente extends JFrame {
         NameText.setForeground(new Color(0,0,0));
         NameText.setEnabled(true);
         NameText.setFont(new Font("sansserif",0,12));
-        NameText.setText("label");
+        NameText.setText(fichas.getNome());
         NameText.setVisible(true);
 
         NifText = new JLabel();
@@ -85,7 +85,7 @@ public class GUI_FichaCliente extends JFrame {
         NifText.setForeground(new Color(0,0,0));
         NifText.setEnabled(true);
         NifText.setFont(new Font("sansserif",0,12));
-        NifText.setText("label");
+        NifText.setText(Integer.toString(fichas.getnif()));
         NifText.setVisible(true);
 
 
@@ -136,7 +136,7 @@ public class GUI_FichaCliente extends JFrame {
         label5.setVisible(true);
 
         label6 = new JLabel();
-        label6.setBounds(75,346,300,70);
+        label6.setBounds(75,316,300,70);
         label6.setBackground(new Color(214,217,223));
         label6.setForeground(new Color(0,0,0));
         label6.setEnabled(true);
@@ -152,7 +152,7 @@ public class GUI_FichaCliente extends JFrame {
         moradaText.setForeground(new Color(0,0,0));
         moradaText.setEnabled(true);
         moradaText.setFont(new Font("sansserif",0,12));
-        moradaText.setText("label");
+        moradaText.setText(fichas.getMorada());
         moradaText.setVisible(true);
         
         if(fichas.getfichaType() == 1){
@@ -181,7 +181,7 @@ public class GUI_FichaCliente extends JFrame {
         defaultatividadeText.setForeground(new Color(0,0,0));
         defaultatividadeText.setEnabled(true);
         defaultatividadeText.setFont(new Font("sansserif",0,12));
-        defaultatividadeText.setText("Atividade Econ�mica:");
+        defaultatividadeText.setText("Atividade Economica:");
         defaultatividadeText.setVisible(true);
         
         
@@ -191,8 +191,25 @@ public class GUI_FichaCliente extends JFrame {
         defaultdeducaotext.setForeground(new Color(0,0,0));
         defaultdeducaotext.setEnabled(true);
         defaultdeducaotext.setFont(new Font("sansserif",0,12));
-        defaultdeducaotext.setText("Dedu��o Fiscal:");
+        defaultdeducaotext.setText("Deducao Fiscal:");
         defaultdeducaotext.setVisible(true);
+        
+        
+        button1 = new JButton();
+        button1.setBounds(435,374,236,117);
+        button1.setBackground(new Color(214,217,223));
+        button1.setForeground(new Color(0,0,0));
+        button1.setEnabled(true);
+        button1.setFont(new Font("sansserif",0,12));
+        button1.setText("Criar Fatura");
+        button1.setVisible(true);
+        
+        button1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                onCriarFaturaButtonClicked(evt);
+            }
+        });
+        contentPane.add(button1);
     }
     else{
         EntidadePrivada fichaP = (EntidadePrivada) fichas;
@@ -233,58 +250,34 @@ public class GUI_FichaCliente extends JFrame {
         defaultdeducaotext.setText("Coeficiente Fiscal:");
         defaultdeducaotext.setVisible(true);
 
-    FichaCliente ola =(FichaCliente)fichaP;
-       List <Fatura> faturaslist = new ArrayList<>();
-       faturaslist = fichaP.getmyfaturas();
-       Object[] butoes = new Botao[faturaslist.size()];
-      
-     int i = 0;
-       for(Fatura h : faturaslist){
-           butoes[i] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h);
-           i++;
-        }
-       
- 
         
-        
-       /* ListaAgregadoFamiliar = new JList(fichaP.getNumerosFiscais().toArray());
-        ListaAgregadoFamiliar.setBounds(435,374,236,117);
+        ListaAgregadoFamiliar = new JList(fichaP.getNumerosFiscais().toArray());
         ListaAgregadoFamiliar.setBackground(new Color(255,255,255));
         ListaAgregadoFamiliar.setForeground(new Color(0,0,0));
         ListaAgregadoFamiliar.setEnabled(true);
         ListaAgregadoFamiliar.setFont(new Font("sansserif",0,12));
-        ListaAgregadoFamiliar.setVisible(true);*/
+        ListaAgregadoFamiliar.setVisible(true);
+        
+        JScrollPane scrollagregado = new JScrollPane();
+        scrollagregado.setViewportView(ListaAgregadoFamiliar);
+        scrollagregado.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollagregado.setBounds(435,374,236,117);
 
-        ListaCodigos = new JList(butoes);
-        ListaCodigos.setBounds(449,588,222,147);
+           
+             
+        ListaCodigos = new JList();
         ListaCodigos.setBackground(new Color(255,255,255));
         ListaCodigos.setForeground(new Color(0,0,0));
         ListaCodigos.setEnabled(true);
         ListaCodigos.setFont(new Font("sansserif",0,12));
         ListaCodigos.setVisible(true);
-        ListaCodigos.setCellRenderer(new BotaoListRenderer());
-        ListaCodigos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        ListaCodigos.addMouseListener(new MouseAdapter()
-    {
-      @Override
-      public void mouseClicked(MouseEvent event)
-      {
-        clickButtonAt(event.getPoint());
-      }
-    });
-    
-        //JScrollPane scroll = new JScrollPane(ListaCodigos); 
-      // scroll.getViewport().setBorder(null);
-       //scroll.getViewport().add(ListaCodigos); 
-       //scroll.setSize(450, 450);
-       //scroll.setVisible(true);
-                listScroller = new JScrollPane();
-                listScroller.setViewportView(ListaCodigos);
-                ListaCodigos.setLayoutOrientation(JList.VERTICAL);
-                listScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-                
-                
         
+        JScrollPane scrollListaCodigos = new JScrollPane();
+        scrollListaCodigos.setViewportView(ListaCodigos);
+        scrollListaCodigos.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollListaCodigos.setBounds(449,588,222,147);
+    
+               
         codigosText = new JLabel();
         codigosText.setBounds(465,550,300,35);
         codigosText.setBackground(new Color(214,217,223));
@@ -294,7 +287,7 @@ public class GUI_FichaCliente extends JFrame {
         codigosText.setText("Codigos de atividade");
         codigosText.setVisible(true);
         
-                listaAgregadotext = new JLabel();
+        listaAgregadotext = new JLabel();
         listaAgregadotext.setBounds(435,337,300,35);
         listaAgregadotext.setBackground(new Color(214,217,223));
         listaAgregadotext.setForeground(new Color(0,0,0));
@@ -303,25 +296,47 @@ public class GUI_FichaCliente extends JFrame {
         listaAgregadotext.setText("Lista do Agregado Familiar");
         listaAgregadotext.setVisible(true);
         
-        ///contentPane.add(ListaAgregadoFamiliar);
+        contentPane.add(scrollagregado);
         contentPane.add(codigosText);
-        contentPane.add(ListaCodigos);
+        contentPane.add(scrollListaCodigos);
         contentPane.add(listaAgregadotext);
     }
 
+       List <Fatura> faturaslist = new ArrayList<>();
+       faturaslist = fichas.getmyfaturas();
+       Object[] botoes = new Botao[faturaslist.size()];
+      
+     int i = 0;
+       for(Fatura h : faturaslist){
+           botoes[i] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h);
+           i++;
+        }
 
-            list1 = new JList();
-        JButton botao = new JButton();
-        list1.setBounds(52,416,299,322);
+        list1 = new JList(botoes);
         list1.setBackground(new Color(255,255,255));
         list1.setForeground(new Color(0,0,0));
         list1.setEnabled(true);
         list1.setFont(new Font("sansserif",0,12));
         list1.setVisible(true);
+        list1.setCellRenderer(new BotaoListRenderer());
+        list1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list1.addMouseListener(new MouseAdapter()
+    {
+      @Override
+      public void mouseClicked(MouseEvent event)
+      {
+        clickButtonAt(event.getPoint());
+      }
+    });
+        
+        JScrollPane scrollListaFaturas = new JScrollPane();
+        scrollListaFaturas.setViewportView(list1);
+        scrollListaFaturas.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollListaFaturas.setBounds(52,386,299,322);
 
         //adding components to contentPane panel
-        contentPane.add(listScroller);
 
+        contentPane.add(scrollListaFaturas);
         contentPane.add(AtividadeEconoagregadoText);
         contentPane.add(DeducaoqueficienteFiscalText);
         contentPane.add(EmailText);
@@ -335,12 +350,13 @@ public class GUI_FichaCliente extends JFrame {
         contentPane.add(label4);
         contentPane.add(label5);
         contentPane.add(label6);
-        contentPane.add(list1);
         contentPane.add(moradaText);
 
         //adding panel to JFrame and seting of window position and close operation
         this.add(contentPane);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         this.setLocationRelativeTo(null);
         this.pack();
         this.setVisible(true);
@@ -348,10 +364,17 @@ public class GUI_FichaCliente extends JFrame {
 
 private void clickButtonAt(Point point)
   {
-    int index =  ListaCodigos.locationToIndex(point);
-    Botao item = (Botao) ListaCodigos.getModel().getElementAt(index);
+    int index =  list1.locationToIndex(point);
+    Botao item = (Botao) list1.getModel().getElementAt(index);
     item.getButton().doClick();
 }
+
+    private void onCriarFaturaButtonClicked (MouseEvent evt) {
+            
+         GUI_CriaFatura criafaturagui = new GUI_CriaFatura(ficha);
+
+           
+    }
     //method for generate menu
     public void generateMenu(){
         menuBar = new JMenuBar();

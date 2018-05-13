@@ -5,8 +5,9 @@ import java.util.stream.Collectors;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class GestaoFaturas
+public class GestaoFaturas implements Serializable
 {
     private Map<Integer,Fatura> faturas;
     public int numerofaturas = 0;

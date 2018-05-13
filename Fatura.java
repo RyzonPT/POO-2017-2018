@@ -4,7 +4,9 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.time.format.DateTimeFormatter;
-public class Fatura
+import javafx.util.Pair;
+import java.io.Serializable;
+public class Fatura implements Serializable
 {
     /**
      * número scal do emitente;
@@ -21,10 +23,8 @@ public class Fatura
    private String emailEmpresa;
    private int nifEmpresa;
    private LocalDate data;
-   private ArrayList<String> produto;
-   private int quantidadeProduto;
+   private ArrayList<Triple> produto;
    private String actividadeEconomica;
-   private double valorUnitario;
    private double valortotal;
    private double deducao;
    private String nomeCliente;
@@ -40,7 +40,6 @@ public class Fatura
        nifEmpresa = 0;
        data = LocalDate.now();
        produto = new ArrayList<>();
-       quantidadeProduto = 0;
        actividadeEconomica ="n/a";
        valortotal= 0.0;
        deducao = 0.0;
@@ -50,7 +49,7 @@ public class Fatura
        nifCliente = 0;
     }
     
-    public Fatura(int faturaID,String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, ArrayList<String> produto, int quantidadeProduto, String actividadeEconomica, 
+    public Fatura(int faturaID,String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, ArrayList<Triple> produto, String actividadeEconomica, 
     double valor, double deducao, String nomeCliente, String moradaCliente, String emailCliente, int nifCliente){
        this.faturaID= faturaID;
        this.nomeEmpresa = nomeEmpresa;
@@ -59,7 +58,6 @@ public class Fatura
        this.nifEmpresa = nifEmpresa;
        this.data = LocalDate.now();
        this.produto = produto;
-       this.quantidadeProduto = quantidadeProduto;
        this.actividadeEconomica = actividadeEconomica;
        this.valortotal = valor;
        this.deducao = deducao;
@@ -77,7 +75,6 @@ public class Fatura
        nifEmpresa = c.getnifEmpresa();
        data = LocalDate.now();
        produto = c.getProduto();
-       quantidadeProduto = c.getquantidadeProduto();
        actividadeEconomica = c.getactividadeEconomica();
        valortotal = c.getvalortotal();
        deducao = c.getdeducao();
@@ -111,13 +108,10 @@ public class Fatura
         return this.data;
     }
     
-        public ArrayList<String> getProduto(){
-        return (ArrayList<String>) produto.clone();
+        public ArrayList<Triple> getProduto(){
+        return (ArrayList<Triple>) produto.clone();
     }
     
-    public int getquantidadeProduto(){
-        return quantidadeProduto;
-    }
     
     public String getactividadeEconomica(){
         return actividadeEconomica;
@@ -127,10 +121,7 @@ public class Fatura
         return valortotal;
     }
     
-        public double getvalorUnitario(){
-        return  valorUnitario;
-    }
-    
+
     public double getdeducao(){
         return deducao;
     }
@@ -174,12 +165,8 @@ public class Fatura
         this.data = data;
     }
     
-    public void setProduto(ArrayList<String> produto){
-        this.produto = (ArrayList<String>)produto.clone();
-    }
-    
-    public void setquantidadeProduto(int quantidadeProduto){
-        this.quantidadeProduto = quantidadeProduto;
+    public void setProduto(ArrayList<Triple> produto){
+        this.produto = (ArrayList<Triple>)produto.clone();
     }
     
     public void setactividadeEconomica(String actividadeEconomica){
@@ -224,7 +211,6 @@ public class Fatura
                nifEmpresa == c.getnifEmpresa() &&
                data.equals(c.getData()) &&
                produto.equals(c.getProduto()) &&
-               quantidadeProduto == c.getquantidadeProduto() &&
                actividadeEconomica.equals(c.getactividadeEconomica()) &&
                c.getvalortotal()==valortotal &&
                c.getdeducao()==deducao &&
