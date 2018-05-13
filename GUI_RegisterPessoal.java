@@ -40,19 +40,43 @@ public class GUI_RegisterPessoal extends JFrame {
     private JLabel labelNumeroDeDependentes;
     private JLabel labelNumerosFiscais;
     private JLabel labelPassword;
-    private JButton AdicionarButton;
+    private JButton AdicionarButtonNifs;
+    private JButton AdicionarButtonCodigos;
+    private JButton removerbotaoNifs;
+    private JButton removerbotaoCodigos;
     private JTable table;
+    private JTable table2;
     private int nif;
     private int codigoAtividade;
-    private ArrayList<NifeCodigoAtividade> nifsEcodigos;
+    private String email;
+    private String morada;
+    private String nome;
+    private int numerodedependentes;
+    private String password;
+    private ArrayList<Nifs> nifs;
+    private ArrayList<CodAtiv> codigos;
     private String[] colunas = {"Nifs"}; 
-    private DefaultTableModel dtm = new DefaultTableModel(null,colunas);
+    private DefaultTableModel dtm = new DefaultTableModel(null,colunas){
+        @Override
+    public boolean isCellEditable(int row, int column) {
+        return false;
+    }
+};
+    private String[] colunas2 = {"Codigos de Atividades"};
+    private DefaultTableModel dtm2 = new DefaultTableModel(null,colunas2){
+        @Override
+    public boolean isCellEditable(int row, int column) {
+        return false;
+    }
+};
 
     //Constructor 
     public GUI_RegisterPessoal(){
         nif = 911;
         codigoAtividade = 112;
-        nifsEcodigos = new ArrayList<NifeCodigoAtividade>();
+        nifs = new ArrayList<Nifs>();
+        codigos = new ArrayList<CodAtiv>();
+        
         
         this.setTitle("GUI_project");
         this.setSize(499,480);
@@ -74,6 +98,12 @@ public class GUI_RegisterPessoal extends JFrame {
         BRegistar.setFont(new Font("sansserif",0,12));
         BRegistar.setText("Registar");
         BRegistar.setVisible(true);
+        
+        /**BRegistar.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                OnClickedRegistar(evt);
+            }
+        });*/
 
         REmail = new JTextField();
         REmail.setBounds(197,298,90,35);
@@ -83,6 +113,12 @@ public class GUI_RegisterPessoal extends JFrame {
         REmail.setFont(new Font("sansserif",0,12));
         REmail.setText("");
         REmail.setVisible(true);
+        
+        REmail.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt){
+                onKeyReleasedREmail(evt);
+            }
+        });
 
         RMorada = new JTextField();
         RMorada.setBounds(197,338,90,35);
@@ -92,6 +128,12 @@ public class GUI_RegisterPessoal extends JFrame {
         RMorada.setFont(new Font("sansserif",0,12));
         RMorada.setText("");
         RMorada.setVisible(true);
+        
+        RMorada.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt){
+                onKeyReleasedRMorada(evt);
+            }
+        });
 
         RNome = new JTextField();
         RNome.setBounds(197,258,90,35);
@@ -101,6 +143,12 @@ public class GUI_RegisterPessoal extends JFrame {
         RNome.setFont(new Font("sansserif",0,12));
         RNome.setText("");
         RNome.setVisible(true);
+        
+        RNome.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt){
+                onKeyReleasedRNome(evt);
+            }
+        });
 
         RNumerodedependentes = new JTextField();
         RNumerodedependentes.setBounds(197,218,90,35);
@@ -110,6 +158,12 @@ public class GUI_RegisterPessoal extends JFrame {
         RNumerodedependentes.setFont(new Font("sansserif",0,12));
         RNumerodedependentes.setText("");
         RNumerodedependentes.setVisible(true);
+        
+        RNumerodedependentes.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt){
+                onKeyReleasedRNumerodedependentes(evt);
+            }
+        });
 
         RPassword = new JPasswordField();
         RPassword.setBounds(197,177,90,35);
@@ -119,6 +173,12 @@ public class GUI_RegisterPessoal extends JFrame {
         RPassword.setFont(new Font("sansserif",0,12));
         RPassword.setText("");
         RPassword.setVisible(true);
+        
+        RPassword.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt){
+                onKeyReleasedRPassword(evt);
+            }
+        });
 
         Title = new JLabel();
         Title.setBounds(130,28,220,35);
@@ -136,6 +196,12 @@ public class GUI_RegisterPessoal extends JFrame {
         CodigosAtividades.setEnabled(true);
         CodigosAtividades.setFont(new Font("sansserif",0,12));
         CodigosAtividades.setVisible(true);
+        
+        CodigosAtividades.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt){
+                onKeyReleasedCodigosAtividades(evt);
+            }
+        });
 
         NumerosFiscais = new JTextField();
         NumerosFiscais.setBounds(197,88,90,35);
@@ -145,11 +211,39 @@ public class GUI_RegisterPessoal extends JFrame {
         NumerosFiscais.setFont(new Font("sansserif",0,12));
         NumerosFiscais.setVisible(true);
         
-        //Set action for key events
-        //Call defined method
         NumerosFiscais.addKeyListener(new KeyAdapter() {
             public void keyReleased(KeyEvent evt){
                 onKeyReleasedNif(evt);
+            }
+        });
+        
+        removerbotaoNifs = new JButton();
+        removerbotaoNifs.setBounds(460,410,90,35);
+        removerbotaoNifs.setBackground(new Color(214,217,223));
+        removerbotaoNifs.setForeground(new Color(0,0,0));
+        removerbotaoNifs.setEnabled(true);
+        removerbotaoNifs.setFont(new Font("sansserif",0,12));
+        removerbotaoNifs.setText("Remover");
+        removerbotaoNifs.setVisible(true);
+
+        removerbotaoNifs.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                NifRemoved(evt);
+            }
+        });
+        
+        removerbotaoCodigos = new JButton();
+        removerbotaoCodigos.setBounds(860,410,90,35);
+        removerbotaoCodigos.setBackground(new Color(214,217,223));
+        removerbotaoCodigos.setForeground(new Color(0,0,0));
+        removerbotaoCodigos.setEnabled(true);
+        removerbotaoCodigos.setFont(new Font("sansserif",0,12));
+        removerbotaoCodigos.setText("Remover");
+        removerbotaoCodigos.setVisible(true);
+
+        removerbotaoCodigos.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                CodigoRemoved(evt);
             }
         });
 
@@ -216,29 +310,52 @@ public class GUI_RegisterPessoal extends JFrame {
         labelPassword.setText("Password");
         labelPassword.setVisible(true);
         
-        AdicionarButton = new JButton();
-        AdicionarButton.setBounds(587,509,90,35);
-        AdicionarButton.setBackground(new Color(214,217,223));
-        AdicionarButton.setForeground(new Color(0,0,0));
-        AdicionarButton.setEnabled(true);
-        AdicionarButton.setFont(new Font("sansserif",0,12));
-        AdicionarButton.setText("Adicionar");
-        AdicionarButton.setVisible(true);
+        AdicionarButtonNifs = new JButton();
+        AdicionarButtonNifs.setBounds(297,88,90,35);
+        AdicionarButtonNifs.setBackground(new Color(214,217,223));
+        AdicionarButtonNifs.setForeground(new Color(0,0,0));
+        AdicionarButtonNifs.setEnabled(true);
+        AdicionarButtonNifs.setFont(new Font("sansserif",0,12));
+        AdicionarButtonNifs.setText("Adicionar");
+        AdicionarButtonNifs.setVisible(true);
         //  Set methods for mouse events
         //Call defined methods
-        AdicionarButton.addMouseListener(new MouseAdapter() {
+        AdicionarButtonNifs.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 NifAdded(evt);
             }
         });
         
-        Integer[][] tnifs = new Integer[nifsEcodigos.size()][1];
+        AdicionarButtonCodigos = new JButton();
+        AdicionarButtonCodigos.setBounds(297,133,90,35);
+        AdicionarButtonCodigos.setBackground(new Color(214,217,223));
+        AdicionarButtonCodigos.setForeground(new Color(0,0,0));
+        AdicionarButtonCodigos.setEnabled(true);
+        AdicionarButtonCodigos.setFont(new Font("sansserif",0,12));
+        AdicionarButtonCodigos.setText("Adicionar");
+        AdicionarButtonCodigos.setVisible(true);
+        //  Set methods for mouse events
+        //Call defined methods
+        AdicionarButtonCodigos.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                CodigoAdded(evt);
+            }
+        });
+        
+        Integer[] tnifs = new Integer[nifs.size()];
         int i = 0;
 
-        for(NifeCodigoAtividade a  : nifsEcodigos){
-            tnifs[i][0] = a.getnif();
-            tnifs[i][1] = a.getcodigoAtividade();
+        for(Nifs a  : nifs){
+            tnifs[i] = a.getnif();
             i++;
+        }
+        
+        Integer[] tcodigos = new Integer[codigos.size()];
+        int z = 0;
+
+        for(CodAtiv a  : codigos){
+            tcodigos[z] = a.getcodigoAtividade();
+            z++;
         }
         
         table = new JTable(dtm);
@@ -249,6 +366,24 @@ public class GUI_RegisterPessoal extends JFrame {
         table.setVisible(true);
         table.getTableHeader().setReorderingAllowed(false);
 
+        JScrollPane scroll = new JScrollPane();
+        scroll.setViewportView(table);
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setBounds(379,197,264,196);
+        
+        table2 = new JTable(dtm2);
+        table2.setBackground(new Color(255,255,255));
+        table2.setForeground(new Color(0,0,0));
+        table2.setEnabled(true);
+        table2.setFont(new Font("sansserif",0,12));
+        table2.setVisible(true);
+        table2.getTableHeader().setReorderingAllowed(false);
+
+        JScrollPane scroll2 = new JScrollPane();
+        scroll2.setViewportView(table2);
+        scroll2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll2.setBounds(779,197,264,196);
+        
         //adding components to contentPane panel
         contentPane.add(BRegistar);
         contentPane.add(REmail);
@@ -266,7 +401,12 @@ public class GUI_RegisterPessoal extends JFrame {
         contentPane.add(labelNumeroDeDependentes);
         contentPane.add(labelNumerosFiscais);
         contentPane.add(labelPassword);
-        contentPane.add(AdicionarButton);
+        contentPane.add(AdicionarButtonNifs);
+        contentPane.add(AdicionarButtonCodigos);
+        contentPane.add(removerbotaoNifs);
+        contentPane.add(removerbotaoCodigos);
+        contentPane.add(scroll);
+        contentPane.add(scroll2);
 
         //adding panel to JFrame and seting of window position and close operation
         this.add(contentPane);
@@ -278,16 +418,66 @@ public class GUI_RegisterPessoal extends JFrame {
     
     //Method mouseClicked for AdicionarButton
     private void NifAdded (MouseEvent evt) {
-        NifeCodigoAtividade h = new NifeCodigoAtividade (nif,codigoAtividade);
-        nifsEcodigos.add(h);
+        Nifs h = new Nifs (nif);
+        nifs.add(h);
         
-        dtm.addRow(new String[1]);
+        dtm.addRow(new Integer[1]);
         table.setValueAt(nif,table.getRowCount()-1,0);
         NumerosFiscais.setText("");
     }
+    
+    private void CodigoAdded (MouseEvent evt) {
+        CodAtiv h = new CodAtiv (codigoAtividade);
+        codigos.add(h);
+        
+        dtm2.addRow(new Integer[1]);
+        table2.setValueAt(codigoAtividade,table2.getRowCount()-1,0);
+        CodigosAtividades.setText("");
+    }
+    
+    private void  NifRemoved (MouseEvent evt) {
+        int row = table.getSelectedRow();
+        int auxnif = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
+        Nifs h = new Nifs (auxnif);
+        nifs.remove(h);
+        dtm.removeRow(row);
+    }
+    
+    private void  CodigoRemoved (MouseEvent evt) {
+        int row = table2.getSelectedRow();
+        int auxcodigo = Integer.parseInt(table2.getModel().getValueAt(row, 0).toString());
+        CodAtiv h = new CodAtiv (auxcodigo);
+        codigos.remove(h);
+        dtm2.removeRow(row);
+    }
+
 
     private void onKeyReleasedNif (KeyEvent evt) {
             nif = Integer.parseInt(NumerosFiscais.getText());
+    }
+    
+    private void onKeyReleasedCodigosAtividades (KeyEvent evt) {
+            codigoAtividade = Integer.parseInt(CodigosAtividades.getText());
+    }
+    
+    private void onKeyReleasedREmail (KeyEvent evt) {
+            email = REmail.getText();
+    }
+    
+    private void onKeyReleasedRMorada (KeyEvent evt) {
+            morada = RMorada.getText();
+    }
+    
+    private void onKeyReleasedRNome (KeyEvent evt) {
+            nome = RNome.getText();
+    }
+    
+    private void onKeyReleasedRNumerodedependentes (KeyEvent evt) {
+            numerodedependentes = Integer.parseInt(RNumerodedependentes.getText());
+    }
+    
+        private void onKeyReleasedRPassword (KeyEvent evt) {
+            password = RPassword.getText();
     }
     
     //method for generate menu
