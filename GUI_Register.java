@@ -60,8 +60,6 @@ public class GUI_Register extends JFrame {
     private String nome;
     private int numerodedependentes;
     private String password;
-    private ArrayList<Nifs> nifs;
-    private ArrayList<CodAtiv> codigos;
 
     private JTextField RAtividadeEconomica;
     private JTextField REmailE;
@@ -83,8 +81,6 @@ public class GUI_Register extends JFrame {
     public GUI_Register(){
         nif = 911;
         codigoAtividade = 112;
-        nifs = new ArrayList<Nifs>();
-        codigos = new ArrayList<CodAtiv>();
         visible = false; flag = false;
         
         this.setTitle("GUI_project");
