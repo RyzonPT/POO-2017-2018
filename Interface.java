@@ -17,6 +17,7 @@ public class Interface
         {
             ArrayList<Integer> lolis = new ArrayList<Integer>();
                 lolis.add(100);
+                lolis.add(2);
                /* lolis.add(32432423);
                 lolis.add(423423424);
                 lolis.add(423423424);
@@ -69,7 +70,7 @@ public class Interface
             gestorfaturas.addFaturas(dam6);
                                     Fatura dam7 = new Fatura(43543539,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,teste, 0, 0, null, null, null, 0);
             gestorfaturas.addFaturas(dam7);
-                                    Fatura dam8 = new Fatura(45345349,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, 0, null, null, null, 0);
+                                    Fatura dam8 = new Fatura(4534534,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, 0, null, null, null, 0);
             gestorfaturas.addFaturas(dam8);
                                     Fatura dam9 = new Fatura(4,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, 0, null, null, null, 100);
             gestorfaturas.addFaturas(dam9);
@@ -80,9 +81,13 @@ public class Interface
             out.writeObject(gestorfaturas);
             
             EntidadePrivada fichaPrivada0 = new EntidadePrivada(0,"email","nome","morada","",3,lolis,0,lolis,gestorfaturas);
-            EntidadePrivada fichaPrivada1 = new EntidadePrivada(100,"email","nome","morada","",3,lolis3,0,lolis,gestorfaturas);
+            EntidadePrivada fichaPrivada1 = new EntidadePrivada(100,"email","nome","morada","",3,lolis,0,lolis,gestorfaturas);
             EntidadePrivada fichaPrivada2 = new EntidadePrivada(2,"email","nome","morada","",3,lolis3,0,lolis,gestorfaturas);
-            System.out.println("si" + fichaPrivada0.gestorfaturas.getMapFaturas().size());
+            gestorFichas.addFicha(fichaPrivada0);
+            gestorFichas.addFicha(fichaPrivada1);
+            gestorFichas.addFicha(fichaPrivada2);
+            System.out.println("si" + gestorFichas.getfichas().size());
+            FichaCliente lol = gestorFichas.getFicha(100);
             
             ArrayList<String> a =new ArrayList<String>();
             a.add("saude");
@@ -98,7 +103,7 @@ public class Interface
             
             
             
-            gestorFichas.addFicha(fichaPrivada0);
+            
            EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1,"ratuinho@hotmail.com", "PedreiroLDA", "SantoTiso","12345", a, 0,gestorfaturas);
            gestorFichas.addFicha(fichaEmpresa0);
             

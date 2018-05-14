@@ -49,8 +49,9 @@ public class GUI_FichaCliente extends JFrame {
     private GestaoFichas gestorfichas;
 
     //Constructor 
-    public GUI_FichaCliente(FichaCliente fichas){
+    public GUI_FichaCliente(FichaCliente fichas,GestaoFichas gestorfichas){
         ficha=fichas;
+        this.gestorfichas = gestorfichas;
         this.setTitle("GUI_FichaCliente");
         this.setSize(796,798);
         //menu generate method
@@ -368,19 +369,34 @@ public class GUI_FichaCliente extends JFrame {
         List <Fatura> faturaslist = new ArrayList<>();
         int j=0;
     for(Integer k : fichaP.getNumerosFiscais()){
+        System.out.println(k);
+        System.out.println("si" + gestorfichas.getfichas().size());
           FichaCliente pato = gestorfichas.getFicha(k);
            j += pato.getmyfaturas().size();   
+           
         
 
     }
-    
+    //
     Object[] botoes = new Botao[fichas.getmyfaturas().size()+j];
+    System.out.println("sioooooo" + (fichas.getmyfaturas().size()+j));
      int i = 0;
+     
+     faturaslist = ficha.getmyfaturas();
+    for(Fatura h : faturaslist){
+       botoes[i] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h);
+       i++;
+       System.out.println("REKTTTT" + i);
+           
+        }
+     
      for(Integer k : fichaP.getNumerosFiscais()){
-       faturaslist = fichas.getmyfaturas();
+       faturaslist = gestorfichas.getFicha(k).getmyfaturas();
        for(Fatura h : faturaslist){
            botoes[i] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h);
            i++;
+           System.out.println("REKTTTT" + i);
+           
         }
     }
 
@@ -494,7 +510,7 @@ public class GUI_FichaCliente extends JFrame {
         System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new GUI_FichaCliente(null);
+                new GUI_FichaCliente(null,null);
             }
         });
     }

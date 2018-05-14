@@ -143,8 +143,8 @@ public class GUI_Login extends JFrame {
 
                 if(fichaEncontrada != null){
                 dispose();
-                GUI_FichaCliente fichagui = new GUI_FichaCliente(fichaEncontrada);
-                fichagui.setgestorfichas(gestorfichas);
+                GUI_FichaCliente fichagui = new GUI_FichaCliente(fichaEncontrada,gestorfichas);
+                //fichagui.setgestorfichas(gestorfichas);
                 System.out.println(fichaEncontrada.getgestorfaturas().getMapFaturas().size() +" ola");
             }
     }
