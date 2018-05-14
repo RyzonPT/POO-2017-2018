@@ -370,7 +370,6 @@ public class GUI_FichaCliente extends JFrame {
         int j=0;
     for(Integer k : fichaP.getNumerosFiscais()){
         System.out.println(k);
-        System.out.println("si" + gestorfichas.getfichas().size());
           FichaCliente pato = gestorfichas.getFicha(k);
            j += pato.getmyfaturas().size();   
            
@@ -379,14 +378,12 @@ public class GUI_FichaCliente extends JFrame {
     }
     //
     Object[] botoes = new Botao[fichas.getmyfaturas().size()+j];
-    System.out.println("sioooooo" + (fichas.getmyfaturas().size()+j));
      int i = 0;
      
      faturaslist = ficha.getmyfaturas();
     for(Fatura h : faturaslist){
        botoes[i] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h);
        i++;
-       System.out.println("REKTTTT" + i);
            
         }
      
@@ -395,7 +392,6 @@ public class GUI_FichaCliente extends JFrame {
        for(Fatura h : faturaslist){
            botoes[i] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h);
            i++;
-           System.out.println("REKTTTT" + i);
            
         }
     }

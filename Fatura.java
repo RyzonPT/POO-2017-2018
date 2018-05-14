@@ -68,7 +68,7 @@ public class Fatura implements Serializable
        this.emailCliente = emailCliente;
        this.nifCliente = nifCliente;
        if(actividadeEconomica.size()==1){
-           ativEconEscolhida= actividadeEconomica.get(1);
+           ativEconEscolhida= actividadeEconomica.get(0);
        }
        else{
            ativEconEscolhida="n/a";

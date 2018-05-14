@@ -47,8 +47,7 @@ public class GUI_Register extends JFrame {
     private JButton AdicionarButtonCodigos;
     private JButton removerbotaoNifs;
     private JButton removerbotaoCodigos;
-    private JTable table;
-    private JTable table2;
+    private JList list1;
     private int nif;
     private int codigoAtividade;
     private boolean visible;
@@ -63,20 +62,7 @@ public class GUI_Register extends JFrame {
     private String password;
     private ArrayList<Nifs> nifs;
     private ArrayList<CodAtiv> codigos;
-    private String[] colunas = {"Nifs"}; 
-    private DefaultTableModel dtm = new DefaultTableModel(null,colunas){
-        @Override
-    public boolean isCellEditable(int row, int column) {
-        return false;
-    }
-};
-    private String[] colunas2 = {"Codigos de Atividades"};
-    private DefaultTableModel dtm2 = new DefaultTableModel(null,colunas2){
-        @Override
-    public boolean isCellEditable(int row, int column) {
-        return false;
-    }
-};  //Registo de empresa
+
     private JTextField RAtividadeEconomica;
     private JTextField REmailE;
     private JTextField RMoradaE;
@@ -91,6 +77,7 @@ public class GUI_Register extends JFrame {
     private JLabel labelNif;
     private JLabel labelNomeE;
     private JLabel labelPasswordE;
+    private DefaultListModel listModel = new DefaultListModel();
 
     //Constructor 
     public GUI_Register(){
@@ -363,6 +350,7 @@ public class GUI_Register extends JFrame {
             }
         });
         
+        /*
         table = new JTable(dtm);
         table.setBackground(new Color(255,255,255));
         table.setForeground(new Color(0,0,0));
@@ -384,13 +372,31 @@ public class GUI_Register extends JFrame {
         table2.setFont(new Font("sansserif",0,12));
         table2.setVisible(visible);
         table2.getTableHeader().setReorderingAllowed(false);
+        
 
         scroll2 = new JScrollPane();
         scroll2.setViewportView(table2);
         scroll2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scroll2.setBounds(779,197,264,196);
         scroll2.setVisible(visible);
+        */
         
+        list1 = new JList(listModel);
+        list1.setBackground(new Color(255,255,255));
+        //list1.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        list1.setForeground(new Color(0,0,0));
+        list1.setEnabled(true);
+        list1.setFont(new Font("sansserif",0,12));
+        
+        
+        scroll2 = new JScrollPane();
+        scroll2.setViewportView(list1);
+        scroll2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll2.setBounds(379,197,264,196);
+        scroll2.setVisible(visible);
+        
+        listModel.addElement("ola");
+       
         //Registo de Empresa
         RAtividadeEconomica = new JTextField();
         RAtividadeEconomica.setBounds(199,282,90,35);
@@ -568,7 +574,6 @@ public class GUI_Register extends JFrame {
         contentPane.add(AdicionarButtonCodigos);
         contentPane.add(removerbotaoNifs);
         contentPane.add(removerbotaoCodigos);
-        contentPane.add(scroll);
         contentPane.add(scroll2);
         contentPane.add(combobox1);
 
@@ -620,46 +625,25 @@ public class GUI_Register extends JFrame {
             labelPassword.setVisible(visible);
             AdicionarButtonNifs.setVisible(visible);
             AdicionarButtonCodigos.setVisible(visible);
-            table.setVisible(visible);
-            table2.setVisible(visible);
-            scroll.setVisible(visible);
             scroll2.setVisible(visible);
         }
     }
     
     //Method mouseClicked for AdicionarButton
     private void NifAdded (MouseEvent evt) {
-        Nifs h = new Nifs (nif);
-        nifs.add(h);
-        
-        dtm.addRow(new Integer[1]);
-        table.setValueAt(nif,table.getRowCount()-1,0);
-        NumerosFiscais.setText("");
+        listModel.addElement("ola");
     }
     
     private void CodigoAdded (MouseEvent evt) {
-        CodAtiv h = new CodAtiv (codigoAtividade);
-        codigos.add(h);
-        
-        dtm2.addRow(new Integer[1]);
-        table2.setValueAt(codigoAtividade,table2.getRowCount()-1,0);
-        CodigosAtividades.setText("");
+        listModel.addElement("John Smith");
     }
     
     private void  NifRemoved (MouseEvent evt) {
-        int row = table.getSelectedRow();
-        int auxnif = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
-        Nifs h = new Nifs (auxnif);
-        nifs.remove(h);
-        dtm.removeRow(row);
+        listModel.addElement("John Smith");
     }
     
     private void  CodigoRemoved (MouseEvent evt) {
-        int row = table2.getSelectedRow();
-        int auxcodigo = Integer.parseInt(table2.getModel().getValueAt(row, 0).toString());
-        CodAtiv h = new CodAtiv (auxcodigo);
-        codigos.remove(h);
-        dtm2.removeRow(row);
+        listModel.addElement("John Smith");
     }
     
     private void onKeyReleasedNif (KeyEvent evt) {
