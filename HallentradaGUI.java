@@ -19,7 +19,6 @@ public class HallentradaGUI extends JFrame {
     private JButton Forgotten;
     private JButton Login;
     private JButton Register;
-    private JComboBox combobox1;
     private GestaoFichas gestorfichas;
     
     //Constructor 
@@ -83,22 +82,11 @@ public class HallentradaGUI extends JFrame {
                     gotoregister(evt);
                 }
             });
-        
-        combobox1 = new JComboBox<String>();
-	combobox1.setBounds(307,227,90,35);
-	combobox1.setBackground(new Color(214,217,223));
-	combobox1.setForeground(new Color(0,0,0));
-	combobox1.setEnabled(true);
-	combobox1.setFont(new Font("sansserif",0,12));
-	combobox1.setVisible(true);
-	combobox1.addItem("Empresa");
-	combobox1.addItem("Pessoal");
 	
         //adding components to contentPane panel
         contentPane.add(Forgotten);
         contentPane.add(Login);
         contentPane.add(Register);
-        contentPane.add(combobox1);
 
         //adding panel to JFrame and seting of window position and close operation
         this.add(contentPane);
@@ -127,15 +115,8 @@ public class HallentradaGUI extends JFrame {
 
     //Method mouseClicked for Register
     private void gotoregister (MouseEvent evt) {
-        String itemSelecionado = (String) combobox1.getSelectedItem();
-        if(itemSelecionado.equals("Empresa")){
-            GUI_RegisterEmpresa registerEmpresa = new GUI_RegisterEmpresa();
-            registerEmpresa.setVisible(true);
-        }
-        else{
-            GUI_RegisterPessoal registerPessoal = new GUI_RegisterPessoal();
-            registerPessoal.setVisible(true);
-        }
+        GUI_Register register = new GUI_Register();
+        register.setVisible(true);
         dispose();
     }
 
