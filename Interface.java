@@ -6,7 +6,7 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-
+import java.util.ArrayList;
 public class Interface
 {
     /**NOTAS/ToDo
@@ -17,12 +17,12 @@ public class Interface
         {
             ArrayList<Integer> lolis = new ArrayList<Integer>();
                 lolis.add(100);
-                lolis.add(32432423);
+               /* lolis.add(32432423);
                 lolis.add(423423424);
                 lolis.add(423423424);
                 lolis.add(423423424);
                 lolis.add(423423424);
-                lolis.add(423423424);lolis.add(423423424);lolis.add(423423424);lolis.add(423423424);lolis.add(423423424);lolis.add(423423424);
+                lolis.add(423423424);lolis.add(423423424);lolis.add(423423424);lolis.add(423423424);lolis.add(423423424);lolis.add(423423424);*/
                Triple triple = new Triple("osd",32,12.99);
                                 Triple triple1 = new Triple("bananas",12,20.43);
                                 Triple triple2 = new Triple("cebolas",98,0.12);
@@ -32,43 +32,75 @@ public class Interface
                 lolis2.add(triple2);
                 //ObjectInputStream in = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
                 //GestaoFaturas gestorfaturass = (GestaoFaturas) in.readObject();
-
+            ArrayList<String> teste = new ArrayList<String>();
+            teste.add("saude");
+            teste.add("transportes");
+            
+            
+            ArrayList<Integer> lolis3 = new ArrayList<Integer>();
+                lolis.add(2);
+                
+            
+            
+            
+            
             ArrayList<Integer> olas= new ArrayList<Integer>();
             GestaoFichas gestorFichas = new GestaoFichas();
             GestaoFaturas gestorfaturas = new GestaoFaturas();
             HallentradaGUI hall = new HallentradaGUI();
+
             
-            //0,"email","nome","morada","",3,ola,434,olas
-            Fatura ola = new Fatura(4937289,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  null, 0, 0, null, null, null, 0);
+            //0,"email","nome","morada","",3,ola,434,ola
+            Fatura ola = new Fatura(4937289,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, 0, null, null, null, 0);
             gestorfaturas.addFaturas(ola);
-                        Fatura dam = new Fatura(4937289,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  null, 0, 0, null, null, null, 0);
+                        Fatura dam = new Fatura(4937289,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, 0, null, null, null, 0);
             gestorfaturas.addFaturas(dam);
-                        Fatura dam1 = new Fatura(4234235,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  null, 0, 0, null, null, null, 0);
+                        Fatura dam1 = new Fatura(4234235,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, 0, null, null, null, 0);
             gestorfaturas.addFaturas(dam1);
-                        Fatura dam2 = new Fatura(493423459,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  null, 0, 0, null, null, null, 0);
+                        Fatura dam2 = new Fatura(493423459,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, 0, null, null, null, 0);
             gestorfaturas.addFaturas(dam2);
-                        Fatura dam3 = new Fatura(4954549,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  null, 0, 0, null, null, null, 0);
+                        Fatura dam3 = new Fatura(4954549,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, 0, null, null, null, 0);
             gestorfaturas.addFaturas(dam3);
-                                    Fatura dam4 = new Fatura(49549,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  null, 0, 0, null, null, null, 0);
+                                    Fatura dam4 = new Fatura(49549,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2, teste, 0, 0, null, null, null, 0);
             gestorfaturas.addFaturas(dam4);
-                                    Fatura dam5 = new Fatura(4549,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  null, 0, 0, null, null, null, 0);
+                                    Fatura dam5 = new Fatura(4549,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, 0, null, null, null, 0);
             gestorfaturas.addFaturas(dam5);
-                                    Fatura dam6 = new Fatura(454549,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  null, 0, 0, null, null, null, 0);
+                                    Fatura dam6 = new Fatura(454549,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, 0, null, null, null, 0);
             gestorfaturas.addFaturas(dam6);
-                                    Fatura dam7 = new Fatura(43543539,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2, null, 0, 0, null, null, null, 0);
+                                    Fatura dam7 = new Fatura(43543539,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,teste, 0, 0, null, null, null, 0);
             gestorfaturas.addFaturas(dam7);
-                                    Fatura dam8 = new Fatura(45345349,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  null, 0, 0, null, null, null, 0);
+                                    Fatura dam8 = new Fatura(45345349,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, 0, null, null, null, 0);
             gestorfaturas.addFaturas(dam8);
+                                    Fatura dam9 = new Fatura(4,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, 0, null, null, null, 100);
+            gestorfaturas.addFaturas(dam9);
+                                    Fatura dam10 = new Fatura(5,"PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, 0, null, null, null, 100);
+            gestorfaturas.addFaturas(dam10);
             
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("gestorfaturas.txt"));
             out.writeObject(gestorfaturas);
             
             EntidadePrivada fichaPrivada0 = new EntidadePrivada(0,"email","nome","morada","",3,lolis,0,lolis,gestorfaturas);
+            EntidadePrivada fichaPrivada1 = new EntidadePrivada(100,"email","nome","morada","",3,lolis3,0,lolis,gestorfaturas);
+            EntidadePrivada fichaPrivada2 = new EntidadePrivada(2,"email","nome","morada","",3,lolis3,0,lolis,gestorfaturas);
             System.out.println("si" + fichaPrivada0.gestorfaturas.getMapFaturas().size());
             
+            ArrayList<String> a =new ArrayList<String>();
+            a.add("saude");
+            a.add("transportes");
+            a.add("transportes");
+            a.add("transportes");
+            a.add("transportes");
+            a.add("transportes");
+            a.add("transportes");
+            a.add("transportes");
+            a.add("transportes");
+            a.add("pilas");
+            
+            
+            
             gestorFichas.addFicha(fichaPrivada0);
-           // EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1,"ratuinho@hotmail.com", "PedreiroLDA", "SantoTiso","12345", "saude", 0,gestorfaturas);
-           // gestorFichas.addFicha(fichaEmpresa0);
+           EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1,"ratuinho@hotmail.com", "PedreiroLDA", "SantoTiso","12345", a, 0,gestorfaturas);
+           gestorFichas.addFicha(fichaEmpresa0);
             
             
             

@@ -14,6 +14,8 @@ import java.awt.event.MouseWheelListener;
 import javax.swing.border.Border;
 import javax.swing.*;
 import javafx.util.Pair;
+import java.util.List;
+import java.util.ArrayList;
 
 public class GUI_Fatura extends JFrame {
 
@@ -52,10 +54,14 @@ public class GUI_Fatura extends JFrame {
     private JList list5;
     private JList list6;
     private JLabel nomeEmpresaText;
+    private JList listAtiv;
+    private JLabel tituloAtividade;
+    private JButton button1;
+    private Fatura fatura;
 
     //Constructor 
     public GUI_Fatura(Fatura fatura){
-
+        this.fatura=fatura;
         this.setTitle("GUI_project");
         this.setSize(1632,883);
         //menu generate method
@@ -64,19 +70,73 @@ public class GUI_Fatura extends JFrame {
 
         //pane with null layout
         JPanel contentPane = new JPanel(null);
+        if(fatura.getAtivEconEscolhida()=="n/a"){
+        contentPane.setPreferredSize(new Dimension(400,800));
+        }
+        else{
         contentPane.setPreferredSize(new Dimension(400,600));
+        }
         contentPane.setBackground(new Color(192,192,192));
-
-
+        
+        
         AtividadeEconoText = new JLabel();
         AtividadeEconoText.setBounds(144,197,300,35);
         AtividadeEconoText.setBackground(new Color(214,217,223));
         AtividadeEconoText.setForeground(new Color(0,0,0));
         AtividadeEconoText.setEnabled(true);
         AtividadeEconoText.setFont(new Font("sansserif",0,12));
-        AtividadeEconoText.setText(fatura.getactividadeEconomica());
+        AtividadeEconoText.setText(fatura.getAtivEconEscolhida());
         AtividadeEconoText.setVisible(true);
+        
 
+       if(fatura.getAtivEconEscolhida()=="n/a"){
+        listAtiv = new JList(fatura.getActividadeEconomica().toArray());
+        listAtiv.setBackground(new Color(255,255,255));
+        listAtiv.setForeground(new Color(0,0,0));
+        listAtiv.setEnabled(true);
+        listAtiv.setFont(new Font("sansserif",0,12));
+        listAtiv.setVisible(true);
+        
+        
+        JScrollPane scrolllistAtiv = new JScrollPane();
+        scrolllistAtiv.setViewportView(listAtiv);
+        scrolllistAtiv.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrolllistAtiv.setBounds(100,650,200,50);
+
+        tituloAtividade = new JLabel();
+        tituloAtividade.setBounds(70,610,300,35);
+        tituloAtividade.setBackground(new Color(214,217,223));
+        tituloAtividade.setForeground(new Color(0,0,0));
+        tituloAtividade.setEnabled(true);
+        tituloAtividade.setFont(new Font("sansserif",0,15));
+        tituloAtividade.setText("Escolha a aréa onde fez a sua despesa:");
+        tituloAtividade.setVisible(true);
+        
+        
+        button1 = new JButton();
+        button1.setBounds(130,720,150,60);
+        button1.setBackground(new Color(214,217,223));
+        button1.setForeground(new Color(0,0,0));
+        button1.setEnabled(true);
+        button1.setFont(new Font("sansserif",0,12));
+        button1.setText("Confirmar");
+        button1.setVisible(true);
+        
+        contentPane.add(button1);
+        contentPane.add(tituloAtividade);
+        contentPane.add(scrolllistAtiv);
+    
+       button1.addActionListener(new ActionListener()
+       {
+           public void actionPerformed(ActionEvent e)
+           {
+               onConfirmarButtonClicked(e);
+            }
+            });
+      }    
+        
+        
+        
         DataText = new JLabel();
         DataText.setBounds(141,148,300,35);
         DataText.setBackground(new Color(214,217,223));
@@ -393,7 +453,23 @@ public class GUI_Fatura extends JFrame {
         this.pack();
         this.setVisible(true);
     }
-
+    
+    public void corfimaAtividade(){
+        String a = listAtiv.getSelectedValue().toString();
+         AtividadeEconoText.setText(a);
+         button1.setEnabled(false);
+         fatura.setAtivEconEscolhida(a);
+    }
+   
+    private void onConfirmarButtonClicked (ActionEvent evt) {  
+         GUI_Warning warn = new  GUI_Warning (this,"TEM A CERTEZA? A SUA ACAO E PERMANENTE!!",2);
+    }
+    
+    private void clickButtonAt(Point point){
+        int index =  listAtiv.locationToIndex(point);
+        Botao item = (Botao) listAtiv.getModel().getElementAt(index);
+        item.getButton().doClick();
+    }
     //method for generate menu
     public void generateMenu(){
         menuBar = new JMenuBar();

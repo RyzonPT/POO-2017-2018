@@ -21,12 +21,12 @@ public class EntidadeEmpresas extends FichaCliente
     
     public EntidadeEmpresas(EntidadeEmpresas c){
         super(c);
-        this.actividadeEconomica = getActividadeEconomica();
-        this.deducaoFiscal = getDeducaoFiscal();
+        this.actividadeEconomica = c.getActividadeEconomica();
+        this.deducaoFiscal = c.getDeducaoFiscal();
     }
     
     public ArrayList<String> getActividadeEconomica(){
-        return (ArrayList<String>) actividadeEconomica.clone();
+        return new ArrayList<String>(actividadeEconomica);
     }
     
     public int getDeducaoFiscal(){

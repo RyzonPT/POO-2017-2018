@@ -24,13 +24,14 @@ public class Fatura implements Serializable
    private int nifEmpresa;
    private LocalDate data;
    private ArrayList<Triple> produto;
-   private String actividadeEconomica;
+   private ArrayList<String> actividadeEconomica;
    private double valortotal;
    private double deducao;
    private String nomeCliente;
    private String moradaCliente;
    private String emailCliente;
    private int nifCliente;
+   private String ativEconEscolhida;
    
    public Fatura(){
        faturaID = 0;
@@ -40,16 +41,17 @@ public class Fatura implements Serializable
        nifEmpresa = 0;
        data = LocalDate.now();
        produto = new ArrayList<>();
-       actividadeEconomica ="n/a";
+       actividadeEconomica = new ArrayList<>();
        valortotal= 0.0;
        deducao = 0.0;
        nomeCliente = "n/a";
        moradaCliente = "n/a";
        emailCliente = "n/a";
        nifCliente = 0;
+       ativEconEscolhida="n/a";
     }
     
-    public Fatura(int faturaID,String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, ArrayList<Triple> produto, String actividadeEconomica, 
+    public Fatura(int faturaID,String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, ArrayList<Triple> produto, ArrayList<String> actividadeEconomica, 
     double valor, double deducao, String nomeCliente, String moradaCliente, String emailCliente, int nifCliente){
        this.faturaID= faturaID;
        this.nomeEmpresa = nomeEmpresa;
@@ -65,6 +67,12 @@ public class Fatura implements Serializable
        this.moradaCliente = moradaCliente;
        this.emailCliente = emailCliente;
        this.nifCliente = nifCliente;
+       if(actividadeEconomica.size()==1){
+           ativEconEscolhida= actividadeEconomica.get(1);
+       }
+       else{
+           ativEconEscolhida="n/a";
+       }
     }
     
     public Fatura(Fatura c){
@@ -75,13 +83,14 @@ public class Fatura implements Serializable
        nifEmpresa = c.getnifEmpresa();
        data = LocalDate.now();
        produto = c.getProduto();
-       actividadeEconomica = c.getactividadeEconomica();
+       actividadeEconomica = c.getActividadeEconomica();
        valortotal = c.getvalortotal();
        deducao = c.getdeducao();
        nomeCliente = c.getnomeCliente();
        moradaCliente = c.getmoradaCliente();
        emailCliente = c.getemailCliente();
        nifCliente = c.getnifCliente();
+       ativEconEscolhida=c.getAtivEconEscolhida();
     }
     
     public int getfaturaID(){
@@ -113,9 +122,10 @@ public class Fatura implements Serializable
     }
     
     
-    public String getactividadeEconomica(){
-        return actividadeEconomica;
+    public ArrayList<String> getActividadeEconomica(){
+        return (ArrayList<String>) actividadeEconomica.clone();
     }
+    
 
     public double getvalortotal(){
         return valortotal;
@@ -140,6 +150,10 @@ public class Fatura implements Serializable
     
     public int getnifCliente(){
         return nifCliente;
+    }
+    
+    public String getAtivEconEscolhida(){
+        return ativEconEscolhida;
     }
     public void setfaturaID(int faturaID){
         this.faturaID= faturaID;
@@ -169,7 +183,7 @@ public class Fatura implements Serializable
         this.produto = (ArrayList<Triple>)produto.clone();
     }
     
-    public void setactividadeEconomica(String actividadeEconomica){
+    public void setActividadeEconomica(ArrayList<String> actividadeEconomica){
         this.actividadeEconomica = actividadeEconomica;
     }
     
@@ -197,6 +211,10 @@ public class Fatura implements Serializable
         this.nifCliente = nifCliente;
     }
     
+    public void setAtivEconEscolhida( String ativEconEscolhida){
+        this.ativEconEscolhida=ativEconEscolhida;
+    }
+    
     public Fatura clone(){
         return new Fatura(this);
     }
@@ -211,13 +229,14 @@ public class Fatura implements Serializable
                nifEmpresa == c.getnifEmpresa() &&
                data.equals(c.getData()) &&
                produto.equals(c.getProduto()) &&
-               actividadeEconomica.equals(c.getactividadeEconomica()) &&
+               actividadeEconomica.equals(c.getActividadeEconomica()) &&
                c.getvalortotal()==valortotal &&
                c.getdeducao()==deducao &&
                nomeCliente.equals(c.getnomeCliente()) &&
                moradaCliente.equals(c.getmoradaCliente()) &&
                emailCliente.equals(c.getemailCliente()) &&
-               nifCliente == c.getnifCliente();
+               nifCliente == c.getnifCliente() &&
+               ativEconEscolhida.equals(c.getAtivEconEscolhida());
     }
     
     public String getdatastring(){

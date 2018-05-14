@@ -19,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.table.*;
+import java.util.Arrays;
 
 public class GUI_CriaFatura extends JFrame {
 
@@ -159,26 +160,30 @@ public class GUI_CriaFatura extends JFrame {
         CriarFacturaButton.setBounds(291,587,100,35);
         CriarFacturaButton.setBackground(new Color(214,217,223));
         CriarFacturaButton.setForeground(new Color(0,0,0));
-        CriarFacturaButton.setEnabled(true);
+        CriarFacturaButton.setEnabled(false);
         CriarFacturaButton.setFont(new Font("sansserif",0,12));
         CriarFacturaButton.setText("Criar Fatura");
         CriarFacturaButton.setVisible(true);
         //Set methods for mouse events
         //Call defined methods
-        CriarFacturaButton.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                OnClickedCriarFatura(evt);
+        CriarFacturaButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                OnClickedCriarFatura(e);
             }
         });
 
-
+        
+        String atividades = Arrays.toString(fichaE.getActividadeEconomica().toArray());
+        atividades=atividades.substring(1,atividades.length()-1);
+; 
+        
         TextAtividadeEco = new JLabel();
         TextAtividadeEco.setBounds(172,201,150,35);
         TextAtividadeEco.setBackground(new Color(214,217,223));
         TextAtividadeEco.setForeground(new Color(0,0,0));
         TextAtividadeEco.setEnabled(true);
         TextAtividadeEco.setFont(new Font("sansserif",0,12));
-      //  TextAtividadeEco.setText(fichaE.getActividadeEconomica());
+        TextAtividadeEco.setText(atividades);
         TextAtividadeEco.setVisible(true);
 
         
@@ -598,10 +603,16 @@ public class GUI_CriaFatura extends JFrame {
     
     private void OnTestaNif(MouseEvent evt){
         if(!nifCliente.matches("[0-9]+") || nifCliente == ""){
-            GUI_Warning warning =  new GUI_Warning(null,"Nif de Cliente Invalido!"); 
+            GUI_Warning warning =  new GUI_Warning(null,"Nif de Cliente Invalido!",1); 
             return;
         }
         int nif = Integer.parseInt(nifCliente);
+        
+        if(nif==ficha.getnif()){
+            GUI_Warning warning =  new GUI_Warning(null,"Impossivel Criar faturas em nome proprio!",1);
+            return;
+        }
+        
         if(gestorfichas.existeFicha(nif)){
             FichaCliente fichaEncontrada = gestorfichas.getFicha(nif);
             nomeCliente=fichaEncontrada.getNome();
@@ -610,25 +621,28 @@ public class GUI_CriaFatura extends JFrame {
             TextFNomeCliente.setText(nomeCliente);
             TextFMoradaCliente.setText(moradaCliente);
             TextFEmailCliente.setText(emailCliente);
+            CriarFacturaButton.setEnabled(true);
+            
         }
         else{
-            GUI_Warning warning =  new GUI_Warning(null,"Nif de Cliente Nao Registado!"); 
+            GUI_Warning warning =  new GUI_Warning(null,"Nif de Cliente Nao Registado!",1); 
         }
     }
+    
     //Method mouseClicked for AdicionarButton
     private void OnProdutoAddedd (MouseEvent evt) {
         if(produto == ""){
-            GUI_Warning warning =  new GUI_Warning(null,"Produto Invalido."); 
+            GUI_Warning warning =  new GUI_Warning(null,"Produto Invalido.",1); 
             return;
         }
         
         if(!quantidade.matches("[0-9]+") || quantidade == ""){
-            GUI_Warning warning =  new GUI_Warning(null,"Quantidade Invalida."); 
+            GUI_Warning warning =  new GUI_Warning(null,"Quantidade Invalida.",1); 
             return;
         }
 
         if(!preco.matches("\\d*\\.?\\d*") || preco == ""){
-            GUI_Warning warning =  new GUI_Warning(null,"Preco Invalido."); 
+            GUI_Warning warning =  new GUI_Warning(null,"Preco Invalido.",1); 
             return;
         }
         
@@ -659,21 +673,21 @@ public class GUI_CriaFatura extends JFrame {
     }
 
     //Method mouseClicked for CriarFacturaButton
-    private void OnClickedCriarFatura (MouseEvent evt) {
+    private void OnClickedCriarFatura (ActionEvent evt) {
         if(!faturaID.matches("[0-9]+")){
-            GUI_Warning warning =  new GUI_Warning(null,"faturaID invalida."); 
+            GUI_Warning warning =  new GUI_Warning(null,"faturaID invalida.",1); 
             return;
     }
         if(!nifCliente.matches("[0-9]+")){
-            GUI_Warning warning =  new GUI_Warning(null,"Nif de Cliente Invalido."); 
+            GUI_Warning warning =  new GUI_Warning(null,"Nif de Cliente Invalido.",1); 
             return;
     }
         EntidadeEmpresas fichaE = (EntidadeEmpresas) ficha;   
-        /*Fatura c = new Fatura (Integer.parseInt(faturaID), ficha.getNome(), ficha.getMorada(), ficha.getEmail(),ficha.getnif(),  produtos,fichaE.getActividadeEconomica(),0,0, nomeCliente, moradaCliente, emailCliente, Integer.parseInt(nifCliente));
+        Fatura c = new Fatura (Integer.parseInt(faturaID), ficha.getNome(), ficha.getMorada(), ficha.getEmail(),ficha.getnif(),  produtos,fichaE.getActividadeEconomica(),0,0, nomeCliente, moradaCliente, emailCliente, Integer.parseInt(nifCliente));
         ficha.gestorfaturas.addFaturas(c);
          System.out.println(ficha.getgestorfaturas().getMapFaturas().size() +" ola");
-         GUI_Warning warning =  new GUI_Warning(this,"Fatura criada com sucesso!"); 
-        */
+         GUI_Warning warning =  new GUI_Warning(this,"Fatura criada com sucesso!",1); 
+        
     }
     
 
@@ -690,6 +704,13 @@ public class GUI_CriaFatura extends JFrame {
     //Method keyReleased for TextFNifCliente
     private void onKeyReleasedNifCliente (KeyEvent evt) {
             nifCliente = TextFNifCliente.getText();
+            nomeCliente="";
+            emailCliente = "";
+            moradaCliente = "";
+            TextFNomeCliente.setText("");
+            TextFMoradaCliente.setText("");
+            TextFEmailCliente.setText("");
+            CriarFacturaButton.setEnabled(false);
     }
 
     //Method keyReleased for TextFNomeCliente
