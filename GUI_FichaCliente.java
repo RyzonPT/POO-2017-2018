@@ -47,10 +47,12 @@ public class GUI_FichaCliente extends JFrame {
     private JButton logOutbutton;
     private FichaCliente ficha;
     private GestaoFichas gestorfichas;
+    private GestaoFaturas gestorfaturas;
 
     //Constructor 
-    public GUI_FichaCliente(FichaCliente fichas,GestaoFichas gestorfichas){
+    public GUI_FichaCliente(FichaCliente fichas,GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
         ficha=fichas;
+        this.gestorfaturas = gestorfaturas;
         this.gestorfichas = gestorfichas;
         this.setTitle("GUI_FichaCliente");
         this.setSize(796,798);
@@ -239,9 +241,9 @@ public class GUI_FichaCliente extends JFrame {
         contentPane.add(button1);
         contentPane.add(scrollAtividade);
         List <Fatura> faturaslist = new ArrayList<>();
-       faturaslist = fichas.getmyfaturas();
+       faturaslist = gestorfaturas.getmyfaturas(ficha.getnif());
        Object[] botoes = new Botao[faturaslist.size()];
-      
+       System.out.println(faturaslist.size()+"E DESTA");
      int i = 0;
          
        for(Fatura h : faturaslist){
@@ -368,13 +370,14 @@ public class GUI_FichaCliente extends JFrame {
         List <Fatura> faturaslist = new ArrayList<>();
         int j = 0;
     for(Integer k : fichaP.getNumerosFiscais()){
-          FichaCliente pato = gestorfichas.getFicha(k);
-           j += pato.getmyfaturas().size();
+        System.out.println(k+"dass");
+           j += gestorfaturas.getmyfaturas(k).size();
     }
     
-    Object[] botoes = new Botao[fichas.getmyfaturas().size()+j];
+    Object[] botoes = new Botao[gestorfaturas.getmyfaturas(ficha.getnif()).size()+j];
     int i = 0; 
-    faturaslist = ficha.getmyfaturas();
+    faturaslist = gestorfaturas.getmyfaturas(ficha.getnif());
+    System.out.println(gestorfaturas.getmyfaturas(ficha.getnif()).size()+"OLA"+j+"FICHAGUII");
     
     for(Fatura h : faturaslist){
        botoes[i] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h);
@@ -382,7 +385,7 @@ public class GUI_FichaCliente extends JFrame {
         }
      
      for(Integer k : fichaP.getNumerosFiscais()){
-       faturaslist = gestorfichas.getFicha(k).getmyfaturas();
+       faturaslist = gestorfaturas.getmyfaturas(k);
        for(Fatura h : faturaslist){
            botoes[i] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h);
            i++;
@@ -452,12 +455,13 @@ public class GUI_FichaCliente extends JFrame {
     }
 
     private void onCriarFaturaButtonClicked (MouseEvent evt) {          
-         GUI_CriaFatura criafaturagui = new GUI_CriaFatura(ficha,gestorfichas);
+         GUI_CriaFatura criafaturagui = new GUI_CriaFatura(ficha,gestorfichas,gestorfaturas);
     }
     
     private void onlogOutButtonClicked (MouseEvent evt) {      
          GUI_Login login = new GUI_Login();
          login.gestorfichas = gestorfichas;
+         login.gestorfaturas = gestorfaturas;
          login.setVisible(true);
          dispose();
     }
@@ -499,7 +503,7 @@ public class GUI_FichaCliente extends JFrame {
         System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new GUI_FichaCliente(null,null);
+                new GUI_FichaCliente(null,null,null);
             }
         });
     }

@@ -20,6 +20,7 @@ public class HallentradaGUI extends JFrame {
     private JButton Login;
     private JButton Register;
     public GestaoFichas gestorfichas;
+    public GestaoFaturas gestorfaturas;
     
     //Constructor 
     public HallentradaGUI(){
@@ -109,6 +110,7 @@ public class HallentradaGUI extends JFrame {
     private void gotologin (MouseEvent evt) {
         GUI_Login login = new GUI_Login();
         login.gestorfichas = gestorfichas;
+        login.gestorfaturas = gestorfaturas;
         login.setVisible(true);
         dispose();
     }
@@ -116,7 +118,6 @@ public class HallentradaGUI extends JFrame {
     //Method mouseClicked for Register
     private void gotoregister (MouseEvent evt) {
         GUI_Register register = new GUI_Register();
-        register.gestorfichas = gestorfichas;
         register.setVisible(true);
         dispose();
     }

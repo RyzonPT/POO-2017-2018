@@ -9,7 +9,6 @@ public class FichaCliente implements Serializable
    private String nome;
    private String morada;
    private String password;
-   public GestaoFaturas gestorfaturas;
    private int fichaType;
    
    public FichaCliente(){
@@ -24,15 +23,13 @@ public class FichaCliente implements Serializable
        else{ 
        this.fichaType = 0;
        }
-       this.gestorfaturas = new GestaoFaturas();
     }
     
-    public FichaCliente(int nif, String email, String nome, String morada, String password,GestaoFaturas gestorfaturas){
+    public FichaCliente(int nif, String email, String nome, String morada, String password){
        this.nif = nif;
        this.email = email;
        this.nome = nome;
        this.morada = morada;
-       this.gestorfaturas = gestorfaturas;
        this.password = password;
 
         if(this instanceof EntidadeEmpresas){
@@ -50,26 +47,13 @@ public class FichaCliente implements Serializable
         this.morada = c.getMorada();
         this.password = c.getPassword();
         this.fichaType = c.getfichaType();
-        this.gestorfaturas = c.gestorfaturas;
     }
     
     public int getnif(){
         return this.nif;
     }
     
-    public GestaoFaturas getgestorfaturas(){
-         return gestorfaturas.clone();
-    }
-    
-    public List<Fatura> getmyfaturas(){
-        List<Fatura> aux = new ArrayList<>();
-        for(Fatura h : gestorfaturas.getMapFaturas().values()){
-            if(h.getnifCliente()==nif){
-            aux.add(h.clone());
-        }
-        }
-        return aux;
-    }
+
     
     public int getfichaType(){
         return this.fichaType;

@@ -38,7 +38,7 @@ public class GestaoFaturas implements Serializable
     
     public void addFaturas(Fatura a){
         a.setfaturaID(this.key);
-        this.mapfaturas.put(a.getfaturaID(),a.clone()); 
+        this.mapfaturas.put(a.getfaturaID(),a); 
         key+=1;
         try{
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("gestorfaturas.txt"));
@@ -80,5 +80,18 @@ public class GestaoFaturas implements Serializable
     }
     public GestaoFaturas clone(){
         return new GestaoFaturas(this);
+    }
+    
+    public List<Fatura> getmyfaturas(int nif){
+        List<Fatura> aux = new ArrayList<>();
+            System.out.println("SONO");
+            for(Fatura h : getMapFaturas().values()){
+                System.out.println(" MIGUEL ASSADO");
+                if(h.getnifCliente()==nif){
+                    aux.add(h.clone());
+                    System.out.println("ole");
+                }
+            }
+            return aux;
     }
 }

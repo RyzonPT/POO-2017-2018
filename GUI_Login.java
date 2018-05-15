@@ -25,6 +25,7 @@ public class GUI_Login extends JFrame {
     private int nif;
     private String password ="";
     public GestaoFichas gestorfichas;
+    public GestaoFaturas gestorfaturas;
     private String save = "";
 
     //Constructor 
@@ -136,11 +137,11 @@ public class GUI_Login extends JFrame {
             save = TextBox.getText();
     }
 
-    public static void infoBox(String infoMessage, String titleBar)
+    //Method mouseClicked for button1
+public static void infoBox(String infoMessage, String titleBar)
     {
         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
-    
     //Method mouseClicked for button1
     private void onLoginButtonClicked (MouseEvent evt) {
             int nif = Integer.parseInt(save);
@@ -149,9 +150,8 @@ public class GUI_Login extends JFrame {
                 if(fichaEncontrada != null){
                 infoBox("Login com sucesso!", "Login com sucesso");
                 dispose();
-                GUI_FichaCliente fichagui = new GUI_FichaCliente(fichaEncontrada,gestorfichas);
+                GUI_FichaCliente fichagui = new GUI_FichaCliente(fichaEncontrada,gestorfichas,gestorfaturas);
                 //fichagui.setgestorfichas(gestorfichas);
-                System.out.println(fichaEncontrada.getgestorfaturas().getMapFaturas().size() +" ola");
             }
     }
 
