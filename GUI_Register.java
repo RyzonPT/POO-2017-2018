@@ -18,9 +18,11 @@ import java.util.Calendar;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import javax.swing.table.*;
 import java.awt.event.ItemListener;  
 import java.awt.event.ItemEvent; 
+import java.awt.List;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 
 public class GUI_Register extends JFrame {
@@ -45,22 +47,27 @@ public class GUI_Register extends JFrame {
     private JLabel labelPassword;
     private JButton AdicionarButtonNifs;
     private JButton AdicionarButtonCodigos;
+    private JButton AdicionarButtonAtividadeEconomica;
     private JButton removerbotaoNifs;
     private JButton removerbotaoCodigos;
+    private JButton removerbotaoAtividadeEconomica;
     private JList list1;
+    private JList list2;
+    private JList list3;
     private int nif;
     private int codigoAtividade;
+    private String atividadeEconomica;
     private boolean visible;
     private boolean flag;
     private JScrollPane scroll;
     private JScrollPane scroll2;
+    private JScrollPane scroll3;
     private JComboBox combobox1;
     private String email;
     private String morada;
     private String nome;
     private int numerodedependentes;
     private String password;
-
     private JTextField RAtividadeEconomica;
     private JTextField REmailE;
     private JTextField RMoradaE;
@@ -76,6 +83,8 @@ public class GUI_Register extends JFrame {
     private JLabel labelNomeE;
     private JLabel labelPasswordE;
     private DefaultListModel listModel = new DefaultListModel();
+    private DefaultListModel listModel2 = new DefaultListModel();
+    private DefaultListModel listModel3 = new DefaultListModel();
 
     //Constructor 
     public GUI_Register(){
@@ -260,7 +269,7 @@ public class GUI_Register extends JFrame {
         label3.setFont(new Font("sansserif",0,12));
         label3.setText("Codigos de Atividades");
         label3.setVisible(visible);
-
+        
         labelEmail = new JLabel();
         labelEmail.setBounds(150,299,50,35);
         labelEmail.setBackground(new Color(214,217,223));
@@ -346,37 +355,6 @@ public class GUI_Register extends JFrame {
             }
         });
         
-        /*
-        table = new JTable(dtm);
-        table.setBackground(new Color(255,255,255));
-        table.setForeground(new Color(0,0,0));
-        table.setEnabled(true);
-        table.setFont(new Font("sansserif",0,12));
-        table.setVisible(visible);
-        table.getTableHeader().setReorderingAllowed(false);
-
-        scroll = new JScrollPane();
-        scroll.setViewportView(table);
-        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setBounds(379,197,264,196);
-        scroll.setVisible(visible);
-        
-        table2 = new JTable(dtm2);
-        table2.setBackground(new Color(255,255,255));
-        table2.setForeground(new Color(0,0,0));
-        table2.setEnabled(true);
-        table2.setFont(new Font("sansserif",0,12));
-        table2.setVisible(visible);
-        table2.getTableHeader().setReorderingAllowed(false);
-        
-
-        scroll2 = new JScrollPane();
-        scroll2.setViewportView(table2);
-        scroll2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll2.setBounds(779,197,264,196);
-        scroll2.setVisible(visible);
-        */
-        
         list1 = new JList(listModel);
         list1.setBackground(new Color(255,255,255));
         //list1.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
@@ -384,14 +362,24 @@ public class GUI_Register extends JFrame {
         list1.setEnabled(true);
         list1.setFont(new Font("sansserif",0,12));
         
+        scroll = new JScrollPane();
+        scroll.setViewportView(list1);
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setBounds(379,197,264,196);
+        scroll.setVisible(visible);
+        
+        list2 = new JList(listModel2);
+        list2.setBackground(new Color(255,255,255));
+        //list2.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        list2.setForeground(new Color(0,0,0));
+        list2.setEnabled(true);
+        list2.setFont(new Font("sansserif",0,12));
         
         scroll2 = new JScrollPane();
-        scroll2.setViewportView(list1);
+        scroll2.setViewportView(list2);
         scroll2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll2.setBounds(379,197,264,196);
+        scroll2.setBounds(679,197,264,196);
         scroll2.setVisible(visible);
-        
-        listModel.addElement("ola");
        
         //Registo de Empresa
         RAtividadeEconomica = new JTextField();
@@ -402,6 +390,56 @@ public class GUI_Register extends JFrame {
         RAtividadeEconomica.setFont(new Font("sansserif",0,12));
         RAtividadeEconomica.setText("");
         RAtividadeEconomica.setVisible(!visible);
+        
+        RAtividadeEconomica.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt){
+                onKeyReleasedAtividadeEconomica(evt);
+            }
+        });
+        
+        AdicionarButtonAtividadeEconomica = new JButton();
+        AdicionarButtonAtividadeEconomica.setBounds(289,282,90,35);
+        AdicionarButtonAtividadeEconomica.setBackground(new Color(214,217,223));
+        AdicionarButtonAtividadeEconomica.setForeground(new Color(0,0,0));
+        AdicionarButtonAtividadeEconomica.setEnabled(true);
+        AdicionarButtonAtividadeEconomica.setFont(new Font("sansserif",0,12));
+        AdicionarButtonAtividadeEconomica.setText("Adicionar");
+        AdicionarButtonAtividadeEconomica.setVisible(!visible);
+        //  Set methods for mouse events
+        //Call defined methods
+        AdicionarButtonAtividadeEconomica.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                AtividadeAdded(evt);
+            }
+        });
+        
+        removerbotaoAtividadeEconomica = new JButton();
+        removerbotaoAtividadeEconomica.setBounds(460,410,90,35);
+        removerbotaoAtividadeEconomica.setBackground(new Color(214,217,223));
+        removerbotaoAtividadeEconomica.setForeground(new Color(0,0,0));
+        removerbotaoAtividadeEconomica.setEnabled(true);
+        removerbotaoAtividadeEconomica.setFont(new Font("sansserif",0,12));
+        removerbotaoAtividadeEconomica.setText("Remover");
+        removerbotaoAtividadeEconomica.setVisible(!visible);
+
+        removerbotaoAtividadeEconomica.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                AtividadeRemoved(evt);
+            }
+        });
+        
+        list3 = new JList(listModel3);
+        list3.setBackground(new Color(255,255,255));
+        //list3.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        list3.setForeground(new Color(0,0,0));
+        list3.setEnabled(true);
+        list3.setFont(new Font("sansserif",0,12));
+        
+        scroll3 = new JScrollPane();
+        scroll3.setViewportView(list3);
+        scroll3.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll3.setBounds(379,197,264,196);
+        scroll3.setVisible(!visible);
 
         REmailE = new JTextField();
         REmailE.setBounds(199,202,90,35);
@@ -411,6 +449,12 @@ public class GUI_Register extends JFrame {
         REmailE.setFont(new Font("sansserif",0,12));
         REmailE.setText("");
         REmailE.setVisible(!visible);
+        
+        REmailE.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt){
+                onKeyReleasedEmailE(evt);
+            }
+        });
     
         RMoradaE = new JTextField();
         RMoradaE.setBounds(199,242,90,35);
@@ -420,6 +464,12 @@ public class GUI_Register extends JFrame {
         RMoradaE.setFont(new Font("sansserif",0,12));
         RMoradaE.setText("");
         RMoradaE.setVisible(!visible);
+        
+        RMoradaE.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt){
+                onKeyReleasedMoradaE(evt);
+            }
+        });
 
         RNifE = new JTextField();
         RNifE.setBounds(199,82,90,35);
@@ -429,6 +479,12 @@ public class GUI_Register extends JFrame {
         RNifE.setFont(new Font("sansserif",0,12));
         RNifE.setText("");
         RNifE.setVisible(!visible);
+        
+        RNifE.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt){
+                onKeyReleasedNifE(evt);
+            }
+        });
 
         RNomeE = new JTextField();
         RNomeE.setBounds(199,162,90,35);
@@ -438,6 +494,12 @@ public class GUI_Register extends JFrame {
         RNomeE.setFont(new Font("sansserif",0,12));
         RNomeE.setText("");
         RNomeE.setVisible(!visible);
+        
+        RNomeE.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt){
+                onKeyReleasedRNomeE(evt);
+            }
+        });
 
         RPasswordE = new JPasswordField();
         RPasswordE.setBounds(199,122,90,35);
@@ -447,6 +509,12 @@ public class GUI_Register extends JFrame {
         RPasswordE.setFont(new Font("sansserif",0,12));
         RPasswordE.setText("");
         RPasswordE.setVisible(!visible);
+        
+        RPasswordE.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt){
+                onKeyReleasedRPasswordE(evt);
+            }
+        });
 
         Registar = new JButton();
         Registar.setBounds(198,343,90,35);
@@ -568,9 +636,13 @@ public class GUI_Register extends JFrame {
         contentPane.add(labelPassword);
         contentPane.add(AdicionarButtonNifs);
         contentPane.add(AdicionarButtonCodigos);
+        contentPane.add(AdicionarButtonAtividadeEconomica);
         contentPane.add(removerbotaoNifs);
         contentPane.add(removerbotaoCodigos);
+        contentPane.add(removerbotaoAtividadeEconomica);
+        contentPane.add(scroll);
         contentPane.add(scroll2);
+        contentPane.add(scroll3);
         contentPane.add(combobox1);
 
         //adding panel to JFrame and seting of window position and close operation
@@ -612,6 +684,7 @@ public class GUI_Register extends JFrame {
             NumerosFiscais.setVisible(visible);
             removerbotaoNifs.setVisible(visible);
             removerbotaoCodigos.setVisible(visible);
+            removerbotaoAtividadeEconomica.setVisible(!visible);
             label3.setVisible(visible);
             labelEmail.setVisible(visible);
             labelMorada.setVisible(visible);
@@ -621,25 +694,72 @@ public class GUI_Register extends JFrame {
             labelPassword.setVisible(visible);
             AdicionarButtonNifs.setVisible(visible);
             AdicionarButtonCodigos.setVisible(visible);
+            AdicionarButtonAtividadeEconomica.setVisible(!visible);
+            scroll.setVisible(visible);
             scroll2.setVisible(visible);
+            scroll3.setVisible(!visible);
         }
     }
     
     //Method mouseClicked for AdicionarButton
     private void NifAdded (MouseEvent evt) {
-        listModel.addElement("ola");
+        listModel.addElement(nif);
+        NumerosFiscais.setText("");
     }
     
     private void CodigoAdded (MouseEvent evt) {
-        listModel.addElement("John Smith");
+        listModel2.addElement(codigoAtividade);
+        CodigosAtividades.setText("");
+    }
+    
+    private void AtividadeAdded (MouseEvent evt) {
+        listModel3.addElement(atividadeEconomica);
+        RAtividadeEconomica.setText("");
     }
     
     private void  NifRemoved (MouseEvent evt) {
-        listModel.addElement("John Smith");
+        int selectedIndex = list1.getSelectedIndex();
+        if (selectedIndex != -1) {
+            listModel.remove(selectedIndex);
+        }
     }
     
     private void  CodigoRemoved (MouseEvent evt) {
-        listModel.addElement("John Smith");
+        int selectedIndex = list2.getSelectedIndex();
+        if (selectedIndex != -1) {
+            listModel2.remove(selectedIndex);
+        }
+    }
+    
+    private void  AtividadeRemoved (MouseEvent evt) {
+        int selectedIndex = list3.getSelectedIndex();
+        if (selectedIndex != -1) {
+            listModel3.remove(selectedIndex);
+        }
+    }
+    
+    private void onKeyReleasedMoradaE (KeyEvent evt) {
+            morada = RMoradaE.getText();
+    }
+    
+    private void onKeyReleasedEmailE (KeyEvent evt) {
+            email = REmailE.getText();
+    }
+    
+    private void onKeyReleasedNifE (KeyEvent evt) {
+            nif = Integer.parseInt(RNifE.getText());
+    }
+    
+    private void onKeyReleasedRNomeE (KeyEvent evt) {
+            nome = RNomeE.getText();
+    }
+    
+    private void onKeyReleasedRPasswordE (KeyEvent evt) {
+            password = RPasswordE.getText();
+    }
+    
+    private void onKeyReleasedAtividadeEconomica (KeyEvent evt) {
+            atividadeEconomica = RAtividadeEconomica.getText();
     }
     
     private void onKeyReleasedNif (KeyEvent evt) {
