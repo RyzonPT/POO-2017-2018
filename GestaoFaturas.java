@@ -39,6 +39,7 @@ public class GestaoFaturas implements Serializable
         try{
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("gestorfaturas.txt"));
             out.writeObject(this);
+            System.out.println("GRAVEI CARALHO");
         }
         catch (Exception e)
         {
@@ -52,8 +53,8 @@ public class GestaoFaturas implements Serializable
     
     public void removeFaturas(Integer faturaID) {
         this.mapfaturas.remove(faturaID);
-        try{
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("save.txt"));
+       try{
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("gestorfaturas.txt"));
             out.writeObject(this);
         }
         catch (Exception e)

@@ -19,7 +19,7 @@ public class HallentradaGUI extends JFrame {
     private JButton Forgotten;
     private JButton Login;
     private JButton Register;
-    private GestaoFichas gestorfichas;
+    public GestaoFichas gestorfichas;
     
     //Constructor 
     public HallentradaGUI(){

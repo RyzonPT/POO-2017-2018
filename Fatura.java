@@ -54,9 +54,8 @@ public class Fatura implements Serializable
     
     public Fatura(String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, ArrayList<Triple> produto, ArrayList<String> actividadeEconomica, 
     double valor, double deducao, String nomeCliente, String moradaCliente, String emailCliente, int nifCliente){
-       globalid += 1;
+       globalid +=1;
        this.faturaID = globalid;
-       System.out.println("lel"+faturaID); 
        this.nomeEmpresa = nomeEmpresa;
        this.moradaEmpresa = moradaEmpresa;
        this.emailEmpresa = emailEmpresa;
@@ -71,7 +70,7 @@ public class Fatura implements Serializable
        this.emailCliente = emailCliente;
        this.nifCliente = nifCliente;
        if(actividadeEconomica.size()==1){
-           ativEconEscolhida= actividadeEconomica.get(0);
+           ativEconEscolhida = actividadeEconomica.get(0);
        }
        else{
            ativEconEscolhida="n/a";

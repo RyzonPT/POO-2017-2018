@@ -1,6 +1,8 @@
 import java.util.List;
 import java.util.ArrayList;
-public class FichaCliente
+import java.io.Serializable;
+
+public class FichaCliente implements Serializable
 {
    private int nif;
    private String email;
@@ -56,7 +58,7 @@ public class FichaCliente
     }
     
     public GestaoFaturas getgestorfaturas(){
-         return gestorfaturas;
+         return gestorfaturas.clone();
     }
     
     public List<Fatura> getmyfaturas(){
