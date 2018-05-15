@@ -87,6 +87,9 @@ public class Interface
             Fatura dam11 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, 0, null, null, null, 2);
             gestorfaturas.addFaturas(dam11);
             
+                        Fatura dam12 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 1 ,lolis2,  teste, 0, 0, null, null, null, 2);
+            gestorfaturas.addFaturas(dam12);
+            
             
     
             EntidadePrivada fichaPrivada0 = new EntidadePrivada(0,"email","nome","morada","",3,lolis,0,lolis);

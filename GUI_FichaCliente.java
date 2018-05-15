@@ -40,6 +40,7 @@ public class GUI_FichaCliente extends JFrame {
     private JLabel label5;
     private JLabel label6;
     private JList list1;
+    private DefaultListModel listModel = new DefaultListModel();
     private JLabel listaAgregadotext;
     private JLabel moradaText;
     private JScrollPane listScroller;
@@ -234,17 +235,15 @@ public class GUI_FichaCliente extends JFrame {
         
         
         
-        List <Fatura> madebyme = new ArrayList<>();
-       madebyme = gestorfaturas.getmadefaturas(ficha.getnif());
-       Object[] botoes3 = new Botao[madebyme.size()];
-     int i = 0;
-         
-       for(Fatura h : madebyme){
-           botoes3[i] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h);
-           i++;
-        }
+        List <Fatura> listfatlancadas = new ArrayList<>();
+       listfatlancadas = gestorfaturas.getmadefaturas(ficha.getnif());
         
-        listfaturasLancadas = new JList(botoes3);
+        listfaturasLancadas = new JList(listModel);
+        for(Fatura h : listfatlancadas){
+            Botao botao22 = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h);
+            listModel.addElement(botao22);
+        }
+            
         listfaturasLancadas.setBackground(new Color(255,255,255));
         listfaturasLancadas.setForeground(new Color(0,0,0));
         listfaturasLancadas.setEnabled(true);
@@ -297,7 +296,7 @@ public class GUI_FichaCliente extends JFrame {
         List <Fatura> faturaslist = new ArrayList<>();
        faturaslist = gestorfaturas.getmyfaturas(ficha.getnif());
        Object[] botoes = new Botao[faturaslist.size()];
-       i = 0;
+       int i = 0;
          
        for(Fatura h : faturaslist){
            botoes[i] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h);
@@ -554,7 +553,7 @@ public class GUI_FichaCliente extends JFrame {
     }
 
     private void onCriarFaturaButtonClicked (MouseEvent evt) {          
-         GUI_CriaFatura criafaturagui = new GUI_CriaFatura(ficha,gestorfichas,gestorfaturas);
+         GUI_CriaFatura criafaturagui = new GUI_CriaFatura(ficha,gestorfichas,gestorfaturas,listModel);
     }
     
     private void onlogOutButtonClicked (MouseEvent evt) {      

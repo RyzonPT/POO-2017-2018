@@ -71,6 +71,7 @@ public class GUI_CriaFatura extends JFrame {
     private FichaCliente ficha;
     private GestaoFichas gestorfichas;
     private GestaoFaturas gestorfaturas;
+    private DefaultListModel listModel;
     private ArrayList<Triple> produtos;
     private String[] colunas = {"Produto","Quantidade","Preço(€)"}; 
     private DefaultTableModel dtm = new DefaultTableModel(null,colunas){    
@@ -81,9 +82,10 @@ public class GUI_CriaFatura extends JFrame {
 };
     
     //Constructor 
-    public GUI_CriaFatura(FichaCliente ficha,GestaoFichas gestorfichas,GestaoFaturas gestorfaturas ){
+    public GUI_CriaFatura(FichaCliente ficha,GestaoFichas gestorfichas,GestaoFaturas gestorfaturas,DefaultListModel listModel){
         this.gestorfichas = gestorfichas;
         this.gestorfaturas = gestorfaturas;
+        this.listModel = listModel;
         faturaID = "";
         nomeCliente = "n/a";
         moradaCliente = "n/a";
@@ -693,6 +695,8 @@ public class GUI_CriaFatura extends JFrame {
         Fatura c = new Fatura (ficha.getNome(), ficha.getMorada(), ficha.getEmail(),ficha.getnif(),  produtos,fichaE.getActividadeEconomica(),0,0, nomeCliente, moradaCliente, emailCliente, Integer.parseInt(nifCliente));
         gestorfaturas.addFaturas(c);
         JOptionPane.showMessageDialog(null,"Fatura criada com sucesso!", "Message" , JOptionPane.INFORMATION_MESSAGE);
+        Botao botao = new Botao(Integer.toString(c.getfaturaID())+"   "+c.getnomeEmpresa(),c);
+        listModel.addElement(botao);
         dispose();
         
     }
@@ -778,7 +782,7 @@ public class GUI_CriaFatura extends JFrame {
         System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new GUI_CriaFatura(null,null,null);
+                new GUI_CriaFatura(null,null,null,null);
             }
         });
     }
