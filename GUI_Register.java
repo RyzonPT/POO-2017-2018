@@ -62,7 +62,6 @@ public class GUI_Register extends JFrame {
     private JScrollPane scroll;
     private JScrollPane scroll2;
     private JScrollPane scroll3;
-    private JScrollPane scrollTotal;
     private JComboBox combobox1;
     private String email;
     private String morada;
@@ -448,14 +447,7 @@ public class GUI_Register extends JFrame {
         scroll3.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scroll3.setBounds(379,197,264,196);
         scroll3.setVisible(!visible);
-       /* 
-        scrollTotal = new JScrollPane();
-        scrollTotal.setViewportView(this);
-        scrollTotal.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollTotal.setBounds(379,197,264,196);
-        scrollTotal.setVisible(!visible);
-        */
-        
+
         REmailE = new JTextField();
         REmailE.setBounds(199,202,90,35);
         REmailE.setBackground(new Color(255,255,255));
@@ -739,7 +731,7 @@ public class GUI_Register extends JFrame {
                 fichaPrivada.setNome(nome);
                 fichaPrivada.setAgregadoFamiliar(numerodedependentes);
                 gestorfichas.addFicha(fichaPrivada);
-                if(gestorfichas.existeFicha(nif)){
+                if(gestorfichas.existeFicha(nif)){  //falta fazer a existeFichas para mais do que um nif
                     infoBox("Registo com sucesso!", "Registo com sucesso");
                     HallentradaGUI hallentrada = new HallentradaGUI();
                     hallentrada.gestorfichas = gestorfichas;
