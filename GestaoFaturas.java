@@ -84,14 +84,21 @@ public class GestaoFaturas implements Serializable
     
     public List<Fatura> getmyfaturas(int nif){
         List<Fatura> aux = new ArrayList<>();
-            System.out.println("SONO");
             for(Fatura h : getMapFaturas().values()){
-                System.out.println(" MIGUEL ASSADO");
                 if(h.getnifCliente()==nif){
                     aux.add(h.clone());
-                    System.out.println("ole");
                 }
             }
             return aux;
     }
+    
+    public List<Fatura> getmadefaturas(int nif){
+        List<Fatura> aux = new ArrayList<>();
+        for(Fatura h : getMapFaturas().values()){
+                if(h.getnifEmpresa()==nif){
+                    aux.add(h.clone());
+                }
+            }
+            return aux;
+}
 }
