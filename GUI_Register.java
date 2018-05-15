@@ -397,6 +397,7 @@ public class GUI_Register extends JFrame {
             }
         });
         
+        
         AdicionarButtonAtividadeEconomica = new JButton();
         AdicionarButtonAtividadeEconomica.setBounds(289,282,90,35);
         AdicionarButtonAtividadeEconomica.setBackground(new Color(214,217,223));
