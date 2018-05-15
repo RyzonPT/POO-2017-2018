@@ -136,12 +136,18 @@ public class GUI_Login extends JFrame {
             save = TextBox.getText();
     }
 
+    public static void infoBox(String infoMessage, String titleBar)
+    {
+        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
+    
     //Method mouseClicked for button1
     private void onLoginButtonClicked (MouseEvent evt) {
             int nif = Integer.parseInt(save);
             FichaCliente fichaEncontrada = gestorfichas.autenticacao(password,nif);
 
                 if(fichaEncontrada != null){
+                infoBox("Login com sucesso!", "Login com sucesso");
                 dispose();
                 GUI_FichaCliente fichagui = new GUI_FichaCliente(fichaEncontrada,gestorfichas);
                 //fichagui.setgestorfichas(gestorfichas);

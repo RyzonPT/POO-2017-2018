@@ -62,6 +62,7 @@ public class GUI_Register extends JFrame {
     private JScrollPane scroll;
     private JScrollPane scroll2;
     private JScrollPane scroll3;
+    private JScrollPane scrollTotal;
     private JComboBox combobox1;
     private String email;
     private String morada;
@@ -88,6 +89,8 @@ public class GUI_Register extends JFrame {
     public GestaoFichas gestorfichas;
     private EntidadePrivada fichaPrivada;
     private EntidadeEmpresas fichaEmpresa;
+    private ArrayList<Integer> nifs;
+    private ArrayList<String> atividades;
 
     //Constructor 
     public GUI_Register(){
@@ -445,6 +448,12 @@ public class GUI_Register extends JFrame {
         scroll3.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scroll3.setBounds(379,197,264,196);
         scroll3.setVisible(!visible);
+        
+        scrollTotal = new JScrollPane();
+        scrollTotal.setViewportView(this);
+        scrollTotal.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollTotal.setBounds(379,197,264,196);
+        scrollTotal.setVisible(!visible);
 
         REmailE = new JTextField();
         REmailE.setBounds(199,202,90,35);
@@ -722,8 +731,8 @@ public class GUI_Register extends JFrame {
             }
             else{
                 fichaPrivada.setPassword(password);
-                //fichaPrivada.setnif(nif); <- tem de ser array list
-                //fichaPrivada.setCodigosAtividades(codigoAtividade); <- tem de ser array list
+                fichaPrivada.setNumerosFiscais(nifs);
+                //fichaPrivada.setCodigosAtividades(codigoAtividade);
                 fichaPrivada.setEmail(email);
                 fichaPrivada.setMorada(morada);
                 fichaPrivada.setNome(nome);
@@ -750,7 +759,7 @@ public class GUI_Register extends JFrame {
             else{
                 fichaEmpresa.setPassword(password);
                 fichaEmpresa.setnif(nif);
-                //fichaEmpresa.setActividadeEconomica(atividadeEconomica);   <- tem de ser array list
+                fichaEmpresa.setActividadeEconomica(atividades);
                 fichaEmpresa.setEmail(email);
                 fichaEmpresa.setMorada(morada);
                 fichaEmpresa.setNome(nome);
@@ -769,11 +778,11 @@ public class GUI_Register extends JFrame {
     {
         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
-    //para retroceder: login.gestorfichas = this.gestorfichas
     
     //Method mouseClicked for AdicionarButton
     private void NifAdded (MouseEvent evt) {
         listModel.addElement(nif);
+        nifs.add(nif);
         NumerosFiscais.setText("");
     }
     
@@ -784,11 +793,14 @@ public class GUI_Register extends JFrame {
     
     private void AtividadeAdded (MouseEvent evt) {
         listModel3.addElement(atividadeEconomica);
+        atividades.add(atividadeEconomica);
         RAtividadeEconomica.setText("");
     }
     
     private void  NifRemoved (MouseEvent evt) {
         int selectedIndex = list1.getSelectedIndex();
+        int selected = Integer.parseInt(list1.getSelectedValue().toString());
+        nifs.remove(selected);
         if (selectedIndex != -1) {
             listModel.remove(selectedIndex);
         }
@@ -796,6 +808,8 @@ public class GUI_Register extends JFrame {
     
     private void  CodigoRemoved (MouseEvent evt) {
         int selectedIndex = list2.getSelectedIndex();
+        int selected = Integer.parseInt(list2.getSelectedValue().toString());
+        atividades.remove(selected);
         if (selectedIndex != -1) {
             listModel2.remove(selectedIndex);
         }

@@ -63,7 +63,7 @@ public class EntidadePrivada extends FichaCliente implements Serializable
         this.agregadoFamiliar = AgregadoFamiliar;
     }
 
-    public void setNumerosFiscais(ArrayList<int[]> numerosFiscais){
+    public void setNumerosFiscais(ArrayList<Integer> numerosFiscais){
         this.numerosFiscais= (ArrayList<Integer>)numerosFiscais.clone();
     }
 
