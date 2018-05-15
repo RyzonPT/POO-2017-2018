@@ -17,7 +17,6 @@ public class Fatura implements Serializable
      * natureza da despesa, isto é, a actividade económica a que diz respeito;
      * valor da despesa.
     */
-   private static int globalid = 900000000;
    private  int faturaID;
    private String nomeEmpresa;
    private String moradaEmpresa;
@@ -54,8 +53,6 @@ public class Fatura implements Serializable
     
     public Fatura(String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, ArrayList<Triple> produto, ArrayList<String> actividadeEconomica, 
     double valor, double deducao, String nomeCliente, String moradaCliente, String emailCliente, int nifCliente){
-       globalid +=1;
-       this.faturaID = globalid;
        this.nomeEmpresa = nomeEmpresa;
        this.moradaEmpresa = moradaEmpresa;
        this.emailEmpresa = emailEmpresa;

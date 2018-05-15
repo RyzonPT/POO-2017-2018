@@ -41,14 +41,15 @@ public class Interface
             
             
             ArrayList<Integer> lolis3 = new ArrayList<Integer>();
-                lolis3.add(2);
                 
-               ObjectInputStream infaturas = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
+              ObjectInputStream infaturas = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
                 GestaoFaturas gestorfaturas = (GestaoFaturas) infaturas.readObject();
-                ObjectInputStream infichas = new ObjectInputStream(new FileInputStream("gestorfichas.txt"));
+               ObjectInputStream infichas = new ObjectInputStream(new FileInputStream("gestorfichas.txt"));
                 GestaoFichas gestorfichas = (GestaoFichas) infichas.readObject();
-            
-            
+                
+            ArrayList<Integer> lolis4 = new ArrayList<Integer>();
+                lolis4.add(2);
+                
             HallentradaGUI hall = new HallentradaGUI();
             /*
             ArrayList<Integer> olas= new ArrayList<Integer>();
@@ -87,7 +88,7 @@ public class Interface
             
             
             EntidadePrivada fichaPrivada0 = new EntidadePrivada(0,"email","nome","morada","",3,lolis,0,lolis,gestorfaturas);
-            EntidadePrivada fichaPrivada1 = new EntidadePrivada(100,"email","nome","morada","",3,lolis,0,lolis,gestorfaturas);
+            EntidadePrivada fichaPrivada1 = new EntidadePrivada(100,"email","nome","morada","",3,lolis4,0,lolis,gestorfaturas);
             EntidadePrivada fichaPrivada2 = new EntidadePrivada(2,"email","nome","morada","",3,lolis3,0,lolis,gestorfaturas);
             gestorfichas.addFicha(fichaPrivada0);
             gestorfichas.addFicha(fichaPrivada1);

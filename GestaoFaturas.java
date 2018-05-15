@@ -16,10 +16,11 @@ import java.io.Serializable;
 public class GestaoFaturas implements Serializable
 {
     private Map<Integer,Fatura> mapfaturas;
-    
+    private int key=900000;
     public GestaoFaturas()
     {
         this.mapfaturas = new HashMap<>();
+        key=900000;
     }
     
     public GestaoFaturas(Map<Integer,Fatura> fat) {
@@ -28,6 +29,7 @@ public class GestaoFaturas implements Serializable
     
     public GestaoFaturas(GestaoFaturas a){
         this.mapfaturas = a.getMapFaturas();
+        this.key=a.getkey();
     }
     
     public Map<Integer,Fatura> getMapFaturas(){
@@ -35,7 +37,9 @@ public class GestaoFaturas implements Serializable
     }
     
     public void addFaturas(Fatura a){
+        a.setfaturaID(this.key);
         this.mapfaturas.put(a.getfaturaID(),a.clone()); 
+        key+=1;
         try{
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("gestorfaturas.txt"));
             out.writeObject(this);
@@ -45,6 +49,10 @@ public class GestaoFaturas implements Serializable
         {
             e.printStackTrace ();
         }
+    }
+    
+    public int getkey(){
+        return key;
     }
     
     public boolean existeFatura(int id){

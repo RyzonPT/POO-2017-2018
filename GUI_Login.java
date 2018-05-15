@@ -76,7 +76,7 @@ public class GUI_Login extends JFrame {
 
 
         button1 = new JButton();
-        button1.setBounds(155,229,90,35);
+        button1.setBounds(205,229,90,35);
         button1.setBackground(new Color(214,217,223));
         button1.setForeground(new Color(0,0,0));
         button1.setEnabled(true);
