@@ -80,7 +80,7 @@ public class GUI_CriaFatura extends JFrame {
 };
     
     //Constructor 
-    public GUI_CriaFatura(FichaCliente ficha,GestaoFichas gestorfichas){
+    public GUI_CriaFatura(FichaCliente ficha,GestaoFichas gestorfichas ){
         this.gestorfichas = gestorfichas;
         faturaID = "";
         nomeCliente = "n/a";
@@ -683,7 +683,7 @@ public class GUI_CriaFatura extends JFrame {
             return;
     }
         EntidadeEmpresas fichaE = (EntidadeEmpresas) ficha;   
-        Fatura c = new Fatura (Integer.parseInt(faturaID), ficha.getNome(), ficha.getMorada(), ficha.getEmail(),ficha.getnif(),  produtos,fichaE.getActividadeEconomica(),0,0, nomeCliente, moradaCliente, emailCliente, Integer.parseInt(nifCliente));
+        Fatura c = new Fatura (ficha.getNome(), ficha.getMorada(), ficha.getEmail(),ficha.getnif(),  produtos,fichaE.getActividadeEconomica(),0,0, nomeCliente, moradaCliente, emailCliente, Integer.parseInt(nifCliente));
         ficha.gestorfaturas.addFaturas(c);
          System.out.println(ficha.getgestorfaturas().getMapFaturas().size() +" ola");
          GUI_Warning warning =  new GUI_Warning(this,"Fatura criada com sucesso!",1); 

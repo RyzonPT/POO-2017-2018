@@ -365,26 +365,20 @@ public class GUI_FichaCliente extends JFrame {
         contentPane.add(scrollListaCodigos);
         contentPane.add(listaAgregadotext);
         
-        
         List <Fatura> faturaslist = new ArrayList<>();
-        int j=0;
+        int j = 0;
     for(Integer k : fichaP.getNumerosFiscais()){
-        System.out.println(k);
           FichaCliente pato = gestorfichas.getFicha(k);
-           j += pato.getmyfaturas().size();   
-           
-        
-
+           j += pato.getmyfaturas().size();
     }
-    //
+    
     Object[] botoes = new Botao[fichas.getmyfaturas().size()+j];
-     int i = 0;
-     
-     faturaslist = ficha.getmyfaturas();
+    int i = 0; 
+    faturaslist = ficha.getmyfaturas();
+    
     for(Fatura h : faturaslist){
        botoes[i] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h);
        i++;
-           
         }
      
      for(Integer k : fichaP.getNumerosFiscais()){
@@ -392,8 +386,7 @@ public class GUI_FichaCliente extends JFrame {
        for(Fatura h : faturaslist){
            botoes[i] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h);
            i++;
-           
-        }
+       }
     }
 
         list1 = new JList(botoes);

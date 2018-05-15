@@ -3,8 +3,15 @@ import java.util.HashMap;
 import java.util.stream.Collectors;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.Serializable;
 
-public class GestaoFichas
+public class GestaoFichas implements Serializable
 {
     private Map<Integer,FichaCliente> fichas;
     
@@ -27,18 +34,26 @@ public class GestaoFichas
     
     public void addFicha (FichaCliente a){
         this.fichas.put(a.getnif(),a.clone());
-    }
-    
-    public List<FichaCliente> getfichas2() {
-        List<FichaCliente> l = new ArrayList<>();
-        for(FichaCliente h : fichas.values()) {
-            l.add(h.clone());
+     /*   try{
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("gestorfichas.txt"));
+            out.writeObject(this);
         }
-        return l;
+        catch (Exception e)
+        {
+            e.printStackTrace ();
+        }*/
     }
     
     public void removeFicha (Integer nif){
         this.fichas.remove(nif);
+        try{
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("gestorfichas.txt"));
+            out.writeObject(this);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace ();
+        }
     }
     
     public boolean existeFicha(int nif){

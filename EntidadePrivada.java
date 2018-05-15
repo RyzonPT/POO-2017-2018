@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class EntidadePrivada extends FichaCliente
+public class EntidadePrivada extends FichaCliente implements Serializable
 {
     private int agregadoFamiliar;
     private ArrayList<Integer> numerosFiscais;

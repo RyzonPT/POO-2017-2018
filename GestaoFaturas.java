@@ -5,12 +5,17 @@ import java.util.stream.Collectors;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.Serializable;
 
 public class GestaoFaturas implements Serializable
 {
     private Map<Integer,Fatura> mapfaturas;
-    public int numerofaturas = 0;
     
     public GestaoFaturas()
     {
@@ -31,7 +36,14 @@ public class GestaoFaturas implements Serializable
     
     public void addFaturas(Fatura a){
         this.mapfaturas.put(a.getfaturaID(),a.clone()); 
-        this.numerofaturas++;
+        try{
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("gestorfaturas.txt"));
+            out.writeObject(this);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace ();
+        }
     }
     
     public boolean existeFatura(int id){
@@ -40,6 +52,14 @@ public class GestaoFaturas implements Serializable
     
     public void removeFaturas(Integer faturaID) {
         this.mapfaturas.remove(faturaID);
+        try{
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("save.txt"));
+            out.writeObject(this);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace ();
+        }
     }
     
     public Fatura getFatura(Integer faturaID) {

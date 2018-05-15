@@ -17,7 +17,8 @@ public class Fatura implements Serializable
      * natureza da despesa, isto é, a actividade económica a que diz respeito;
      * valor da despesa.
     */
-   private int faturaID;
+   private static int globalid = 900000000;
+   private  int faturaID;
    private String nomeEmpresa;
    private String moradaEmpresa;
    private String emailEmpresa;
@@ -51,9 +52,11 @@ public class Fatura implements Serializable
        ativEconEscolhida="n/a";
     }
     
-    public Fatura(int faturaID,String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, ArrayList<Triple> produto, ArrayList<String> actividadeEconomica, 
+    public Fatura(String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, ArrayList<Triple> produto, ArrayList<String> actividadeEconomica, 
     double valor, double deducao, String nomeCliente, String moradaCliente, String emailCliente, int nifCliente){
-       this.faturaID= faturaID;
+       globalid += 1;
+       this.faturaID = globalid;
+       System.out.println("lel"+faturaID); 
        this.nomeEmpresa = nomeEmpresa;
        this.moradaEmpresa = moradaEmpresa;
        this.emailEmpresa = emailEmpresa;

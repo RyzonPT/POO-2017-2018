@@ -56,18 +56,13 @@ public class FichaCliente
     }
     
     public GestaoFaturas getgestorfaturas(){
-         return gestorfaturas.clone();
+         return gestorfaturas;
     }
     
     public List<Fatura> getmyfaturas(){
-
         List<Fatura> aux = new ArrayList<>();
-        System.out.println("ole");
-        System.out.println("size" + gestorfaturas.getMapFaturas().size());
         for(Fatura h : gestorfaturas.getMapFaturas().values()){
-            System.out.println(h.getnifCliente()+"olaesd");
             if(h.getnifCliente()==nif){
-                        System.out.println("ola");
             aux.add(h.clone());
         }
         }

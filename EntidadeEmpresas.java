@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class EntidadeEmpresas extends FichaCliente
+public class EntidadeEmpresas extends FichaCliente implements Serializable
 {
    private ArrayList<String> actividadeEconomica;
    private int deducaoFiscal;
