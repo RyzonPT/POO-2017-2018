@@ -448,13 +448,14 @@ public class GUI_Register extends JFrame {
         scroll3.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scroll3.setBounds(379,197,264,196);
         scroll3.setVisible(!visible);
-        
+       /* 
         scrollTotal = new JScrollPane();
         scrollTotal.setViewportView(this);
         scrollTotal.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollTotal.setBounds(379,197,264,196);
         scrollTotal.setVisible(!visible);
-
+        */
+        
         REmailE = new JTextField();
         REmailE.setBounds(199,202,90,35);
         REmailE.setBackground(new Color(255,255,255));

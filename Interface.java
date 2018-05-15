@@ -49,10 +49,7 @@ public class Interface
                 
             ArrayList<Integer> lolis4 = new ArrayList<Integer>();
                 lolis4.add(2);
-                
-                        Fatura dd = new Fatura("LISTOS", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, 0, null, null, null, 0);
-                        gestorfaturas.addFaturas(dd);
-                        System.out.println(gestorfaturas.getMapFaturas().size()+"INICIOOOO gestorfaturas");
+
                         
             HallentradaGUI hall = new HallentradaGUI();
             /*

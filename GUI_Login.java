@@ -137,7 +137,6 @@ public class GUI_Login extends JFrame {
             save = TextBox.getText();
     }
 
-    //Method mouseClicked for button1
 public static void infoBox(String infoMessage, String titleBar)
     {
         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);

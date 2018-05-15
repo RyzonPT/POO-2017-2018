@@ -542,6 +542,7 @@ public class GUI_CriaFatura extends JFrame {
         textfield2.setFont(new Font("sansserif",0,12));
         textfield2.setText("");
         textfield2.setVisible(true);
+        textfield2.setEditable(false);
         //Set action for key events
         //Call defined method
         textfield2.addKeyListener(new KeyAdapter() {
@@ -605,13 +606,13 @@ public class GUI_CriaFatura extends JFrame {
     
     private void OnTestaNif(MouseEvent evt){
         if(!nifCliente.matches("[0-9]+") || nifCliente == ""){
-            GUI_Warning warning =  new GUI_Warning(null,"Nif de Cliente Invalido!",1); 
+            JOptionPane.showMessageDialog(null,"Nif de Cliente Invalido.", "Message", JOptionPane.ERROR_MESSAGE);
             return;
         }
         int nif = Integer.parseInt(nifCliente);
         
         if(nif==ficha.getnif()){
-            GUI_Warning warning =  new GUI_Warning(null,"Impossivel Criar faturas em nome proprio!",1);
+            JOptionPane.showMessageDialog(null,"Impossivel Criar faturas em nome proprio!", "Message", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -623,28 +624,29 @@ public class GUI_CriaFatura extends JFrame {
             TextFNomeCliente.setText(nomeCliente);
             TextFMoradaCliente.setText(moradaCliente);
             TextFEmailCliente.setText(emailCliente);
+            textfield2.setText(Integer.toString(gestorfaturas.getkey()));
             CriarFacturaButton.setEnabled(true);
             
         }
         else{
-            GUI_Warning warning =  new GUI_Warning(null,"Nif de Cliente Nao Registado!",1); 
+           JOptionPane.showMessageDialog(null,"Nif de Cliente Nao Registado!", "Message", JOptionPane.ERROR_MESSAGE);
         }
     }
     
     //Method mouseClicked for AdicionarButton
     private void OnProdutoAddedd (MouseEvent evt) {
         if(produto == ""){
-            GUI_Warning warning =  new GUI_Warning(null,"Produto Invalido.",1); 
+            JOptionPane.showMessageDialog(null,"Produto Invalido.", "Message", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         if(!quantidade.matches("[0-9]+") || quantidade == ""){
-            GUI_Warning warning =  new GUI_Warning(null,"Quantidade Invalida.",1); 
+            JOptionPane.showMessageDialog(null,"Quantidade Invalida.", "Message", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if(!preco.matches("\\d*\\.?\\d*") || preco == ""){
-            GUI_Warning warning =  new GUI_Warning(null,"Preco Invalido.",1); 
+            JOptionPane.showMessageDialog(null,"Preco Invalido.", "Message", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -676,19 +678,22 @@ public class GUI_CriaFatura extends JFrame {
 
     //Method mouseClicked for CriarFacturaButton
     private void OnClickedCriarFatura (ActionEvent evt) {
-        if(!faturaID.matches("[0-9]+")){
-            GUI_Warning warning =  new GUI_Warning(null,"faturaID invalida.",1); 
-            return;
-    }
+
         if(!nifCliente.matches("[0-9]+")){
-            GUI_Warning warning =  new GUI_Warning(null,"Nif de Cliente Invalido.",1); 
+            JOptionPane.showMessageDialog(null,"Nif de Cliente Invalido.", "Message", JOptionPane.ERROR_MESSAGE);
             return;
     }
+    
+        if(table.getRowCount()<1){
+            JOptionPane.showMessageDialog(null,"Nenhum produto adiconado.", "Message", JOptionPane.ERROR_MESSAGE);
+            return;
+    }
+    
         EntidadeEmpresas fichaE = (EntidadeEmpresas) ficha;   
         Fatura c = new Fatura (ficha.getNome(), ficha.getMorada(), ficha.getEmail(),ficha.getnif(),  produtos,fichaE.getActividadeEconomica(),0,0, nomeCliente, moradaCliente, emailCliente, Integer.parseInt(nifCliente));
         gestorfaturas.addFaturas(c);
-        System.out.println(gestorfaturas.getMapFaturas().size() +" ola");
-        GUI_Warning warning =  new GUI_Warning(this,"Fatura criada com sucesso!",1); 
+        JOptionPane.showMessageDialog(null,"Fatura criada com sucesso!", "Message" , JOptionPane.INFORMATION_MESSAGE);
+        dispose();
         
     }
     

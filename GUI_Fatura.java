@@ -454,7 +454,7 @@ public class GUI_Fatura extends JFrame {
         this.setVisible(true);
     }
     
-    public void corfimaAtividade(){
+    public void corfirmaAtividade(){
         String a = listAtiv.getSelectedValue().toString();
          AtividadeEconoText.setText(a);
          button1.setEnabled(false);
@@ -462,7 +462,10 @@ public class GUI_Fatura extends JFrame {
     }
    
     private void onConfirmarButtonClicked (ActionEvent evt) {  
-         GUI_Warning warn = new  GUI_Warning (this,"TEM A CERTEZA? A SUA ACAO E PERMANENTE!!",2);
+         int reply = JOptionPane.showConfirmDialog(null, "TEM A CERTEZA? A SUA ACAO E PERMANENTE!!", "Message", JOptionPane.YES_NO_OPTION);
+         if (reply == JOptionPane.YES_OPTION){
+             corfirmaAtividade();
+            }
     }
     
     private void clickButtonAt(Point point){
