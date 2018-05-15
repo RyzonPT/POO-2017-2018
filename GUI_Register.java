@@ -736,7 +736,7 @@ public class GUI_Register extends JFrame {
                 fichaPrivada.setEmail(email);
                 fichaPrivada.setMorada(morada);
                 fichaPrivada.setNome(nome);
-                fichaPrivada.setNumeroDeDependentes(numerodedependentes);
+                fichaPrivada.setAgregadoFamiliar(numerodedependentes);
                 gestorfichas.addFicha(fichaPrivada);
                 if(gestorfichas.existeFicha(nif)){
                     infoBox("Registo com sucesso!", "Registo com sucesso");
