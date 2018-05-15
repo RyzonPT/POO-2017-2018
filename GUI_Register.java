@@ -85,12 +85,16 @@ public class GUI_Register extends JFrame {
     private DefaultListModel listModel = new DefaultListModel();
     private DefaultListModel listModel2 = new DefaultListModel();
     private DefaultListModel listModel3 = new DefaultListModel();
+    public GestaoFichas gestorfichas;
+    private EntidadePrivada fichaPrivada;
+    private EntidadeEmpresas fichaEmpresa;
 
     //Constructor 
     public GUI_Register(){
-        nif = 911;
-        codigoAtividade = 112;
+        nif = numerodedependentes=codigoAtividade=1221; password=morada=email=nome=atividadeEconomica="";
         visible = false; flag = false;
+        fichaEmpresa = new EntidadeEmpresas();
+        fichaPrivada = new EntidadePrivada();
         
         this.setTitle("GUI_project");
         this.setSize(499,480);
@@ -113,11 +117,11 @@ public class GUI_Register extends JFrame {
         BRegistar.setText("Registar");
         BRegistar.setVisible(visible);
         
-        /**BRegistar.addMouseListener(new MouseAdapter() {
+        BRegistar.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 OnClickedRegistar(evt);
             }
-        });*/
+        });
 
         REmail = new JTextField();
         REmail.setBounds(197,298,90,35);
@@ -525,6 +529,12 @@ public class GUI_Register extends JFrame {
         Registar.setFont(new Font("sansserif",0,12));
         Registar.setText("Registar");
         Registar.setVisible(!visible);
+        
+        Registar.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                OnClickedRegistarE(evt);
+            }
+        });
 
         Titulo = new JLabel();
         Titulo.setBounds(114,18,300,35);
@@ -701,6 +711,65 @@ public class GUI_Register extends JFrame {
             scroll3.setVisible(!visible);
         }
     }
+    
+    private void OnClickedRegistar (MouseEvent evt){
+        if(nif==1221 || numerodedependentes==1221 || codigoAtividade==1221 || morada=="" || email=="" || nome=="" || password=="" ){
+            infoBox("Por favor preencha todos os campos", "Impossível registar");
+        }
+        else{
+            if(gestorfichas.existeFicha(nif)){ //tem de ser diferente
+                infoBox("Já existe um registo com este Nif", "Impossível registar");
+            }
+            else{
+                fichaPrivada.setPassword(password);
+                //fichaPrivada.setnif(nif); <- tem de ser array list
+                //fichaPrivada.setCodigosAtividades(codigoAtividade); <- tem de ser array list
+                fichaPrivada.setEmail(email);
+                fichaPrivada.setMorada(morada);
+                fichaPrivada.setNome(nome);
+                fichaPrivada.setNumeroDeDependentes(numerodedependentes);
+                gestorfichas.addFicha(fichaPrivada);
+                if(gestorfichas.existeFicha(nif)){
+                    infoBox("Registo com sucesso!", "Registo com sucesso");
+                    HallentradaGUI hallentrada = new HallentradaGUI();
+                    hallentrada.gestorfichas = gestorfichas;
+                    dispose();
+                }
+            }
+        }
+    }
+    
+    private void OnClickedRegistarE (MouseEvent evt){
+        if(nif==123321 || morada=="" || email=="" || nome=="" || atividadeEconomica=="" || password=="" ){
+            infoBox("Por favor preencha todos os campos", "Impossível registar");
+        }
+        else {
+            if(gestorfichas.existeFicha(nif)){
+                infoBox("Já existe um registo com este Nif", "Impossível registar");
+            }
+            else{
+                fichaEmpresa.setPassword(password);
+                fichaEmpresa.setnif(nif);
+                //fichaEmpresa.setActividadeEconomica(atividadeEconomica);   <- tem de ser array list
+                fichaEmpresa.setEmail(email);
+                fichaEmpresa.setMorada(morada);
+                fichaEmpresa.setNome(nome);
+                gestorfichas.addFicha(fichaEmpresa);
+                if(gestorfichas.existeFicha(nif)){
+                    infoBox("Registo com sucesso!", "Registo com sucesso");
+                    HallentradaGUI hallentrada = new HallentradaGUI();
+                    hallentrada.gestorfichas = gestorfichas;
+                    dispose();
+                }
+            }
+        }
+    }
+    
+    public static void infoBox(String infoMessage, String titleBar)
+    {
+        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
+    //para retroceder: login.gestorfichas = this.gestorfichas
     
     //Method mouseClicked for AdicionarButton
     private void NifAdded (MouseEvent evt) {

@@ -116,6 +116,7 @@ public class HallentradaGUI extends JFrame {
     //Method mouseClicked for Register
     private void gotoregister (MouseEvent evt) {
         GUI_Register register = new GUI_Register();
+        register.gestorfichas = gestorfichas;
         register.setVisible(true);
         dispose();
     }
