@@ -24,10 +24,10 @@ public class FichaCliente implements Serializable
        else{ 
        this.fichaType = 0;
        }
-       moneyspent=0;
+       
     }
     
-    public FichaCliente(int nif, String email, String nome, String morada, String password,double moneyspent){
+    public FichaCliente(int nif, String email, String nome, String morada, String password){
        this.nif = nif;
        this.email = email;
        this.nome = nome;
