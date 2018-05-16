@@ -53,6 +53,9 @@ public class GUI_FichaCliente extends JFrame {
     private JList list2;
     private JLabel faturasLancadas ;
     private JList listfaturasLancadas;
+    private JButton button2;
+    private JButton ordenaValor;
+    private JButton ordenaValorDecres;
 
     //Constructor 
     public GUI_FichaCliente(FichaCliente fichas,GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
@@ -173,7 +176,7 @@ public class GUI_FichaCliente extends JFrame {
         
         
         logOutbutton = new JButton();
-        logOutbutton.setBounds(280,690,90,35);
+        logOutbutton.setBounds(330,690,150,60);
         logOutbutton.setBackground(new Color(214,217,223));
         logOutbutton.setForeground(new Color(0,0,0));
         logOutbutton.setEnabled(true);
@@ -201,17 +204,66 @@ public class GUI_FichaCliente extends JFrame {
         JScrollPane scrollAtividade = new JScrollPane();
         scrollAtividade.setViewportView(ListaAtividadeEconomica);
         scrollAtividade.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollAtividade.setBounds(550,160,150,170);
-        
-        
+        scrollAtividade.setBounds(400,286,150,170);
+       
         defaultatividadeText = new JLabel();
-        defaultatividadeText.setBounds(400,200,160,35);
+        defaultatividadeText.setBounds(400,231,300,70);
         defaultatividadeText.setBackground(new Color(214,217,223));
         defaultatividadeText.setForeground(new Color(0,0,0));
         defaultatividadeText.setEnabled(true);
-        defaultatividadeText.setFont(new Font("sansserif",0,15));
+        defaultatividadeText.setFont(new Font("sansserif",0,20));
         defaultatividadeText.setText("Atividade Economica:");
         defaultatividadeText.setVisible(true);
+        
+        //////testes necesarios////
+        button2 = new JButton();
+        button2.setBounds(550,510,150,60);
+        button2.setBackground(new Color(214,217,223));
+        button2.setForeground(new Color(0,0,0));
+        button2.setEnabled(true);
+        button2.setFont(new Font("sansserif",0,12));
+        button2.setText("Ordenar por data");
+        button2.setVisible(true);
+        
+        button2.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                onOrdenarDataButtonClicked(evt);
+            }
+        });
+        
+        
+        ordenaValor = new JButton();
+        ordenaValor.setBounds(330,590,160,60);
+        ordenaValor.setBackground(new Color(214,217,223));
+        ordenaValor.setForeground(new Color(0,0,0));
+        ordenaValor.setEnabled(true);
+        ordenaValor.setFont(new Font("sansserif",0,12));
+        ordenaValor.setText("Ordenar por valor Cres");
+        ordenaValor.setVisible(true);
+        
+        ordenaValor.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                onOrdenarValorButtonClicked(evt);
+            }
+        });
+        
+        ordenaValorDecres = new JButton();
+        ordenaValorDecres.setBounds(330,510,160,60);
+        ordenaValorDecres.setBackground(new Color(214,217,223));
+        ordenaValorDecres.setForeground(new Color(0,0,0));
+        ordenaValorDecres.setEnabled(true);
+        ordenaValorDecres.setFont(new Font("sansserif",0,12));
+        ordenaValorDecres.setText("Ordenar por valor Decres");
+        ordenaValorDecres.setVisible(true);
+        
+        ordenaValorDecres.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                onOrdenarValorDecresButtonClicked(evt);
+            }
+        });
+        
+        
+        /////// END////////
         
         
         DeducaoqueficienteFiscalText = new JLabel();
@@ -225,7 +277,7 @@ public class GUI_FichaCliente extends JFrame {
         
         
         faturasLancadas = new JLabel();
-        faturasLancadas.setBounds(420,330,300,70);
+        faturasLancadas.setBounds(60,480,300,70);
         faturasLancadas.setBackground(new Color(214,217,223));
         faturasLancadas.setForeground(new Color(0,0,0));
         faturasLancadas.setEnabled(true);
@@ -262,7 +314,7 @@ public class GUI_FichaCliente extends JFrame {
         JScrollPane scrollfaturaslancadas = new JScrollPane();
         scrollfaturaslancadas.setViewportView(listfaturasLancadas);
         scrollfaturaslancadas.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollfaturaslancadas.setBounds(420,400,250,200);
+        scrollfaturaslancadas.setBounds(52,540,250,200);
         
         
         
@@ -278,7 +330,7 @@ public class GUI_FichaCliente extends JFrame {
         
         
         button1 = new JButton();
-        button1.setBounds(450,690,150,60);
+        button1.setBounds(570,360,150,60);
         button1.setBackground(new Color(214,217,223));
         button1.setForeground(new Color(0,0,0));
         button1.setEnabled(true);
@@ -323,8 +375,11 @@ public class GUI_FichaCliente extends JFrame {
         JScrollPane scrollListaFaturas = new JScrollPane();
         scrollListaFaturas.setViewportView(list1);
         scrollListaFaturas.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollListaFaturas.setBounds(52,286,299,300);
+        scrollListaFaturas.setBounds(52,286,250,200);
         
+        contentPane.add(ordenaValorDecres);
+        contentPane.add(ordenaValor);
+        contentPane.add(button2);
         contentPane.add(faturasLancadas);
         contentPane.add(scrollfaturaslancadas);
         contentPane.add(scrollListaFaturas);
@@ -545,17 +600,29 @@ public class GUI_FichaCliente extends JFrame {
         Botao item = (Botao) list2.getModel().getElementAt(index);
         item.getButton().doClick();
     }
-     /// USADA PARA GUARDAR AS FATURAS QUE A EMPRESA LANÇA (HELP ME FILIPE)
+     /// USADA PARA GUARDAR AS FATURAS QUE A EMPRESA LANÇA 
     private void clickButtonAt3(Point point){
         int index =  listfaturasLancadas.locationToIndex(point);
         Botao item = (Botao) listfaturasLancadas.getModel().getElementAt(index);
         item.getButton().doClick();
     }
-
+            
     private void onCriarFaturaButtonClicked (MouseEvent evt) {          
          GUI_CriaFatura criafaturagui = new GUI_CriaFatura(ficha,gestorfichas,gestorfaturas,listModel);
     }
+            ///////
+    private void onOrdenarDataButtonClicked (MouseEvent evt) {          
+         gestorfaturas.OrdFaturasData(ficha.getnif());
+    }
     
+    private void onOrdenarValorButtonClicked (MouseEvent evt) {          
+         gestorfaturas.OrdFaturasValor(ficha.getnif());
+    }
+    
+    private void onOrdenarValorDecresButtonClicked (MouseEvent evt) {     
+         gestorfaturas.OrdEmpresaFaturasValorDecrecente(ficha.getnif());
+    }
+            ///////
     private void onlogOutButtonClicked (MouseEvent evt) {      
          GUI_Login login = new GUI_Login();
          login.setgestorfichas(gestorfichas);
