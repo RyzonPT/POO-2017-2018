@@ -10,6 +10,7 @@ public class FichaCliente implements Serializable
    private String morada;
    private String password;
    private int fichaType;
+   private double moneyspent;
    
    public FichaCliente(){
        this.nif = 0;
@@ -23,9 +24,10 @@ public class FichaCliente implements Serializable
        else{ 
        this.fichaType = 0;
        }
+       moneyspent=0;
     }
     
-    public FichaCliente(int nif, String email, String nome, String morada, String password){
+    public FichaCliente(int nif, String email, String nome, String morada, String password,double moneyspent){
        this.nif = nif;
        this.email = email;
        this.nome = nome;
@@ -38,6 +40,7 @@ public class FichaCliente implements Serializable
        else{ 
        this.fichaType = 0;
        }
+       this.moneyspent +=moneyspent;
     }
     
     public FichaCliente(FichaCliente c){
@@ -47,13 +50,16 @@ public class FichaCliente implements Serializable
         this.morada = c.getMorada();
         this.password = c.getPassword();
         this.fichaType = c.getfichaType();
+        this.moneyspent =c.getmoneyspent();
     }
     
     public int getnif(){
         return this.nif;
     }
     
-
+    public double getmoneyspent(){
+        return this.moneyspent;
+    }
     
     public int getfichaType(){
         return this.fichaType;
@@ -81,6 +87,10 @@ public class FichaCliente implements Serializable
     
     public void setnif(int numeroFiscal){
         this.nif = numeroFiscal;
+    }
+    
+    public void setmoneyspent(double moneyspent){
+        this.moneyspent=moneyspent;
     }
     
     public void setfichaType(int fichatype){
@@ -111,6 +121,8 @@ public class FichaCliente implements Serializable
         sb.append("nome: ").append(this.nome);
         sb.append("Morada: ").append(this.morada);
         sb.append("Password: ").append(this.password);
+        sb.append("Tipo de Ficha:").append(this.fichaType);
+        sb.append("Total de Dinheiro Gasto: ").append(this.moneyspent);
         return sb.toString();
     }
     
@@ -126,6 +138,8 @@ public class FichaCliente implements Serializable
                email.equals(a.getEmail()) &&
                nome.equals(a.getNome()) &&
                morada.equals(a.getMorada()) &&
-               password.equals(a.getPassword());
+               password.equals(a.getPassword()) &&
+               fichaType==a.getfichaType() &&
+               moneyspent==a.getmoneyspent();
     }
 }

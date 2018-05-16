@@ -12,6 +12,10 @@ import java.io.ObjectInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 public class GestaoFaturas implements Serializable
 {
@@ -78,6 +82,7 @@ public class GestaoFaturas implements Serializable
     public Map<Integer,Fatura> getFaturasUser(Integer nifCliente){
         return this.mapfaturas.values().stream().collect(Collectors.toMap((e)->e.getnifCliente(),(e)->e.clone()));
     }
+    
     public GestaoFaturas clone(){
         return new GestaoFaturas(this);
     }
@@ -98,7 +103,19 @@ public class GestaoFaturas implements Serializable
                 if(h.getnifEmpresa()==nif){
                     aux.add(h.clone());
                 }
+        }
+        return aux;
+     }
+     
+    public List<Fatura> intervalofaturas(Date dataf, Date datai){
+        List<Fatura> aux = new ArrayList<>();
+        for(Fatura h: getMapFaturas().values()){
+            Date date = Date.from(h.getData().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            if(date.before(dataf) && date.after(datai)){
+                aux.add(h.clone());
             }
-            return aux;
-}
+        }
+        return aux;
+    }
+    
 }

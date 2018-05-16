@@ -12,8 +12,8 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
        this.deducaoFiscal = 0;
     }
     
-    public EntidadeEmpresas(int nif,String email, String nome, String morada, String password, ArrayList<String> actividadeEconomica, int deducaoFiscal){
-       super(nif,email,nome,morada,password);
+    public EntidadeEmpresas(int nif,String email, String nome, String morada, String password, ArrayList<String> actividadeEconomica, int deducaoFiscal,double moneyspent){
+       super(nif,email,nome,morada,password,moneyspent);
        this.actividadeEconomica = actividadeEconomica;
        this.deducaoFiscal = deducaoFiscal;
        FichaCliente ola = (FichaCliente) this;
