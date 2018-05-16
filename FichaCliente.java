@@ -65,6 +65,10 @@ public class FichaCliente implements Serializable
         return this.fichaType;
     }
     
+    public int getfichaType(FichaCliente a){
+        return a.fichaType;
+    }
+    
     public String getEmail(){
         return this.email;
     }

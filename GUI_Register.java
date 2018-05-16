@@ -38,12 +38,14 @@ public class GUI_Register extends JFrame {
     private JLabel Title;
     private JTextField CodigosAtividades;
     private JTextField NumerosFiscais;
+    private JTextField ProprioNIF;
     private JLabel label3;
     private JLabel labelEmail;
     private JLabel labelMorada;
     private JLabel labelNome;
     private JLabel labelNumeroDeDependentes;
     private JLabel labelNumerosFiscais;
+    private JLabel labelProprioNif;
     private JLabel labelPassword;
     private JButton AdicionarButtonNifs;
     private JButton AdicionarButtonCodigos;
@@ -54,7 +56,8 @@ public class GUI_Register extends JFrame {
     private JList list1;
     private JList list2;
     private JList list3;
-    private int nif;
+    private String nif;
+    private int proprionif;
     private int codigoAtividade;
     private String atividadeEconomica;
     private boolean visible;
@@ -89,14 +92,18 @@ public class GUI_Register extends JFrame {
     private EntidadePrivada fichaPrivada;
     private EntidadeEmpresas fichaEmpresa;
     private ArrayList<Integer> nifs;
+    private ArrayList<Integer> codigoatividades;
     private ArrayList<String> atividades;
 
     //Constructor 
     public GUI_Register(){
-        nif = numerodedependentes=codigoAtividade=1221; password=morada=email=nome=atividadeEconomica="";
+        proprionif=numerodedependentes=codigoAtividade=-1; nif="";password=morada=email=nome=atividadeEconomica="";
         visible = false; flag = false;
         fichaEmpresa = new EntidadeEmpresas();
         fichaPrivada = new EntidadePrivada();
+        nifs = new ArrayList<Integer>();
+        codigoatividades = new ArrayList<Integer>();
+        atividades = new ArrayList<String>();
         
         this.setTitle("GUI_project");
         this.setSize(499,480);
@@ -237,6 +244,20 @@ public class GUI_Register extends JFrame {
             }
         });
         
+        ProprioNIF = new JTextField();
+        ProprioNIF.setBounds(497,88,90,35);
+        ProprioNIF.setBackground(new Color(214,217,223));
+        ProprioNIF.setForeground(new Color(0,0,0));
+        ProprioNIF.setEnabled(true);
+        ProprioNIF.setFont(new Font("sansserif",0,12));
+        ProprioNIF.setVisible(visible);
+        
+        ProprioNIF.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt){
+                onKeyReleasedProprioNif(evt);
+            }
+        });
+        
         removerbotaoNifs = new JButton();
         removerbotaoNifs.setBounds(460,410,90,35);
         removerbotaoNifs.setBackground(new Color(214,217,223));
@@ -319,6 +340,15 @@ public class GUI_Register extends JFrame {
         labelNumerosFiscais.setFont(new Font("sansserif",0,12));
         labelNumerosFiscais.setText("Numeros Fiscais");
         labelNumerosFiscais.setVisible(visible);
+        
+        labelProprioNif = new JLabel();
+        labelProprioNif.setBounds(592,88,100,35);
+        labelProprioNif.setBackground(new Color(214,217,223));
+        labelProprioNif.setForeground(new Color(0,0,0));
+        labelProprioNif.setEnabled(true);
+        labelProprioNif.setFont(new Font("sansserif",0,12));
+        labelProprioNif.setText("Proprio Nif");
+        labelProprioNif.setVisible(visible);
 
         labelPassword = new JLabel();
         labelPassword.setBounds(129,177,60,35);
@@ -640,12 +670,14 @@ public class GUI_Register extends JFrame {
         contentPane.add(Title);
         contentPane.add(CodigosAtividades);
         contentPane.add(NumerosFiscais);
+        contentPane.add(ProprioNIF);
         contentPane.add(label3);
         contentPane.add(labelEmail);
         contentPane.add(labelMorada);
         contentPane.add(labelNome);
         contentPane.add(labelNumeroDeDependentes);
         contentPane.add(labelNumerosFiscais);
+        contentPane.add(labelProprioNif);
         contentPane.add(labelPassword);
         contentPane.add(AdicionarButtonNifs);
         contentPane.add(AdicionarButtonCodigos);
@@ -695,6 +727,7 @@ public class GUI_Register extends JFrame {
             Title.setVisible(visible);
             CodigosAtividades.setVisible(visible);
             NumerosFiscais.setVisible(visible);
+            ProprioNIF.setVisible(visible);
             removerbotaoNifs.setVisible(visible);
             removerbotaoCodigos.setVisible(visible);
             removerbotaoAtividadeEconomica.setVisible(!visible);
@@ -704,6 +737,7 @@ public class GUI_Register extends JFrame {
             labelNome.setVisible(visible);
             labelNumeroDeDependentes.setVisible(visible);
             labelNumerosFiscais.setVisible(visible);
+            labelProprioNif.setVisible(visible);
             labelPassword.setVisible(visible);
             AdicionarButtonNifs.setVisible(visible);
             AdicionarButtonCodigos.setVisible(visible);
@@ -715,23 +749,25 @@ public class GUI_Register extends JFrame {
     }
     
     private void OnClickedRegistar (MouseEvent evt){
-        if(nif==1221 || numerodedependentes==1221 || codigoAtividade==1221 || morada=="" || email=="" || nome=="" || password=="" ){
+        if(nif=="" || proprionif==-1 || numerodedependentes==-1 || codigoAtividade==-1 || morada=="" || email=="" || nome=="" || password=="" ){
             infoBox("Por favor preencha todos os campos", "Impossível registar");
         }
         else{
-            if(gestorfichas.existeFicha(nif)){ //tem de ser diferente
-                infoBox("Já existe um registo com este Nif", "Impossível registar");
+            if(gestorfichas.existeFicha(proprionif)){
+                infoBox("Já existe um registo com este proprio Nif", "Impossível registar");
             }
             else{
                 fichaPrivada.setPassword(password);
+                fichaPrivada.setnif(proprionif);
+                fichaPrivada.setfichaType(0);
                 fichaPrivada.setNumerosFiscais(nifs);
-                //fichaPrivada.setCodigosAtividades(codigoAtividade);
+                fichaPrivada.setCodigosAtividades(codigoatividades);
                 fichaPrivada.setEmail(email);
                 fichaPrivada.setMorada(morada);
                 fichaPrivada.setNome(nome);
                 fichaPrivada.setAgregadoFamiliar(numerodedependentes);
                 gestorfichas.addFicha(fichaPrivada);
-                if(gestorfichas.existeFicha(nif)){  //falta fazer a existeFichas para mais do que um nif
+                if(gestorfichas.existeFicha(proprionif)){
                     infoBox("Registo com sucesso!", "Registo com sucesso");
                     HallentradaGUI hallentrada = new HallentradaGUI();
                     hallentrada.setgestorfichas(gestorfichas);
@@ -742,22 +778,23 @@ public class GUI_Register extends JFrame {
     }
     
     private void OnClickedRegistarE (MouseEvent evt){
-        if(nif==123321 || morada=="" || email=="" || nome=="" || atividadeEconomica=="" || password=="" ){
+        if(nif=="" || morada=="" || email=="" || nome=="" || atividadeEconomica=="" || password=="" ){
             infoBox("Por favor preencha todos os campos", "Impossível registar");
         }
         else {
-            if(gestorfichas.existeFicha(nif)){
+            if(gestorfichas.existeFicha(Integer.parseInt(nif))){
                 infoBox("Já existe um registo com este Nif", "Impossível registar");
             }
             else{
                 fichaEmpresa.setPassword(password);
-                fichaEmpresa.setnif(nif);
+                fichaEmpresa.setnif(Integer.parseInt(nif));
+                fichaEmpresa.setfichaType(1);
                 fichaEmpresa.setActividadeEconomica(atividades);
                 fichaEmpresa.setEmail(email);
                 fichaEmpresa.setMorada(morada);
                 fichaEmpresa.setNome(nome);
                 gestorfichas.addFicha(fichaEmpresa);
-                if(gestorfichas.existeFicha(nif)){
+                if(gestorfichas.existeFicha(Integer.parseInt(nif))){
                     infoBox("Registo com sucesso!", "Registo com sucesso");
                     HallentradaGUI hallentrada = new HallentradaGUI();
                     hallentrada.setgestorfichas(gestorfichas);
@@ -774,38 +811,67 @@ public class GUI_Register extends JFrame {
     
     //Method mouseClicked for AdicionarButton
     private void NifAdded (MouseEvent evt) {
-        listModel.addElement(nif);
-        nifs.add(nif);
-        NumerosFiscais.setText("");
+        if(!gestorfichas.existeFicha(Integer.parseInt(nif))){
+            infoBox("Não existe registo com o Nif que adicionou", "Impossível adicionar Nif");
+            NumerosFiscais.setText("");
+        }
+        else{
+            if(listModel.contains(nif)){
+                infoBox("Já adicionou esse Nif", "Impossível adicionar Nif");
+                NumerosFiscais.setText("");
+            }
+            else{ if (fichaPrivada.getfichaType(gestorfichas.getFicha(Integer.parseInt(nif)))==1){
+                infoBox("Este Nif não corresponde a uma entidade pessoal", "Impossível adicionar Nif");
+                NumerosFiscais.setText("");
+            }
+            else{
+                NumerosFiscais.setText("");
+                listModel.addElement(nif);
+                nifs.add(Integer.parseInt(nif));
+            }
+        }}
     }
     
-    private void CodigoAdded (MouseEvent evt) {
-        listModel2.addElement(codigoAtividade);
-        CodigosAtividades.setText("");
+    private void CodigoAdded (MouseEvent evt) { // *1 verificar se o codigoatividade corresponde aos pre defenidos
+        if(listModel2.contains(codigoAtividade)){
+            infoBox("Já adicionou este codigo", "Impossível adicionar codigo");
+            CodigosAtividades.setText("");
+        }
+        else{
+            CodigosAtividades.setText("");
+            listModel2.addElement(codigoAtividade);
+            codigoatividades.add(codigoAtividade);
+        }
     }
     
     private void AtividadeAdded (MouseEvent evt) {
-        listModel3.addElement(atividadeEconomica);
-        atividades.add(atividadeEconomica);
-        RAtividadeEconomica.setText("");
+        if(listModel3.contains(atividadeEconomica)){
+            infoBox("Já adicionou esta atividade", "Impossível adicionar atividade");
+            RAtividadeEconomica.setText("");
+        }
+        else{
+            RAtividadeEconomica.setText("");
+            listModel3.addElement(atividadeEconomica);
+            atividades.add(atividadeEconomica);
+        }
     }
     
     private void  NifRemoved (MouseEvent evt) {
         int selectedIndex = list1.getSelectedIndex();
-        int selected = Integer.parseInt(list1.getSelectedValue().toString());
-        nifs.remove(selected);
         if (selectedIndex != -1) {
             listModel.remove(selectedIndex);
         }
+        int selected = Integer.parseInt(list1.getSelectedValue().toString());
+        nifs.remove(selected);
     }
     
     private void  CodigoRemoved (MouseEvent evt) {
         int selectedIndex = list2.getSelectedIndex();
-        int selected = Integer.parseInt(list2.getSelectedValue().toString());
-        atividades.remove(selected);
         if (selectedIndex != -1) {
             listModel2.remove(selectedIndex);
         }
+        int selected = Integer.parseInt(list2.getSelectedValue().toString());
+        codigoatividades.remove(selected);
     }
     
     private void  AtividadeRemoved (MouseEvent evt) {
@@ -813,6 +879,8 @@ public class GUI_Register extends JFrame {
         if (selectedIndex != -1) {
             listModel3.remove(selectedIndex);
         }
+        String selected = list3.getSelectedValue().toString();
+        codigoatividades.remove(selected);
     }
     
     private void onKeyReleasedMoradaE (KeyEvent evt) {
@@ -824,7 +892,7 @@ public class GUI_Register extends JFrame {
     }
     
     private void onKeyReleasedNifE (KeyEvent evt) {
-            nif = Integer.parseInt(RNifE.getText());
+            nif = RNifE.getText();
     }
     
     private void onKeyReleasedRNomeE (KeyEvent evt) {
@@ -840,7 +908,11 @@ public class GUI_Register extends JFrame {
     }
     
     private void onKeyReleasedNif (KeyEvent evt) {
-            nif = Integer.parseInt(NumerosFiscais.getText());
+            nif = NumerosFiscais.getText();
+    }
+    
+    private void onKeyReleasedProprioNif (KeyEvent evt) {
+            proprionif = Integer.parseInt(ProprioNIF.getText());
     }
     
     private void onKeyReleasedCodigosAtividades (KeyEvent evt) {
