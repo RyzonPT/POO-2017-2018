@@ -820,7 +820,7 @@ public class GUI_Register extends JFrame {
                 infoBox("Já adicionou esse Nif", "Impossível adicionar Nif");
                 NumerosFiscais.setText("");
             }
-            else{ if (fichaPrivada.getfichaType(gestorfichas.getFicha(Integer.parseInt(nif)))==1){
+            else{ if (fichaPrivada.getfichaType()==1){
                 infoBox("Este Nif não corresponde a uma entidade pessoal", "Impossível adicionar Nif");
                 NumerosFiscais.setText("");
             }
