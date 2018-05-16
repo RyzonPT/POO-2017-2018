@@ -758,6 +758,7 @@ public class GUI_Register extends JFrame {
             }
             else{
                 fichaPrivada.setPassword(password);
+                fichaPrivada.setCoeficienteFiscal(0);
                 fichaPrivada.setnif(proprionif);
                 fichaPrivada.setfichaType(0);
                 fichaPrivada.setNumerosFiscais(nifs);
@@ -787,6 +788,7 @@ public class GUI_Register extends JFrame {
             }
             else{
                 fichaEmpresa.setPassword(password);
+                fichaEmpresa.setdeducaoFiscal(0);
                 fichaEmpresa.setnif(Integer.parseInt(nif));
                 fichaEmpresa.setfichaType(1);
                 fichaEmpresa.setActividadeEconomica(atividades);
@@ -881,6 +883,10 @@ public class GUI_Register extends JFrame {
         }
         String selected = list3.getSelectedValue().toString();
         codigoatividades.remove(selected);
+    }
+    
+    public void setgestorfichas(GestaoFichas a){
+        gestorfichas = a;
     }
     
     private void onKeyReleasedMoradaE (KeyEvent evt) {
