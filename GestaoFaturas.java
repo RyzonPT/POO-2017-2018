@@ -42,12 +42,11 @@ public class GestaoFaturas implements Serializable
     
     public void addFaturas(Fatura a){
         a.setfaturaID(this.key);
-        this.mapfaturas.put(a.getfaturaID(),a); 
+        this.mapfaturas.put(a.getfaturaID(),a.clone()); 
         key+=1;
         try{
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("gestorfaturas.txt"));
             out.writeObject(this);
-            System.out.println("GRAVEI CARALHO");
         }
         catch (Exception e)
         {

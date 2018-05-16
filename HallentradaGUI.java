@@ -19,8 +19,8 @@ public class HallentradaGUI extends JFrame {
     private JButton Forgotten;
     private JButton Login;
     private JButton Register;
-    public GestaoFichas gestorfichas;
-    public GestaoFaturas gestorfaturas;
+    private GestaoFichas gestorfichas;
+    private GestaoFaturas gestorfaturas;
     
     //Constructor 
     public HallentradaGUI(){
@@ -83,7 +83,7 @@ public class HallentradaGUI extends JFrame {
                     gotoregister(evt);
                 }
             });
-	
+    
         //adding components to contentPane panel
         contentPane.add(Forgotten);
         contentPane.add(Login);
@@ -100,17 +100,21 @@ public class HallentradaGUI extends JFrame {
     public void setgestorfichas(GestaoFichas a){
         gestorfichas = a;
     }
+    
+    public void setgestorfaturas(GestaoFaturas a){
+        gestorfaturas=a;
+    }
 
     //Method mouseClicked for Forgotten
     private void forgottenPass (MouseEvent evt) {
-
+        GUI_RecuperacaoPass recupera = new GUI_RecuperacaoPass(gestorfichas);
     }
 
     //Method mouseClicked for Login
     private void gotologin (MouseEvent evt) {
         GUI_Login login = new GUI_Login();
-        login.gestorfichas = gestorfichas;
-        login.gestorfaturas = gestorfaturas;
+        login.setgestorfichas(gestorfichas);
+        login.setgestorfaturas(gestorfaturas);
         login.setVisible(true);
         dispose();
     }

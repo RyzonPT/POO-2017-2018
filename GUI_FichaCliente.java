@@ -558,8 +558,8 @@ public class GUI_FichaCliente extends JFrame {
     
     private void onlogOutButtonClicked (MouseEvent evt) {      
          GUI_Login login = new GUI_Login();
-         login.gestorfichas = gestorfichas;
-         login.gestorfaturas = gestorfaturas;
+         login.setgestorfichas(gestorfichas);
+         login.setgestorfaturas(gestorfaturas);
          login.setVisible(true);
          dispose();
     }
@@ -568,6 +568,7 @@ public class GUI_FichaCliente extends JFrame {
     public void setgestorfichas(GestaoFichas a){
         gestorfichas = a;
     }
+    
     //method for generate menu
     public void generateMenu(){
         menuBar = new JMenuBar();

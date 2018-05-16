@@ -33,7 +33,7 @@ public class GestaoFichas implements Serializable
     }
     
     public void addFicha (FichaCliente a){
-        this.fichas.put(a.getnif(),a);
+        this.fichas.put(a.getnif(),a.clone());
         try{
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("gestorfichas.txt"));
             out.writeObject(this);
@@ -65,7 +65,7 @@ public class GestaoFichas implements Serializable
     }
     
     public FichaCliente getFicha(Integer nif){
-        return (this.fichas.get(nif));
+        return fichas.get(nif).clone();
     }
     
     public String toString() {

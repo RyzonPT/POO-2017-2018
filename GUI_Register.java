@@ -734,7 +734,7 @@ public class GUI_Register extends JFrame {
                 if(gestorfichas.existeFicha(nif)){  //falta fazer a existeFichas para mais do que um nif
                     infoBox("Registo com sucesso!", "Registo com sucesso");
                     HallentradaGUI hallentrada = new HallentradaGUI();
-                    hallentrada.gestorfichas = gestorfichas;
+                    hallentrada.setgestorfichas(gestorfichas);
                     dispose();
                 }
             }
@@ -760,7 +760,7 @@ public class GUI_Register extends JFrame {
                 if(gestorfichas.existeFicha(nif)){
                     infoBox("Registo com sucesso!", "Registo com sucesso");
                     HallentradaGUI hallentrada = new HallentradaGUI();
-                    hallentrada.gestorfichas = gestorfichas;
+                    hallentrada.setgestorfichas(gestorfichas);
                     dispose();
                 }
             }
@@ -900,7 +900,7 @@ public class GUI_Register extends JFrame {
         System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new GUI_project();
+                new GUI_Register();
             }
         });
     }

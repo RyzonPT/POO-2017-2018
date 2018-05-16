@@ -24,7 +24,7 @@ public class FichaCliente implements Serializable
        else{ 
        this.fichaType = 0;
        }
-       
+       moneyspent=0;
     }
     
     public FichaCliente(int nif, String email, String nome, String morada, String password){
@@ -50,7 +50,7 @@ public class FichaCliente implements Serializable
         this.morada = c.getMorada();
         this.password = c.getPassword();
         this.fichaType = c.getfichaType();
-        this.moneyspent =c.getmoneyspent();
+
     }
     
     public int getnif(){

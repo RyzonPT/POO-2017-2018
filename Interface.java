@@ -41,23 +41,25 @@ public class Interface
             
             
             ArrayList<Integer> lolis3 = new ArrayList<Integer>();
-                /*
-                ObjectInputStream infaturas = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
+                
+               /* ObjectInputStream infaturas = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
                 GestaoFaturas gestorfaturas = (GestaoFaturas) infaturas.readObject();
                 ObjectInputStream infichas = new ObjectInputStream(new FileInputStream("gestorfichas.txt"));
-                GestaoFichas gestorfichas = (GestaoFichas) infichas.readObject();
-                */
+                GestaoFichas gestorfichas = (GestaoFichas) infichas.readObject();*/
+                
             ArrayList<Integer> lolis4 = new ArrayList<Integer>();
                 lolis4.add(2);
 
-                        
+
             HallentradaGUI hall = new HallentradaGUI();
             
             ArrayList<Integer> olas= new ArrayList<Integer>();
             GestaoFichas gestorfichas = new GestaoFichas();
             GestaoFaturas gestorfaturas = new GestaoFaturas();
             
-
+                             EntidadePrivada fichaPrivada7 = new EntidadePrivada(7,"Filipe-Cunha1@hotmail.com","Filipe","morada","tanos",3,lolis3,0,lolis);
+            gestorfichas.addFicha(fichaPrivada7);
+            
             
             //0,"email","nome","morada","",3,ola,434,ola
             Fatura ola = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste2, 0, 0, null, null, null, 0);
@@ -115,14 +117,14 @@ public class Interface
             
             
             
-           EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1,"ratuinho@hotmail.com", "PedreiroLDA", "SantoTiso","12345", a, 0);
+           EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1,"andrepx1998@gmail.com", "NERDLDA", "BRAGA","12345", a, 0);
            gestorfichas.addFicha(fichaEmpresa0);
             /*
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("gestorfichas.txt"));
             out.writeObject(gestorfichas);
             */
-           hall.gestorfichas = gestorfichas;
-           hall.gestorfaturas = gestorfaturas;
+           hall.setgestorfichas(gestorfichas);
+           hall.setgestorfaturas(gestorfaturas); 
             //hall.setgestorfichas(gestorfichas);
             EntidadePrivada fichatest = (EntidadePrivada) gestorfichas.getFicha(2);
             System.out.println("fodasse"+gestorfaturas.getmyfaturas(0).size());

@@ -24,8 +24,8 @@ public class GUI_Login extends JFrame {
     private JLabel label2;
     private int nif;
     private String password ="";
-    public GestaoFichas gestorfichas;
-    public GestaoFaturas gestorfaturas;
+    private GestaoFichas gestorfichas;
+    private GestaoFaturas gestorfaturas;
     private String save = "";
 
     //Constructor 
@@ -154,6 +154,13 @@ public static void infoBox(String infoMessage, String titleBar)
             }
     }
 
+    public void setgestorfichas(GestaoFichas a){
+        gestorfichas = a;
+    }
+    
+    public void setgestorfaturas(GestaoFaturas a){
+        gestorfaturas = a;
+    }
     //method for generate menu
     public void generateMenu(){
         menuBar = new JMenuBar();
