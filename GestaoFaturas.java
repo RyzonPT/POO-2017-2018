@@ -4,6 +4,7 @@ import java.util.stream.Stream;
 import java.util.stream.Collectors;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.*;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -106,15 +107,33 @@ public class GestaoFaturas implements Serializable
         return aux;
      }
      
-    public List<Fatura> intervalofaturas(Date dataf, Date datai){
-        List<Fatura> aux = new ArrayList<>();
-        for(Fatura h: getMapFaturas().values()){
+    public List<Fatura> OrdFaturasData(int nif){
+        List<Fatura> aux = new ArrayList<Fatura>(getmyfaturas(nif));
+        aux.sort((o1, o2) -> o1.getData().compareTo(o2.getData()));
+        return aux;
+    }
+    
+        public List<Fatura> OrdFaturasValor(int nif){
+        List<Fatura> aux = new ArrayList<Fatura>(getmyfaturas(nif));
+        aux.sort(Comparator.comparingDouble(Fatura::getvalortotal));
+        return aux;
+    }
+    
+    public List<Fatura> intervalofaturas(Date dataf, Date datai,int nif){
+    List<Fatura> aux = new ArrayList<Fatura>(getmadefaturas(nif));
+            for(Fatura h: getMapFaturas().values()){
             Date date = Date.from(h.getData().atStartOfDay(ZoneId.systemDefault()).toInstant());
             if(date.before(dataf) && date.after(datai)){
                 aux.add(h.clone());
             }
         }
+        aux.sort(Comparator.comparingInt(Fatura::getnifCliente));
         return aux;
     }
     
+    public List<Fatura> OrdEmpresaFaturasValorDecrecente(int nif){
+        List<Fatura> aux = new ArrayList<Fatura>(getmadefaturas(nif));
+        aux.sort(Comparator.comparingDouble(Fatura::getvalortotal));
+        return aux;
+    }
 }
