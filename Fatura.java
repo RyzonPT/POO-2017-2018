@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.time.format.DateTimeFormatter;
 import javafx.util.Pair;
 import java.io.Serializable;
+import java.util.Locale;
 public class Fatura implements Serializable
 {
     /**
@@ -32,6 +33,7 @@ public class Fatura implements Serializable
    private String emailCliente;
    private int nifCliente;
    private String ativEconEscolhida;
+   private GestaoAtividadeEconomica ati;
    
    public Fatura(){
        faturaID = 0;
@@ -51,8 +53,7 @@ public class Fatura implements Serializable
        ativEconEscolhida="n/a";
     }
     
-    public Fatura(String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, ArrayList<Triple> produto, ArrayList<String> actividadeEconomica, 
-    double valor, double deducao, String nomeCliente, String moradaCliente, String emailCliente, int nifCliente){
+    public Fatura(String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, ArrayList<Triple> produto, ArrayList<String> actividadeEconomica, double deducao, String nomeCliente, String moradaCliente, String emailCliente, int nifCliente){
        this.nomeEmpresa = nomeEmpresa;
        this.moradaEmpresa = moradaEmpresa;
        this.emailEmpresa = emailEmpresa;
@@ -60,7 +61,7 @@ public class Fatura implements Serializable
        this.data = LocalDate.now();
        this.produto = produto;
        this.actividadeEconomica = actividadeEconomica;
-       this.valortotal = valor;
+       this.valortotal = calculaValor(produto);
        this.deducao = deducao;
        this.nomeCliente = nomeCliente;
        this.moradaCliente = moradaCliente;
@@ -242,5 +243,18 @@ public class Fatura implements Serializable
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/LLLL/yyyy");
         String formattedString = data.format(formatter);
         return formattedString;
+    }
+    
+    public double calculaValor(ArrayList<Triple> produto){
+        for(Triple h : produto){
+            valortotal += h.getquantidade() * h.getprecounitario();
+        }
+        return valortotal;
+      }
+      
+    public double calculoDeducao( double valortotal,GestaoAtividadeEconomica eco){
+        
+        
+        return deducao;
     }
 }

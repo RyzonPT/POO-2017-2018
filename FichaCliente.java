@@ -40,7 +40,7 @@ public class FichaCliente implements Serializable
        else{ 
        this.fichaType = 0;
        }
-       this.moneyspent +=moneyspent;
+       moneyspent=0;
     }
     
     public FichaCliente(FichaCliente c){
@@ -50,7 +50,7 @@ public class FichaCliente implements Serializable
         this.morada = c.getMorada();
         this.password = c.getPassword();
         this.fichaType = c.getfichaType();
-
+        this.moneyspent =c.getmoneyspent();
     }
     
     public int getnif(){
@@ -141,5 +141,9 @@ public class FichaCliente implements Serializable
                password.equals(a.getPassword()) &&
                fichaType==a.getfichaType() &&
                moneyspent==a.getmoneyspent();
+    }
+    
+    public double adicionaDinheiroGasto(double valor){
+        return moneyspent= moneyspent + valor;
     }
 }

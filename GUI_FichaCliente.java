@@ -69,6 +69,9 @@ public class GUI_FichaCliente extends JFrame {
     private String nifCliente;
     private String datai;
     private String dataf;
+    private double moneyspent;
+    private JLabel moneyspentText;
+    private JLabel  moneyspentgetText;
 
     //Constructor 
     public GUI_FichaCliente(FichaCliente fichas,GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
@@ -104,6 +107,30 @@ public class GUI_FichaCliente extends JFrame {
         EmailText.setFont(new Font("sansserif",0,12));
         EmailText.setText(fichas.getEmail());
         EmailText.setVisible(true);
+        
+        ///////
+        
+        
+        moneyspentText = new JLabel();
+        moneyspentText.setBounds(458,200,110,35);
+        moneyspentText.setBackground(new Color(214,217,223));
+        moneyspentText.setForeground(new Color(0,0,0));
+        moneyspentText.setEnabled(true);
+        moneyspentText.setFont(new Font("sansserif",0,12));
+        moneyspentText.setText("Valor total Gasto:");
+        moneyspentText.setVisible(true);
+        
+        moneyspentgetText = new JLabel();
+        moneyspentgetText.setBounds(560,200,90,35);
+        moneyspentgetText.setBackground(new Color(214,217,223));
+        moneyspentgetText.setForeground(new Color(0,0,0));
+        moneyspentgetText.setEnabled(true);
+        moneyspentgetText.setFont(new Font("sansserif",0,12));
+        moneyspentgetText.setText(String.valueOf(ficha.getmoneyspent()));
+        moneyspentgetText.setVisible(true);
+
+        
+        ////////////////////
 
 
         label4 = new JLabel();
@@ -311,7 +338,7 @@ public class GUI_FichaCliente extends JFrame {
         });
         
         DeducaoqueficienteFiscalText = new JLabel();
-        DeducaoqueficienteFiscalText.setBounds(500 ,130,90,35);
+        DeducaoqueficienteFiscalText.setBounds(558 ,130,90,35);
         DeducaoqueficienteFiscalText.setBackground(new Color(214,217,223));
         DeducaoqueficienteFiscalText.setForeground(new Color(0,0,0));
         DeducaoqueficienteFiscalText.setEnabled(true);
@@ -360,7 +387,7 @@ public class GUI_FichaCliente extends JFrame {
         scrollfaturaslancadas.setBounds(52,540,250,200);
         
         defaultdeducaotext = new JLabel();
-        defaultdeducaotext.setBounds(400,130,130,35); 
+        defaultdeducaotext.setBounds(458,130,130,35); 
         defaultdeducaotext.setBackground(new Color(214,217,223));
         defaultdeducaotext.setForeground(new Color(0,0,0));
         defaultdeducaotext.setEnabled(true);
@@ -606,7 +633,8 @@ public class GUI_FichaCliente extends JFrame {
        
         //adding components to contentPane panel
 
-        
+        contentPane.add(moneyspentText);
+        contentPane.add(moneyspentgetText);
         contentPane.add(DeducaoqueficienteFiscalText);
         contentPane.add(EmailText);
         contentPane.add(NameText);

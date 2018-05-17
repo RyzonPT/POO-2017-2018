@@ -7,7 +7,6 @@ public class EntidadePrivada extends FichaCliente implements Serializable
     private ArrayList<Integer> numerosFiscais;
     private int coeficienteFiscal;
     private ArrayList<Integer> codigosAtividades;
-    private int numerodedependentes;
     public EntidadePrivada()
     {
         super();
