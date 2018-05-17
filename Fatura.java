@@ -253,8 +253,13 @@ public class Fatura implements Serializable
       }
       
     public double calculoDeducao(double valortotal,GestaoAtividadeEconomica eco){
-        
-        
+        if(eco.getPairSaude()!=null)deducao= valortotal * (double)eco.getPairSaude().getKey();
+        else if(eco.getPairEducacao()!=null)deducao= valortotal * (double)eco.getPairEducacao().getKey();
+            else if (eco.getPairHabitacao()!=null)deducao= valortotal * (double)eco.getPairHabitacao().getKey();
+                else if (eco.getPairLares()!=null)deducao= valortotal * (double)eco.getPairLares().getKey();
+                    else if(eco.getPairReparacaoAutomovel()!=null)deducao= valortotal * (double)eco.getPairReparacaoAutomovel().getKey();
+                         else if(eco.getPairRestauracaoAlojamento()!=null)deducao= valortotal * (double)eco.getPairRestauracaoAlojamento().getKey();
         return deducao;
-    }
+     }
+    
 }
