@@ -84,12 +84,12 @@ public class Interface
             gestorfaturas.addFaturas(dam8);
                                     Fatura dam9 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste2, 0, 0, null, null, null, 100);
             gestorfaturas.addFaturas(dam9);
-                                    Fatura dam10 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, 0, null, null, null, 100);
+                                    Fatura dam10 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 1 ,lolis2,  teste, 50, 0, null, null, null, 100);
             gestorfaturas.addFaturas(dam10);
-            Fatura dam11 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, 0, null, null, null, 2);
+            Fatura dam11 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 1 ,lolis2,  teste, 22, 0, null, null, null, 2);
             gestorfaturas.addFaturas(dam11);
             
-                        Fatura dam12 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 1 ,lolis2,  teste, 0, 0, null, null, null, 2);
+                        Fatura dam12 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 1 ,lolis2,  teste, 200, 0, null, null, null, 2);
             gestorfaturas.addFaturas(dam12);
             
             

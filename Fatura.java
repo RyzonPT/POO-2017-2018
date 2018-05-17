@@ -239,7 +239,7 @@ public class Fatura implements Serializable
     }
     
     public String getdatastring(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/LLLL/yyyy");
         String formattedString = data.format(formatter);
         return formattedString;
     }

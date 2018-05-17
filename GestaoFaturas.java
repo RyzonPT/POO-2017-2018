@@ -2,7 +2,6 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.*;
 import java.util.ArrayList;
@@ -14,8 +13,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 public class GestaoFaturas implements Serializable
@@ -108,32 +105,32 @@ public class GestaoFaturas implements Serializable
      }
      
     public List<Fatura> OrdFaturasData(int nif){
-        List<Fatura> aux = new ArrayList<Fatura>(getmyfaturas(nif));
+        List<Fatura> aux = new ArrayList<Fatura>(getmadefaturas(nif));
         aux.sort((o1, o2) -> o1.getData().compareTo(o2.getData()));
         return aux;
     }
     
-        public List<Fatura> OrdFaturasValor(int nif){
-        List<Fatura> aux = new ArrayList<Fatura>(getmyfaturas(nif));
+        public List<Fatura> OrdFaturasValorCrescente(int nif){
+        List<Fatura> aux = new ArrayList<Fatura>(getmadefaturas(nif));
         aux.sort(Comparator.comparingDouble(Fatura::getvalortotal));
         return aux;
     }
     
-    public List<Fatura> intervalofaturas(Date dataf, Date datai,int nif){
-    List<Fatura> aux = new ArrayList<Fatura>(getmadefaturas(nif));
-            for(Fatura h: getMapFaturas().values()){
+    public List<Fatura> intervalofaturas(Date dataf, Date datai,int nifempresa,int nifcliente){
+    List<Fatura> madefaturas = new ArrayList<Fatura>(getmadefaturas(nifempresa));
+    List<Fatura> aux = new ArrayList<Fatura>();
+            for(Fatura h: madefaturas){
             Date date = Date.from(h.getData().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            if(date.before(dataf) && date.after(datai)){
+            if(date.before(dataf) && date.after(datai) && h.getnifCliente() == nifcliente){
                 aux.add(h.clone());
             }
         }
-        aux.sort(Comparator.comparingInt(Fatura::getnifCliente));
         return aux;
     }
     
     public List<Fatura> OrdEmpresaFaturasValorDecrecente(int nif){
         List<Fatura> aux = new ArrayList<Fatura>(getmadefaturas(nif));
-        aux.sort(Comparator.comparingDouble(Fatura::getvalortotal));
+        aux.sort(Comparator.comparingDouble(Fatura::getvalortotal).reversed());
         return aux;
     }
 }

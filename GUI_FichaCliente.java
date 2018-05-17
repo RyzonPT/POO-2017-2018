@@ -15,7 +15,13 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import javax.swing.border.Border;
 import javax.swing.*;
-
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.text.DateFormat;
 import java.util.List;
 
 
@@ -53,9 +59,16 @@ public class GUI_FichaCliente extends JFrame {
     private JList list2;
     private JLabel faturasLancadas ;
     private JList listfaturasLancadas;
-    private JButton button2;
+    private JButton buttonOrdData;
     private JButton ordenaValor;
-    private JButton ordenaValorDecres;
+    private JButton buttonDataInter;
+    private JTextField TextFdatai;
+    private JTextField TextFdataf;
+    private JTextField TextFnifCliente;
+    private int flag;
+    private String nifCliente;
+    private String datai;
+    private String dataf;
 
     //Constructor 
     public GUI_FichaCliente(FichaCliente fichas,GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
@@ -67,6 +80,7 @@ public class GUI_FichaCliente extends JFrame {
         //menu generate method
         generateMenu();
         this.setJMenuBar(menuBar);
+        flag = 1;
 
         //pane with null layout
         JPanel contentPane = new JPanel(null);
@@ -130,7 +144,6 @@ public class GUI_FichaCliente extends JFrame {
         NifText.setVisible(true);
 
 
-
         label1 = new JLabel();
         label1.setBounds(187,16,400,150);
         label1.setBackground(new Color(214,217,223));
@@ -169,11 +182,6 @@ public class GUI_FichaCliente extends JFrame {
         label6.setText("Faturas de Cliente");
         label6.setVisible(true);
 
-
-
-        
-        
-        
         
         logOutbutton = new JButton();
         logOutbutton.setBounds(330,690,150,60);
@@ -214,18 +222,17 @@ public class GUI_FichaCliente extends JFrame {
         defaultatividadeText.setFont(new Font("sansserif",0,20));
         defaultatividadeText.setText("Atividade Economica:");
         defaultatividadeText.setVisible(true);
+
+        buttonOrdData = new JButton();
+        buttonOrdData.setBounds(550,510,150,60);
+        buttonOrdData.setBackground(new Color(214,217,223));
+        buttonOrdData.setForeground(new Color(0,0,0));
+        buttonOrdData.setEnabled(true);
+        buttonOrdData.setFont(new Font("sansserif",0,12));
+        buttonOrdData.setText("Ordenar por data");
+        buttonOrdData.setVisible(true);
         
-        //////testes necesarios////
-        button2 = new JButton();
-        button2.setBounds(550,510,150,60);
-        button2.setBackground(new Color(214,217,223));
-        button2.setForeground(new Color(0,0,0));
-        button2.setEnabled(true);
-        button2.setFont(new Font("sansserif",0,12));
-        button2.setText("Ordenar por data");
-        button2.setVisible(true);
-        
-        button2.addMouseListener(new MouseAdapter() {
+        buttonOrdData.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 onOrdenarDataButtonClicked(evt);
             }
@@ -233,12 +240,12 @@ public class GUI_FichaCliente extends JFrame {
         
         
         ordenaValor = new JButton();
-        ordenaValor.setBounds(330,590,160,60);
+        ordenaValor.setBounds(330,540,150,40);
         ordenaValor.setBackground(new Color(214,217,223));
         ordenaValor.setForeground(new Color(0,0,0));
         ordenaValor.setEnabled(true);
         ordenaValor.setFont(new Font("sansserif",0,12));
-        ordenaValor.setText("Ordenar por valor Cres");
+        ordenaValor.setText("Ordenar por valor");
         ordenaValor.setVisible(true);
         
         ordenaValor.addMouseListener(new MouseAdapter() {
@@ -247,24 +254,61 @@ public class GUI_FichaCliente extends JFrame {
             }
         });
         
-        ordenaValorDecres = new JButton();
-        ordenaValorDecres.setBounds(330,510,160,60);
-        ordenaValorDecres.setBackground(new Color(214,217,223));
-        ordenaValorDecres.setForeground(new Color(0,0,0));
-        ordenaValorDecres.setEnabled(true);
-        ordenaValorDecres.setFont(new Font("sansserif",0,12));
-        ordenaValorDecres.setText("Ordenar por valor Decres");
-        ordenaValorDecres.setVisible(true);
-        
-        ordenaValorDecres.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                onOrdenarValorDecresButtonClicked(evt);
+        TextFdatai = new JTextField();
+        TextFdatai.setBounds(330,615,90,40);
+        TextFdatai.setBackground(new Color(255,255,255));
+        TextFdatai.setForeground(new Color(0,0,0));
+        TextFdatai.setEnabled(true);
+        TextFdatai.setFont(new Font("sansserif",0,12));
+        TextFdatai.setText("Data inicial");
+        TextFdatai.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt){
+                onDataiKeyReleased(evt);
             }
         });
         
         
-        /////// END////////
         
+        TextFnifCliente = new JTextField();
+        TextFnifCliente.setBounds(580,615,90,40);
+        TextFnifCliente.setBackground(new Color(255,255,255));
+        TextFnifCliente.setForeground(new Color(0,0,0));
+        TextFnifCliente.setEnabled(true);
+        TextFnifCliente.setFont(new Font("sansserif",0,12));
+        TextFnifCliente.setText("nif de Cliente");
+        TextFnifCliente.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt){
+                onnifClienteReleasedKeyReleased(evt);
+            }
+        });
+        
+        TextFdataf = new JTextField();
+        TextFdataf.setBounds(450,615,90,40);
+        TextFdataf.setBackground(new Color(255,255,255));
+        TextFdataf.setForeground(new Color(0,0,0));
+        TextFdataf.setEnabled(true);
+        TextFdataf.setFont(new Font("sansserif",0,12));
+        TextFdataf.setText("Data final");
+        TextFdataf.addKeyListener(new KeyAdapter(){
+            public void keyReleased(KeyEvent evt){
+                onDatafKeyReleased(evt);
+            }
+        });
+        
+        buttonDataInter = new JButton();
+        buttonDataInter.setBounds(620,615,90,40);
+        buttonDataInter.setBackground(new Color(214,217,223));
+        buttonDataInter.setForeground(new Color(0,0,0));
+        buttonDataInter.setEnabled(true);
+        buttonDataInter.setFont(new Font("sansserif",0,12));
+        buttonDataInter.setText("Confirmar");
+        buttonDataInter.setVisible(true);
+        
+        buttonDataInter.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                onIntervalDataButtonClicked(evt);
+            }
+        });
         
         DeducaoqueficienteFiscalText = new JLabel();
         DeducaoqueficienteFiscalText.setBounds(500 ,130,90,35);
@@ -285,8 +329,7 @@ public class GUI_FichaCliente extends JFrame {
         faturasLancadas.setText("Faturas Lançadas");
         faturasLancadas.setVisible(true);
         
-        
-        
+
         List <Fatura> listfatlancadas = new ArrayList<>();
        listfatlancadas = gestorfaturas.getmadefaturas(ficha.getnif());
         
@@ -316,9 +359,6 @@ public class GUI_FichaCliente extends JFrame {
         scrollfaturaslancadas.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollfaturaslancadas.setBounds(52,540,250,200);
         
-        
-        
-       
         defaultdeducaotext = new JLabel();
         defaultdeducaotext.setBounds(400,130,130,35); 
         defaultdeducaotext.setBackground(new Color(214,217,223));
@@ -377,9 +417,13 @@ public class GUI_FichaCliente extends JFrame {
         scrollListaFaturas.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollListaFaturas.setBounds(52,286,250,200);
         
-        contentPane.add(ordenaValorDecres);
+        contentPane.add(TextFdatai);
+        contentPane.add(TextFdataf);
+        contentPane.add(TextFnifCliente);
+        contentPane.add(buttonDataInter);
+        contentPane.add(buttonDataInter);
         contentPane.add(ordenaValor);
-        contentPane.add(button2);
+        contentPane.add(buttonOrdData);
         contentPane.add(faturasLancadas);
         contentPane.add(scrollfaturaslancadas);
         contentPane.add(scrollListaFaturas);
@@ -610,19 +654,83 @@ public class GUI_FichaCliente extends JFrame {
     private void onCriarFaturaButtonClicked (MouseEvent evt) {          
          GUI_CriaFatura criafaturagui = new GUI_CriaFatura(ficha,gestorfichas,gestorfaturas,listModel);
     }
-            ///////
+    
+    private void onDataiKeyReleased(KeyEvent e){
+         datai = TextFdatai.getText();
+    }
+    
+    private void onDatafKeyReleased(KeyEvent e){
+         dataf = TextFdataf.getText();
+    }
+    
+    private void onnifClienteReleasedKeyReleased(KeyEvent e){
+        nifCliente = TextFnifCliente.getText();
+    }
+    
+    private void onIntervalDataButtonClicked(MouseEvent es){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date datei;
+        Date datef;
+        
+        try{
+            datei = formatter.parse(datai);
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null,"Data inicial Invalida, use o formato dia/mes/ano.", "Message", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            datef = formatter.parse(dataf);
+            if(datef.before(datei)){
+            JOptionPane.showMessageDialog(null,"Data final é mais antiga que a inicial!", "Message", JOptionPane.ERROR_MESSAGE);
+            return;
+            }
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null,"Data final Invalida, use o formato dia/mes/ano.", "Message", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        List<Fatura> list = gestorfaturas.intervalofaturas(datef,datei,ficha.getnif(),Integer.parseInt(nifCliente));
+        
+        listModel.removeAllElements(); 
+        for(Fatura h : list){
+            Botao botao22 = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h);
+            listModel.addElement(botao22);
+        }
+    }
+    
     private void onOrdenarDataButtonClicked (MouseEvent evt) {          
-         gestorfaturas.OrdFaturasData(ficha.getnif());
+        List<Fatura> aux = gestorfaturas.OrdFaturasData(ficha.getnif());
+        listModel.removeAllElements(); 
+        for(Fatura h : aux){
+            Botao botao22 = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h);
+            listModel.addElement(botao22);
+        }
+         
     }
     
     private void onOrdenarValorButtonClicked (MouseEvent evt) {          
-         gestorfaturas.OrdFaturasValor(ficha.getnif());
+        if(flag == 1){
+            List<Fatura> aux = gestorfaturas.OrdFaturasValorCrescente(ficha.getnif());
+            listModel.removeAllElements();
+            for(Fatura h : aux){
+                Botao botao22 = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h);
+                listModel.addElement(botao22);
+            }
+            flag = 0;
+        }
+        else{
+            List<Fatura> aux = gestorfaturas.OrdEmpresaFaturasValorDecrecente(ficha.getnif());
+            listModel.removeAllElements();
+            for(Fatura h : aux){
+                Botao botao22 = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h);
+                listModel.addElement(botao22);
+            }
+            flag = 1;
+        }
     }
-    
-    private void onOrdenarValorDecresButtonClicked (MouseEvent evt) {     
-         gestorfaturas.OrdEmpresaFaturasValorDecrecente(ficha.getnif());
-    }
-            ///////
+
     private void onlogOutButtonClicked (MouseEvent evt) {      
          GUI_Login login = new GUI_Login();
          login.setgestorfichas(gestorfichas);
