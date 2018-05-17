@@ -17,7 +17,7 @@ public class GestaoFichas implements Serializable
     
     public GestaoFichas()
     {
-        this.fichas = new HashMap<Integer,FichaCliente>();
+        this.fichas = new HashMap<Integer,FichaCliente>(); 
     }
     
     public GestaoFichas(Map<Integer,FichaCliente> fch) {
