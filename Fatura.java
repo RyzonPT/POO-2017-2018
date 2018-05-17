@@ -252,7 +252,7 @@ public class Fatura implements Serializable
         return valortotal;
       }
       
-    public double calculoDeducao( double valortotal,GestaoAtividadeEconomica eco){
+    public double calculoDeducao(double valortotal,GestaoAtividadeEconomica eco){
         
         
         return deducao;

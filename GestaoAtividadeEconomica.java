@@ -2,6 +2,7 @@ import java.util.*;
 import java.util.Map;
 import java.util.EnumMap;
 import javafx.util.Pair;
+import java.lang.Object;
 
 public class  GestaoAtividadeEconomica
 {
@@ -54,9 +55,9 @@ public class  GestaoAtividadeEconomica
        Pair Habitacao = new Pair<Double,Integer>(0.18,1000004);
        Pair Lares = new Pair<Double,Integer>(0.05,1000005);
        Pair ReparacaoAutomovel = new Pair<Double,Integer>(0.15,1000006);
-       Pair RestauraçãoAlojamento = new Pair<Double,Integer>(0.20,1000007);
+       Pair RestauracaoAlojamento = new Pair<Double,Integer>(0.20,1000007);
        Pair CabeleireirosInstitutosBeleza = new Pair<Double,Integer>(0.18,1000008);
-       Pair AtividadesVeterinarias = new Pair<Double,Integer>(0.03,1000000);
+       Pair AtividadesVeterinarias = new Pair<Double,Integer>(0.03,1000009);
        Pair PassesMensais = new Pair<Double,Integer>(0.23,1000010);
        
        EnumPrivadaMap.put(AtividadeEconomica.Saude, Saude);
@@ -65,11 +66,122 @@ public class  GestaoAtividadeEconomica
        EnumPrivadaMap.put(AtividadeEconomica.Habitacao, Habitacao);
        EnumPrivadaMap.put(AtividadeEconomica.Lares, Lares);
        EnumPrivadaMap.put(AtividadeEconomica.ReparacaoAutomovel, ReparacaoAutomovel);
-       EnumPrivadaMap.put(AtividadeEconomica.RestauraçãoAlojamento, RestauraçãoAlojamento);
+       EnumPrivadaMap.put(AtividadeEconomica.RestauraçãoAlojamento, RestauracaoAlojamento);
        EnumPrivadaMap.put(AtividadeEconomica.CabeleireirosInstitutosBeleza, CabeleireirosInstitutosBeleza);
        EnumPrivadaMap.put(AtividadeEconomica.AtividadesVeterinarias, AtividadesVeterinarias);
        EnumPrivadaMap.put(AtividadeEconomica.PassesMensais, PassesMensais);
    }
+   
+   public static EnumMap<Regiao,Double> getEnumRegiao(){
+       return EnumEmpresaMap;
+    }
+    
+   public static EnumMap<AtividadeEconomica,Pair<Double,Integer>> getEnumPrivada(){
+       return EnumPrivadaMap;
+    }
+    
+    
+   public static Pair getPairSaude(){
+        for (Pair m : EnumPrivadaMap.values()) {
+            if ( m.getValue()==new Integer(1000001)) {
+                return m;
+            }
+        }
+        return null;
+
+    }
+    
+    public static Pair getPairEducacao(){
+        for (Pair m : EnumPrivadaMap.values()) {
+            if ( m.getValue()==new Integer(1000002)) {
+                return m;
+            }
+        }
+        return null;
+
+    }
+    
+    public static Pair getPairDespesasGerais(){
+        for (Pair m : EnumPrivadaMap.values()) {
+            if ( m.getValue()==new Integer(1000003)) {
+                return m;
+            }
+        }
+        return null;
+
+    }
+    
+    public static Pair getPairHabitacao(){
+        for (Pair m : EnumPrivadaMap.values()) {
+            if ( m.getValue()==new Integer(1000004)) {
+                return m;
+            }
+        }
+        return null;
+
+    }
+    
+    public static Pair getPairLares(){
+        for (Pair m : EnumPrivadaMap.values()) {
+            if ( m.getValue()==new Integer(1000005)) {
+                return m;
+            }
+        }
+        return null;
+
+    }
+    
+    public static Pair getPairReparacaoAutomovel(){
+        for (Pair m : EnumPrivadaMap.values()) {
+            if ( m.getValue()==new Integer(1000006)) {
+                return m;
+            }
+        }
+        return null;
+
+    }
+    
+    public static Pair getPairRestauracaoAlojamento(){
+        for (Pair m : EnumPrivadaMap.values()) {
+            if ( m.getValue()==new Integer(1000007)) {
+                return m;
+            }
+        }
+        return null;
+
+    }
+    
+    public static Pair getPairCabeleireirosInstitutosBeleza(){
+        for (Pair m : EnumPrivadaMap.values()) {
+            if ( m.getValue()==new Integer(1000008)) {
+                return m;
+            }
+        }
+        return null;
+
+    }
+    
+    public static Pair getPairAtividadesVeterinarias(){
+        for (Pair m : EnumPrivadaMap.values()) {
+            if ( m.getValue()==new Integer(1000009)) {
+                return m;
+            }
+        }
+        return null;
+
+    }
+    
+    public static Pair getPairPassesMensais(){
+        for (Pair m : EnumPrivadaMap.values()) {
+            if ( m.getValue()==new Integer(1000010)) {
+                return m;
+            }
+        }
+        return null;
+
+    }
+    
+    
    
 }
 
