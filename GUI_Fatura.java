@@ -58,10 +58,12 @@ public class GUI_Fatura extends JFrame {
     private JLabel tituloAtividade;
     private JButton button1;
     private Fatura fatura;
+    private FichaCliente ficha;
 
     //Constructor 
-    public GUI_Fatura(Fatura fatura){
+    public GUI_Fatura(Fatura fatura, FichaCliente ficha){
         this.fatura=fatura;
+        this.ficha = ficha;
         this.setTitle("GUI_project");
         this.setSize(1632,883);
         //menu generate method
@@ -459,8 +461,16 @@ public class GUI_Fatura extends JFrame {
          AtividadeEconoText.setText(a);
          button1.setEnabled(false);
          fatura.setAtivEconEscolhida(a);
-    }
-   
+         if(ficha.getfichaType() == 1){
+             fatura.calculoDeducaoEmpresa();
+            }
+         else{
+             EntidadePrivada fichaP = (EntidadePrivada) ficha;
+             fatura.calculoDeducaoPrivada(fichaP.getndependentes());
+        }
+        
+        DeducaoText.setText(String.valueOf(fatura.getdeducao()));
+}
     private void onConfirmarButtonClicked (ActionEvent evt) {  
          int reply = JOptionPane.showConfirmDialog(null, "TEM A CERTEZA? A SUA ACAO E PERMANENTE!!", "Message", JOptionPane.YES_NO_OPTION);
          if (reply == JOptionPane.YES_OPTION){
@@ -506,7 +516,7 @@ public class GUI_Fatura extends JFrame {
         System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new GUI_Fatura(null);
+                new GUI_Fatura(null,null);
             }
         });
     }

@@ -10,7 +10,9 @@ public class FichaCliente implements Serializable
    private String morada;
    private String password;
    private int fichaType;
+   private double imposto;
    private double moneyspent;
+   private String regiaoEscolhida;
    
    public FichaCliente(){
        this.nif = 0;
@@ -25,25 +27,26 @@ public class FichaCliente implements Serializable
        this.fichaType = 0;
        }
        moneyspent=0;
-    }
+       imposto = reducaoImposto();
+   }
     
-    public FichaCliente(int nif, String email, String nome, String morada, String password){
+   public FichaCliente(int nif, String email, String nome, String morada, String password){
        this.nif = nif;
        this.email = email;
        this.nome = nome;
        this.morada = morada;
        this.password = password;
-
-        if(this instanceof EntidadeEmpresas){
-        this.fichaType = 1;
+       imposto = reducaoImposto();
+       if(this instanceof EntidadeEmpresas){
+           this.fichaType = 1;
        }
        else{ 
-       this.fichaType = 0;
+           this.fichaType = 0;
        }
-       moneyspent=0;
-    }
+           moneyspent=0;
+   }
     
-    public FichaCliente(FichaCliente c){
+   public FichaCliente(FichaCliente c){
         this.nif = c.getnif();
         this.email = c.getEmail();
         this.nome = c.getNome();
@@ -51,69 +54,73 @@ public class FichaCliente implements Serializable
         this.password = c.getPassword();
         this.fichaType = c.getfichaType();
         this.moneyspent =c.getmoneyspent();
-    }
+   }
     
-    public int getnif(){
+   public int getnif(){
         return this.nif;
-    }
+   }
     
-    public double getmoneyspent(){
+   public double getmoneyspent(){
         return this.moneyspent;
-    }
+   }
     
-    public int getfichaType(){
+   public int getfichaType(){
         return this.fichaType;
-    }
+   }
     
-    public int getfichaType(FichaCliente a){
+   public int getfichaType(FichaCliente a){
         return a.fichaType;
-    }
+   }
     
-    public String getEmail(){
+   public String getEmail(){
         return this.email;
+   }
+   
+   public double getimposto(){
+       return imposto;
     }
     
-    public String getNome(){
+   public String getNome(){
         return this.nome;
-    }
+   }
     
-    public String getMorada(){
+   public String getMorada(){
         return this.morada;
-    }
+   }
     
-    public String getPassword(){
+   public String getPassword(){
         return this.password;
-    }
+   }
     
-    public void setnif(int numeroFiscal){
+   public void setnif(int numeroFiscal){
         this.nif = numeroFiscal;
-    }
+   }
     
-    public void setmoneyspent(double moneyspent){
+   public void setmoneyspent(double moneyspent){
         this.moneyspent=moneyspent;
-    }
+   }
     
-    public void setfichaType(int fichatype){
+   public void setfichaType(int fichatype){
         this.fichaType = fichatype;
-    }
+   }
     
-    public void setEmail(String email){
+   public void setEmail(String email){
         this.email = email;
-    }
+   }
     
-    public void setNome(String nome){
+   public void setNome(String nome){
         this.nome = nome;
-    }
+   }
     
-    public void setMorada(String morada){
+   public void setMorada(String morada){
         this.morada = morada;
-    }
+   }
     
-    public void setPassword(String password){
+   public void setPassword(String password){
         this.password = password;
-    }
+   }
     
-    public String toString() {
+   public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Ficha Cliente : [");
         sb.append("NIF: ").append(this.nif);
@@ -124,13 +131,13 @@ public class FichaCliente implements Serializable
         sb.append("Tipo de Ficha:").append(this.fichaType);
         sb.append("Total de Dinheiro Gasto: ").append(this.moneyspent);
         return sb.toString();
-    }
+   }
     
-    public FichaCliente clone(){
+   public FichaCliente clone(){
         return new FichaCliente(this);
-    }
+   }
     
-    public boolean equals(Object obj) {
+   public boolean equals(Object obj) {
         if(obj==this) return true;
         if(obj==null || obj.getClass() != this.getClass()) return false;
         FichaCliente a = (FichaCliente) obj;
@@ -141,9 +148,25 @@ public class FichaCliente implements Serializable
                password.equals(a.getPassword()) &&
                fichaType==a.getfichaType() &&
                moneyspent==a.getmoneyspent();
-    }
+   }
     
-    public double adicionaDinheiroGasto(double valor){
+   public double adicionaDinheiroGasto(double valor){
         return moneyspent= moneyspent + valor;
-    }
+   }
+   
+   public double reducaoImposto(){
+        if(fichaType == 1){
+            double impostoregiao = GestaoAtividadeEconomica.getEnumEmpresaMap().get(regiaoEscolhida);
+            imposto = impostoregiao;
+        }
+        else{
+            if(this instanceof EntidadePrivada){
+             EntidadePrivada fichaP =(EntidadePrivada) this;
+                if(fichaP.getndependentes()> 4){
+                    imposto = 0.23 - 0.23*0.05*(fichaP.getndependentes()-4);
+                }
+            }
+        }
+        return imposto;
+   }
 }

@@ -1,5 +1,7 @@
 import java.util.Map;
 import java.util.HashMap;
+import java.util.stream.Stream;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.List;
 import java.util.ArrayList;
@@ -10,22 +12,27 @@ import java.io.ObjectInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.*;
 
 public class GestaoFichas implements Serializable
 {
     private Map<Integer,FichaCliente> fichas;
+    private GestaoFaturas gestorfaturas;
     
     public GestaoFichas()
     {
         this.fichas = new HashMap<Integer,FichaCliente>(); 
+        gestorfaturas = new GestaoFaturas();
     }
     
-    public GestaoFichas(Map<Integer,FichaCliente> fch) {
+    public GestaoFichas(Map<Integer,FichaCliente> fch, GestaoFaturas c) {
        this.fichas = fch.values().stream().collect(Collectors.toMap((e) -> e.getnif(),(e) -> e.clone()));
+       gestorfaturas = c;
     }
     
     public GestaoFichas(GestaoFichas a){
         this.fichas=a.getfichas();
+        this.gestorfaturas = a.gestorfaturas;
     }
     
     public Map<Integer,FichaCliente> getfichas(){
@@ -111,5 +118,11 @@ public class GestaoFichas implements Serializable
         }
         return null;
     }    
-   
+    
+   public List<FichaCliente> gettenUsersMostRich(){
+        List<FichaCliente> richppl = new ArrayList<FichaCliente>(fichas.values());
+        richppl.sort(Comparator.comparingDouble(FichaCliente::getmoneyspent).reversed());
+        richppl = richppl.stream().limit(10).collect(Collectors.toList());
+        return richppl;
+    }
 }

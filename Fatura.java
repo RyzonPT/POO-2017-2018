@@ -7,6 +7,10 @@ import java.time.format.DateTimeFormatter;
 import javafx.util.Pair;
 import java.io.Serializable;
 import java.util.Locale;
+import java.util.Map;
+import java.util.EnumMap;
+import javafx.util.Pair;
+import java.lang.Object;
 public class Fatura implements Serializable
 {
     /**
@@ -21,6 +25,7 @@ public class Fatura implements Serializable
    private  int faturaID;
    private String nomeEmpresa;
    private String moradaEmpresa;
+   private String Regiao;
    private String emailEmpresa;
    private int nifEmpresa;
    private LocalDate data;
@@ -33,7 +38,7 @@ public class Fatura implements Serializable
    private String emailCliente;
    private int nifCliente;
    private String ativEconEscolhida;
-   private GestaoAtividadeEconomica ati;
+   private double imposto;
    
    public Fatura(){
        faturaID = 0;
@@ -51,9 +56,11 @@ public class Fatura implements Serializable
        emailCliente = "n/a";
        nifCliente = 0;
        ativEconEscolhida="n/a";
+       imposto = 0.23;
     }
     
-    public Fatura(String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, ArrayList<Triple> produto, ArrayList<String> actividadeEconomica, double deducao, String nomeCliente, String moradaCliente, String emailCliente, int nifCliente){
+    public Fatura(String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, ArrayList<Triple> produto, ArrayList<String> actividadeEconomica,
+    double deducao, String nomeCliente, String moradaCliente, String emailCliente, int nifCliente, double imposto){
        this.nomeEmpresa = nomeEmpresa;
        this.moradaEmpresa = moradaEmpresa;
        this.emailEmpresa = emailEmpresa;
@@ -67,6 +74,7 @@ public class Fatura implements Serializable
        this.moradaCliente = moradaCliente;
        this.emailCliente = emailCliente;
        this.nifCliente = nifCliente;
+       this.imposto =imposto;
        if(actividadeEconomica.size()==1){
            ativEconEscolhida = actividadeEconomica.get(0);
        }
@@ -252,14 +260,17 @@ public class Fatura implements Serializable
         return valortotal;
       }
       
-    public double calculoDeducao(double valortotal,GestaoAtividadeEconomica eco){
-        if(eco.getPairSaude()!=null)deducao= valortotal * (double)eco.getPairSaude().getKey();
-        else if(eco.getPairEducacao()!=null)deducao= valortotal * (double)eco.getPairEducacao().getKey();
-            else if (eco.getPairHabitacao()!=null)deducao= valortotal * (double)eco.getPairHabitacao().getKey();
-                else if (eco.getPairLares()!=null)deducao= valortotal * (double)eco.getPairLares().getKey();
-                    else if(eco.getPairReparacaoAutomovel()!=null)deducao= valortotal * (double)eco.getPairReparacaoAutomovel().getKey();
-                         else if(eco.getPairRestauracaoAlojamento()!=null)deducao= valortotal * (double)eco.getPairRestauracaoAlojamento().getKey();
+   public double calculoDeducaoPrivada(int nAgregado){
+       
+        Pair<Double,Integer> pair = GestaoAtividadeEconomica.getEnumPrivadaMap().get(GestaoAtividadeEconomica.AtividadeEconomica.valueOf(ativEconEscolhida));
+        deducao = pair.getKey() * 0.23 * (nAgregado+1) * valortotal;
         return deducao;
-     }
-    
+   }
+   
+   public double calculoDeducaoEmpresa(){
+        double imposto = GestaoAtividadeEconomica.getEnumEmpresaMap().get(GestaoAtividadeEconomica.AtividadeEconomica.valueOf(Regiao));
+        deducao =(0.23-imposto)*valortotal;
+        return deducao;
+   }
+
 }

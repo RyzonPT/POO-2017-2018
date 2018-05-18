@@ -5,6 +5,7 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
 {
    private ArrayList<String> actividadeEconomica;
    private int deducaoFiscal;
+   private String Regiao;
 
    public EntidadeEmpresas(){
        super();
@@ -53,4 +54,5 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
         return le.getActividadeEconomica()==this.actividadeEconomica &&
                le.getDeducaoFiscal()==this.deducaoFiscal;
     }
+    
 }
