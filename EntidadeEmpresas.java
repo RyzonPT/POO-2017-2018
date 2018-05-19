@@ -5,7 +5,8 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
 {
    private ArrayList<String> actividadeEconomica;
    private int deducaoFiscal;
-   private String Regiao;
+   private String regiao;
+   private int faturacao;
 
    public EntidadeEmpresas(){
        super();
@@ -31,6 +32,13 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
         return new ArrayList<String>(actividadeEconomica);
     }
     
+    public double getFaturacao(){
+        return this.faturacao;
+    }
+    public String getregiao(){
+        return this.regiao;
+    }
+    
     public int getDeducaoFiscal(){
         return this.deducaoFiscal;
     }
@@ -54,5 +62,13 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
         return le.getActividadeEconomica()==this.actividadeEconomica &&
                le.getDeducaoFiscal()==this.deducaoFiscal;
     }
+    
+    public void valorFaturacao(GestaoFaturas a){
+      for(Fatura h :a.getmadefaturas(getnif())){
+          faturacao+=h.getvalortotal();
+        }
+        
+    }
+    
     
 }

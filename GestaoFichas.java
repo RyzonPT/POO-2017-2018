@@ -17,22 +17,21 @@ import java.util.*;
 public class GestaoFichas implements Serializable
 {
     private Map<Integer,FichaCliente> fichas;
-    private GestaoFaturas gestorfaturas;
     
     public GestaoFichas()
     {
         this.fichas = new HashMap<Integer,FichaCliente>(); 
-        gestorfaturas = new GestaoFaturas();
+
     }
     
     public GestaoFichas(Map<Integer,FichaCliente> fch, GestaoFaturas c) {
        this.fichas = fch.values().stream().collect(Collectors.toMap((e) -> e.getnif(),(e) -> e.clone()));
-       gestorfaturas = c;
+
     }
     
     public GestaoFichas(GestaoFichas a){
         this.fichas=a.getfichas();
-        this.gestorfaturas = a.gestorfaturas;
+
     }
     
     public Map<Integer,FichaCliente> getfichas(){
@@ -122,7 +121,20 @@ public class GestaoFichas implements Serializable
    public List<FichaCliente> gettenUsersMostRich(){
         List<FichaCliente> richppl = new ArrayList<FichaCliente>(fichas.values());
         richppl.sort(Comparator.comparingDouble(FichaCliente::getmoneyspent).reversed());
-        richppl = richppl.stream().limit(10).collect(Collectors.toList());
+        richppl = richppl.stream().filter(p -> p.getfichaType()==0).limit(10).collect(Collectors.toList());
         return richppl;
+   }
+    
+    
+   public List<EntidadeEmpresas> getMoneyEmpresas(int x){
+        List<EntidadeEmpresas> a = new ArrayList<EntidadeEmpresas>();
+        for( FichaCliente b : fichas.values()){
+            if( b instanceof EntidadeEmpresas){
+                a.add((EntidadeEmpresas)b);
+            }
+        }
+        a.sort(Comparator.comparingDouble(EntidadeEmpresas::getFaturacao).reversed());
+        a = a.stream().limit(x).collect(Collectors.toList());
+        return a;
     }
 }

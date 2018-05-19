@@ -117,11 +117,11 @@ public class GestaoFaturas implements Serializable
     }
     
     public List<Fatura> intervalofaturas(Date dataf, Date datai,int nifempresa,int nifcliente){
-    List<Fatura> madefaturas = new ArrayList<Fatura>(getmadefaturas(nifempresa));
-    List<Fatura> aux = new ArrayList<Fatura>();
-            for(Fatura h: madefaturas){
+        List<Fatura> madefaturas = new ArrayList<Fatura>(getmadefaturas(nifempresa));
+        List<Fatura> aux = new ArrayList<Fatura>();
+        for(Fatura h: madefaturas){
             Date date = Date.from(h.getData().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            if(date.before(dataf) && date.after(datai) && h.getnifCliente() == nifcliente){
+            if(date.before(dataf) && date.after(datai) && (h.getnifCliente() == nifcliente)){
                 aux.add(h.clone());
             }
         }
@@ -132,5 +132,17 @@ public class GestaoFaturas implements Serializable
         List<Fatura> aux = new ArrayList<Fatura>(getmadefaturas(nif));
         aux.sort(Comparator.comparingDouble(Fatura::getvalortotal).reversed());
         return aux;
+    }
+    
+    public double getIntervalFaturacao(Date datai, Date dataf, int nif){
+       List <Fatura> a = new ArrayList<Fatura>();
+       double total=0;
+       for(Fatura h : getmadefaturas(nif)){
+           Date date = Date.from(h.getData().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            if(date.before(dataf) && date.after(datai) && h.getnifEmpresa() == nif){
+                total+= h.getvalortotal();
+            }
+        }
+        return total;
     }
 }

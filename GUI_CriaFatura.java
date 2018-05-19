@@ -694,7 +694,7 @@ public class GUI_CriaFatura extends JFrame {
         EntidadeEmpresas fichaE = (EntidadeEmpresas) ficha;   
         Fatura c = new Fatura (ficha.getNome(), ficha.getMorada(), ficha.getEmail(),ficha.getnif(),  produtos,fichaE.getActividadeEconomica(),0, nomeCliente, moradaCliente, emailCliente, Integer.parseInt(nifCliente), ficha.getimposto());
         gestorfaturas.addFaturas(c);
-        ficha.adicionaDinheiroGasto(c.getvalortotal());
+        ficha.adicionaDinheiroGasto(c);
         JOptionPane.showMessageDialog(null,"Fatura criada com sucesso!", "Message" , JOptionPane.INFORMATION_MESSAGE);
         Botao botao = new Botao(Integer.toString(c.getfaturaID())+"   "+c.getnomeEmpresa(),c,ficha);
         listModel.addElement(botao);
