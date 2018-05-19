@@ -34,6 +34,7 @@ public class GUI_Register extends JFrame {
     private JTextField RMorada;
     private JTextField RNome;
     private JTextField RNumerodedependentes;
+    private JTextField RRegiao;
     private JTextField RPassword;
     private JLabel Title;
     private JTextField CodigosAtividades;
@@ -47,6 +48,7 @@ public class GUI_Register extends JFrame {
     private JLabel labelNumerosFiscais;
     private JLabel labelProprioNif;
     private JLabel labelPassword;
+    private JLabel labelRegiao;
     private JButton AdicionarButtonNifs;
     private JButton AdicionarButtonCodigos;
     private JButton AdicionarButtonAtividadeEconomica;
@@ -62,6 +64,7 @@ public class GUI_Register extends JFrame {
     private String atividadeEconomica;
     private boolean visible;
     private boolean flag;
+    private String regiao;
     private JScrollPane scroll;
     private JScrollPane scroll2;
     private JScrollPane scroll3;
@@ -97,7 +100,7 @@ public class GUI_Register extends JFrame {
 
     //Constructor 
     public GUI_Register(){
-        proprionif=numerodedependentes=codigoAtividade=-1; nif="";password=morada=email=nome=atividadeEconomica="";
+        proprionif=numerodedependentes=codigoAtividade=-1; nif=password=regiao=morada=email=nome=atividadeEconomica="";
         visible = false; flag = false;
         fichaEmpresa = new EntidadeEmpresas();
         fichaPrivada = new EntidadePrivada();
@@ -433,6 +436,21 @@ public class GUI_Register extends JFrame {
             }
         });
         
+        RRegiao = new JTextField();
+        RRegiao.setBounds(199,322,90,35);
+        RRegiao.setBackground(new Color(255,255,255));
+        RRegiao.setForeground(new Color(0,0,0));
+        RRegiao.setEnabled(true);
+        RRegiao.setFont(new Font("sansserif",0,12));
+        RRegiao.setText("");
+        RRegiao.setVisible(!visible);
+        
+        RRegiao.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent evt){
+                onKeyReleasedRegiao(evt);
+            }
+        });
+        
         
         AdicionarButtonAtividadeEconomica = new JButton();
         AdicionarButtonAtividadeEconomica.setBounds(289,282,90,35);
@@ -554,7 +572,7 @@ public class GUI_Register extends JFrame {
         });
 
         Registar = new JButton();
-        Registar.setBounds(198,343,90,35);
+        Registar.setBounds(198,383,90,35);
         Registar.setBackground(new Color(214,217,223));
         Registar.setForeground(new Color(0,0,0));
         Registar.setEnabled(true);
@@ -585,6 +603,15 @@ public class GUI_Register extends JFrame {
         labelAtividadeEconomica.setFont(new Font("sansserif",0,12));
         labelAtividadeEconomica.setText("AtividadeEconomica");
         labelAtividadeEconomica.setVisible(!visible);
+        
+        labelRegiao = new JLabel();
+        labelRegiao.setBounds(65,323,120,35);
+        labelRegiao.setBackground(new Color(214,217,223));
+        labelRegiao.setForeground(new Color(0,0,0));
+        labelRegiao.setEnabled(true);
+        labelRegiao.setFont(new Font("sansserif",0,12));
+        labelRegiao.setText("Região");
+        labelRegiao.setVisible(!visible);
 
         labelEmailE = new JLabel();
         labelEmailE.setBounds(146,203,90,35);
@@ -648,6 +675,7 @@ public class GUI_Register extends JFrame {
         
         //adding components to contentPane panel
         contentPane.add(RAtividadeEconomica);
+        contentPane.add(RRegiao);
         contentPane.add(REmailE);
         contentPane.add(RMoradaE);
         contentPane.add(RNifE);
@@ -656,6 +684,7 @@ public class GUI_Register extends JFrame {
         contentPane.add(Registar);
         contentPane.add(Titulo);
         contentPane.add(labelAtividadeEconomica);
+        contentPane.add(labelRegiao);
         contentPane.add(labelEmailE);
         contentPane.add(labelMoradaE);
         contentPane.add(labelNif);
@@ -705,6 +734,7 @@ public class GUI_Register extends JFrame {
         if (flag!=visible){
             visible = !visible;
             RAtividadeEconomica.setVisible(!visible);
+            RRegiao.setVisible(!visible);
             REmailE.setVisible(!visible);
             RMoradaE.setVisible(!visible);
             RNifE.setVisible(!visible);
@@ -713,6 +743,7 @@ public class GUI_Register extends JFrame {
             Registar.setVisible(!visible);
             Titulo.setVisible(!visible);
             labelAtividadeEconomica.setVisible(!visible);
+            labelRegiao.setVisible(!visible);
             labelEmailE.setVisible(!visible);
             labelMoradaE.setVisible(!visible);
             labelNif.setVisible(!visible);
@@ -766,7 +797,8 @@ public class GUI_Register extends JFrame {
                 fichaPrivada.setEmail(email);
                 fichaPrivada.setMorada(morada);
                 fichaPrivada.setNome(nome);
-                fichaPrivada.setAgregadoFamiliar(numerodedependentes);
+                fichaPrivada.setndependentes(numerodedependentes);
+                fichaPrivada.setAgregadoFamiliar(nifs.size());
                 gestorfichas.addFicha(fichaPrivada);
                 if(gestorfichas.existeFicha(proprionif)){
                     infoBox("Registo com sucesso!", "Registo com sucesso");
@@ -779,7 +811,7 @@ public class GUI_Register extends JFrame {
     }
     
     private void OnClickedRegistarE (MouseEvent evt){
-        if(nif=="" || morada=="" || email=="" || nome=="" || atividadeEconomica=="" || password=="" ){
+        if(nif=="" || morada=="" || email=="" || nome=="" || atividadeEconomica=="" || regiao=="" || password=="" ){
             infoBox("Por favor preencha todos os campos", "Impossível registar");
         }
         else {
@@ -787,20 +819,26 @@ public class GUI_Register extends JFrame {
                 infoBox("Já existe um registo com este Nif", "Impossível registar");
             }
             else{
-                fichaEmpresa.setPassword(password);
-                fichaEmpresa.setdeducaoFiscal(0);
-                fichaEmpresa.setnif(Integer.parseInt(nif));
-                fichaEmpresa.setfichaType(1);
-                fichaEmpresa.setActividadeEconomica(atividades);
-                fichaEmpresa.setEmail(email);
-                fichaEmpresa.setMorada(morada);
-                fichaEmpresa.setNome(nome);
-                gestorfichas.addFicha(fichaEmpresa);
-                if(gestorfichas.existeFicha(Integer.parseInt(nif))){
-                    infoBox("Registo com sucesso!", "Registo com sucesso");
-                    HallentradaGUI hallentrada = new HallentradaGUI();
-                    hallentrada.setgestorfichas(gestorfichas);
-                    dispose();
+                if(RRegiao.getText()=="EntreDouroMinho" || RRegiao.getText()=="TrasoMontesAltoDouro" || RRegiao.getText()=="BeiraLitoral" || RRegiao.getText()=="BeiraInterior" || RRegiao.getText()=="EstramaduraRibatejo" || RRegiao.getText()=="LisboaSetubal" || RRegiao.getText()=="Alentejo" || RRegiao.getText()=="Algarve" || RRegiao.getText()=="Madeira" || RRegiao.getText()=="Acores"){
+                    fichaEmpresa.setregiao(regiao);
+                    fichaEmpresa.setPassword(password);
+                    fichaEmpresa.setdeducaoFiscal(0);
+                    fichaEmpresa.setnif(Integer.parseInt(nif));
+                    fichaEmpresa.setfichaType(1);
+                    fichaEmpresa.setActividadeEconomica(atividades);
+                    fichaEmpresa.setEmail(email);
+                    fichaEmpresa.setMorada(morada);
+                    fichaEmpresa.setNome(nome);
+                    gestorfichas.addFicha(fichaEmpresa);
+                    if(gestorfichas.existeFicha(Integer.parseInt(nif))){
+                        infoBox("Registo com sucesso!", "Registo com sucesso");
+                        HallentradaGUI hallentrada = new HallentradaGUI();
+                        hallentrada.setgestorfichas(gestorfichas);
+                        dispose();
+                    }
+                }
+                else{
+                    infoBox("A regiao tem de ser uma das seguintes: EntreDouroMinho, TrasoMontesAltoDouro, BeiraLitoral, BeiraInterior, EstramaduraRibatejo, LisboaSetubal, Alentejo, Algarve, Madeira, Acores", "Impossível registar");
                 }
             }
         }
@@ -834,15 +872,21 @@ public class GUI_Register extends JFrame {
         }}
     }
     
-    private void CodigoAdded (MouseEvent evt) { // *1 verificar se o codigoatividade corresponde aos pre defenidos
+    private void CodigoAdded (MouseEvent evt) {
         if(listModel2.contains(codigoAtividade)){
             infoBox("Já adicionou este codigo", "Impossível adicionar codigo");
             CodigosAtividades.setText("");
         }
         else{
-            CodigosAtividades.setText("");
-            listModel2.addElement(codigoAtividade);
-            codigoatividades.add(codigoAtividade);
+            if(CodigosAtividades.getText()=="1000001" || CodigosAtividades.getText()=="1000002" || CodigosAtividades.getText()=="1000003" || CodigosAtividades.getText()=="1000004" || CodigosAtividades.getText()=="1000005" || CodigosAtividades.getText()=="1000006" || CodigosAtividades.getText()=="1000007" || CodigosAtividades.getText()=="1000008" || CodigosAtividades.getText()=="1000009" || CodigosAtividades.getText()=="1000010"){
+               CodigosAtividades.setText("");
+               listModel2.addElement(codigoAtividade);
+               codigoatividades.add(codigoAtividade); 
+            }
+            else{
+                infoBox("Codigo inválido", "Impossível adicionar codigo");
+                CodigosAtividades.setText("");
+            }
         }
     }
     
@@ -852,9 +896,15 @@ public class GUI_Register extends JFrame {
             RAtividadeEconomica.setText("");
         }
         else{
-            RAtividadeEconomica.setText("");
-            listModel3.addElement(atividadeEconomica);
-            atividades.add(atividadeEconomica);
+            if(RAtividadeEconomica.getText()=="Saude" || RAtividadeEconomica.getText()=="Educacao" || RAtividadeEconomica.getText()=="DespesasGerais" || RAtividadeEconomica.getText()=="Habitacao" || RAtividadeEconomica.getText()=="Lares" || RAtividadeEconomica.getText()=="ReparacaoAutomovel" || RAtividadeEconomica.getText()=="RestauraçãoAlojamento" || RAtividadeEconomica.getText()=="CabeleireirosInstitutosBeleza" || RAtividadeEconomica.getText()=="AtividadesVeterinarias" || RAtividadeEconomica.getText()=="PassesMensais"){
+                RAtividadeEconomica.setText("");
+                listModel3.addElement(atividadeEconomica);
+                atividades.add(atividadeEconomica);
+            }
+            else{
+                infoBox("A atividade tem de ser uma das seguintes: Saude, Educacao, DespesasGerais, Habitacao, Lares, ReparacaoAutomovel, RestauraçãoAlojamento, CabeleireirosInstitutosBeleza, AtividadesVeterinarias, PassesMensais", "Impossível adicionar atividade");
+                RAtividadeEconomica.setText("");
+            }
         }
     }
     
@@ -887,6 +937,10 @@ public class GUI_Register extends JFrame {
     
     public void setgestorfichas(GestaoFichas a){
         gestorfichas = a;
+    }
+    
+    private void onKeyReleasedRegiao (KeyEvent evt) {
+            regiao = RRegiao.getText();
     }
     
     private void onKeyReleasedMoradaE (KeyEvent evt) {

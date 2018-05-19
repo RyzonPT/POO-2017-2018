@@ -61,6 +61,10 @@ public class EntidadePrivada extends FichaCliente implements Serializable
     public void setNumerosFiscais(ArrayList<Integer> numerosFiscais){
         this.numerosFiscais= (ArrayList<Integer>)numerosFiscais.clone();
     }
+    
+    public void setndependentes(int ndependentes){
+        this.ndependentes = ndependentes;
+    }
 
     public void setCoeficienteFiscal(int coeficienteFiscal){
         this.coeficienteFiscal=coeficienteFiscal;

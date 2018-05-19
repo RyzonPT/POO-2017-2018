@@ -39,6 +39,10 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
         return this.regiao;
     }
     
+    public void setregiao(String regiao){
+        this.regiao = regiao;
+    }
+    
     public int getDeducaoFiscal(){
         return this.deducaoFiscal;
     }
