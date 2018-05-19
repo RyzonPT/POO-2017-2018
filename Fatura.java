@@ -25,7 +25,7 @@ public class Fatura implements Serializable
    private  int faturaID;
    private String nomeEmpresa;
    private String moradaEmpresa;
-   private String Regiao;
+   private String regiao;
    private String emailEmpresa;
    private int nifEmpresa;
    private LocalDate data;
@@ -57,30 +57,33 @@ public class Fatura implements Serializable
        nifCliente = 0;
        ativEconEscolhida="n/a";
        imposto = 0.23;
+       regiao="EntreDouroMinho";
     }
     
     public Fatura(String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, ArrayList<Triple> produto, ArrayList<String> actividadeEconomica,
-    double deducao, String nomeCliente, String moradaCliente, String emailCliente, int nifCliente, double imposto){
+    double deducao, String nomeCliente, String moradaCliente, String emailCliente, int nifCliente, double imposto,String regiao){
        this.nomeEmpresa = nomeEmpresa;
        this.moradaEmpresa = moradaEmpresa;
        this.emailEmpresa = emailEmpresa;
        this.nifEmpresa = nifEmpresa;
        this.data = LocalDate.now();
        this.produto = produto;
+       this.imposto =imposto;
        this.actividadeEconomica = actividadeEconomica;
-       this.valortotal = calculaValor(produto);
+       this.valortotal = calculaValor();
        this.deducao = deducao;
        this.nomeCliente = nomeCliente;
        this.moradaCliente = moradaCliente;
        this.emailCliente = emailCliente;
        this.nifCliente = nifCliente;
-       this.imposto =imposto;
+       
        if(actividadeEconomica.size()==1){
            ativEconEscolhida = actividadeEconomica.get(0);
        }
        else{
            ativEconEscolhida="n/a";
        }
+       this.regiao = regiao;
     }
     
     public Fatura(Fatura c){
@@ -91,6 +94,7 @@ public class Fatura implements Serializable
        nifEmpresa = c.getnifEmpresa();
        data = LocalDate.now();
        produto = c.getProduto();
+       imposto =c.getimposto();
        actividadeEconomica = c.getActividadeEconomica();
        valortotal = c.getvalortotal();
        deducao = c.getdeducao();
@@ -99,6 +103,7 @@ public class Fatura implements Serializable
        emailCliente = c.getemailCliente();
        nifCliente = c.getnifCliente();
        ativEconEscolhida=c.getAtivEconEscolhida();
+       regiao=c.getregiao();
     }
     
     public int getfaturaID(){
@@ -111,6 +116,14 @@ public class Fatura implements Serializable
     
     public String getmoradaEmpresa(){
         return moradaEmpresa;
+    }
+    
+    public double getimposto(){
+        return imposto;
+    }
+    
+    public void setimposto(double imposto){
+        this.imposto = imposto;
     }
     
     public String getemailEmpresa(){
@@ -139,6 +152,13 @@ public class Fatura implements Serializable
         return valortotal;
     }
     
+    public String getregiao(){
+        return regiao;
+    }
+    
+    public  void setregiao(String regiao){
+        this.regiao=regiao;
+    }
 
     public double getdeducao(){
         return deducao;
@@ -253,10 +273,12 @@ public class Fatura implements Serializable
         return formattedString;
     }
     
-    public double calculaValor(ArrayList<Triple> produto){
+    public double calculaValor(){
         for(Triple h : produto){
-            valortotal += h.getquantidade() * h.getprecounitario() * (1 - imposto);
+            valortotal += h.getquantidade() * h.getprecounitario();
         }
+        valortotal = valortotal *(1+imposto);
+        System.out.println(imposto+"get fucked");
         return valortotal;
       }
       
@@ -268,7 +290,8 @@ public class Fatura implements Serializable
    }
    
    public double calculoDeducaoEmpresa(){
-        double imposto = GestaoAtividadeEconomica.getEnumEmpresaMap().get(GestaoAtividadeEconomica.AtividadeEconomica.valueOf(Regiao));
+       
+        double imposto = GestaoAtividadeEconomica.getEnumEmpresaMap().get(GestaoAtividadeEconomica.Regiao.valueOf(regiao));
         deducao =(0.23-imposto)*valortotal;
         return deducao;
    }

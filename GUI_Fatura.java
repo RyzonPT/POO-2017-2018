@@ -16,6 +16,7 @@ import javax.swing.*;
 import javafx.util.Pair;
 import java.util.List;
 import java.util.ArrayList;
+import java.text.*;
 
 public class GUI_Fatura extends JFrame {
 
@@ -72,11 +73,19 @@ public class GUI_Fatura extends JFrame {
 
         //pane with null layout
         JPanel contentPane = new JPanel(null);
-        if(fatura.getAtivEconEscolhida()=="n/a"){
-        contentPane.setPreferredSize(new Dimension(400,800));
+        if(fatura.getAtivEconEscolhida()=="n/a" && ficha.getfichaType()==0){
+            contentPane.setPreferredSize(new Dimension(400,800));
         }
         else{
-        contentPane.setPreferredSize(new Dimension(400,600));
+            contentPane.setPreferredSize(new Dimension(400,600));
+            if(ficha instanceof EntidadePrivada){
+                EntidadePrivada fichaP = (EntidadePrivada) ficha;
+                fatura.calculoDeducaoPrivada(fichaP.getndependentes());
+            }
+            else{
+                if(fatura.getnifCliente()==ficha.getnif())
+                fatura.calculoDeducaoEmpresa();
+            }
         }
         contentPane.setBackground(new Color(192,192,192));
         
@@ -91,7 +100,7 @@ public class GUI_Fatura extends JFrame {
         AtividadeEconoText.setVisible(true);
         
 
-       if(fatura.getAtivEconEscolhida()=="n/a"){
+       if(fatura.getAtivEconEscolhida()=="n/a" && ficha.getfichaType()==0){
         listAtiv = new JList(fatura.getActividadeEconomica().toArray());
         listAtiv.setBackground(new Color(255,255,255));
         listAtiv.setForeground(new Color(0,0,0));
@@ -148,13 +157,15 @@ public class GUI_Fatura extends JFrame {
         DataText.setText(fatura.getdatastring());
         DataText.setVisible(true);
 
+        DecimalFormat df = new DecimalFormat("0.00");
+        
         DeducaoText = new JLabel();
         DeducaoText.setBounds(137,540,300,35);
         DeducaoText.setBackground(new Color(214,217,223));
         DeducaoText.setForeground(new Color(0,0,0));
         DeducaoText.setEnabled(true);
         DeducaoText.setFont(new Font("sansserif",0,12));
-        DeducaoText.setText(String.valueOf(fatura.getdeducao()));
+        DeducaoText.setText(df.format(fatura.getdeducao())+"€");
         DeducaoText.setVisible(true);
 
         EmailClienteText = new JLabel();
@@ -468,8 +479,8 @@ public class GUI_Fatura extends JFrame {
              EntidadePrivada fichaP = (EntidadePrivada) ficha;
              fatura.calculoDeducaoPrivada(fichaP.getndependentes());
         }
-        
-        DeducaoText.setText(String.valueOf(fatura.getdeducao()));
+        DecimalFormat df = new DecimalFormat("0.00");
+        DeducaoText.setText(df.format(fatura.getdeducao()));
 }
     private void onConfirmarButtonClicked (ActionEvent evt) {  
          int reply = JOptionPane.showConfirmDialog(null, "TEM A CERTEZA? A SUA ACAO E PERMANENTE!!", "Message", JOptionPane.YES_NO_OPTION);

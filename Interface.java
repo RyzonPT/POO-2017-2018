@@ -41,11 +41,11 @@ public class Interface
             
             
             ArrayList<Integer> lolis3 = new ArrayList<Integer>();
-                /*
-                ObjectInputStream infaturas = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
+                
+                /*ObjectInputStream infaturas = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
                 GestaoFaturas gestorfaturas = (GestaoFaturas) infaturas.readObject();
                 ObjectInputStream infichas = new ObjectInputStream(new FileInputStream("gestorfichas.txt"));
-                GestaoFichas gestorfichas = (GestaoFichas) infichas.readObject(); */
+                GestaoFichas gestorfichas = (GestaoFichas) infichas.readObject();*/ 
             ArrayList<Integer> lolis4 = new ArrayList<Integer>();
                 lolis4.add(2);
 
@@ -60,7 +60,7 @@ public class Interface
                              EntidadePrivada fichaPrivada7 = new EntidadePrivada(7,"Filipe-Cunha1@hotmail.com","Filipe","morada","tanos",3,lolis3,0,lolis);
             gestorfichas.addFicha(fichaPrivada7);
             
-            
+            /*
             Fatura ola = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste2,0, null, null, null, 0,0.23);
             gestorfaturas.addFaturas(ola);
                         Fatura dam = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste2,0, null, null, null, 0, 0.23);
@@ -88,8 +88,8 @@ public class Interface
             Fatura dam11 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 1 ,lolis2,  teste,0, null, null, null, 2,0.23);
             gestorfaturas.addFaturas(dam11);
             
-                        Fatura dam12 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 1 ,lolis2,  teste, 0, null, null, null, 2,0.23);
-            gestorfaturas.addFaturas(dam12);
+                        Fatura dam12 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 1 ,lolis2,  teste, 0, null, null, null, 2,0.23,EntreDouroMinho);
+            gestorfaturas.addFaturas(dam12);*/
             
             
     
@@ -103,14 +103,14 @@ public class Interface
             
             ArrayList<String> a =new ArrayList<String>();
             a.add("Educacao");
-            a.add("transportes");
-            a.add("pilas");
             
             
             
             
-           EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1,"andrepx1998@gmail.com", "NERDLDA", "BRAGA","12345", a, 0);
+           EntidadeEmpresas fichaEmpresa0 = new EntidadeEmpresas(1,"andrepx1998@gmail.com", "NERDLDA", "BRAGA","12345", a, 0,"EntreDouroMinho");
+           EntidadeEmpresas fichaEmpresa1 = new EntidadeEmpresas(3,"andrepx1998@gmail.com", "NERDLDA", "BRAGA","", a, 0,"Alentejo");
            gestorfichas.addFicha(fichaEmpresa0);
+           gestorfichas.addFicha(fichaEmpresa1);
             /*
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("gestorfichas.txt"));
             out.writeObject(gestorfichas);

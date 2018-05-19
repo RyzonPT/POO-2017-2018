@@ -23,7 +23,8 @@ public class EntidadePrivada extends FichaCliente implements Serializable
         this.agregadoFamiliar = agregadoFamiliar;
         this.numerosFiscais = numerosFiscais;
         this.coeficienteFiscal = coeficienteFiscal;
-        this.codigosAtividades = codigosAtividade;        
+        this.codigosAtividades = codigosAtividade;     
+        reducaoImposto();
     }
     
     public EntidadePrivada( EntidadePrivada c){

@@ -12,20 +12,24 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
        super();
        this.actividadeEconomica = new ArrayList<>();
        this.deducaoFiscal = 0;
+       this.regiao="EntreDouroMinho";
     }
     
-    public EntidadeEmpresas(int nif,String email, String nome, String morada, String password, ArrayList<String> actividadeEconomica, int deducaoFiscal){
+    public EntidadeEmpresas(int nif,String email, String nome, String morada, String password, ArrayList<String> actividadeEconomica, int deducaoFiscal,String regiao){
        super(nif,email,nome,morada,password);
        this.actividadeEconomica = actividadeEconomica;
        this.deducaoFiscal = deducaoFiscal;
        FichaCliente ola = (FichaCliente) this;
        ola.setfichaType(1);
+       this.regiao=regiao;
+       reducaoImposto();
     }
     
     public EntidadeEmpresas(EntidadeEmpresas c){
         super(c);
         this.actividadeEconomica = c.getActividadeEconomica();
         this.deducaoFiscal = c.getDeducaoFiscal();
+        this.regiao =c.getregiao();
     }
     
     public ArrayList<String> getActividadeEconomica(){
@@ -35,6 +39,7 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
     public double getFaturacao(){
         return this.faturacao;
     }
+    
     public String getregiao(){
         return this.regiao;
     }

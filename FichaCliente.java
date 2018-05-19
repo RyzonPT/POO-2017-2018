@@ -35,14 +35,14 @@ public class FichaCliente implements Serializable
        this.nome = nome;
        this.morada = morada;
        this.password = password;
-       imposto = reducaoImposto();
+       
        if(this instanceof EntidadeEmpresas){
            this.fichaType = 1;
        }
        else{ 
            this.fichaType = 0;
        }
-           moneyspent=0;
+       moneyspent=0;
    }
     
    public FichaCliente(FichaCliente c){
@@ -53,6 +53,7 @@ public class FichaCliente implements Serializable
         this.password = c.getPassword();
         this.fichaType = c.getfichaType();
         this.moneyspent =c.getmoneyspent();
+        this.imposto=c.getimposto();
    }
     
    public int getnif(){
@@ -90,6 +91,10 @@ public class FichaCliente implements Serializable
    public String getPassword(){
         return this.password;
    }
+   
+   public void setimposto(double imposto){
+       this.imposto=imposto;
+    }
     
    public void setnif(int numeroFiscal){
         this.nif = numeroFiscal;
@@ -156,8 +161,10 @@ public class FichaCliente implements Serializable
    public double reducaoImposto(){
         if(fichaType == 1){
             EntidadeEmpresas fichaE =(EntidadeEmpresas) this;
-            double impostoregiao = GestaoAtividadeEconomica.getEnumEmpresaMap().get(fichaE.getregiao());
+            System.out.println(fichaE.getregiao());
+            double impostoregiao = GestaoAtividadeEconomica.getEnumEmpresaMap().get(GestaoAtividadeEconomica.Regiao.valueOf(fichaE.getregiao()));
             imposto = impostoregiao;
+            System.out.print("imposto:" +imposto);
         }
         else{
             if( this instanceof EntidadePrivada){

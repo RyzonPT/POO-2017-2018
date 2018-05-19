@@ -691,17 +691,10 @@ public class GUI_CriaFatura extends JFrame {
             JOptionPane.showMessageDialog(null,"Nenhum produto adiconado.", "Message", JOptionPane.ERROR_MESSAGE);
             return;
     }
-    Fatura c;
+        System.out.println(ficha.getimposto()+"treo");
         EntidadeEmpresas fichaE = (EntidadeEmpresas) ficha;   
-        if(fichaAssociada.getfichaType() == 1){
-            c = new Fatura (ficha.getNome(), ficha.getMorada(), ficha.getEmail(),ficha.getnif(),  produtos,fichaE.getActividadeEconomica(),0, nomeCliente, moradaCliente, emailCliente, Integer.parseInt(nifCliente), ficha.getimposto());
-            c.calculoDeducaoEmpresa();
-        }
-        else{
-            EntidadePrivada kapa = (EntidadePrivada) fichaAssociada;
-            c = new Fatura (ficha.getNome(), ficha.getMorada(), ficha.getEmail(),ficha.getnif(),  produtos,fichaE.getActividadeEconomica(),0, nomeCliente, moradaCliente, emailCliente, Integer.parseInt(nifCliente), ficha.getimposto());
-            c.calculoDeducaoPrivada(kapa.getndependentes());
-        }
+            Fatura c = new Fatura (ficha.getNome(), ficha.getMorada(), ficha.getEmail(),ficha.getnif(), produtos,fichaE.getActividadeEconomica(),0, nomeCliente, moradaCliente, emailCliente, Integer.parseInt(nifCliente), ficha.getimposto(),fichaE.getregiao());
+        
         gestorfaturas.addFaturas(c);
         ficha.adicionaDinheiroGasto(c);
         JOptionPane.showMessageDialog(null,"Fatura criada com sucesso!", "Message" , JOptionPane.INFORMATION_MESSAGE);
