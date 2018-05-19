@@ -255,7 +255,7 @@ public class Fatura implements Serializable
     
     public double calculaValor(ArrayList<Triple> produto){
         for(Triple h : produto){
-            valortotal += h.getquantidade() * h.getprecounitario();
+            valortotal += h.getquantidade() * h.getprecounitario() * (1 - imposto);
         }
         return valortotal;
       }

@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.*;  
 import java.util.Map;
 import java.util.EnumMap;
-
+import java.text.*;
 
 public class GUI_FichaCliente extends JFrame {
 
@@ -44,6 +44,7 @@ public class GUI_FichaCliente extends JFrame {
     private JLabel defaultdeducaotext;
     private JLabel label1;
     private JLabel label2;
+    private JLabel faturacaotext1;
     private JLabel label3;
     private JLabel label4;
     private JLabel label5;
@@ -68,6 +69,7 @@ public class GUI_FichaCliente extends JFrame {
     private JButton buttonDataInter;
     private JTextField TextFdatai;
     private JTextField TextFdataf;
+    private JTextField faturacaotext;
     private JTextField TextFnifCliente;
     private int flag;
     private String nifCliente;
@@ -82,6 +84,7 @@ public class GUI_FichaCliente extends JFrame {
     //Constructor 
     public GUI_FichaCliente(FichaCliente fichas,GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
         ficha=fichas;
+        nifCliente = "-1";
         this.gestorfaturas = gestorfaturas;
         this.gestorfichas = gestorfichas;
         this.setTitle("GUI_FichaCliente");
@@ -257,6 +260,25 @@ public class GUI_FichaCliente extends JFrame {
         defaultatividadeText.setVisible(true);
         
         
+        faturacaotext1 = new JLabel();
+        faturacaotext1.setBounds(320,650,300,35);
+        faturacaotext1.setBackground(new Color(214,217,223));
+        faturacaotext1.setForeground(new Color(0,0,0));
+        faturacaotext1.setEnabled(true);
+        faturacaotext1.setFont(new Font("sansserif",0,15));
+        faturacaotext1.setText("Faturacao no intervalo de tempo dado:");
+        faturacaotext1.setVisible(true);
+        
+        faturacaotext = new JTextField();
+        faturacaotext.setBounds(579,655,100,27);
+        faturacaotext.setBackground(new Color(214,217,223));
+        faturacaotext.setForeground(new Color(0,0,0));
+        faturacaotext.setEnabled(true);
+        faturacaotext.setFont(new Font("sansserif",0,15));
+        faturacaotext.setText("0");
+        faturacaotext.setVisible(true);
+        faturacaotext.setEditable(false);
+        
         comboBoxText = new JLabel();
         comboBoxText.setBounds(330,490,70,70);
         comboBoxText.setBackground(new Color(214,217,223));
@@ -311,7 +333,7 @@ public class GUI_FichaCliente extends JFrame {
         TextFnifCliente.setForeground(new Color(0,0,0));
         TextFnifCliente.setEnabled(true);
         TextFnifCliente.setFont(new Font("sansserif",0,12));
-        TextFnifCliente.setText("nif de Cliente");
+        TextFnifCliente.setText("Nif de Cliente");
         TextFnifCliente.addKeyListener(new KeyAdapter() {
             public void keyReleased(KeyEvent evt){
                 onnifClienteReleasedKeyReleased(evt);
@@ -453,6 +475,8 @@ public class GUI_FichaCliente extends JFrame {
         scrollListaFaturas.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollListaFaturas.setBounds(52,286,250,200);
         
+        contentPane.add(faturacaotext1);
+        contentPane.add(faturacaotext);
         contentPane.add(comboBoxText);
         contentPane.add(combobox1);
         contentPane.add(textinhoText);
@@ -742,7 +766,12 @@ public class GUI_FichaCliente extends JFrame {
     }
     
     private void onnifClienteReleasedKeyReleased(KeyEvent e){
-        nifCliente = TextFnifCliente.getText();
+         if(TextFnifCliente.getText().equals("")||TextFnifCliente.getText().equals("Nif de Cliente")){
+         nifCliente = "-1";  
+         }
+         else{
+         nifCliente = TextFnifCliente.getText();
+         }
     }
     
     private void onIntervalDataButtonClicked(MouseEvent es){
@@ -769,6 +798,11 @@ public class GUI_FichaCliente extends JFrame {
             return;
         }
         
+        if(!nifCliente.matches("[(-1)-9]+")){
+            JOptionPane.showMessageDialog(null,"Nif de Cliente Invalido.", "Message", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         List<Fatura> list = gestorfaturas.intervalofaturas(datef,datei,ficha.getnif(),Integer.parseInt(nifCliente));
         
         listModel.removeAllElements(); 
@@ -776,6 +810,8 @@ public class GUI_FichaCliente extends JFrame {
             Botao botao22 = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha);
             listModel.addElement(botao22);
         }
+        DecimalFormat df = new DecimalFormat("0.00");
+        faturacaotext.setText(df.format(gestorfaturas.getIntervalFaturacao(datei,datef,ficha.getnif(),Integer.parseInt(nifCliente)))+ " €");
     }
     
   

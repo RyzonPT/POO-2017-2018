@@ -15,6 +15,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.time.ZoneId;
 
+
+
+
 public class GestaoFaturas implements Serializable
 {
     private Map<Integer,Fatura> mapfaturas;
@@ -121,7 +124,7 @@ public class GestaoFaturas implements Serializable
         List<Fatura> aux = new ArrayList<Fatura>();
         for(Fatura h: madefaturas){
             Date date = Date.from(h.getData().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            if(date.before(dataf) && date.after(datai) && (h.getnifCliente() == nifcliente)){
+            if(date.before(dataf) && date.after(datai) && ((h.getnifCliente() == nifcliente) || nifcliente == -1)){
                 aux.add(h.clone());
             }
         }
@@ -134,15 +137,17 @@ public class GestaoFaturas implements Serializable
         return aux;
     }
     
-    public double getIntervalFaturacao(Date datai, Date dataf, int nif){
+    public double getIntervalFaturacao(Date datai, Date dataf, int nifEmpresa, int nifCliente){
        List <Fatura> a = new ArrayList<Fatura>();
        double total=0;
-       for(Fatura h : getmadefaturas(nif)){
+       for(Fatura h : getmadefaturas(nifEmpresa)){
            Date date = Date.from(h.getData().atStartOfDay(ZoneId.systemDefault()).toInstant());
-            if(date.before(dataf) && date.after(datai) && h.getnifEmpresa() == nif){
+           
+            if(date.before(dataf) && date.after(datai) && ((h.getnifCliente() == nifCliente) || nifCliente == -1)){
                 total+= h.getvalortotal();
             }
         }
+       
         return total;
     }
 }
