@@ -278,7 +278,6 @@ public class Fatura implements Serializable
             valortotal += h.getquantidade() * h.getprecounitario();
         }
         valortotal = valortotal *(1+imposto);
-        System.out.println(imposto+"get fucked");
         return valortotal;
       }
       
@@ -295,5 +294,7 @@ public class Fatura implements Serializable
         deducao =(0.23-imposto)*valortotal;
         return deducao;
    }
+   
+   
 
 }

@@ -13,6 +13,7 @@ import javax.swing.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.text.*;
 
 public class GUI_Administrador extends JFrame {
 
@@ -33,6 +34,7 @@ public class GUI_Administrador extends JFrame {
     private String numerodeempresas;
     private int flag = 0;
     private int flag2= 0;
+    private JButton logOutbutton;
 
     //Constructor 
     public GUI_Administrador(GestaoFichas gestorfichas,GestaoFaturas gestorfaturas){
@@ -60,11 +62,14 @@ public class GUI_Administrador extends JFrame {
         dezQueMaisGastam.setVisible(true);
         //Set methods for mouse events
         //Call defined methods
-        dezQueMaisGastam.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                gotodezQueMaisGastam(evt);
+        dezQueMaisGastam.addActionListener(new ActionListener()
+       {
+           public void actionPerformed(ActionEvent e)
+           {
+               gotodezQueMaisGastam(e);
             }
-        });
+            });
+      
         
         list1 = new JList(listModel);
         list1.setBackground(new Color(255,255,255));
@@ -121,8 +126,25 @@ public class GUI_Administrador extends JFrame {
                 onKeyReleasednempresas(evt);
             }
         });
+        
+        
+        logOutbutton = new JButton();
+        logOutbutton.setBounds(330,690,150,60);
+        logOutbutton.setBackground(new Color(214,217,223));
+        logOutbutton.setForeground(new Color(0,0,0));
+        logOutbutton.setEnabled(true);
+        logOutbutton.setFont(new Font("sansserif",0,12));
+        logOutbutton.setText("Logout");
+        logOutbutton.setVisible(true);
+        
+       logOutbutton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                onlogOutButtonClicked(evt);
+            }
+        });
             
         //adding components to contentPane panel
+        contentPane.add(logOutbutton);
         contentPane.add(dezQueMaisGastam);
         contentPane.add(scroll);
         contentPane.add(scroll2);
@@ -142,20 +164,17 @@ public class GUI_Administrador extends JFrame {
         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
     
-    private void gotodezQueMaisGastam (MouseEvent evt) {
-        if (flag == 0){ //flag só para nao poder clicar no butao mais do que uma vez
-            lista = gestorfichas.gettenUsersMostRich();
-            List<FichaCliente> dezmaisgastam = new ArrayList<>();
-            dezmaisgastam = lista;
-            for(int i = 0; i < dezmaisgastam.size(); i++) {
-                //System.out.println("Nif: "+dezmaisgastam.get(i).getnif()+" Total Gasto: "+dezmaisgastam.get(i).getmoneyspent());
-                listModel.addElement("Nif: "+dezmaisgastam.get(i).getnif()+" Total Gasto: "+dezmaisgastam.get(i).getmoneyspent());
+    private void gotodezQueMaisGastam (ActionEvent evt) {
+            List<FichaCliente> dezmaisgastam = gestorfichas.gettenUsersMostRich();
+            DecimalFormat df = new DecimalFormat("0.00");
+            for(FichaCliente h : dezmaisgastam) {
+                listModel.addElement("Nif: "+h.getnif()+" Total Gasto: "+df.format(h.getmoneyspent()));
+                System.out.println(h.getnif()+"tou farto" + h.getmoneyspent());
             }
-            flag = 1;
-            //lista = gestorfichas.gettenUsersMostRich();             <-
-            //System.out.println(Arrays.toString(lista.toArray()));   <- (para ver a lista completa)
-        }
-    }
+            dezQueMaisGastam.setEnabled(false);
+           
+        } 
+            
     
     private void gotoxempresas (MouseEvent evt) {
         listModel2.removeAllElements();
@@ -166,14 +185,23 @@ public class GUI_Administrador extends JFrame {
             lista2 = gestorfichas.getMoneyEmpresas(Integer.parseInt(numerodeempresas));
             List<EntidadeEmpresas> xEmpresas = new ArrayList<>();
             xEmpresas = lista2;
-            for(int i = 0; i < xEmpresas.size(); i++) {
-                listModel2.addElement("Nif: "+xEmpresas.get(i).getnif()+" Faturas: "+xEmpresas.get(i).getFaturacao()+" Dedução fiscal: "+xEmpresas.get(i).getDeducaoFiscal());
+            DecimalFormat df = new DecimalFormat("0.00");
+            for(EntidadeEmpresas x : xEmpresas) {
+                listModel2.addElement("Nif: "+x.getnif()+" Faturas: "+df.format(x.getFaturacao())+" Dedução fiscal: "+df.format(gestorfaturas.totalDeducao(x.getnif())));
             }
         }
     }
     
     private void onKeyReleasednempresas (KeyEvent evt) {
             numerodeempresas = nempresas.getText();
+    }
+    
+    private void onlogOutButtonClicked (MouseEvent evt) {      
+         GUI_Login login = new GUI_Login();
+         login.setgestorfichas(gestorfichas);
+         login.setgestorfaturas(gestorfaturas);
+         login.setVisible(true);
+         dispose();
     }
     
     //method for generate menu

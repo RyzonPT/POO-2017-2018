@@ -150,4 +150,20 @@ public class GestaoFaturas implements Serializable
        
         return total;
     }
+    
+    public double totalDeducao (int nif){
+        double totalDeducao=0;
+        for(Fatura h : getmadefaturas(nif)){
+            totalDeducao+=h.calculoDeducaoEmpresa();
+        }
+        return totalDeducao;
+    }
+    
+    public double totalmoneygasto (int nif){
+        double moneygasto=0;
+        for(Fatura h : getmyfaturas(nif)){
+           moneygasto+=h.getvalortotal();
+        }
+        return moneygasto;
+    }
 }

@@ -85,6 +85,7 @@ public class GUI_Fatura extends JFrame {
             else{
                 if(fatura.getnifCliente()==ficha.getnif())
                 fatura.calculoDeducaoEmpresa();
+                System.out.print(fatura.calculoDeducaoEmpresa());
             }
         }
         contentPane.setBackground(new Color(192,192,192));

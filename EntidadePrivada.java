@@ -32,7 +32,7 @@ public class EntidadePrivada extends FichaCliente implements Serializable
         this.agregadoFamiliar =c.getAgregadoFamiliar();
         this.numerosFiscais = c.getNumerosFiscais();
         this.coeficienteFiscal = c.getCoeficienteFiscal();
-        this.codigosAtividades = c.getCodigosAtividades(); 
+        this.codigosAtividades = c.getCodigosAtividades();
     }
 
     public int getAgregadoFamiliar(){
@@ -88,4 +88,5 @@ public class EntidadePrivada extends FichaCliente implements Serializable
         le.getCoeficienteFiscal()==this.coeficienteFiscal &&
         this.codigosAtividades.equals(le.getCodigosAtividades());
     }
+    
 }

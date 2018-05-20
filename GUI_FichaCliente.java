@@ -566,7 +566,6 @@ public class GUI_FichaCliente extends JFrame {
         int i = 0;
         for(GestaoAtividadeEconomica.AtividadeEconomica h: GestaoAtividadeEconomica.getEnumPrivadaMap().keySet()){
             codigos[i] =  GestaoAtividadeEconomica.getEnumPrivadaMap().get(h).getValue()+ "    " + h;
-            System.out.println("jesus crist # mioguel");
             i++;
         }
         

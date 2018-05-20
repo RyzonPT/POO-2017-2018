@@ -42,7 +42,6 @@ public class FichaCliente implements Serializable
        else{ 
            this.fichaType = 0;
        }
-       moneyspent=0;
    }
     
    public FichaCliente(FichaCliente c){
@@ -155,16 +154,14 @@ public class FichaCliente implements Serializable
    }
     
    public void adicionaDinheiroGasto(Fatura a){
-        moneyspent= moneyspent + a.getvalortotal();
+        moneyspent=moneyspent + a.getvalortotal();
    }
    
    public double reducaoImposto(){
         if(fichaType == 1){
             EntidadeEmpresas fichaE =(EntidadeEmpresas) this;
-            System.out.println(fichaE.getregiao());
             double impostoregiao = GestaoAtividadeEconomica.getEnumEmpresaMap().get(GestaoAtividadeEconomica.Regiao.valueOf(fichaE.getregiao()));
             imposto = impostoregiao;
-            System.out.print("imposto:" +imposto);
         }
         else{
             if( this instanceof EntidadePrivada){

@@ -6,7 +6,7 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
    private ArrayList<String> actividadeEconomica;
    private int deducaoFiscal;
    private String regiao;
-   private int faturacao;
+   private double faturacao;
 
    public EntidadeEmpresas(){
        super();
@@ -14,8 +14,8 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
        this.deducaoFiscal = 0;
        this.regiao="EntreDouroMinho";
     }
-    
-    public EntidadeEmpresas(int nif,String email, String nome, String morada, String password, ArrayList<String> actividadeEconomica, int deducaoFiscal,String regiao){
+
+   public EntidadeEmpresas(int nif,String email, String nome, String morada, String password, ArrayList<String> actividadeEconomica, int deducaoFiscal,String regiao){
        super(nif,email,nome,morada,password);
        this.actividadeEconomica = actividadeEconomica;
        this.deducaoFiscal = deducaoFiscal;
@@ -23,13 +23,20 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
        ola.setfichaType(1);
        this.regiao=regiao;
        reducaoImposto();
-    }
+   }
     
     public EntidadeEmpresas(EntidadeEmpresas c){
         super(c);
         this.actividadeEconomica = c.getActividadeEconomica();
         this.deducaoFiscal = c.getDeducaoFiscal();
         this.regiao =c.getregiao();
+        this.faturacao = c.getFaturacao();
+    }
+    
+    public void valorFaturacao(GestaoFaturas a){
+      for(Fatura h :a.getmadefaturas(getnif())){
+          this.faturacao+=h.getvalortotal();
+        }
     }
     
     public ArrayList<String> getActividadeEconomica(){
@@ -38,6 +45,10 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
     
     public double getFaturacao(){
         return this.faturacao;
+    }
+    
+    public void setFaturacao(double faturacao){
+        this.faturacao=faturacao;
     }
     
     public String getregiao(){
@@ -72,12 +83,5 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
                le.getDeducaoFiscal()==this.deducaoFiscal;
     }
     
-    public void valorFaturacao(GestaoFaturas a){
-      for(Fatura h :a.getmadefaturas(getnif())){
-          faturacao+=h.getvalortotal();
-        }
-        
-    }
-    
-    
+
 }
