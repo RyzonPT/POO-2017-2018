@@ -26,7 +26,11 @@ import javax.swing.event.ListSelectionListener;
 
 
 public class GUI_Register extends JFrame {
-
+    /*alguns registos que já estão feitos que usei ao experimentar o debugging:
+     * nif password
+     * 8  8
+     * 9  9
+    */
     //Registo de individuo
     private JMenuBar menuBar;
     private JButton BRegistar;
@@ -92,6 +96,7 @@ public class GUI_Register extends JFrame {
     private DefaultListModel listModel2 = new DefaultListModel();
     private DefaultListModel listModel3 = new DefaultListModel();
     public GestaoFichas gestorfichas;
+    public GestaoFaturas gestorfaturas;
     private EntidadePrivada fichaPrivada;
     private EntidadeEmpresas fichaEmpresa;
     private ArrayList<Integer> nifs;
@@ -804,6 +809,7 @@ public class GUI_Register extends JFrame {
                     infoBox("Registo com sucesso!", "Registo com sucesso");
                     HallentradaGUI hallentrada = new HallentradaGUI();
                     hallentrada.setgestorfichas(gestorfichas);
+                    hallentrada.setgestorfaturas(gestorfaturas);
                     dispose();
                 }
             }
@@ -819,7 +825,7 @@ public class GUI_Register extends JFrame {
                 infoBox("Já existe um registo com este Nif", "Impossível registar");
             }
             else{
-                if(RRegiao.getText()=="EntreDouroMinho" || RRegiao.getText()=="TrasoMontesAltoDouro" || RRegiao.getText()=="BeiraLitoral" || RRegiao.getText()=="BeiraInterior" || RRegiao.getText()=="EstramaduraRibatejo" || RRegiao.getText()=="LisboaSetubal" || RRegiao.getText()=="Alentejo" || RRegiao.getText()=="Algarve" || RRegiao.getText()=="Madeira" || RRegiao.getText()=="Acores"){
+                if(RRegiao.getText().equals("EntreDouroMinho") || RRegiao.getText().equals("TrasoMontesAltoDouro") || RRegiao.getText().equals("BeiraLitoral") || RRegiao.getText().equals("BeiraInterior") || RRegiao.getText().equals("EstramaduraRibatejo") || RRegiao.getText().equals("LisboaSetubal") || RRegiao.getText().equals("Alentejo") || RRegiao.getText().equals("Algarve") || RRegiao.getText().equals("Madeira") || RRegiao.getText().equals("Acores")){
                     fichaEmpresa.setregiao(regiao);
                     fichaEmpresa.setPassword(password);
                     fichaEmpresa.setdeducaoFiscal(0);
@@ -829,11 +835,13 @@ public class GUI_Register extends JFrame {
                     fichaEmpresa.setEmail(email);
                     fichaEmpresa.setMorada(morada);
                     fichaEmpresa.setNome(nome);
+                    fichaEmpresa.setmoneyspent(0);
                     gestorfichas.addFicha(fichaEmpresa);
                     if(gestorfichas.existeFicha(Integer.parseInt(nif))){
                         infoBox("Registo com sucesso!", "Registo com sucesso");
                         HallentradaGUI hallentrada = new HallentradaGUI();
                         hallentrada.setgestorfichas(gestorfichas);
+                        hallentrada.setgestorfaturas(gestorfaturas);
                         dispose();
                     }
                 }
@@ -878,7 +886,7 @@ public class GUI_Register extends JFrame {
             CodigosAtividades.setText("");
         }
         else{
-            if(CodigosAtividades.getText()=="1000001" || CodigosAtividades.getText()=="1000002" || CodigosAtividades.getText()=="1000003" || CodigosAtividades.getText()=="1000004" || CodigosAtividades.getText()=="1000005" || CodigosAtividades.getText()=="1000006" || CodigosAtividades.getText()=="1000007" || CodigosAtividades.getText()=="1000008" || CodigosAtividades.getText()=="1000009" || CodigosAtividades.getText()=="1000010"){
+            if(CodigosAtividades.getText().equals("1000001") || CodigosAtividades.getText().equals("1000002") || CodigosAtividades.getText().equals("1000003") || CodigosAtividades.getText().equals("1000004") || CodigosAtividades.getText().equals("1000005") || CodigosAtividades.getText().equals("1000006") || CodigosAtividades.getText().equals("1000007") || CodigosAtividades.getText()=="1000008" || CodigosAtividades.getText().equals("1000009") || CodigosAtividades.getText().equals("1000010")){
                CodigosAtividades.setText("");
                listModel2.addElement(codigoAtividade);
                codigoatividades.add(codigoAtividade); 
@@ -896,7 +904,7 @@ public class GUI_Register extends JFrame {
             RAtividadeEconomica.setText("");
         }
         else{
-            if(RAtividadeEconomica.getText()=="Saude" || RAtividadeEconomica.getText()=="Educacao" || RAtividadeEconomica.getText()=="DespesasGerais" || RAtividadeEconomica.getText()=="Habitacao" || RAtividadeEconomica.getText()=="Lares" || RAtividadeEconomica.getText()=="ReparacaoAutomovel" || RAtividadeEconomica.getText()=="RestauraçãoAlojamento" || RAtividadeEconomica.getText()=="CabeleireirosInstitutosBeleza" || RAtividadeEconomica.getText()=="AtividadesVeterinarias" || RAtividadeEconomica.getText()=="PassesMensais"){
+            if(RAtividadeEconomica.getText().equals("Saude") || RAtividadeEconomica.getText().equals("Educacao") || RAtividadeEconomica.getText().equals("DespesasGerais") || RAtividadeEconomica.getText().equals("Habitacao") || RAtividadeEconomica.getText().equals("Lares") || RAtividadeEconomica.getText().equals("ReparacaoAutomovel") || RAtividadeEconomica.getText().equals("RestauraçãoAlojamento") || RAtividadeEconomica.getText().equals("CabeleireirosInstitutosBeleza") || RAtividadeEconomica.getText().equals("AtividadesVeterinarias") || RAtividadeEconomica.getText().equals("PassesMensais")){
                 RAtividadeEconomica.setText("");
                 listModel3.addElement(atividadeEconomica);
                 atividades.add(atividadeEconomica);
@@ -937,6 +945,10 @@ public class GUI_Register extends JFrame {
     
     public void setgestorfichas(GestaoFichas a){
         gestorfichas = a;
+    }
+    
+    public void setgestorfaturas(GestaoFaturas a){
+        gestorfaturas = a;
     }
     
     private void onKeyReleasedRegiao (KeyEvent evt) {

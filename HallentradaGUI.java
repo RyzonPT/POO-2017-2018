@@ -123,6 +123,7 @@ public class HallentradaGUI extends JFrame {
     private void gotoregister (MouseEvent evt) {
         GUI_Register register = new GUI_Register();
         register.setgestorfichas(gestorfichas);
+        register.setgestorfaturas(gestorfaturas);
         register.setVisible(true);
         dispose();
     }
