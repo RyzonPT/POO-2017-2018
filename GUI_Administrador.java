@@ -169,7 +169,6 @@ public class GUI_Administrador extends JFrame {
             DecimalFormat df = new DecimalFormat("0.00");
             for(FichaCliente h : dezmaisgastam) {
                 listModel.addElement("Nif: "+h.getnif()+" Total Gasto: "+df.format(h.getmoneyspent()));
-                System.out.println(h.getnif()+"tou farto" + h.getmoneyspent());
             }
             dezQueMaisGastam.setEnabled(false);
            

@@ -13,6 +13,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import javax.swing.border.Border;
 import javax.swing.*;
+import java.util.List;
 
 public class GUI_Login extends JFrame {
 
@@ -145,9 +146,10 @@ public static void infoBox(String infoMessage, String titleBar)
     private void onLoginButtonClicked (MouseEvent evt) {
             int nif = Integer.parseInt(save);
             if(nif==101010 && password.equals("admin")){
-                GUI_Administrador admin = new GUI_Administrador(gestorfichas, gestorfaturas);
-                admin.setVisible(true);
                 dispose();
+                GUI_Administrador admin = new GUI_Administrador(gestorfichas, gestorfaturas);
+                
+                
             }
             else {
                 FichaCliente fichaEncontrada = gestorfichas.autenticacao(password,nif);

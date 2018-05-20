@@ -34,10 +34,8 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
         this.faturacao = c.getFaturacao();
     }
     
-    public void valorFaturacao(GestaoFaturas a){
-      for(Fatura h :a.getmadefaturas(getnif())){
-          this.faturacao+=h.getvalortotal();
-        }
+    public void valorFaturacao(double valortotal){
+          faturacao = faturacao + valortotal;
     }
     
     public ArrayList<String> getActividadeEconomica(){

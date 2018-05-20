@@ -44,6 +44,7 @@ public class GestaoFaturas implements Serializable
     public void addFaturas(Fatura a){
         a.setfaturaID(this.key);
         this.mapfaturas.put(a.getfaturaID(),a.clone()); 
+        
         key+=1;
         try{
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("gestorfaturas.txt"));
@@ -159,11 +160,4 @@ public class GestaoFaturas implements Serializable
         return totalDeducao;
     }
     
-    public double totalmoneygasto (int nif){
-        double moneygasto=0;
-        for(Fatura h : getmyfaturas(nif)){
-           moneygasto+=h.getvalortotal();
-        }
-        return moneygasto;
-    }
 }

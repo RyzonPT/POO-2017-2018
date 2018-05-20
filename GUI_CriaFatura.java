@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.table.*;
 import java.util.Arrays;
+import java.util.List;
 
 public class GUI_CriaFatura extends JFrame {
 
@@ -685,18 +686,24 @@ public class GUI_CriaFatura extends JFrame {
         if(!nifCliente.matches("[0-9]+")){
             JOptionPane.showMessageDialog(null,"Nif de Cliente Invalido.", "Message", JOptionPane.ERROR_MESSAGE);
             return;
-    }
+        }
     
         if(table.getRowCount()<1){
             JOptionPane.showMessageDialog(null,"Nenhum produto adiconado.", "Message", JOptionPane.ERROR_MESSAGE);
             return;
-    }
-        System.out.println(ficha.getimposto()+"treo");
+        }
         EntidadeEmpresas fichaE = (EntidadeEmpresas) ficha;   
-            Fatura c = new Fatura (ficha.getNome(), ficha.getMorada(), ficha.getEmail(),ficha.getnif(), produtos,fichaE.getActividadeEconomica(),0, nomeCliente, moradaCliente, emailCliente, Integer.parseInt(nifCliente), ficha.getimposto(),fichaE.getregiao());
+        Fatura c = new Fatura (ficha.getNome(), ficha.getMorada(), ficha.getEmail(),ficha.getnif(), produtos,fichaE.getActividadeEconomica(),0, nomeCliente, moradaCliente, emailCliente, Integer.parseInt(nifCliente), ficha.getimposto(),fichaE.getregiao());
         
         gestorfaturas.addFaturas(c);
-        ficha.adicionaDinheiroGasto(c);
+        gestorfichas.incrementavalor(fichaAssociada.getnif(),c.getvalortotal());
+        gestorfichas.incremenFaturacao(ficha.getnif(),c.getvalortotal());
+        
+        List<FichaCliente> dezmaisgastam = gestorfichas.gettenUsersMostRich();
+            for(FichaCliente h : dezmaisgastam) {
+                System.out.println(h.getnif()+"tou farto" + h.getmoneyspent());
+            }
+        
         JOptionPane.showMessageDialog(null,"Fatura criada com sucesso!", "Message" , JOptionPane.INFORMATION_MESSAGE);
         Botao botao = new Botao(Integer.toString(c.getfaturaID())+"   "+c.getnomeEmpresa(),c,ficha);
         listModel.addElement(botao);

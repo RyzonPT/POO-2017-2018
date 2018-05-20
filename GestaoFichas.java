@@ -93,6 +93,7 @@ public class GestaoFichas implements Serializable
     public GestaoFichas clone(){
         return new GestaoFichas(this);
     }
+
     
     public boolean testaautenticacao(String password, int nif){
                      if (!this.existeFicha(nif)){
@@ -137,5 +138,15 @@ public class GestaoFichas implements Serializable
         a = a.stream().limit(x).collect(Collectors.toList());
         return a;
     }
+    
+   public void incrementavalor( int nif, double valor){
+        fichas.get(nif).adicionaDinheiroGasto(valor);
+   }
+   
+   public void incremenFaturacao( int nif, double valor){
+       EntidadeEmpresas a = (EntidadeEmpresas)fichas.get(nif);
+        a.valorFaturacao(valor);
+   }
+    
     
 }

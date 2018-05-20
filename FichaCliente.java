@@ -153,8 +153,8 @@ public class FichaCliente implements Serializable
                moneyspent==a.getmoneyspent();
    }
     
-   public void adicionaDinheiroGasto(Fatura a){
-        moneyspent=moneyspent + a.getvalortotal();
+   public void adicionaDinheiroGasto(double a){
+        moneyspent=moneyspent + a;
    }
    
    public double reducaoImposto(){

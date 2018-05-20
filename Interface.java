@@ -42,17 +42,17 @@ public class Interface
             
             ArrayList<Integer> lolis3 = new ArrayList<Integer>();
                 
-                ObjectInputStream infaturas = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
+                /*ObjectInputStream infaturas = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
                 GestaoFaturas gestorfaturas = (GestaoFaturas) infaturas.readObject();
                 ObjectInputStream infichas = new ObjectInputStream(new FileInputStream("gestorfichas.txt"));
-                GestaoFichas gestorfichas = (GestaoFichas) infichas.readObject();
+                GestaoFichas gestorfichas = (GestaoFichas) infichas.readObject();*/
             ArrayList<Integer> lolis4 = new ArrayList<Integer>();
                 lolis4.add(2);
 
                 
             HallentradaGUI hall = new HallentradaGUI();
             GestaoAtividadeEconomica OLA = new GestaoAtividadeEconomica();
-           /*
+          
             ArrayList<Integer> olas= new ArrayList<Integer>();
             GestaoFichas gestorfichas = new GestaoFichas();
             GestaoFaturas gestorfaturas = new GestaoFaturas();
@@ -60,7 +60,7 @@ public class Interface
             
                              EntidadePrivada fichaPrivada7 = new EntidadePrivada(7,"Filipe-Cunha1@hotmail.com","Filipe","morada","tanos",3,lolis3,0,lolis);
             gestorfichas.addFicha(fichaPrivada7);
-            
+            /*
             
             Fatura ola = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste2,0, null, null, null, 0,0.23,"Algarve");
             gestorfaturas.addFaturas(ola);
@@ -90,7 +90,7 @@ public class Interface
             gestorfaturas.addFaturas(dam11);
             
                         Fatura dam12 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 1 ,lolis2,  teste, 0, null, null, null, 2,0.23,"EntreDouroMinho");
-            gestorfaturas.addFaturas(dam12);
+            gestorfaturas.addFaturas(dam12);*/
             
             
     
