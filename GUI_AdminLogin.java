@@ -14,7 +14,7 @@ import java.awt.event.MouseWheelListener;
 import javax.swing.border.Border;
 import javax.swing.*;
 
-public class GUI_Login extends JFrame {
+public class GUI_AdminLogin extends JFrame {
 
     private JMenuBar menuBar;
     private JPasswordField PasswordBox;
@@ -22,14 +22,13 @@ public class GUI_Login extends JFrame {
     private JButton button1;
     private JLabel label1;
     private JLabel label2;
-    private int nif;
     private String password ="";
     private GestaoFichas gestorfichas;
     private GestaoFaturas gestorfaturas;
-    private String save = "";
+    private int loginid = 0;
 
     //Constructor 
-    public GUI_Login(){
+    public GUI_AdminLogin(){
 
         this.setTitle("GUI_project");
         this.setSize(500,400);
@@ -71,7 +70,7 @@ public class GUI_Login extends JFrame {
         //Call defined method
         TextBox.addKeyListener(new KeyAdapter() {
             public void keyReleased(KeyEvent evt){
-                onNifKeyTyped(evt);
+                onloginKeyTyped(evt);
             }
         });
 
@@ -99,7 +98,7 @@ public class GUI_Login extends JFrame {
         label1.setForeground(new Color(0,0,0));
         label1.setEnabled(true);
         label1.setFont(new Font("sansserif",0,12));
-        label1.setText("NIF:");
+        label1.setText("Login ID:");
         label1.setVisible(true);
 
         label2 = new JLabel();
@@ -129,39 +128,26 @@ public class GUI_Login extends JFrame {
 
     //Method keyTyped for PasswordBox
     private void OnPasswordKeyTyped (KeyEvent evt) {
-            password = PasswordBox.getText();
+        password = PasswordBox.getText();
     }
     
     //Method keyTyped for TextBox
-        private void onNifKeyTyped (KeyEvent evt) {
-            save = TextBox.getText();
+    private void onloginKeyTyped (KeyEvent evt) {
+        loginid = Integer.parseInt(TextBox.getText());
     }
 
-public static void infoBox(String infoMessage, String titleBar)
+    public static void infoBox(String infoMessage, String titleBar)
     {
         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
     //Method mouseClicked for button1
     private void onLoginButtonClicked (MouseEvent evt) {
-            int nif = Integer.parseInt(save);
-            if(nif==101010 && password.equals("admin")){
-                GUI_Administrador admin = new GUI_Administrador(gestorfichas, gestorfaturas);
-                admin.setVisible(true);
+            if(password.equals("admin") && loginid==101010){
+                infoBox("Login com sucesso!", "Login com sucesso");
                 dispose();
+                GUI_Administrador administrador = new GUI_Administrador(gestorfichas,gestorfaturas);
             }
-            else {
-                FichaCliente fichaEncontrada = gestorfichas.autenticacao(password,nif);
-
-                if(fichaEncontrada != null){
-                    infoBox("Login com sucesso!", "Login com sucesso");
-                    dispose();
-                    GUI_FichaCliente fichagui = new GUI_FichaCliente(fichaEncontrada,gestorfichas,gestorfaturas);
-                    //fichagui.setgestorfichas(gestorfichas);
-                }
-                else{
-                    infoBox("Nif/Password inválida!", "Alerta");
-                }
-            }
+            else infoBox("Password/ID inválido!", "Login failed");
     }
 
     public void setgestorfichas(GestaoFichas a){
@@ -171,7 +157,6 @@ public static void infoBox(String infoMessage, String titleBar)
     public void setgestorfaturas(GestaoFaturas a){
         gestorfaturas = a;
     }
-    
     //method for generate menu
     public void generateMenu(){
         menuBar = new JMenuBar();
