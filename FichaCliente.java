@@ -26,7 +26,7 @@ public class FichaCliente implements Serializable
        this.fichaType = 0;
        }
        moneyspent=0;
-       imposto = reducaoImposto();
+       //imposto = reducaoImposto();
    }
     
    public FichaCliente(int nif, String email, String nome, String morada, String password){

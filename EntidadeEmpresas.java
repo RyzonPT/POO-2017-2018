@@ -13,6 +13,7 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
        this.actividadeEconomica = new ArrayList<>();
        this.deducaoFiscal = 0;
        this.regiao="EntreDouroMinho";
+       setimposto(reducaoImposto());
     }
 
    public EntidadeEmpresas(int nif,String email, String nome, String morada, String password, ArrayList<String> actividadeEconomica, int deducaoFiscal,String regiao){
