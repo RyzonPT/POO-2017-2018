@@ -73,7 +73,7 @@ public class GUI_CriaFatura extends JFrame {
     private GestaoFichas gestorfichas;
     private GestaoFaturas gestorfaturas;
     private FichaCliente fichaAssociada;
-    private DefaultListModel listModel;
+    private GUI_FichaCliente guificha;
     private ArrayList<Triple> produtos;
     private String[] colunas = {"Produto","Quantidade","Preço(€)"}; 
     private DefaultTableModel dtm = new DefaultTableModel(null,colunas){    
@@ -84,10 +84,10 @@ public class GUI_CriaFatura extends JFrame {
 };
     
     //Constructor 
-    public GUI_CriaFatura(FichaCliente ficha,GestaoFichas gestorfichas,GestaoFaturas gestorfaturas,DefaultListModel listModel){
+    public GUI_CriaFatura(FichaCliente ficha,GestaoFichas gestorfichas,GestaoFaturas gestorfaturas,GUI_FichaCliente guificha){
         this.gestorfichas = gestorfichas;
         this.gestorfaturas = gestorfaturas;
-        this.listModel = listModel;
+        this.guificha = guificha;
         faturaID = "";
         nomeCliente = "n/a";
         moradaCliente = "n/a";
@@ -693,20 +693,22 @@ public class GUI_CriaFatura extends JFrame {
             return;
         }
         EntidadeEmpresas fichaE = (EntidadeEmpresas) ficha;   
-        Fatura c = new Fatura (ficha.getNome(), ficha.getMorada(), ficha.getEmail(),ficha.getnif(), produtos,fichaE.getActividadeEconomica(),0, nomeCliente, moradaCliente, emailCliente, Integer.parseInt(nifCliente), ficha.getimposto(),fichaE.getregiao());
-        
+
+        Fatura c = new Fatura (ficha.getNome(), ficha.getMorada(), ficha.getEmail(),ficha.getnif(), produtos,fichaE.getActividadeEconomica(), nomeCliente, moradaCliente, emailCliente, Integer.parseInt(nifCliente), ficha.getimposto(),fichaE.getregiao(),fichaAssociada);
+
         gestorfaturas.addFaturas(c);
         gestorfichas.incrementavalor(fichaAssociada.getnif(),c.getvalortotal());
         gestorfichas.incremenFaturacao(ficha.getnif(),c.getvalortotal());
         
         List<FichaCliente> dezmaisgastam = gestorfichas.gettenUsersMostRich();
+        
             for(FichaCliente h : dezmaisgastam) {
                 System.out.println(h.getnif()+"tou farto" + h.getmoneyspent());
             }
         
         JOptionPane.showMessageDialog(null,"Fatura criada com sucesso!", "Message" , JOptionPane.INFORMATION_MESSAGE);
-        Botao botao = new Botao(Integer.toString(c.getfaturaID())+"   "+c.getnomeEmpresa(),c,ficha);
-        listModel.addElement(botao);
+        Botao botao = new Botao(Integer.toString(c.getfaturaID())+"   "+c.getnomeEmpresa(),c,ficha,guificha);
+        guificha.getlistModel().addElement(botao);
         dispose();
         
     }

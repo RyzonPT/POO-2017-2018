@@ -186,7 +186,7 @@ public class GUI_Administrador extends JFrame {
             xEmpresas = lista2;
             DecimalFormat df = new DecimalFormat("0.00");
             for(EntidadeEmpresas x : xEmpresas) {
-                listModel2.addElement("Nif: "+x.getnif()+" Faturas: "+df.format(x.getFaturacao())+" Dedução fiscal: "+df.format(gestorfaturas.totalDeducao(x.getnif())));
+                listModel2.addElement("Nif: "+x.getnif()+" Faturas: "+df.format(x.getFaturacao())+" Dedução fiscal: "+df.format(gestorfaturas.totalDeducaoEmpresa(x.getnif())));
             }
         }
     }

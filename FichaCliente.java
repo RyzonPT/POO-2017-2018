@@ -12,6 +12,7 @@ public class FichaCliente implements Serializable
    private int fichaType;
    private double imposto;
    private double moneyspent;
+   private double deducaototal;
    
    public FichaCliente(){
        this.nif = 0;
@@ -19,6 +20,7 @@ public class FichaCliente implements Serializable
        this.nome = "";
        this.morada = "";
        this.password = "";
+       deducaototal = 0;
                if(this instanceof EntidadeEmpresas){
         this.fichaType = 1;
        }
@@ -35,7 +37,7 @@ public class FichaCliente implements Serializable
        this.nome = nome;
        this.morada = morada;
        this.password = password;
-       
+       this.deducaototal = 0;
        if(this instanceof EntidadeEmpresas){
            this.fichaType = 1;
        }
@@ -53,6 +55,7 @@ public class FichaCliente implements Serializable
         this.fichaType = c.getfichaType();
         this.moneyspent =c.getmoneyspent();
         this.imposto=c.getimposto();
+        this.deducaototal = c.getdeducaototal();
    }
     
    public int getnif(){
@@ -62,7 +65,11 @@ public class FichaCliente implements Serializable
    public double getmoneyspent(){
         return this.moneyspent;
    }
-    
+   
+   public double getdeducaototal(){
+       return deducaototal;
+   }
+   
    public int getfichaType(){
         return this.fichaType;
    }
@@ -98,7 +105,11 @@ public class FichaCliente implements Serializable
    public void setnif(int numeroFiscal){
         this.nif = numeroFiscal;
    }
-    
+   
+   public void setdeducaototal(double deducao){
+       deducaototal = deducao;
+   }
+   
    public void setmoneyspent(double moneyspent){
         this.moneyspent=moneyspent;
    }
@@ -152,7 +163,12 @@ public class FichaCliente implements Serializable
                fichaType==a.getfichaType() &&
                moneyspent==a.getmoneyspent();
    }
-    
+   
+   void adicionadeducaototal(double x){
+       System.out.println(x+"+"+deducaototal);
+       deducaototal+= x;
+   }
+   
    public void adicionaDinheiroGasto(double a){
         moneyspent=moneyspent + a;
    }

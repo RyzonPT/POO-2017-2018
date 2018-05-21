@@ -60,8 +60,8 @@ public class Fatura implements Serializable
        regiao="EntreDouroMinho";
     }
     
-    public Fatura(String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, ArrayList<Triple> produto, ArrayList<String> actividadeEconomica,
-    double deducao, String nomeCliente, String moradaCliente, String emailCliente, int nifCliente, double imposto,String regiao){
+   public Fatura(String nomeEmpresa, String moradaEmpresa, String emailEmpresa, int nifEmpresa, ArrayList<Triple> produto, ArrayList<String> actividadeEconomica,
+   String nomeCliente, String moradaCliente, String emailCliente, int nifCliente, double imposto,String regiao,FichaCliente ficha){
        this.nomeEmpresa = nomeEmpresa;
        this.moradaEmpresa = moradaEmpresa;
        this.emailEmpresa = emailEmpresa;
@@ -71,7 +71,6 @@ public class Fatura implements Serializable
        this.imposto =imposto;
        this.actividadeEconomica = actividadeEconomica;
        this.valortotal = calculaValor();
-       this.deducao = deducao;
        this.nomeCliente = nomeCliente;
        this.moradaCliente = moradaCliente;
        this.emailCliente = emailCliente;
@@ -83,6 +82,15 @@ public class Fatura implements Serializable
        else{
            ativEconEscolhida="n/a";
        }
+       if(ficha instanceof EntidadeEmpresas){
+           deducao = calculoDeducaoEmpresa();
+           ficha.adicionadeducaototal(deducao);
+       }
+        else{
+            EntidadePrivada fichaP = (EntidadePrivada) ficha;
+            deducao = calculoDeducaoPrivada(fichaP.getndependentes());
+            ficha.adicionadeducaototal(deducao);
+        }
        this.regiao = regiao;
     }
     
@@ -280,11 +288,13 @@ public class Fatura implements Serializable
         valortotal = valortotal *(1+imposto);
         return valortotal;
       }
+   
       
-   public double calculoDeducaoPrivada(int nAgregado){
-       
+   public double calculoDeducaoPrivada(int ndependentes){
+        if (ativEconEscolhida.equals("n/a")) return 0;
+        System.out.println(ativEconEscolhida+"lel");
         Pair<Double,Integer> pair = GestaoAtividadeEconomica.getEnumPrivadaMap().get(GestaoAtividadeEconomica.AtividadeEconomica.valueOf(ativEconEscolhida));
-        deducao = pair.getKey() * 0.23 * (nAgregado+1) * valortotal;
+        deducao = pair.getKey() * 0.23 * (ndependentes) * valortotal;
         return deducao;
    }
    
@@ -295,6 +305,4 @@ public class Fatura implements Serializable
         return deducao;
    }
    
-   
-
 }

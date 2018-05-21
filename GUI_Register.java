@@ -841,7 +841,7 @@ public class GUI_Register extends JFrame {
             else{
                     fichaEmpresa.setregiao(regiao);
                     fichaEmpresa.setPassword(password);
-                    fichaEmpresa.setdeducaoFiscal(0);
+                    //fichaEmpresa.setdeducaoFiscal(0);
                     fichaEmpresa.setnif(Integer.parseInt(nif));
                     fichaEmpresa.setfichaType(1);
                     fichaEmpresa.setActividadeEconomica(atividades);

@@ -6,7 +6,7 @@ public class Botao
   {
     private JButton Botao;
 
-    public Botao(String name,Fatura fatura, FichaCliente ficha)
+    public Botao(String name,Fatura fatura, FichaCliente ficha,GUI_FichaCliente gui)
     {
       this.Botao = new JButton(name);
       Botao.addActionListener(new ActionListener()
@@ -14,7 +14,7 @@ public class Botao
         @Override
         public void actionPerformed(ActionEvent e)
         {
-          GUI_Fatura faturagui = new GUI_Fatura(fatura,ficha);
+          GUI_Fatura faturagui = new GUI_Fatura(fatura,ficha,gui);
         }
       });
     }

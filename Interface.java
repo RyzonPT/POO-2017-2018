@@ -33,11 +33,11 @@ public class Interface
                 lolis2.add(triple2);
 
             ArrayList<String> teste = new ArrayList<String>();
-            teste.add("saude");
+            teste.add("Saude");
             teste.add("transportes");
             
             ArrayList<String> teste2 = new ArrayList<String>();
-            teste2.add("saude");
+            teste2.add("Saude");
             
             
             ArrayList<Integer> lolis3 = new ArrayList<Integer>();
@@ -58,45 +58,45 @@ public class Interface
             GestaoFaturas gestorfaturas = new GestaoFaturas();
             
             
-                             EntidadePrivada fichaPrivada7 = new EntidadePrivada(7,"Filipe-Cunha1@hotmail.com","Filipe","morada","tanos",3,lolis3,0,lolis);
+                             EntidadePrivada fichaPrivada7 = new EntidadePrivada(7,"Filipe-Cunha1@hotmail.com","Filipe","morada","tanos",3,lolis3,0,lolis,2);
             gestorfichas.addFicha(fichaPrivada7);
-            /*
             
-            Fatura ola = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste2,0, null, null, null, 0,0.23,"Algarve");
+            
+            Fatura ola = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste2, null, null, null, 0,0.23,"Algarve",fichaPrivada7);
             gestorfaturas.addFaturas(ola);
-                        Fatura dam = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste2,0, null, null, null, 0, 0.23,"Alentejo");
+                        Fatura dam = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste2, null, null, null, 0, 0.23,"Alentejo",fichaPrivada7);
             gestorfaturas.addFaturas(dam);
-                        Fatura dam1 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste2, 0, null, null, null, 0, 0.23,"EntreDouroMinho");
+                        Fatura dam1 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste2, null, null, null, 0, 0.23,"EntreDouroMinho",fichaPrivada7);
             gestorfaturas.addFaturas(dam1);
-                        Fatura dam2 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste2,0, null, null, null, 0,0.23,"TrasoMontesAltoDouro");
+                        Fatura dam2 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste2,null, null, null, 0,0.23,"TrasoMontesAltoDouro",fichaPrivada7);
             gestorfaturas.addFaturas(dam2);
-                        Fatura dam3 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste,0, null, null, null, 0,0.23,"EntreDouroMinho");
+                        Fatura dam3 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste,null, null, null, 0,0.23,"EntreDouroMinho",fichaPrivada7);
             gestorfaturas.addFaturas(dam3);
-                                    Fatura dam4 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2, teste2, 0, null, null, null, 0,0.23,"EntreDouroMinho");
+                                    Fatura dam4 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2, teste2, null, null, null, 0,0.23,"EntreDouroMinho",fichaPrivada7);
             gestorfaturas.addFaturas(dam4);
-                                    Fatura dam5 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, null, null, null, 0,0.23,"EntreDouroMinho");
+                                    Fatura dam5 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste,  null, null, null, 0,0.23,"EntreDouroMinho",fichaPrivada7);
             gestorfaturas.addFaturas(dam5);
-                                    Fatura dam6 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, null, null, null, 0,0.23,"EntreDouroMinho");
+                                    Fatura dam6 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste,  null, null, null, 0,0.23,"EntreDouroMinho",fichaPrivada7);
             gestorfaturas.addFaturas(dam6);
-                                    Fatura dam7 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,teste, 0, null, null, null, 0,0.23,"EntreDouroMinho");
+                                    Fatura dam7 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,teste,  null, null, null, 0,0.23,"EntreDouroMinho",fichaPrivada7);
             gestorfaturas.addFaturas(dam7);
-                                    Fatura dam8 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste, 0, null, null, null, 0,0.23,"EntreDouroMinho");
+                                    Fatura dam8 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste,  null, null, null, 0,0.23,"EntreDouroMinho",fichaPrivada7);
             gestorfaturas.addFaturas(dam8);
-                                    Fatura dam9 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste2,0, null, null, null, 100,0.23,"EntreDouroMinho");
+                                    Fatura dam9 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 434 ,lolis2,  teste2, null, null, null, 100,0.23,"EntreDouroMinho",fichaPrivada7);
             gestorfaturas.addFaturas(dam9);
-                                    Fatura dam10 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 1 ,lolis2,  teste, 0, null, null, null, 100,0.23,"EntreDouroMinho");
+                                    Fatura dam10 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 1 ,lolis2,  teste,  null, null, null, 100,0.23,"EntreDouroMinho",fichaPrivada7);
             gestorfaturas.addFaturas(dam10);
-            Fatura dam11 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 1 ,lolis2,  teste,0, null, null, null, 2,0.23,"EntreDouroMinho");
+            Fatura dam11 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 1 ,lolis2,  teste, null, null, null, 2,0.23,"EntreDouroMinho",fichaPrivada7);
             gestorfaturas.addFaturas(dam11);
             
-                        Fatura dam12 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 1 ,lolis2,  teste, 0, null, null, null, 2,0.23,"EntreDouroMinho");
+                        Fatura dam12 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 1 ,lolis2,  teste, null, null, null, 2,0.23,"EntreDouroMinho",fichaPrivada7);
             gestorfaturas.addFaturas(dam12);
             
             
     
-            EntidadePrivada fichaPrivada0 = new EntidadePrivada(0,"email","nome","morada","",3,lolis,0,lolis);
-            EntidadePrivada fichaPrivada1 = new EntidadePrivada(100,"email","nome","morada","",3,lolis4,0,lolis);
-            EntidadePrivada fichaPrivada2 = new EntidadePrivada(2,"email","nome","morada","",3,lolis3,0,lolis);
+            EntidadePrivada fichaPrivada0 = new EntidadePrivada(0,"email","nome","morada","",3,lolis,0,lolis,2);
+            EntidadePrivada fichaPrivada1 = new EntidadePrivada(100,"email","nome","morada","",3,lolis4,0,lolis,2);
+            EntidadePrivada fichaPrivada2 = new EntidadePrivada(2,"email","nome","morada","",3,lolis3,0,lolis,2);
             gestorfichas.addFicha(fichaPrivada0);
             gestorfichas.addFicha(fichaPrivada1);
             gestorfichas.addFicha(fichaPrivada2);
@@ -104,6 +104,7 @@ public class Interface
             
             ArrayList<String> a =new ArrayList<String>();
             a.add("Educacao");
+            a.add("Saude");
             
             
             

@@ -131,7 +131,7 @@ public class GestaoFichas implements Serializable
         List<EntidadeEmpresas> a = new ArrayList<EntidadeEmpresas>();
         for( FichaCliente b : fichas.values()){
             if( b instanceof EntidadeEmpresas){
-                a.add((EntidadeEmpresas)b);
+                a.add((EntidadeEmpresas)b.clone());
             }
         }
         a.sort(Comparator.comparingDouble(EntidadeEmpresas::getFaturacao).reversed());
@@ -147,6 +147,16 @@ public class GestaoFichas implements Serializable
        EntidadeEmpresas a = (EntidadeEmpresas)fichas.get(nif);
         a.valorFaturacao(valor);
    }
-    
-    
+   
+   public List<FichaCliente> getAgregadoFichas(int nif){
+       List<FichaCliente> agregado = new ArrayList();
+       if( getFicha(nif) instanceof EntidadeEmpresas){
+           return null;
+        }
+       EntidadePrivada fichaP = (EntidadePrivada) getFicha(nif);
+           for(Integer k : fichaP.getNumerosFiscais()){
+               agregado.add(getFicha(k));
+           }
+       return agregado;
+   }
 }

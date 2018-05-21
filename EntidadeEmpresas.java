@@ -4,14 +4,12 @@ import java.io.Serializable;
 public class EntidadeEmpresas extends FichaCliente implements Serializable
 {
    private ArrayList<String> actividadeEconomica;
-   private int deducaoFiscal;
    private String regiao;
    private double faturacao;
 
    public EntidadeEmpresas(){
        super();
        this.actividadeEconomica = new ArrayList<>();
-       this.deducaoFiscal = 0;
        this.regiao="EntreDouroMinho";
        reducaoImposto();
     }
@@ -19,7 +17,6 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
    public EntidadeEmpresas(int nif,String email, String nome, String morada, String password, ArrayList<String> actividadeEconomica, int deducaoFiscal,String regiao){
        super(nif,email,nome,morada,password);
        this.actividadeEconomica = actividadeEconomica;
-       this.deducaoFiscal = deducaoFiscal;
        FichaCliente ola = (FichaCliente) this;
        ola.setfichaType(1);
        this.regiao=regiao;
@@ -29,7 +26,6 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
     public EntidadeEmpresas(EntidadeEmpresas c){
         super(c);
         this.actividadeEconomica = c.getActividadeEconomica();
-        this.deducaoFiscal = c.getDeducaoFiscal();
         this.regiao =c.getregiao();
         this.faturacao = c.getFaturacao();
     }
@@ -57,17 +53,9 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
     public void setregiao(String regiao){
         this.regiao = regiao;
     }
-    
-    public int getDeducaoFiscal(){
-        return this.deducaoFiscal;
-    }
 
     public void setActividadeEconomica(ArrayList<String> actividadeEconomica){
         this.actividadeEconomica = actividadeEconomica;
-    }
-
-    public void setdeducaoFiscal(int deducaoFiscal){
-        this.deducaoFiscal = deducaoFiscal;
     }
     
     public EntidadeEmpresas clone(){
@@ -78,8 +66,7 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
         if(obj==this) return true;
         if(obj==null || obj.getClass() != this.getClass()) return false;
         EntidadeEmpresas le = (EntidadeEmpresas) obj;
-        return le.getActividadeEconomica()==this.actividadeEconomica &&
-               le.getDeducaoFiscal()==this.deducaoFiscal;
+        return le.getActividadeEconomica()==this.actividadeEconomica;
     }
     
 

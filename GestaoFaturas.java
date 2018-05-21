@@ -152,7 +152,15 @@ public class GestaoFaturas implements Serializable
         return total;
     }
     
-    public double totalDeducao (int nif){
+    public double CalculaDecucaoCliente(EntidadePrivada fichaP){
+        double deducaototal = 0;        
+        for(Fatura h : getmyfaturas(fichaP.getnif())){
+             deducaototal += h.calculoDeducaoPrivada(fichaP.getndependentes());
+        }
+        return deducaototal;
+    }
+    
+    public double totalDeducaoEmpresa (int nif){
         double totalDeducao=0;
         for(Fatura h : getmadefaturas(nif)){
             totalDeducao+=h.calculoDeducaoEmpresa();

@@ -60,11 +60,14 @@ public class GUI_Fatura extends JFrame {
     private JButton button1;
     private Fatura fatura;
     private FichaCliente ficha;
+    private GUI_FichaCliente guificha;
+    private double deducao;
 
     //Constructor 
-    public GUI_Fatura(Fatura fatura, FichaCliente ficha){
+    public GUI_Fatura(Fatura fatura, FichaCliente ficha, GUI_FichaCliente guificha){
         this.fatura=fatura;
         this.ficha = ficha;
+        this.guificha=guificha;
         this.setTitle("GUI_project");
         this.setSize(1632,883);
         //menu generate method
@@ -73,20 +76,11 @@ public class GUI_Fatura extends JFrame {
 
         //pane with null layout
         JPanel contentPane = new JPanel(null);
-        if(fatura.getAtivEconEscolhida()=="n/a" && ficha.getfichaType()==0){
+        if(fatura.getAtivEconEscolhida()=="n/a" && (ficha.getfichaType()==0 || fatura.getnifCliente()==ficha.getnif())){
             contentPane.setPreferredSize(new Dimension(400,800));
         }
         else{
             contentPane.setPreferredSize(new Dimension(400,600));
-            if(ficha instanceof EntidadePrivada){
-                EntidadePrivada fichaP = (EntidadePrivada) ficha;
-                fatura.calculoDeducaoPrivada(fichaP.getndependentes());
-            }
-            else{
-                if(fatura.getnifCliente()==ficha.getnif())
-                fatura.calculoDeducaoEmpresa();
-                System.out.print(fatura.calculoDeducaoEmpresa());
-            }
         }
         contentPane.setBackground(new Color(192,192,192));
         
@@ -101,7 +95,7 @@ public class GUI_Fatura extends JFrame {
         AtividadeEconoText.setVisible(true);
         
 
-       if(fatura.getAtivEconEscolhida()=="n/a" && ficha.getfichaType()==0){
+       if(fatura.getAtivEconEscolhida()=="n/a" && (ficha.getfichaType()==0 || fatura.getnifCliente()==ficha.getnif())){
         listAtiv = new JList(fatura.getActividadeEconomica().toArray());
         listAtiv.setBackground(new Color(255,255,255));
         listAtiv.setForeground(new Color(0,0,0));
@@ -473,16 +467,29 @@ public class GUI_Fatura extends JFrame {
          AtividadeEconoText.setText(a);
          button1.setEnabled(false);
          fatura.setAtivEconEscolhida(a);
+         DecimalFormat df = new DecimalFormat("0.00");
+         double deducaototal;
          if(ficha.getfichaType() == 1){
              fatura.calculoDeducaoEmpresa();
             }
          else{
              EntidadePrivada fichaP = (EntidadePrivada) ficha;
              fatura.calculoDeducaoPrivada(fichaP.getndependentes());
-        }
-        DecimalFormat df = new DecimalFormat("0.00");
+             if(ficha.getnif() == fatura.getnifCliente()){
+                 ficha.adicionadeducaototal(fatura.getdeducao());
+                 guificha.getdeducaoprivadatext().setText(df.format(ficha.getdeducaototal()));
+             }
+             else{
+                 deducaototal = guificha.getdeducaoagregado() + fatura.getdeducao();
+                 guificha.setdeducaoagregado(deducaototal);
+                 guificha.getdeducaoagregadotext().setText(df.format(deducaototal));
+             }
+         }
+        
         DeducaoText.setText(df.format(fatura.getdeducao()));
-}
+                     
+    }
+    
     private void onConfirmarButtonClicked (ActionEvent evt) {  
          int reply = JOptionPane.showConfirmDialog(null, "TEM A CERTEZA? A SUA ACAO E PERMANENTE!!", "Message", JOptionPane.YES_NO_OPTION);
          if (reply == JOptionPane.YES_OPTION){
@@ -528,7 +535,7 @@ public class GUI_Fatura extends JFrame {
         System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new GUI_Fatura(null,null);
+                new GUI_Fatura(null,null,null);
             }
         });
     }

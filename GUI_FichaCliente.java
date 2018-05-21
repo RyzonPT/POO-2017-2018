@@ -84,13 +84,13 @@ public class GUI_FichaCliente extends JFrame {
     private JLabel deducaoagregadotext;
     private JLabel labelj;
     private JLabel labelk;
-    private double valor;
-    private double valor2;
+    private double deducaoagregado;
 
     //Constructor 
     public GUI_FichaCliente(FichaCliente fichas,GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
         ficha=fichas;
         nifCliente = "-1";
+        DecimalFormat df = new DecimalFormat("0.00");
         this.gestorfaturas = gestorfaturas;
         this.gestorfichas = gestorfichas;
         this.setTitle("GUI_FichaCliente");
@@ -380,7 +380,7 @@ public class GUI_FichaCliente extends JFrame {
         DeducaoqueficienteFiscalText.setForeground(new Color(0,0,0));
         DeducaoqueficienteFiscalText.setEnabled(true);
         DeducaoqueficienteFiscalText.setFont(new Font("sansserif",0,12));
-        DeducaoqueficienteFiscalText.setText(Integer.toString(fichaE.getDeducaoFiscal()));
+        DeducaoqueficienteFiscalText.setText(df.format(ficha.getdeducaototal()));
         DeducaoqueficienteFiscalText.setVisible(true);
         
         
@@ -399,7 +399,7 @@ public class GUI_FichaCliente extends JFrame {
         
         listfaturasLancadas = new JList(listModel);
         for(Fatura h : listfatlancadas){
-            Botao botao22 = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha);
+            Botao botao22 = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha,this);
             listModel.addElement(botao22);
         }
             
@@ -455,7 +455,7 @@ public class GUI_FichaCliente extends JFrame {
        int i = 0;
          
        for(Fatura h : faturaslist){
-           botoes[i] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha);
+           botoes[i] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha,this);
            i++;
         }
 
@@ -498,7 +498,6 @@ public class GUI_FichaCliente extends JFrame {
     }
     else{
         EntidadePrivada fichaP = (EntidadePrivada) fichas;
-        DecimalFormat df = new DecimalFormat("0.00");
         
         defaultatividadeText = new JLabel();
         defaultatividadeText.setBounds(458,135,130,35);
@@ -568,17 +567,13 @@ public class GUI_FichaCliente extends JFrame {
         labelk.setText("Deducao Fiscal:");
         labelk.setVisible(true);
         
-        for( Fatura h : gestorfaturas.getmyfaturas(fichaP.getnif())){
-             valor = h.calculoDeducaoPrivada(fichaP.getndependentes());
-        }
-        
         deducaoprivadatext = new JLabel();
         deducaoprivadatext.setBounds(583,155,300,35);;
         deducaoprivadatext.setBackground(new Color(214,217,223));
         deducaoprivadatext.setForeground(new Color(0,0,0));
         deducaoprivadatext.setEnabled(true);
         deducaoprivadatext.setFont(new Font("sansserif",0,12));
-        deducaoprivadatext.setText(df.format(valor));
+        deducaoprivadatext.setText(df.format(gestorfaturas.CalculaDecucaoCliente(fichaP)));
         deducaoprivadatext.setVisible(true);
         
 
@@ -617,7 +612,7 @@ public class GUI_FichaCliente extends JFrame {
         i = 0; 
         faturaslist = gestorfaturas.getmyfaturas(ficha.getnif());
         for(Fatura h : faturaslist){
-            botoes[i] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,fichas);
+            botoes[i] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,fichas,this);
             i++;
         }
 
@@ -664,9 +659,10 @@ public class GUI_FichaCliente extends JFrame {
      for(Integer k : fichaP.getNumerosFiscais()){
        listAgreg = gestorfaturas.getmyfaturas(k);
        for(Fatura h : listAgreg){
-           botoes2[m] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha);
+           botoes2[m] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha,this);
            m++;
-           valor2 = h.calculoDeducaoPrivada(fichaP.getndependentes());
+           EntidadePrivada fp = (EntidadePrivada) gestorfichas.getFicha(k);
+           deducaoagregado += h.calculoDeducaoPrivada(fp.getndependentes());
        }
     }
         list2 = new JList(botoes2);
@@ -706,7 +702,7 @@ public class GUI_FichaCliente extends JFrame {
         deducaoagregadotext.setForeground(new Color(0,0,0));
         deducaoagregadotext.setEnabled(true);
         deducaoagregadotext.setFont(new Font("sansserif",0,12));
-        deducaoagregadotext.setText(df.format(valor2));
+        deducaoagregadotext.setText(df.format(deducaoagregado));
         deducaoagregadotext.setVisible(true);
         
         
@@ -761,7 +757,7 @@ public class GUI_FichaCliente extends JFrame {
             List<Fatura> aux = gestorfaturas.OrdFaturasData(ficha.getnif());
             listModel.removeAllElements(); 
             for(Fatura h : aux){
-               Botao botao22 = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha);
+               Botao botao22 = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha,this);
                listModel.addElement(botao22);
             }
          
@@ -771,7 +767,7 @@ public class GUI_FichaCliente extends JFrame {
                 List<Fatura> aux = gestorfaturas.OrdFaturasValorCrescente(ficha.getnif());
                 listModel.removeAllElements();
                 for(Fatura h : aux){
-                    Botao botao22 = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha);
+                    Botao botao22 = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha,this);
                     listModel.addElement(botao22);
                 }
                 flag = 0;
@@ -780,7 +776,7 @@ public class GUI_FichaCliente extends JFrame {
                 List<Fatura> aux = gestorfaturas.OrdEmpresaFaturasValorDecrecente(ficha.getnif());
                 listModel.removeAllElements();
                 for(Fatura h : aux){
-                    Botao botao22 = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha);
+                    Botao botao22 = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha,this);
                     listModel.addElement(botao22);
                 }
                 flag = 1;
@@ -807,7 +803,7 @@ public class GUI_FichaCliente extends JFrame {
     }
             
     private void onCriarFaturaButtonClicked (MouseEvent evt) {          
-         GUI_CriaFatura criafaturagui = new GUI_CriaFatura(ficha,gestorfichas,gestorfaturas,listModel);
+         GUI_CriaFatura criafaturagui = new GUI_CriaFatura(ficha,gestorfichas,gestorfaturas,this);
     }
     
     private void onDataiKeyReleased(KeyEvent e){
@@ -816,6 +812,27 @@ public class GUI_FichaCliente extends JFrame {
     
     private void onDatafKeyReleased(KeyEvent e){
          dataf = TextFdataf.getText();
+    }
+    
+    public JLabel getdeducaoprivadatext(){
+        return deducaoprivadatext;
+    }
+    
+    public JLabel getdeducaoagregadotext(){
+        return deducaoagregadotext;
+    }
+    
+    public void setdeducaoagregado(double x){
+        deducaoagregado = x;
+    }
+    
+    
+    public double getdeducaoagregado(){
+        return deducaoagregado;
+    }
+    
+    public DefaultListModel getlistModel(){
+        return listModel;
     }
     
     private void onnifClienteReleasedKeyReleased(KeyEvent e){
@@ -860,7 +877,7 @@ public class GUI_FichaCliente extends JFrame {
         
         listModel.removeAllElements(); 
         for(Fatura h : list){
-            Botao botao22 = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha);
+            Botao botao22 = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha,this);
             listModel.addElement(botao22);
         }
         DecimalFormat df = new DecimalFormat("0.00");
