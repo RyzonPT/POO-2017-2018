@@ -600,6 +600,10 @@ public class GUI_CriaFatura extends JFrame {
         this.setLocationRelativeTo(null);
         this.pack();
         this.setVisible(true);
+        
+        Container c = getContentPane();
+        JScrollPane scroll = new JScrollPane( c );
+        setContentPane( scroll );
     }
 
     public String getdatastring(){
