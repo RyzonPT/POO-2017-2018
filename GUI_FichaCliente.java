@@ -898,6 +898,13 @@ public class GUI_FichaCliente extends JFrame {
          dispose();
     }
     
+    public GestaoFaturas getgestorfaturas(){
+        return gestorfaturas;
+    }
+    
+    public GestaoFichas getgestorfichas(){
+        return gestorfichas;
+    }
     
     public void setgestorfichas(GestaoFichas a){
         gestorfichas = a;

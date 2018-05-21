@@ -166,12 +166,13 @@ public class FichaCliente implements Serializable
    }
    
    void adicionadeducaototal(double x){
-       System.out.println(x+"+"+deducaototal);
        deducaototal+= x;
    }
    
    public void adicionaDinheiroGasto(double a){
-        moneyspent=moneyspent + a;
+       System.out.println(a+"ola"+moneyspent);
+       moneyspent += a;
+        
    }
    
    public double reducaoImposto(){

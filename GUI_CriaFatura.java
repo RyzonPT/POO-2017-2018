@@ -702,7 +702,9 @@ public class GUI_CriaFatura extends JFrame {
 
         gestorfaturas.addFaturas(c);
         gestorfichas.incrementavalor(fichaAssociada.getnif(),c.getvalortotal());
+        gestorfichas.addFicha(fichaAssociada);
         gestorfichas.incremenFaturacao(ficha.getnif(),c.getvalortotal());
+        gestorfichas.addFicha(ficha);
         
         List<FichaCliente> dezmaisgastam = gestorfichas.gettenUsersMostRich();
         

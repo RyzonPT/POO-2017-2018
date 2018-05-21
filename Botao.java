@@ -14,7 +14,7 @@ public class Botao
         @Override
         public void actionPerformed(ActionEvent e)
         {
-          GUI_Fatura faturagui = new GUI_Fatura(fatura,ficha,gui);
+          GUI_Fatura faturagui = new GUI_Fatura(fatura,ficha,gui,gui.getgestorfaturas(),gui.getgestorfichas());
         }
       });
     }

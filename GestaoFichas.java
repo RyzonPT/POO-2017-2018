@@ -140,11 +140,11 @@ public class GestaoFichas implements Serializable
     }
     
    public void incrementavalor( int nif, double valor){
-        fichas.get(nif).adicionaDinheiroGasto(valor);
+       getFicha(nif).adicionaDinheiroGasto(valor);
    }
    
    public void incremenFaturacao( int nif, double valor){
-       EntidadeEmpresas a = (EntidadeEmpresas)fichas.get(nif);
+       EntidadeEmpresas a = (EntidadeEmpresas) getFicha(nif);
         a.valorFaturacao(valor);
    }
    

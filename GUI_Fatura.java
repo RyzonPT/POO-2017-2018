@@ -62,11 +62,14 @@ public class GUI_Fatura extends JFrame {
     private FichaCliente ficha;
     private GUI_FichaCliente guificha;
     private double deducao;
-
+    private GestaoFaturas gestorfaturas;
+    private GestaoFichas gestorfichas;
     //Constructor 
-    public GUI_Fatura(Fatura fatura, FichaCliente ficha, GUI_FichaCliente guificha){
+    public GUI_Fatura(Fatura fatura, FichaCliente ficha, GUI_FichaCliente guificha, GestaoFaturas gestorfaturas, GestaoFichas gestorfichas ){
         this.fatura=fatura;
         this.ficha = ficha;
+        this.gestorfaturas = gestorfaturas;
+        this.gestorfichas = gestorfichas;
         this.guificha=guificha;
         this.setTitle("GUI_project");
         this.setSize(1632,883);
@@ -471,6 +474,7 @@ public class GUI_Fatura extends JFrame {
          AtividadeEconoText.setText(a);
          button1.setEnabled(false);
          fatura.setAtivEconEscolhida(a);
+         gestorfaturas.addFaturas(fatura);
          DecimalFormat df = new DecimalFormat("0.00");
          double deducaototal;
          if(ficha.getfichaType() == 1){
@@ -482,6 +486,7 @@ public class GUI_Fatura extends JFrame {
              System.out.println(fatura.calculoDeducaoPrivada(fichaP.getndependentes()));
              if(ficha.getnif() == fatura.getnifCliente()){
                  ficha.adicionadeducaototal(fatura.getdeducao());
+                 gestorfichas.addFicha(ficha);
                  guificha.getdeducaoprivadatext().setText(df.format(ficha.getdeducaototal()));
              }
              else{
@@ -540,7 +545,7 @@ public class GUI_Fatura extends JFrame {
         System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new GUI_Fatura(null,null,null);
+                new GUI_Fatura(null,null,null,null,null);
             }
         });
     }
