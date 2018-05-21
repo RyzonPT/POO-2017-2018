@@ -80,6 +80,12 @@ public class GUI_FichaCliente extends JFrame {
     private JLabel  moneyspentgetText;
     private JComboBox combobox1;
     private JLabel comboBoxText;
+    private JLabel deducaoprivadatext;
+    private JLabel deducaoagregadotext;
+    private JLabel labelj;
+    private JLabel labelk;
+    private double valor;
+    private double valor2;
 
     //Constructor 
     public GUI_FichaCliente(FichaCliente fichas,GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
@@ -492,9 +498,10 @@ public class GUI_FichaCliente extends JFrame {
     }
     else{
         EntidadePrivada fichaP = (EntidadePrivada) fichas;
+        DecimalFormat df = new DecimalFormat("0.00");
         
         defaultatividadeText = new JLabel();
-        defaultatividadeText.setBounds(458,145,130,35);
+        defaultatividadeText.setBounds(458,135,130,35);
         defaultatividadeText.setBackground(new Color(214,217,223));
         defaultatividadeText.setForeground(new Color(0,0,0));
         defaultatividadeText.setEnabled(true);
@@ -504,7 +511,7 @@ public class GUI_FichaCliente extends JFrame {
         
         
         AtividadeEconoagregadoText = new JLabel();
-        AtividadeEconoagregadoText.setBounds(583,145,300,35);
+        AtividadeEconoagregadoText.setBounds(583,135,300,35);
         AtividadeEconoagregadoText.setBackground(new Color(214,217,223));
         AtividadeEconoagregadoText.setForeground(new Color(0,0,0));
         AtividadeEconoagregadoText.setEnabled(true);
@@ -551,9 +558,31 @@ public class GUI_FichaCliente extends JFrame {
         scrollagregado.setViewportView(ListaAgregadoFamiliar);
         scrollagregado.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollagregado.setBounds(52,550,236,117);
+        
+        labelk = new JLabel();
+        labelk.setBounds(458,155,130,35);;
+        labelk.setBackground(new Color(214,217,223));
+        labelk.setForeground(new Color(0,0,0));
+        labelk.setEnabled(true);
+        labelk.setFont(new Font("sansserif",0,12));
+        labelk.setText("Deducao Fiscal:");
+        labelk.setVisible(true);
+        
+        for( Fatura h : gestorfaturas.getmyfaturas(fichaP.getnif())){
+             valor = h.calculoDeducaoPrivada(fichaP.getndependentes());
+        }
+        
+        deducaoprivadatext = new JLabel();
+        deducaoprivadatext.setBounds(583,155,300,35);;
+        deducaoprivadatext.setBackground(new Color(214,217,223));
+        deducaoprivadatext.setForeground(new Color(0,0,0));
+        deducaoprivadatext.setEnabled(true);
+        deducaoprivadatext.setFont(new Font("sansserif",0,12));
+        deducaoprivadatext.setText(df.format(valor));
+        deducaoprivadatext.setVisible(true);
+        
 
-           
-         codigosText = new JLabel();
+        codigosText = new JLabel();
         codigosText.setBounds(465,495,300,35);
         codigosText.setBackground(new Color(214,217,223));
         codigosText.setForeground(new Color(0,0,0));
@@ -581,11 +610,7 @@ public class GUI_FichaCliente extends JFrame {
         scrollListaCodigos.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollListaCodigos.setBounds(449,550,236,117);
         
-        contentPane.add(scrollagregado);
-        contentPane.add(AtividadeEconoagregadoText);
-        contentPane.add(codigosText);
-        contentPane.add(scrollListaCodigos);
-        contentPane.add(listaAgregadotext);
+        
         
         List <Fatura> faturaslist = new ArrayList<>();
         Object[] botoes = new Botao[gestorfaturas.getmyfaturas(ficha.getnif()).size()];
@@ -641,6 +666,7 @@ public class GUI_FichaCliente extends JFrame {
        for(Fatura h : listAgreg){
            botoes2[m] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha);
            m++;
+           valor2 = h.calculoDeducaoPrivada(fichaP.getndependentes());
        }
     }
         list2 = new JList(botoes2);
@@ -665,6 +691,34 @@ public class GUI_FichaCliente extends JFrame {
         scrolllistAgreg.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrolllistAgreg.setBounds(435,286,299,200);
         
+        labelj = new JLabel();
+        labelj.setBounds(50,670,300,35);
+        labelj.setBackground(new Color(214,217,223));
+        labelj.setForeground(new Color(0,0,0));
+        labelj.setEnabled(true);
+        labelj.setFont(new Font("sansserif",0,12));
+        labelj.setText("Deducao Fiscal do Agregado:");
+        labelj.setVisible(true);
+        
+        deducaoagregadotext = new JLabel();
+        deducaoagregadotext.setBounds(220,670,300,35);
+        deducaoagregadotext.setBackground(new Color(214,217,223));
+        deducaoagregadotext.setForeground(new Color(0,0,0));
+        deducaoagregadotext.setEnabled(true);
+        deducaoagregadotext.setFont(new Font("sansserif",0,12));
+        deducaoagregadotext.setText(df.format(valor2));
+        deducaoagregadotext.setVisible(true);
+        
+        
+        contentPane.add(labelj);
+        contentPane.add(deducaoagregadotext);
+        contentPane.add(scrollagregado);
+        contentPane.add(AtividadeEconoagregadoText);
+        contentPane.add(codigosText);
+        contentPane.add(scrollListaCodigos);
+        contentPane.add(listaAgregadotext);
+        contentPane.add(labelk);
+        contentPane.add(deducaoprivadatext);
         contentPane.add(lFatAgre);
         contentPane.add(scrolllistAgreg);
         contentPane.add(scrollListaFaturas);

@@ -118,10 +118,6 @@ public class Interface
             */
            hall.setgestorfichas(gestorfichas);
            hall.setgestorfaturas(gestorfaturas); 
-            //hall.setgestorfichas(gestorfichas);
-            FichaCliente fichatest =  gestorfichas.getFicha(0);
-            System.out.println("pleasenot0"+fichatest.getmoneyspent());
-            System.out.println("fodasse"+gestorfaturas.getmyfaturas(0).size());
             
             
             
