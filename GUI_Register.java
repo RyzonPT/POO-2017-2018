@@ -36,10 +36,8 @@ public class GUI_Register extends JFrame {
     private JTextField RRegiao;
     private JTextField RPassword;
     private JLabel Title;
-    private JTextField CodigosAtividades;
     private JTextField NumerosFiscais;
     private JTextField ProprioNIF;
-    private JLabel label3;
     private JLabel labelEmail;
     private JLabel labelMorada;
     private JLabel labelNome;
@@ -49,24 +47,19 @@ public class GUI_Register extends JFrame {
     private JLabel labelPassword;
     private JLabel labelRegiao;
     private JButton AdicionarButtonNifs;
-    private JButton AdicionarButtonCodigos;
     private JButton AdicionarButtonAtividadeEconomica;
     private JButton removerbotaoNifs;
     private JButton AdicionarbotaoAtividadeEconomica;
-    private JButton removerbotaoCodigos;
     private JButton removerbotaoAtividadeEconomica;
     private JList list1;
-    private JList list2;
     private JList EmpAtividList;
     private String nif;
     private String proprionif;
-    private int codigoAtividade;
     private String atividadeEconomica;
     private boolean visible;
     private boolean flag;
     private String regiao;
     private JScrollPane scroll;
-    private JScrollPane scroll2;
     private JScrollPane scroll3;
     private JScrollPane scroll4;
     private JComboBox combobox1;
@@ -99,18 +92,17 @@ public class GUI_Register extends JFrame {
     private EntidadePrivada fichaPrivada;
     private EntidadeEmpresas fichaEmpresa;
     private ArrayList<Integer> nifs;
-    private ArrayList<Integer> codigoatividades;
     private ArrayList<String> atividades;
+    private JLabel listaAgregadostext;
 
     //Constructor 
     public GUI_Register(){
-        numerodedependentes=codigoAtividade=-1; nif=password=morada=email=nome=atividadeEconomica=""; regiao = "EntreDouroMinho";
+        numerodedependentes=-1; nif=password=morada=email=nome=atividadeEconomica=""; regiao = "EntreDouroMinho";
         proprionif="-1";
         visible = false; flag = false;
         fichaEmpresa = new EntidadeEmpresas();
         fichaPrivada = new EntidadePrivada();
         nifs = new ArrayList<Integer>();
-        codigoatividades = new ArrayList<Integer>();
         atividades = new ArrayList<String>();
         
         this.setTitle("GUI_project");
@@ -121,7 +113,7 @@ public class GUI_Register extends JFrame {
 
         //pane with null layout
         JPanel contentPane = new JPanel(null);
-        contentPane.setPreferredSize(new Dimension(499,480));
+        contentPane.setPreferredSize(new Dimension(1100,480));
         contentPane.setBackground(new Color(192,192,192));
 
 
@@ -223,23 +215,18 @@ public class GUI_Register extends JFrame {
         Title.setFont(new Font("SansSerif",0,30));
         Title.setText("Registo Pessoal");
         Title.setVisible(visible);
-
-        CodigosAtividades = new JTextField();
-        CodigosAtividades.setBounds(198,132,90,35);
-        CodigosAtividades.setBackground(new Color(214,217,223));
-        CodigosAtividades.setForeground(new Color(0,0,0));
-        CodigosAtividades.setEnabled(true);
-        CodigosAtividades.setFont(new Font("sansserif",0,12));
-        CodigosAtividades.setVisible(visible);
         
-        CodigosAtividades.addKeyListener(new KeyAdapter() {
-            public void keyReleased(KeyEvent evt){
-                onKeyReleasedCodigosAtividades(evt);
-            }
-        });
+        listaAgregadostext = new JLabel();
+        listaAgregadostext.setBounds(485,105,264,35);
+        listaAgregadostext.setBackground(new Color(214,217,223));
+        listaAgregadostext.setForeground(new Color(0,0,0));
+        listaAgregadostext.setEnabled(true);
+        listaAgregadostext.setFont(new Font("SansSerif",0,15));
+        listaAgregadostext.setText("Lista do Agregado Familiar");
+        listaAgregadostext.setVisible(visible);
 
         NumerosFiscais = new JTextField();
-        NumerosFiscais.setBounds(197,88,90,35);
+        NumerosFiscais.setBounds(197,135,90,35);
         NumerosFiscais.setBackground(new Color(214,217,223));
         NumerosFiscais.setForeground(new Color(0,0,0));
         NumerosFiscais.setEnabled(true);
@@ -253,7 +240,7 @@ public class GUI_Register extends JFrame {
         });
         
         ProprioNIF = new JTextField();
-        ProprioNIF.setBounds(497,88,90,35);
+        ProprioNIF.setBounds(197,88,90,35);
         ProprioNIF.setBackground(new Color(214,217,223));
         ProprioNIF.setForeground(new Color(0,0,0));
         ProprioNIF.setEnabled(true);
@@ -267,7 +254,7 @@ public class GUI_Register extends JFrame {
         });
         
         removerbotaoNifs = new JButton();
-        removerbotaoNifs.setBounds(460,410,90,35);
+        removerbotaoNifs.setBounds(540,360,90,35);
         removerbotaoNifs.setBackground(new Color(214,217,223));
         removerbotaoNifs.setForeground(new Color(0,0,0));
         removerbotaoNifs.setEnabled(true);
@@ -280,31 +267,6 @@ public class GUI_Register extends JFrame {
                 NifRemoved(evt);
             }
         });
-        
-        removerbotaoCodigos = new JButton();
-        removerbotaoCodigos.setBounds(860,410,90,35);
-        removerbotaoCodigos.setBackground(new Color(214,217,223));
-        removerbotaoCodigos.setForeground(new Color(0,0,0));
-        removerbotaoCodigos.setEnabled(true);
-        removerbotaoCodigos.setFont(new Font("sansserif",0,12));
-        removerbotaoCodigos.setText("Remover");
-        removerbotaoCodigos.setVisible(visible);
-
-        removerbotaoCodigos.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                CodigoRemoved(evt);
-            }
-        });
-
-        label3 = new JLabel();
-        label3.setBounds(63,132,130,35);
-        label3.setBackground(new Color(214,217,223));
-        label3.setForeground(new Color(0,0,0));
-        label3.setEnabled(true);
-        label3.setFont(new Font("sansserif",0,12));
-        label3.setText("Codigos de Atividades");
-        label3.setVisible(visible);
-        
         labelEmail = new JLabel();
         labelEmail.setBounds(150,299,50,35);
         labelEmail.setBackground(new Color(214,217,223));
@@ -331,6 +293,7 @@ public class GUI_Register extends JFrame {
         labelNome.setFont(new Font("sansserif",0,12));
         labelNome.setText("Nome");
         labelNome.setVisible(visible);
+        
         labelNumeroDeDependentes = new JLabel();
         labelNumeroDeDependentes.setBounds(45,220,140,35);
         labelNumeroDeDependentes.setBackground(new Color(214,217,223));
@@ -341,16 +304,16 @@ public class GUI_Register extends JFrame {
         labelNumeroDeDependentes.setVisible(visible);
 
         labelNumerosFiscais = new JLabel();
-        labelNumerosFiscais.setBounds(92,88,100,35);
+        labelNumerosFiscais.setBounds(92,135,100,35);
         labelNumerosFiscais.setBackground(new Color(214,217,223));
         labelNumerosFiscais.setForeground(new Color(0,0,0));
         labelNumerosFiscais.setEnabled(true);
         labelNumerosFiscais.setFont(new Font("sansserif",0,12));
-        labelNumerosFiscais.setText("Numeros Fiscais");
+        labelNumerosFiscais.setText("Nifs Agregados");
         labelNumerosFiscais.setVisible(visible);
         
         labelProprioNif = new JLabel();
-        labelProprioNif.setBounds(592,88,100,35);
+        labelProprioNif.setBounds(92,88,100,35);
         labelProprioNif.setBackground(new Color(214,217,223));
         labelProprioNif.setForeground(new Color(0,0,0));
         labelProprioNif.setEnabled(true);
@@ -368,7 +331,7 @@ public class GUI_Register extends JFrame {
         labelPassword.setVisible(visible);
         
         AdicionarButtonNifs = new JButton();
-        AdicionarButtonNifs.setBounds(297,88,90,35);
+        AdicionarButtonNifs.setBounds(297,135,90,35);
         AdicionarButtonNifs.setBackground(new Color(214,217,223));
         AdicionarButtonNifs.setForeground(new Color(0,0,0));
         AdicionarButtonNifs.setEnabled(true);
@@ -383,21 +346,6 @@ public class GUI_Register extends JFrame {
             }
         });
         
-        AdicionarButtonCodigos = new JButton();
-        AdicionarButtonCodigos.setBounds(297,133,90,35);
-        AdicionarButtonCodigos.setBackground(new Color(214,217,223));
-        AdicionarButtonCodigos.setForeground(new Color(0,0,0));
-        AdicionarButtonCodigos.setEnabled(true);
-        AdicionarButtonCodigos.setFont(new Font("sansserif",0,12));
-        AdicionarButtonCodigos.setText("Adicionar");
-        AdicionarButtonCodigos.setVisible(visible);
-        //  Set methods for mouse events
-        //Call defined methods
-        AdicionarButtonCodigos.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                CodigoAdded(evt);
-            }
-        });
         
         list1 = new JList(listModel);
         list1.setBackground(new Color(255,255,255));
@@ -409,22 +357,9 @@ public class GUI_Register extends JFrame {
         scroll = new JScrollPane();
         scroll.setViewportView(list1);
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setBounds(379,197,264,196);
+        scroll.setBounds(450,140,264,196);
         scroll.setVisible(visible);
-        
-        list2 = new JList(listModel2);
-        list2.setBackground(new Color(255,255,255));
-        //list2.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        list2.setForeground(new Color(0,0,0));
-        list2.setEnabled(true);
-        list2.setFont(new Font("sansserif",0,12));
-        
-        scroll2 = new JScrollPane();
-        scroll2.setViewportView(list2);
-        scroll2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll2.setBounds(679,197,264,196);
-        scroll2.setVisible(visible);
-       
+
         //Registo de Empresa/*
         /*
         RAtividadeEconomica = new JTextField();
@@ -460,7 +395,7 @@ public class GUI_Register extends JFrame {
         });
         */
         removerbotaoAtividadeEconomica = new JButton();
-        removerbotaoAtividadeEconomica.setBounds(830,310,90,35);
+        removerbotaoAtividadeEconomica.setBounds(30,310,90,35);
         removerbotaoAtividadeEconomica.setBackground(new Color(214,217,223));
         removerbotaoAtividadeEconomica.setForeground(new Color(0,0,0));
         removerbotaoAtividadeEconomica.setEnabled(true);
@@ -622,16 +557,16 @@ public class GUI_Register extends JFrame {
         Titulo.setVisible(!visible);
 
         labelAtividadeEconomica = new JLabel();
-        labelAtividadeEconomica.setBounds(65,283,120,35);
+        labelAtividadeEconomica.setBounds(550,65,400,35);
         labelAtividadeEconomica.setBackground(new Color(214,217,223));
         labelAtividadeEconomica.setForeground(new Color(0,0,0));
         labelAtividadeEconomica.setEnabled(true);
-        labelAtividadeEconomica.setFont(new Font("sansserif",0,12));
-        labelAtividadeEconomica.setText("AtividadeEconomica");
+        labelAtividadeEconomica.setFont(new Font("sansserif",0,15));
+        labelAtividadeEconomica.setText("AtividadeEconomica(Selecione e clique adicionar): ");
         labelAtividadeEconomica.setVisible(!visible);
         
         labelRegiao = new JLabel();
-        labelRegiao.setBounds(143,323,90,35);
+        labelRegiao.setBounds(143,283,90,35);
         labelRegiao.setBackground(new Color(214,217,223));
         labelRegiao.setForeground(new Color(0,0,0));
         labelRegiao.setEnabled(true);
@@ -700,7 +635,7 @@ public class GUI_Register extends JFrame {
         });
         
         combobox2 = new JComboBox<String>();
-        combobox2.setBounds(199,322,150,35);
+        combobox2.setBounds(199,283,150,35);
         combobox2.setBackground(new Color(214,217,223));
         combobox2.setForeground(new Color(0,0,0));
         combobox2.setEnabled(true);
@@ -727,6 +662,7 @@ public class GUI_Register extends JFrame {
         
         //adding components to contentPane panel
         //contentPane.add(RAtividadeEconomica);
+        contentPane.add(listaAgregadostext);
         contentPane.add(REmailE);
         contentPane.add(RMoradaE);
         contentPane.add(RNifE);
@@ -748,10 +684,8 @@ public class GUI_Register extends JFrame {
         contentPane.add(RNumerodedependentes);
         contentPane.add(RPassword);
         contentPane.add(Title);
-        contentPane.add(CodigosAtividades);
         contentPane.add(NumerosFiscais);
         contentPane.add(ProprioNIF);
-        contentPane.add(label3);
         contentPane.add(labelEmail);
         contentPane.add(labelMorada);
         contentPane.add(labelNome);
@@ -760,14 +694,10 @@ public class GUI_Register extends JFrame {
         contentPane.add(labelProprioNif);
         contentPane.add(labelPassword);
         contentPane.add(AdicionarButtonNifs);
-        contentPane.add(AdicionarButtonCodigos);
-        //contentPane.add(AdicionarButtonAtividadeEconomica);
         contentPane.add(removerbotaoNifs);
         contentPane.add(AdicionarbotaoAtividadeEconomica);
-        contentPane.add(removerbotaoCodigos);
         contentPane.add(removerbotaoAtividadeEconomica);
         contentPane.add(scroll);
-        contentPane.add(scroll2);
         contentPane.add(scroll4);
         contentPane.add(scroll3);
         contentPane.add(combobox1);
@@ -815,13 +745,10 @@ public class GUI_Register extends JFrame {
             RNumerodedependentes.setVisible(visible);
             RPassword.setVisible(visible);
             Title.setVisible(visible);
-            CodigosAtividades.setVisible(visible);
             NumerosFiscais.setVisible(visible);
             ProprioNIF.setVisible(visible);
             removerbotaoNifs.setVisible(visible);
-            removerbotaoCodigos.setVisible(visible);
             removerbotaoAtividadeEconomica.setVisible(!visible);
-            label3.setVisible(visible);
             labelEmail.setVisible(visible);
             labelMorada.setVisible(visible);
             AdicionarbotaoAtividadeEconomica.setVisible(!visible);
@@ -831,17 +758,15 @@ public class GUI_Register extends JFrame {
             labelProprioNif.setVisible(visible);
             labelPassword.setVisible(visible);
             AdicionarButtonNifs.setVisible(visible);
-            AdicionarButtonCodigos.setVisible(visible);
-            //AdicionarButtonAtividadeEconomica.setVisible(!visible);
             scroll.setVisible(visible);
-            scroll2.setVisible(visible);
+            listaAgregadostext.setVisible(visible);
             scroll3.setVisible(!visible);
             scroll4.setVisible(!visible);
         }
     }
     
     private void OnClickedRegistar (MouseEvent evt){
-        if(nif=="" || proprionif.equals("-1") || numerodedependentes==-1 || codigoAtividade==-1 || morada=="" || email=="" || nome=="" || password=="" ){
+        if(nif=="" || proprionif.equals("-1") || numerodedependentes==-1 || morada=="" || email=="" || nome=="" || password=="" ){
             infoBox("Por favor preencha todos os campos", "Impossível registar");
             return;
         }
@@ -945,24 +870,6 @@ public class GUI_Register extends JFrame {
         }}
     }
     
-    private void CodigoAdded (MouseEvent evt) {
-        if(listModel2.contains(codigoAtividade)){
-            infoBox("Já adicionou este codigo", "Impossível adicionar codigo");
-            CodigosAtividades.setText("");
-        }
-        else{
-            if(CodigosAtividades.getText().equals("1000001") || CodigosAtividades.getText().equals("1000002") || CodigosAtividades.getText().equals("1000003") || CodigosAtividades.getText().equals("1000004") || CodigosAtividades.getText().equals("1000005") || CodigosAtividades.getText().equals("1000006") || CodigosAtividades.getText().equals("1000007") || CodigosAtividades.getText()=="1000008" || CodigosAtividades.getText().equals("1000009") || CodigosAtividades.getText().equals("1000010")){
-               CodigosAtividades.setText("");
-               listModel2.addElement(codigoAtividade);
-               codigoatividades.add(codigoAtividade); 
-            }
-            else{
-                infoBox("Codigo inválido", "Impossível adicionar codigo");
-                CodigosAtividades.setText("");
-            }
-        }
-    }
-
     private void AtividadeAdded (MouseEvent evt) {
         if(listModel3.contains(EmpDefautAtivlist.getSelectedValue())){
             infoBox("Já adicionou esta atividade", "Impossível adicionar atividade");
@@ -981,14 +888,6 @@ public class GUI_Register extends JFrame {
         nifs.remove(selected);
     }
     
-    private void  CodigoRemoved (MouseEvent evt) {
-        int selectedIndex = list2.getSelectedIndex();
-        if (selectedIndex != -1) {
-            listModel2.remove(selectedIndex);
-        }
-        int selected = Integer.parseInt(list2.getSelectedValue().toString());
-        codigoatividades.remove(selected);
-    }
     
     private void  AtividadeRemoved (MouseEvent evt) {
         int selectedIndex = EmpAtividList.getSelectedIndex();
@@ -1042,10 +941,6 @@ public class GUI_Register extends JFrame {
             proprionif = ProprioNIF.getText();
     }
     
-    private void onKeyReleasedCodigosAtividades (KeyEvent evt) {
-            codigoAtividade = Integer.parseInt(CodigosAtividades.getText());
-    }
-    
     private void onKeyReleasedREmail (KeyEvent evt) {
             email = REmail.getText();
     }
@@ -1059,6 +954,10 @@ public class GUI_Register extends JFrame {
     }
     
     private void onKeyReleasedRNumerodedependentes (KeyEvent evt) {
+        if(Integer.parseInt(RNumerodedependentes.getText())>nifs.size()){
+            infoBox("Numero de dependentes invalido", "Impossível ter um numero maior do que o agregado");
+            return;
+        }
             numerodedependentes = Integer.parseInt(RNumerodedependentes.getText());
     }
     
