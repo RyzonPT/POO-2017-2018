@@ -26,11 +26,6 @@ import javax.swing.event.ListSelectionListener;
 
 
 public class GUI_Register extends JFrame {
-    /*alguns registos que já estão feitos que usei ao experimentar o debugging:
-     * nif password
-     * 8  8
-     * 9  9
-    */
     //Registo de individuo
     private JMenuBar menuBar;
     private JButton BRegistar;
@@ -73,6 +68,7 @@ public class GUI_Register extends JFrame {
     private JScrollPane scroll2;
     private JScrollPane scroll3;
     private JComboBox combobox1;
+    private JComboBox combobox2;
     private String email;
     private String morada;
     private String nome;
@@ -105,7 +101,7 @@ public class GUI_Register extends JFrame {
 
     //Constructor 
     public GUI_Register(){
-        proprionif=numerodedependentes=codigoAtividade=-1; nif=password=regiao=morada=email=nome=atividadeEconomica="";
+        proprionif=numerodedependentes=codigoAtividade=-1; nif=password=morada=email=nome=atividadeEconomica=""; regiao = "Acores";
         visible = false; flag = false;
         fichaEmpresa = new EntidadeEmpresas();
         fichaPrivada = new EntidadePrivada();
@@ -441,21 +437,6 @@ public class GUI_Register extends JFrame {
             }
         });
         
-        RRegiao = new JTextField();
-        RRegiao.setBounds(199,322,90,35);
-        RRegiao.setBackground(new Color(255,255,255));
-        RRegiao.setForeground(new Color(0,0,0));
-        RRegiao.setEnabled(true);
-        RRegiao.setFont(new Font("sansserif",0,12));
-        RRegiao.setText("");
-        RRegiao.setVisible(!visible);
-        
-        RRegiao.addKeyListener(new KeyAdapter() {
-            public void keyReleased(KeyEvent evt){
-                onKeyReleasedRegiao(evt);
-            }
-        });
-        
         
         AdicionarButtonAtividadeEconomica = new JButton();
         AdicionarButtonAtividadeEconomica.setBounds(289,282,90,35);
@@ -678,9 +659,34 @@ public class GUI_Register extends JFrame {
             }
         });
         
+        combobox2 = new JComboBox<String>();
+        combobox2.setBounds(199,322,90,35);
+        combobox2.setBackground(new Color(214,217,223));
+        combobox2.setForeground(new Color(0,0,0));
+        combobox2.setEnabled(true);
+        combobox2.setFont(new Font("sansserif",0,12));
+        combobox2.setVisible(!visible);
+        combobox2.addItem("EntreDouroMinho");
+        combobox2.addItem("TrasoMontesAltoDouro");
+        combobox2.addItem("BeiraLitoral");
+        combobox2.addItem("BeiraInterior");
+        combobox2.addItem("EstramaduraRibatejo");
+        combobox2.addItem("LisboaSetubal");
+        combobox2.addItem("Alentejo");
+        combobox2.addItem("Algarve");
+        combobox2.addItem("Madeira");
+        combobox2.addItem("Acores");
+        
+        //if(RAtividadeEconomica.getText().equals("Saude") || RAtividadeEconomica.getText().equals("Educacao") || RAtividadeEconomica.getText().equals("DespesasGerais") || RAtividadeEconomica.getText().equals("Habitacao") || RAtividadeEconomica.getText().equals("Lares") || RAtividadeEconomica.getText().equals("ReparacaoAutomovel") || RAtividadeEconomica.getText().equals("RestauraçãoAlojamento") || RAtividadeEconomica.getText().equals("CabeleireirosInstitutosBeleza") || RAtividadeEconomica.getText().equals("AtividadesVeterinarias") || RAtividadeEconomica.getText().equals("PassesMensais")){
+        
+        combobox2.addActionListener (new ActionListener () {
+            public void actionPerformed(ActionEvent e) {
+                setcomboboxregiao(e);
+            }
+        });
+        
         //adding components to contentPane panel
         contentPane.add(RAtividadeEconomica);
-        contentPane.add(RRegiao);
         contentPane.add(REmailE);
         contentPane.add(RMoradaE);
         contentPane.add(RNifE);
@@ -723,6 +729,7 @@ public class GUI_Register extends JFrame {
         contentPane.add(scroll2);
         contentPane.add(scroll3);
         contentPane.add(combobox1);
+        contentPane.add(combobox2);
 
         //adding panel to JFrame and seting of window position and close operation
         this.add(contentPane);
@@ -732,6 +739,11 @@ public class GUI_Register extends JFrame {
         this.setVisible(true);
     }
     
+    private void setcomboboxregiao (ActionEvent evt) {
+        String itemSelecionado = (String) combobox1.getSelectedItem();
+        regiao = itemSelecionado;
+    }
+    
     private void setvisibility (ActionEvent evt) {
         String itemSelecionado = (String) combobox1.getSelectedItem();
         if(itemSelecionado.equals("Empresa")) flag = false;
@@ -739,7 +751,6 @@ public class GUI_Register extends JFrame {
         if (flag!=visible){
             visible = !visible;
             RAtividadeEconomica.setVisible(!visible);
-            RRegiao.setVisible(!visible);
             REmailE.setVisible(!visible);
             RMoradaE.setVisible(!visible);
             RNifE.setVisible(!visible);
@@ -749,6 +760,7 @@ public class GUI_Register extends JFrame {
             Titulo.setVisible(!visible);
             labelAtividadeEconomica.setVisible(!visible);
             labelRegiao.setVisible(!visible);
+            combobox2.setVisible(!visible);
             labelEmailE.setVisible(!visible);
             labelMoradaE.setVisible(!visible);
             labelNif.setVisible(!visible);
@@ -817,7 +829,7 @@ public class GUI_Register extends JFrame {
     }
     
     private void OnClickedRegistarE (MouseEvent evt){
-        if(nif=="" || morada=="" || email=="" || nome=="" || atividadeEconomica=="" || regiao=="" || password=="" ){
+        if(nif=="" || morada=="" || email=="" || nome=="" || atividadeEconomica=="" || password=="" ){
             infoBox("Por favor preencha todos os campos", "Impossível registar");
         }
         else {
@@ -825,7 +837,6 @@ public class GUI_Register extends JFrame {
                 infoBox("Já existe um registo com este Nif", "Impossível registar");
             }
             else{
-                if(RRegiao.getText().equals("EntreDouroMinho") || RRegiao.getText().equals("TrasoMontesAltoDouro") || RRegiao.getText().equals("BeiraLitoral") || RRegiao.getText().equals("BeiraInterior") || RRegiao.getText().equals("EstramaduraRibatejo") || RRegiao.getText().equals("LisboaSetubal") || RRegiao.getText().equals("Alentejo") || RRegiao.getText().equals("Algarve") || RRegiao.getText().equals("Madeira") || RRegiao.getText().equals("Acores")){
                     fichaEmpresa.setregiao(regiao);
                     fichaEmpresa.setPassword(password);
                     fichaEmpresa.setdeducaoFiscal(0);
@@ -844,10 +855,6 @@ public class GUI_Register extends JFrame {
                         hallentrada.setgestorfaturas(gestorfaturas);
                         dispose();
                     }
-                }
-                else{
-                    infoBox("A regiao tem de ser uma das seguintes: EntreDouroMinho, TrasoMontesAltoDouro, BeiraLitoral, BeiraInterior, EstramaduraRibatejo, LisboaSetubal, Alentejo, Algarve, Madeira, Acores", "Impossível registar");
-                }
             }
         }
     }
