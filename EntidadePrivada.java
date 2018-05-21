@@ -34,6 +34,7 @@ public class EntidadePrivada extends FichaCliente implements Serializable
         this.numerosFiscais = c.getNumerosFiscais();
         this.coeficienteFiscal = c.getCoeficienteFiscal();
         this.codigosAtividades = c.getCodigosAtividades();
+        this.ndependentes=c.getndependentes();
     }
 
     public int getAgregadoFamiliar(){

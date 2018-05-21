@@ -460,6 +460,10 @@ public class GUI_Fatura extends JFrame {
         this.setLocationRelativeTo(null);
         this.pack();
         this.setVisible(true);
+        
+       Container c = getContentPane();
+       JScrollPane scroll = new JScrollPane(c);
+       setContentPane(scroll);
     }
     
     public void corfirmaAtividade(){
@@ -475,6 +479,7 @@ public class GUI_Fatura extends JFrame {
          else{
              EntidadePrivada fichaP = (EntidadePrivada) ficha;
              fatura.calculoDeducaoPrivada(fichaP.getndependentes());
+             System.out.println(fatura.calculoDeducaoPrivada(fichaP.getndependentes()));
              if(ficha.getnif() == fatura.getnifCliente()){
                  ficha.adicionadeducaototal(fatura.getdeducao());
                  guificha.getdeducaoprivadatext().setText(df.format(ficha.getdeducaototal()));
