@@ -534,7 +534,7 @@ public class GUI_FichaCliente extends JFrame {
         DeducaoqueficienteFiscalText.setForeground(new Color(0,0,0));
         DeducaoqueficienteFiscalText.setEnabled(true);
         DeducaoqueficienteFiscalText.setFont(new Font("sansserif",0,12));
-        DeducaoqueficienteFiscalText.setText(Integer.toString(fichaP.getCoeficienteFiscal()));
+        DeducaoqueficienteFiscalText.setText(df.format((fichaP.getimposto())));
         DeducaoqueficienteFiscalText.setVisible(true);
         
         listaAgregadotext = new JLabel();

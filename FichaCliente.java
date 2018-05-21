@@ -38,6 +38,7 @@ public class FichaCliente implements Serializable
        this.morada = morada;
        this.password = password;
        this.deducaototal = 0;
+       moneyspent = 0;
        if(this instanceof EntidadeEmpresas){
            this.fichaType = 1;
        }

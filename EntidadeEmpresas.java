@@ -18,6 +18,7 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
        super(nif,email,nome,morada,password);
        this.actividadeEconomica = actividadeEconomica;
        FichaCliente ola = (FichaCliente) this;
+       faturacao = 0;
        ola.setfichaType(1);
        this.regiao=regiao;
        reducaoImposto();

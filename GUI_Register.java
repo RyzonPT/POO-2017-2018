@@ -23,7 +23,7 @@ import java.awt.event.ItemEvent;
 import java.awt.List;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
+import java.lang.*;
 
 public class GUI_Register extends JFrame {
     //Registo de individuo
@@ -52,13 +52,14 @@ public class GUI_Register extends JFrame {
     private JButton AdicionarButtonCodigos;
     private JButton AdicionarButtonAtividadeEconomica;
     private JButton removerbotaoNifs;
+    private JButton AdicionarbotaoAtividadeEconomica;
     private JButton removerbotaoCodigos;
     private JButton removerbotaoAtividadeEconomica;
     private JList list1;
     private JList list2;
-    private JList list3;
+    private JList EmpAtividList;
     private String nif;
-    private int proprionif;
+    private String proprionif;
     private int codigoAtividade;
     private String atividadeEconomica;
     private boolean visible;
@@ -67,6 +68,7 @@ public class GUI_Register extends JFrame {
     private JScrollPane scroll;
     private JScrollPane scroll2;
     private JScrollPane scroll3;
+    private JScrollPane scroll4;
     private JComboBox combobox1;
     private JComboBox combobox2;
     private String email;
@@ -91,6 +93,7 @@ public class GUI_Register extends JFrame {
     private DefaultListModel listModel = new DefaultListModel();
     private DefaultListModel listModel2 = new DefaultListModel();
     private DefaultListModel listModel3 = new DefaultListModel();
+    private JList EmpDefautAtivlist;
     public GestaoFichas gestorfichas;
     public GestaoFaturas gestorfaturas;
     private EntidadePrivada fichaPrivada;
@@ -101,7 +104,8 @@ public class GUI_Register extends JFrame {
 
     //Constructor 
     public GUI_Register(){
-        proprionif=numerodedependentes=codigoAtividade=-1; nif=password=morada=email=nome=atividadeEconomica=""; regiao = "EntreDouroMinho";
+        numerodedependentes=codigoAtividade=-1; nif=password=morada=email=nome=atividadeEconomica=""; regiao = "EntreDouroMinho";
+        proprionif="-1";
         visible = false; flag = false;
         fichaEmpresa = new EntidadeEmpresas();
         fichaPrivada = new EntidadePrivada();
@@ -137,7 +141,7 @@ public class GUI_Register extends JFrame {
         });
 
         REmail = new JTextField();
-        REmail.setBounds(197,298,90,35);
+        REmail.setBounds(197,298,150,35);
         REmail.setBackground(new Color(255,255,255));
         REmail.setForeground(new Color(0,0,0));
         REmail.setEnabled(true);
@@ -152,7 +156,7 @@ public class GUI_Register extends JFrame {
         });
 
         RMorada = new JTextField();
-        RMorada.setBounds(197,338,90,35);
+        RMorada.setBounds(197,338,150,35);
         RMorada.setBackground(new Color(255,255,255));
         RMorada.setForeground(new Color(0,0,0));
         RMorada.setEnabled(true);
@@ -167,7 +171,7 @@ public class GUI_Register extends JFrame {
         });
 
         RNome = new JTextField();
-        RNome.setBounds(197,258,90,35);
+        RNome.setBounds(197,258,150,35);
         RNome.setBackground(new Color(255,255,255));
         RNome.setForeground(new Color(0,0,0));
         RNome.setEnabled(true);
@@ -197,7 +201,7 @@ public class GUI_Register extends JFrame {
         });
 
         RPassword = new JPasswordField();
-        RPassword.setBounds(197,177,90,35);
+        RPassword.setBounds(197,177,110,35);
         RPassword.setBackground(new Color(255,255,255));
         RPassword.setForeground(new Color(0,0,0));
         RPassword.setEnabled(true);
@@ -421,7 +425,8 @@ public class GUI_Register extends JFrame {
         scroll2.setBounds(679,197,264,196);
         scroll2.setVisible(visible);
        
-        //Registo de Empresa
+        //Registo de Empresa/*
+        /*
         RAtividadeEconomica = new JTextField();
         RAtividadeEconomica.setBounds(199,282,90,35);
         RAtividadeEconomica.setBackground(new Color(255,255,255));
@@ -453,9 +458,9 @@ public class GUI_Register extends JFrame {
                 AtividadeAdded(evt);
             }
         });
-        
+        */
         removerbotaoAtividadeEconomica = new JButton();
-        removerbotaoAtividadeEconomica.setBounds(460,410,90,35);
+        removerbotaoAtividadeEconomica.setBounds(830,310,90,35);
         removerbotaoAtividadeEconomica.setBackground(new Color(214,217,223));
         removerbotaoAtividadeEconomica.setForeground(new Color(0,0,0));
         removerbotaoAtividadeEconomica.setEnabled(true);
@@ -469,21 +474,56 @@ public class GUI_Register extends JFrame {
             }
         });
         
-        list3 = new JList(listModel3);
-        list3.setBackground(new Color(255,255,255));
-        //list3.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        list3.setForeground(new Color(0,0,0));
-        list3.setEnabled(true);
-        list3.setFont(new Font("sansserif",0,12));
+        EmpAtividList = new JList(listModel3);
+        EmpAtividList.setBackground(new Color(255,255,255));
+        //EmpAtividList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        EmpAtividList.setForeground(new Color(0,0,0));
+        EmpAtividList.setEnabled(true);
+        EmpAtividList.setFont(new Font("sansserif",0,12));
         
         scroll3 = new JScrollPane();
-        scroll3.setViewportView(list3);
+        scroll3.setViewportView(EmpAtividList);
         scroll3.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll3.setBounds(379,197,264,196);
+        scroll3.setBounds(750,100,264,196);
         scroll3.setVisible(!visible);
+        
+        String[] codigos = new String[10];
+        int i = 0;
+        for(GestaoAtividadeEconomica.AtividadeEconomica h: GestaoAtividadeEconomica.getEnumPrivadaMap().keySet()){
+            codigos[i] = h.toString();
+            i++;
+        }
+        
+        EmpDefautAtivlist = new JList(codigos);
+        EmpDefautAtivlist.setBackground(new Color(255,255,255));
+        //EmpAtividList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        EmpDefautAtivlist.setForeground(new Color(0,0,0));
+        EmpDefautAtivlist.setEnabled(true);
+        EmpDefautAtivlist.setFont(new Font("sansserif",0,12));
+        
+        scroll4 = new JScrollPane();
+        scroll4.setViewportView(EmpDefautAtivlist);
+        scroll4.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll4.setBounds(430,100,264,196);
+        scroll4.setVisible(!visible);
+        
+        AdicionarbotaoAtividadeEconomica = new JButton();
+        AdicionarbotaoAtividadeEconomica.setBounds(510,310,90,35);
+        AdicionarbotaoAtividadeEconomica.setBackground(new Color(214,217,223));
+        AdicionarbotaoAtividadeEconomica.setForeground(new Color(0,0,0));
+        AdicionarbotaoAtividadeEconomica.setEnabled(true);
+        AdicionarbotaoAtividadeEconomica.setFont(new Font("sansserif",0,12));
+        AdicionarbotaoAtividadeEconomica.setText("Adicionar");
+        AdicionarbotaoAtividadeEconomica.setVisible(!visible);
+
+        AdicionarbotaoAtividadeEconomica.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                AtividadeAdded(evt);
+            }
+        });
 
         REmailE = new JTextField();
-        REmailE.setBounds(199,202,90,35);
+        REmailE.setBounds(199,202,150,35);
         REmailE.setBackground(new Color(255,255,255));
         REmailE.setForeground(new Color(0,0,0));
         REmailE.setEnabled(true);
@@ -498,7 +538,7 @@ public class GUI_Register extends JFrame {
         });
     
         RMoradaE = new JTextField();
-        RMoradaE.setBounds(199,242,90,35);
+        RMoradaE.setBounds(199,242,150,35);
         RMoradaE.setBackground(new Color(255,255,255));
         RMoradaE.setForeground(new Color(0,0,0));
         RMoradaE.setEnabled(true);
@@ -528,7 +568,7 @@ public class GUI_Register extends JFrame {
         });
 
         RNomeE = new JTextField();
-        RNomeE.setBounds(199,162,90,35);
+        RNomeE.setBounds(199,162,150,35);
         RNomeE.setBackground(new Color(255,255,255));
         RNomeE.setForeground(new Color(0,0,0));
         RNomeE.setEnabled(true);
@@ -543,7 +583,7 @@ public class GUI_Register extends JFrame {
         });
 
         RPasswordE = new JPasswordField();
-        RPasswordE.setBounds(199,122,90,35);
+        RPasswordE.setBounds(199,122,110,35);
         RPasswordE.setBackground(new Color(255,255,255));
         RPasswordE.setForeground(new Color(0,0,0));
         RPasswordE.setEnabled(true);
@@ -591,7 +631,7 @@ public class GUI_Register extends JFrame {
         labelAtividadeEconomica.setVisible(!visible);
         
         labelRegiao = new JLabel();
-        labelRegiao.setBounds(65,323,120,35);
+        labelRegiao.setBounds(143,323,90,35);
         labelRegiao.setBackground(new Color(214,217,223));
         labelRegiao.setForeground(new Color(0,0,0));
         labelRegiao.setEnabled(true);
@@ -660,7 +700,7 @@ public class GUI_Register extends JFrame {
         });
         
         combobox2 = new JComboBox<String>();
-        combobox2.setBounds(199,322,90,35);
+        combobox2.setBounds(199,322,150,35);
         combobox2.setBackground(new Color(214,217,223));
         combobox2.setForeground(new Color(0,0,0));
         combobox2.setEnabled(true);
@@ -686,7 +726,7 @@ public class GUI_Register extends JFrame {
         });
         
         //adding components to contentPane panel
-        contentPane.add(RAtividadeEconomica);
+        //contentPane.add(RAtividadeEconomica);
         contentPane.add(REmailE);
         contentPane.add(RMoradaE);
         contentPane.add(RNifE);
@@ -721,12 +761,14 @@ public class GUI_Register extends JFrame {
         contentPane.add(labelPassword);
         contentPane.add(AdicionarButtonNifs);
         contentPane.add(AdicionarButtonCodigos);
-        contentPane.add(AdicionarButtonAtividadeEconomica);
+        //contentPane.add(AdicionarButtonAtividadeEconomica);
         contentPane.add(removerbotaoNifs);
+        contentPane.add(AdicionarbotaoAtividadeEconomica);
         contentPane.add(removerbotaoCodigos);
         contentPane.add(removerbotaoAtividadeEconomica);
         contentPane.add(scroll);
         contentPane.add(scroll2);
+        contentPane.add(scroll4);
         contentPane.add(scroll3);
         contentPane.add(combobox1);
         contentPane.add(combobox2);
@@ -750,7 +792,7 @@ public class GUI_Register extends JFrame {
         else flag = true;
         if (flag!=visible){
             visible = !visible;
-            RAtividadeEconomica.setVisible(!visible);
+            //RAtividadeEconomica.setVisible(!visible);
             REmailE.setVisible(!visible);
             RMoradaE.setVisible(!visible);
             RNifE.setVisible(!visible);
@@ -782,6 +824,7 @@ public class GUI_Register extends JFrame {
             label3.setVisible(visible);
             labelEmail.setVisible(visible);
             labelMorada.setVisible(visible);
+            AdicionarbotaoAtividadeEconomica.setVisible(!visible);
             labelNome.setVisible(visible);
             labelNumeroDeDependentes.setVisible(visible);
             labelNumerosFiscais.setVisible(visible);
@@ -789,37 +832,43 @@ public class GUI_Register extends JFrame {
             labelPassword.setVisible(visible);
             AdicionarButtonNifs.setVisible(visible);
             AdicionarButtonCodigos.setVisible(visible);
-            AdicionarButtonAtividadeEconomica.setVisible(!visible);
+            //AdicionarButtonAtividadeEconomica.setVisible(!visible);
             scroll.setVisible(visible);
             scroll2.setVisible(visible);
             scroll3.setVisible(!visible);
+            scroll4.setVisible(!visible);
         }
     }
     
     private void OnClickedRegistar (MouseEvent evt){
-        if(nif=="" || proprionif==-1 || numerodedependentes==-1 || codigoAtividade==-1 || morada=="" || email=="" || nome=="" || password=="" ){
+        if(nif=="" || proprionif.equals("-1") || numerodedependentes==-1 || codigoAtividade==-1 || morada=="" || email=="" || nome=="" || password=="" ){
             infoBox("Por favor preencha todos os campos", "Impossível registar");
+            return;
+        }
+        if(password.length()<5){
+            infoBox("Password tem de conter pelo menos 5 carateres", "Impossível registar");
+            return;
+        }
+        if(proprionif.length()<9){
+            infoBox("Nif tem de conter pelo menos 9 carateres", "Impossível registar");
+            return;
         }
         else{
-            if(gestorfichas.existeFicha(proprionif)){
+            if(gestorfichas.existeFicha(Integer.parseInt(proprionif))){
                 infoBox("Já existe um registo com este proprio Nif", "Impossível registar");
+                return;
             }
             else{
                 fichaPrivada.setPassword(password);
-                fichaPrivada.setCoeficienteFiscal(0);
-                fichaPrivada.setnif(proprionif);
-                fichaPrivada.setfichaType(0);
+                fichaPrivada.setnif(Integer.parseInt(proprionif));
                 fichaPrivada.setNumerosFiscais(nifs);
-                fichaPrivada.setCodigosAtividades(codigoatividades);
                 fichaPrivada.setEmail(email);
                 fichaPrivada.setMorada(morada);
                 fichaPrivada.setNome(nome);
                 fichaPrivada.setndependentes(numerodedependentes);
                 fichaPrivada.setAgregadoFamiliar(nifs.size());
-                fichaPrivada.setmoneyspent(0);
-                fichaPrivada.setimposto(fichaEmpresa.reducaoImposto());
                 gestorfichas.addFicha(fichaPrivada);
-                if(gestorfichas.existeFicha(proprionif)){
+                if(gestorfichas.existeFicha(Integer.parseInt(proprionif))){
                     infoBox("Registo com sucesso!", "Registo com sucesso");
                     HallentradaGUI hallentrada = new HallentradaGUI();
                     hallentrada.setgestorfichas(gestorfichas);
@@ -833,23 +882,29 @@ public class GUI_Register extends JFrame {
     private void OnClickedRegistarE (MouseEvent evt){
         if(nif=="" || morada=="" || email=="" || nome=="" || atividadeEconomica=="" || password=="" ){
             infoBox("Por favor preencha todos os campos", "Impossível registar");
+            return;
+        }
+        if(password.length()<5){
+            infoBox("Password tem de conter pelo menos 5 carateres", "Impossível registar");
+            return;
+        }
+        if(nif.length()<9){
+            infoBox("Nif tem de conter pelo menos 9 carateres", "Impossível registar");
+            return;
         }
         else {
             if(gestorfichas.existeFicha(Integer.parseInt(nif))){
                 infoBox("Já existe um registo com este Nif", "Impossível registar");
+                return;
             }
             else{
                     fichaEmpresa.setregiao(regiao);
                     fichaEmpresa.setPassword(password);
-                    //fichaEmpresa.setdeducaoFiscal(0);
                     fichaEmpresa.setnif(Integer.parseInt(nif));
-                    fichaEmpresa.setfichaType(1);
                     fichaEmpresa.setActividadeEconomica(atividades);
                     fichaEmpresa.setEmail(email);
                     fichaEmpresa.setMorada(morada);
                     fichaEmpresa.setNome(nome);
-                    fichaEmpresa.setmoneyspent(0);
-                    fichaEmpresa.setimposto(fichaEmpresa.reducaoImposto());
                     gestorfichas.addFicha(fichaEmpresa);
                     if(gestorfichas.existeFicha(Integer.parseInt(nif))){
                         infoBox("Registo com sucesso!", "Registo com sucesso");
@@ -907,23 +962,14 @@ public class GUI_Register extends JFrame {
             }
         }
     }
-    
+
     private void AtividadeAdded (MouseEvent evt) {
-        if(listModel3.contains(atividadeEconomica)){
+        if(listModel3.contains(EmpDefautAtivlist.getSelectedValue())){
             infoBox("Já adicionou esta atividade", "Impossível adicionar atividade");
-            RAtividadeEconomica.setText("");
+            return;
         }
-        else{
-            if(RAtividadeEconomica.getText().equals("Saude") || RAtividadeEconomica.getText().equals("Educacao") || RAtividadeEconomica.getText().equals("DespesasGerais") || RAtividadeEconomica.getText().equals("Habitacao") || RAtividadeEconomica.getText().equals("Lares") || RAtividadeEconomica.getText().equals("ReparacaoAutomovel") || RAtividadeEconomica.getText().equals("RestauraçãoAlojamento") || RAtividadeEconomica.getText().equals("CabeleireirosInstitutosBeleza") || RAtividadeEconomica.getText().equals("AtividadesVeterinarias") || RAtividadeEconomica.getText().equals("PassesMensais")){
-                RAtividadeEconomica.setText("");
-                listModel3.addElement(atividadeEconomica);
-                atividades.add(atividadeEconomica);
-            }
-            else{
-                infoBox("A atividade tem de ser uma das seguintes: Saude, Educacao, DespesasGerais, Habitacao, Lares, ReparacaoAutomovel, RestauraçãoAlojamento, CabeleireirosInstitutosBeleza, AtividadesVeterinarias, PassesMensais", "Impossível adicionar atividade");
-                RAtividadeEconomica.setText("");
-            }
-        }
+        listModel3.addElement(EmpDefautAtivlist.getSelectedValue());
+        atividades.add(EmpDefautAtivlist.getSelectedValue().toString());         
     }
     
     private void  NifRemoved (MouseEvent evt) {
@@ -945,12 +991,11 @@ public class GUI_Register extends JFrame {
     }
     
     private void  AtividadeRemoved (MouseEvent evt) {
-        int selectedIndex = list3.getSelectedIndex();
+        int selectedIndex = EmpAtividList.getSelectedIndex();
         if (selectedIndex != -1) {
             listModel3.remove(selectedIndex);
+            atividades.remove(EmpAtividList.getSelectedValue());
         }
-        String selected = list3.getSelectedValue().toString();
-        codigoatividades.remove(selected);
     }
     
     public void setgestorfichas(GestaoFichas a){
@@ -994,7 +1039,7 @@ public class GUI_Register extends JFrame {
     }
     
     private void onKeyReleasedProprioNif (KeyEvent evt) {
-            proprionif = Integer.parseInt(ProprioNIF.getText());
+            proprionif = ProprioNIF.getText();
     }
     
     private void onKeyReleasedCodigosAtividades (KeyEvent evt) {

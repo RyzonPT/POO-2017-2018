@@ -5,16 +5,12 @@ public class EntidadePrivada extends FichaCliente implements Serializable
 {
     private int agregadoFamiliar;
     private ArrayList<Integer> numerosFiscais;
-    private int coeficienteFiscal;
-    private ArrayList<Integer> codigosAtividades;
     private int ndependentes;
     public EntidadePrivada()
     {
         super();
         this.agregadoFamiliar = 0;
         this.numerosFiscais = new ArrayList<Integer>();
-        this.coeficienteFiscal =0;
-        this.codigosAtividades = new ArrayList<Integer>();
     }
 
     public EntidadePrivada(int numeroFiscal, String email, String nome, String morada, String password, int agregadoFamiliar, ArrayList<Integer> numerosFiscais,
@@ -22,8 +18,6 @@ public class EntidadePrivada extends FichaCliente implements Serializable
         super(numeroFiscal,email,nome,morada,password);
         this.agregadoFamiliar = agregadoFamiliar;
         this.numerosFiscais = numerosFiscais;
-        this.coeficienteFiscal = coeficienteFiscal;
-        this.codigosAtividades = codigosAtividade;
         this.ndependentes = ndependentes;
         reducaoImposto();
     }
@@ -32,8 +26,6 @@ public class EntidadePrivada extends FichaCliente implements Serializable
         super(c);
         this.agregadoFamiliar =c.getAgregadoFamiliar();
         this.numerosFiscais = c.getNumerosFiscais();
-        this.coeficienteFiscal = c.getCoeficienteFiscal();
-        this.codigosAtividades = c.getCodigosAtividades();
         this.ndependentes=c.getndependentes();
     }
 
@@ -48,14 +40,6 @@ public class EntidadePrivada extends FichaCliente implements Serializable
     public ArrayList<Integer> getNumerosFiscais(){
         return new ArrayList<Integer> (numerosFiscais);
     }
-    
-    public int getCoeficienteFiscal(){
-        return this.coeficienteFiscal;
-    }
-
-    public ArrayList<Integer> getCodigosAtividades(){
-        return new ArrayList<Integer>(codigosAtividades);
-    }
 
     public void setAgregadoFamiliar(int AgregadoFamiliar){
         this.agregadoFamiliar = AgregadoFamiliar;
@@ -69,14 +53,6 @@ public class EntidadePrivada extends FichaCliente implements Serializable
         this.ndependentes = ndependentes;
     }
 
-    public void setCoeficienteFiscal(int coeficienteFiscal){
-        this.coeficienteFiscal=coeficienteFiscal;
-    }
-
-    public void setCodigosAtividades(ArrayList<Integer> codigosAtividades){
-        this.codigosAtividades=(ArrayList<Integer>)codigosAtividades.clone();
-    }
-
     public EntidadePrivada clone() {
         return new EntidadePrivada(this);
     }
@@ -86,9 +62,7 @@ public class EntidadePrivada extends FichaCliente implements Serializable
         if(obj==null || obj.getClass() != this.getClass()) return false;
         EntidadePrivada le = (EntidadePrivada) obj;
         return le.getAgregadoFamiliar() == this.agregadoFamiliar &&
-        this.numerosFiscais.equals(le.getNumerosFiscais()) &&
-        le.getCoeficienteFiscal()==this.coeficienteFiscal &&
-        this.codigosAtividades.equals(le.getCodigosAtividades());
+        this.numerosFiscais.equals(le.getNumerosFiscais());
     }
     
 }
