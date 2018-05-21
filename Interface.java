@@ -90,7 +90,7 @@ public class Interface
             gestorfaturas.addFaturas(dam11);
             
                         Fatura dam12 = new Fatura("PedreiroLDA", "SantoTiso", "ratuinho@hotmail.com", 1 ,lolis2,  teste, 0, null, null, null, 2,0.23,"EntreDouroMinho");
-            gestorfaturas.addFaturas(dam12);*/
+            gestorfaturas.addFaturas(dam12);
             
             
     
