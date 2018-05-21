@@ -118,11 +118,11 @@ public class GUI_Register extends JFrame {
 
 
         BRegistar = new JButton();
-        BRegistar.setBounds(195,389,90,35);
+        BRegistar.setBounds(195,389,110,50);
         BRegistar.setBackground(new Color(214,217,223));
         BRegistar.setForeground(new Color(0,0,0));
         BRegistar.setEnabled(true);
-        BRegistar.setFont(new Font("sansserif",0,12));
+        BRegistar.setFont(new Font("sansserif",0,20));
         BRegistar.setText("Registar");
         BRegistar.setVisible(visible);
         
@@ -217,11 +217,11 @@ public class GUI_Register extends JFrame {
         Title.setVisible(visible);
         
         listaAgregadostext = new JLabel();
-        listaAgregadostext.setBounds(485,105,264,35);
+        listaAgregadostext.setBounds(473,105,264,35);
         listaAgregadostext.setBackground(new Color(214,217,223));
         listaAgregadostext.setForeground(new Color(0,0,0));
         listaAgregadostext.setEnabled(true);
-        listaAgregadostext.setFont(new Font("SansSerif",0,15));
+        listaAgregadostext.setFont(new Font("SansSerif",0,18));
         listaAgregadostext.setText("Lista do Agregado Familiar");
         listaAgregadostext.setVisible(visible);
 
@@ -304,7 +304,7 @@ public class GUI_Register extends JFrame {
         labelNumeroDeDependentes.setVisible(visible);
 
         labelNumerosFiscais = new JLabel();
-        labelNumerosFiscais.setBounds(92,135,100,35);
+        labelNumerosFiscais.setBounds(97,135,100,35);
         labelNumerosFiscais.setBackground(new Color(214,217,223));
         labelNumerosFiscais.setForeground(new Color(0,0,0));
         labelNumerosFiscais.setEnabled(true);
@@ -313,7 +313,7 @@ public class GUI_Register extends JFrame {
         labelNumerosFiscais.setVisible(visible);
         
         labelProprioNif = new JLabel();
-        labelProprioNif.setBounds(92,88,100,35);
+        labelProprioNif.setBounds(127,88,100,35);
         labelProprioNif.setBackground(new Color(214,217,223));
         labelProprioNif.setForeground(new Color(0,0,0));
         labelProprioNif.setEnabled(true);
@@ -395,7 +395,7 @@ public class GUI_Register extends JFrame {
         });
         */
         removerbotaoAtividadeEconomica = new JButton();
-        removerbotaoAtividadeEconomica.setBounds(30,310,90,35);
+        removerbotaoAtividadeEconomica.setBounds(830,310,90,35);
         removerbotaoAtividadeEconomica.setBackground(new Color(214,217,223));
         removerbotaoAtividadeEconomica.setForeground(new Color(0,0,0));
         removerbotaoAtividadeEconomica.setEnabled(true);
@@ -533,11 +533,11 @@ public class GUI_Register extends JFrame {
         });
 
         Registar = new JButton();
-        Registar.setBounds(198,383,90,35);
+        Registar.setBounds(250,383,110,50);
         Registar.setBackground(new Color(214,217,223));
         Registar.setForeground(new Color(0,0,0));
         Registar.setEnabled(true);
-        Registar.setFont(new Font("sansserif",0,12));
+        Registar.setFont(new Font("sansserif",0,20));
         Registar.setText("Registar");
         Registar.setVisible(!visible);
         
@@ -557,11 +557,11 @@ public class GUI_Register extends JFrame {
         Titulo.setVisible(!visible);
 
         labelAtividadeEconomica = new JLabel();
-        labelAtividadeEconomica.setBounds(550,65,400,35);
+        labelAtividadeEconomica.setBounds(520,65,450,35);
         labelAtividadeEconomica.setBackground(new Color(214,217,223));
         labelAtividadeEconomica.setForeground(new Color(0,0,0));
         labelAtividadeEconomica.setEnabled(true);
-        labelAtividadeEconomica.setFont(new Font("sansserif",0,15));
+        labelAtividadeEconomica.setFont(new Font("sansserif",0,20));
         labelAtividadeEconomica.setText("AtividadeEconomica(Selecione e clique adicionar): ");
         labelAtividadeEconomica.setVisible(!visible);
         
