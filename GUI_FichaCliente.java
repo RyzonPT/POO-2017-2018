@@ -750,6 +750,10 @@ public class GUI_FichaCliente extends JFrame {
         this.setLocationRelativeTo(null);
         this.pack();
         this.setVisible(true);
+        
+        Container c = getContentPane();
+        JScrollPane scroll = new JScrollPane( c );
+        setContentPane( scroll );
     }
     
     private void onComboBoxClicked(ActionEvent e){
