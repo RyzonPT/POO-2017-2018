@@ -101,7 +101,7 @@ public class GUI_Register extends JFrame {
 
     //Constructor 
     public GUI_Register(){
-        proprionif=numerodedependentes=codigoAtividade=-1; nif=password=morada=email=nome=atividadeEconomica=""; regiao = "Acores";
+        proprionif=numerodedependentes=codigoAtividade=-1; nif=password=morada=email=nome=atividadeEconomica=""; regiao = "EntreDouroMinho";
         visible = false; flag = false;
         fichaEmpresa = new EntidadeEmpresas();
         fichaPrivada = new EntidadePrivada();
@@ -816,6 +816,8 @@ public class GUI_Register extends JFrame {
                 fichaPrivada.setNome(nome);
                 fichaPrivada.setndependentes(numerodedependentes);
                 fichaPrivada.setAgregadoFamiliar(nifs.size());
+                fichaPrivada.setmoneyspent(0);
+                fichaPrivada.setimposto(fichaEmpresa.reducaoImposto());
                 gestorfichas.addFicha(fichaPrivada);
                 if(gestorfichas.existeFicha(proprionif)){
                     infoBox("Registo com sucesso!", "Registo com sucesso");
@@ -847,6 +849,7 @@ public class GUI_Register extends JFrame {
                     fichaEmpresa.setMorada(morada);
                     fichaEmpresa.setNome(nome);
                     fichaEmpresa.setmoneyspent(0);
+                    fichaEmpresa.setimposto(fichaEmpresa.reducaoImposto());
                     gestorfichas.addFicha(fichaEmpresa);
                     if(gestorfichas.existeFicha(Integer.parseInt(nif))){
                         infoBox("Registo com sucesso!", "Registo com sucesso");
