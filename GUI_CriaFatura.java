@@ -697,21 +697,15 @@ public class GUI_CriaFatura extends JFrame {
             return;
         }
         EntidadeEmpresas fichaE = (EntidadeEmpresas) ficha;   
-
         Fatura c = new Fatura (ficha.getNome(), ficha.getMorada(), ficha.getEmail(),ficha.getnif(), produtos,fichaE.getActividadeEconomica(), nomeCliente, moradaCliente, emailCliente, Integer.parseInt(nifCliente), ficha.getimposto(),fichaE.getregiao(),fichaAssociada);
 
         gestorfaturas.addFaturas(c);
-        gestorfichas.incrementavalor(fichaAssociada.getnif(),c.getvalortotal());
+        
+        fichaAssociada.adicionaDinheiroGasto(c.getvalortotal());
         gestorfichas.addFicha(fichaAssociada);
-        gestorfichas.incremenFaturacao(ficha.getnif(),c.getvalortotal());
+        fichaE.valorFaturacao(c.getvalortotal());
         gestorfichas.addFicha(ficha);
-        
-        List<FichaCliente> dezmaisgastam = gestorfichas.gettenUsersMostRich();
-        
-            for(FichaCliente h : dezmaisgastam) {
-                System.out.println(h.getnif()+"tou farto" + h.getmoneyspent());
-            }
-        
+
         JOptionPane.showMessageDialog(null,"Fatura criada com sucesso!", "Message" , JOptionPane.INFORMATION_MESSAGE);
         Botao botao = new Botao(Integer.toString(c.getfaturaID())+"   "+c.getnomeEmpresa(),c,ficha,guificha);
         guificha.getlistModel().addElement(botao);

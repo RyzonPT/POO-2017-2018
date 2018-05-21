@@ -75,7 +75,7 @@ public class Fatura implements Serializable
        this.moradaCliente = moradaCliente;
        this.emailCliente = emailCliente;
        this.nifCliente = nifCliente;
-       
+       this.regiao = regiao;
        if(actividadeEconomica.size()==1){
            ativEconEscolhida = actividadeEconomica.get(0);
        }
@@ -88,12 +88,11 @@ public class Fatura implements Serializable
        }
         else{
             EntidadePrivada fichaP = (EntidadePrivada) ficha;
-            System.out.println(fichaP.getndependentes()+"assasaassaas"+ fichaP.getnif()+ " NAO METO UM 1");
             deducao = calculoDeducaoPrivada(fichaP.getndependentes());
             
             ficha.adicionadeducaototal(deducao);
         }
-       this.regiao = regiao;
+       
     }
     
     public Fatura(Fatura c){
@@ -294,16 +293,12 @@ public class Fatura implements Serializable
       
    public double calculoDeducaoPrivada(int ndependentes){
         if (ativEconEscolhida.equals("n/a")) return 0;
-        System.out.println(ativEconEscolhida+"lel");
-        
         Pair<Double,Integer> pair = GestaoAtividadeEconomica.getEnumPrivadaMap().get(GestaoAtividadeEconomica.AtividadeEconomica.valueOf(ativEconEscolhida));
         deducao = pair.getKey() * 0.23 * (ndependentes) * valortotal;
-        System.out.println(deducao +"existe amanhaaaa" + ndependentes+ " merdas" + pair.getKey());
         return deducao;
    }
    
    public double calculoDeducaoEmpresa(){
-       
         double imposto = GestaoAtividadeEconomica.getEnumEmpresaMap().get(GestaoAtividadeEconomica.Regiao.valueOf(regiao));
         deducao =(0.23-imposto)*valortotal;
         return deducao;

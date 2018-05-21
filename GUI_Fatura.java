@@ -483,7 +483,6 @@ public class GUI_Fatura extends JFrame {
          else{
              EntidadePrivada fichaP = (EntidadePrivada) ficha;
              fatura.calculoDeducaoPrivada(fichaP.getndependentes());
-             System.out.println(fatura.calculoDeducaoPrivada(fichaP.getndependentes()));
              if(ficha.getnif() == fatura.getnifCliente()){
                  ficha.adicionadeducaototal(fatura.getdeducao());
                  gestorfichas.addFicha(ficha);

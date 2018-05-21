@@ -360,40 +360,7 @@ public class GUI_Register extends JFrame {
         scroll.setBounds(450,140,264,196);
         scroll.setVisible(visible);
 
-        //Registo de Empresa/*
-        /*
-        RAtividadeEconomica = new JTextField();
-        RAtividadeEconomica.setBounds(199,282,90,35);
-        RAtividadeEconomica.setBackground(new Color(255,255,255));
-        RAtividadeEconomica.setForeground(new Color(0,0,0));
-        RAtividadeEconomica.setEnabled(true);
-        RAtividadeEconomica.setFont(new Font("sansserif",0,12));
-        RAtividadeEconomica.setText("");
-        RAtividadeEconomica.setVisible(!visible);
-        
-        RAtividadeEconomica.addKeyListener(new KeyAdapter() {
-            public void keyReleased(KeyEvent evt){
-                onKeyReleasedAtividadeEconomica(evt);
-            }
-        });
-        
-        
-        AdicionarButtonAtividadeEconomica = new JButton();
-        AdicionarButtonAtividadeEconomica.setBounds(289,282,90,35);
-        AdicionarButtonAtividadeEconomica.setBackground(new Color(214,217,223));
-        AdicionarButtonAtividadeEconomica.setForeground(new Color(0,0,0));
-        AdicionarButtonAtividadeEconomica.setEnabled(true);
-        AdicionarButtonAtividadeEconomica.setFont(new Font("sansserif",0,12));
-        AdicionarButtonAtividadeEconomica.setText("Adicionar");
-        AdicionarButtonAtividadeEconomica.setVisible(!visible);
-        //  Set methods for mouse events
-        //Call defined methods
-        AdicionarButtonAtividadeEconomica.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                AtividadeAdded(evt);
-            }
-        });
-        */
+        //Registo empresas
         removerbotaoAtividadeEconomica = new JButton();
         removerbotaoAtividadeEconomica.setBounds(830,310,90,35);
         removerbotaoAtividadeEconomica.setBackground(new Color(214,217,223));
@@ -411,7 +378,6 @@ public class GUI_Register extends JFrame {
         
         EmpAtividList = new JList(listModel3);
         EmpAtividList.setBackground(new Color(255,255,255));
-        //EmpAtividList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         EmpAtividList.setForeground(new Color(0,0,0));
         EmpAtividList.setEnabled(true);
         EmpAtividList.setFont(new Font("sansserif",0,12));
@@ -431,7 +397,6 @@ public class GUI_Register extends JFrame {
         
         EmpDefautAtivlist = new JList(codigos);
         EmpDefautAtivlist.setBackground(new Color(255,255,255));
-        //EmpAtividList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         EmpDefautAtivlist.setForeground(new Color(0,0,0));
         EmpDefautAtivlist.setEnabled(true);
         EmpDefautAtivlist.setFont(new Font("sansserif",0,12));
@@ -652,8 +617,8 @@ public class GUI_Register extends JFrame {
         combobox2.addItem("Madeira");
         combobox2.addItem("Acores");
         
-        //if(RAtividadeEconomica.getText().equals("Saude") || RAtividadeEconomica.getText().equals("Educacao") || RAtividadeEconomica.getText().equals("DespesasGerais") || RAtividadeEconomica.getText().equals("Habitacao") || RAtividadeEconomica.getText().equals("Lares") || RAtividadeEconomica.getText().equals("ReparacaoAutomovel") || RAtividadeEconomica.getText().equals("RestauraçãoAlojamento") || RAtividadeEconomica.getText().equals("CabeleireirosInstitutosBeleza") || RAtividadeEconomica.getText().equals("AtividadesVeterinarias") || RAtividadeEconomica.getText().equals("PassesMensais")){
-        
+   
+       
         combobox2.addActionListener (new ActionListener () {
             public void actionPerformed(ActionEvent e) {
                 setcomboboxregiao(e);
@@ -661,7 +626,6 @@ public class GUI_Register extends JFrame {
         });
         
         //adding components to contentPane panel
-        //contentPane.add(RAtividadeEconomica);
         contentPane.add(listaAgregadostext);
         contentPane.add(REmailE);
         contentPane.add(RMoradaE);
@@ -710,7 +674,7 @@ public class GUI_Register extends JFrame {
         this.pack();
         this.setVisible(true);
     }
-    
+     
     private void setcomboboxregiao (ActionEvent evt) {
         String itemSelecionado = (String) combobox1.getSelectedItem();
         regiao = itemSelecionado;
@@ -722,7 +686,6 @@ public class GUI_Register extends JFrame {
         else flag = true;
         if (flag!=visible){
             visible = !visible;
-            //RAtividadeEconomica.setVisible(!visible);
             REmailE.setVisible(!visible);
             RMoradaE.setVisible(!visible);
             RNifE.setVisible(!visible);
@@ -805,8 +768,10 @@ public class GUI_Register extends JFrame {
     }
     
     private void OnClickedRegistarE (MouseEvent evt){
-        if(nif=="" || morada=="" || email=="" || nome=="" || atividadeEconomica=="" || password=="" ){
+        if(nif=="" || morada=="" || email=="" || nome=="" || password=="" || atividades.size()<=0 ){
+            System.out.println(nif+morada+email+nome+atividades+password);
             infoBox("Por favor preencha todos os campos", "Impossível registar");
+            
             return;
         }
         if(password.length()<5){

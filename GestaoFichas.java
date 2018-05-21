@@ -97,17 +97,14 @@ public class GestaoFichas implements Serializable
     
     public boolean testaautenticacao(String password, int nif){
                      if (!this.existeFicha(nif)){
-                System.out.println("Nif não registado");
                 return false;
             }
 
             FichaCliente fichaEncontrada = this.getFicha(nif);
 
             if(!password.equals(fichaEncontrada.getPassword())){
-                System.out.println("Password inválida");
                 return false;
             }
-            System.out.println("Login => sucesso!");
             return true;
     }
     
@@ -139,15 +136,6 @@ public class GestaoFichas implements Serializable
         return a;
     }
     
-   public void incrementavalor( int nif, double valor){
-       getFicha(nif).adicionaDinheiroGasto(valor);
-   }
-   
-   public void incremenFaturacao( int nif, double valor){
-       EntidadeEmpresas a = (EntidadeEmpresas) getFicha(nif);
-        a.valorFaturacao(valor);
-   }
-   
    public List<FichaCliente> getAgregadoFichas(int nif){
        List<FichaCliente> agregado = new ArrayList();
        if( getFicha(nif) instanceof EntidadeEmpresas){

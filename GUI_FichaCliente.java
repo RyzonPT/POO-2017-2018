@@ -85,6 +85,8 @@ public class GUI_FichaCliente extends JFrame {
     private JLabel labelj;
     private JLabel labelk;
     private double deducaoagregado;
+    private JLabel defaultregiaotext;
+    private JLabel regiaotext;
 
     //Constructor 
     public GUI_FichaCliente(FichaCliente fichas,GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
@@ -141,7 +143,7 @@ public class GUI_FichaCliente extends JFrame {
         moneyspentgetText.setForeground(new Color(0,0,0));
         moneyspentgetText.setEnabled(true);
         moneyspentgetText.setFont(new Font("sansserif",0,12));
-        moneyspentgetText.setText(String.valueOf(ficha.getmoneyspent()));
+        moneyspentgetText.setText(df.format(ficha.getmoneyspent())+ "€");
         moneyspentgetText.setVisible(true);
 
         
@@ -433,6 +435,27 @@ public class GUI_FichaCliente extends JFrame {
         defaultdeducaotext.setVisible(true);
         
         
+        
+        defaultregiaotext = new JLabel();
+        defaultregiaotext.setBounds(465,170,130,35); 
+        defaultregiaotext.setBackground(new Color(214,217,223));
+        defaultregiaotext.setForeground(new Color(0,0,0));
+        defaultregiaotext.setEnabled(true);
+        defaultregiaotext.setFont(new Font("sansserif",0,12));
+        defaultregiaotext.setText("Regiao:");
+        defaultregiaotext.setVisible(true);
+        
+        regiaotext = new JLabel();
+        regiaotext.setBounds(520,170,130,35); 
+        regiaotext.setBackground(new Color(214,217,223));
+        regiaotext.setForeground(new Color(0,0,0));
+        regiaotext.setEnabled(true);
+        regiaotext.setFont(new Font("sansserif",0,12));
+        regiaotext.setText(fichaE.getregiao());
+        regiaotext.setVisible(true);
+        
+        
+        
         button1 = new JButton();
         button1.setBounds(570,360,150,60);
         button1.setBackground(new Color(214,217,223));
@@ -481,6 +504,9 @@ public class GUI_FichaCliente extends JFrame {
         scrollListaFaturas.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollListaFaturas.setBounds(52,286,250,200);
         
+        
+        contentPane.add(defaultregiaotext);
+        contentPane.add(regiaotext);
         contentPane.add(faturacaotext1);
         contentPane.add(faturacaotext);
         contentPane.add(comboBoxText);
@@ -520,21 +546,21 @@ public class GUI_FichaCliente extends JFrame {
         
         
         defaultdeducaotext = new JLabel();
-        defaultdeducaotext.setBounds(457,177,130,35);
+        defaultdeducaotext.setBounds(457,177,150,35);
         defaultdeducaotext.setBackground(new Color(214,217,223));
         defaultdeducaotext.setForeground(new Color(0,0,0));
         defaultdeducaotext.setEnabled(true);
         defaultdeducaotext.setFont(new Font("sansserif",0,12));
-        defaultdeducaotext.setText("Coeficiente Fiscal:");
+        defaultdeducaotext.setText("Taxa de imposto sujeito:");
         defaultdeducaotext.setVisible(true);
         
         DeducaoqueficienteFiscalText = new JLabel();
-        DeducaoqueficienteFiscalText.setBounds(582,177,90,35);
+        DeducaoqueficienteFiscalText.setBounds(600,177,90,35);
         DeducaoqueficienteFiscalText.setBackground(new Color(214,217,223));
         DeducaoqueficienteFiscalText.setForeground(new Color(0,0,0));
         DeducaoqueficienteFiscalText.setEnabled(true);
         DeducaoqueficienteFiscalText.setFont(new Font("sansserif",0,12));
-        DeducaoqueficienteFiscalText.setText(df.format((fichaP.getimposto())));
+        DeducaoqueficienteFiscalText.setText(df.format((fichaP.getimposto()))+ "%");
         DeducaoqueficienteFiscalText.setVisible(true);
         
         listaAgregadotext = new JLabel();
@@ -573,7 +599,7 @@ public class GUI_FichaCliente extends JFrame {
         deducaoprivadatext.setForeground(new Color(0,0,0));
         deducaoprivadatext.setEnabled(true);
         deducaoprivadatext.setFont(new Font("sansserif",0,12));
-        deducaoprivadatext.setText(df.format(gestorfaturas.CalculaDecucaoCliente(fichaP)));
+        deducaoprivadatext.setText(df.format(gestorfaturas.CalculaDecucaoCliente(fichaP))+ "€");
         deducaoprivadatext.setVisible(true);
         
 
@@ -702,7 +728,7 @@ public class GUI_FichaCliente extends JFrame {
         deducaoagregadotext.setForeground(new Color(0,0,0));
         deducaoagregadotext.setEnabled(true);
         deducaoagregadotext.setFont(new Font("sansserif",0,12));
-        deducaoagregadotext.setText(df.format(deducaoagregado));
+        deducaoagregadotext.setText(df.format(deducaoagregado)+ "€");
         deducaoagregadotext.setVisible(true);
         
         
