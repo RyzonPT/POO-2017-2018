@@ -35,7 +35,8 @@ public class GUI_Administrador extends JFrame {
     private int flag = 0;
     private int flag2= 0;
     private JButton logOutbutton;
-
+    private JLabel titulotext;
+    private JLabel empresaslabeltext;
     //Constructor 
     public GUI_Administrador(GestaoFichas gestorfichas,GestaoFaturas gestorfaturas){
         numerodeempresas="";
@@ -49,16 +50,36 @@ public class GUI_Administrador extends JFrame {
 
         //pane with null layout
         JPanel contentPane = new JPanel(null);
-        contentPane.setPreferredSize(new Dimension(500,400));
+        contentPane.setPreferredSize(new Dimension(796,798));
         contentPane.setBackground(new Color(192,192,192));
 
+        
+        titulotext = new JLabel();
+        titulotext.setBounds(150,50,500,55);
+        titulotext.setBackground(new Color(214,217,223));
+        titulotext.setForeground(new Color(0,0,0));
+        titulotext.setEnabled(true);
+        titulotext.setFont(new Font("sansserif",0,50));
+        titulotext.setText("Acesso Administrador");
+        titulotext.setVisible(true);
+        
+        empresaslabeltext = new JLabel();
+        empresaslabeltext.setBounds(447,220,240,35);
+        empresaslabeltext.setBackground(new Color(214,217,223));
+        empresaslabeltext.setForeground(new Color(0,0,0));
+        empresaslabeltext.setEnabled(true);
+        empresaslabeltext.setFont(new Font("sansserif",0,18));
+        empresaslabeltext.setText("Insira o numero de empresas:");
+        empresaslabeltext.setVisible(true);
+        
+        
         dezQueMaisGastam = new JButton();
-        dezQueMaisGastam.setBounds(197,160,250,35);
+        dezQueMaisGastam.setBounds(58,260,264,35);
         dezQueMaisGastam.setBackground(new Color(214,217,223));
         dezQueMaisGastam.setForeground(new Color(0,0,0));
         dezQueMaisGastam.setEnabled(true);
-        dezQueMaisGastam.setFont(new Font("sansserif",0,12));
-        dezQueMaisGastam.setText("10 contribuintes que mais gastam");
+        dezQueMaisGastam.setFont(new Font("sansserif",0,10));
+        dezQueMaisGastam.setText("Obter os 10 contribuintes que mais gastaram:");
         dezQueMaisGastam.setVisible(true);
         //Set methods for mouse events
         //Call defined methods
@@ -81,7 +102,7 @@ public class GUI_Administrador extends JFrame {
         scroll = new JScrollPane();
         scroll.setViewportView(list1);
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setBounds(197,210,264,196);
+        scroll.setBounds(58,310,264,196);
         scroll.setVisible(true);
         
         list2 = new JList(listModel2);
@@ -94,16 +115,16 @@ public class GUI_Administrador extends JFrame {
         scroll2 = new JScrollPane();
         scroll2.setViewportView(list2);
         scroll2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll2.setBounds(497,210,264,196);
+        scroll2.setBounds(447,310,264,196);
         scroll2.setVisible(true);
         
         xempresas = new JButton();
-        xempresas.setBounds(497,160,250,35);
+        xempresas.setBounds(487,260,220,35);
         xempresas.setBackground(new Color(214,217,223));
         xempresas.setForeground(new Color(0,0,0));
         xempresas.setEnabled(true);
         xempresas.setFont(new Font("sansserif",0,12));
-        xempresas.setText("X empresas com mais facturas");
+        xempresas.setText("empresas com mais facturas");
         xempresas.setVisible(true);
         
         xempresas.addMouseListener(new MouseAdapter() {
@@ -113,7 +134,7 @@ public class GUI_Administrador extends JFrame {
         });
         
         nempresas = new JTextField();
-        nempresas.setBounds(497,120,90,35);
+        nempresas.setBounds(447,260,40,35);
         nempresas.setBackground(new Color(255,255,255));
         nempresas.setForeground(new Color(0,0,0));
         nempresas.setEnabled(true);
@@ -129,7 +150,7 @@ public class GUI_Administrador extends JFrame {
         
         
         logOutbutton = new JButton();
-        logOutbutton.setBounds(330,690,150,60);
+        logOutbutton.setBounds(310,550,150,60);
         logOutbutton.setBackground(new Color(214,217,223));
         logOutbutton.setForeground(new Color(0,0,0));
         logOutbutton.setEnabled(true);
@@ -144,6 +165,8 @@ public class GUI_Administrador extends JFrame {
         });
             
         //adding components to contentPane panel
+        contentPane.add(empresaslabeltext);
+        contentPane.add(titulotext);
         contentPane.add(logOutbutton);
         contentPane.add(dezQueMaisGastam);
         contentPane.add(scroll);
