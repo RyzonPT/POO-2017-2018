@@ -145,7 +145,7 @@ public class FichaCliente implements Serializable
         sb.append("Morada: ").append(this.morada);
         sb.append("Password: ").append(this.password);
         sb.append("Tipo de Ficha:").append(this.fichaType);
-        sb.append("Total de Dinheiro Gasto: ").append(this.moneyspent);
+        sb.append("Total de Dinheiro Gasto: ").append(this.moneyspent); 
         return sb.toString();
    }
     
