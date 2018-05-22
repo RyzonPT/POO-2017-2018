@@ -418,6 +418,8 @@ public class GUI_FichaCliente extends JFrame {
         DeducaoInvesText.setVisible(true);
         
         
+        
+        
         faturasLancadas = new JLabel();
         faturasLancadas.setBounds(60,480,300,70);
         faturasLancadas.setBackground(new Color(214,217,223));
