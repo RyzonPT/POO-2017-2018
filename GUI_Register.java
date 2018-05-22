@@ -67,7 +67,7 @@ public class GUI_Register extends JFrame {
     private String email;
     private String morada;
     private String nome;
-    private int numerodedependentes;
+    private String numerodedependentes;
     private String password;
     private JTextField RAtividadeEconomica;
     private JTextField REmailE;
@@ -89,19 +89,15 @@ public class GUI_Register extends JFrame {
     private JList EmpDefautAtivlist;
     public GestaoFichas gestorfichas;
     public GestaoFaturas gestorfaturas;
-    private EntidadePrivada fichaPrivada;
-    private EntidadeEmpresas fichaEmpresa;
     private ArrayList<Integer> nifs;
     private ArrayList<String> atividades;
     private JLabel listaAgregadostext;
 
     //Constructor 
     public GUI_Register(){
-        numerodedependentes=-1; nif=password=morada=email=nome=atividadeEconomica=""; regiao = "EntreDouroMinho";
+        numerodedependentes="-1"; nif=password=morada=email=nome=atividadeEconomica=""; regiao = "EntreDouroMinho";
         proprionif="-1";
         visible = false; flag = false;
-        fichaEmpresa = new EntidadeEmpresas();
-        fichaPrivada = new EntidadePrivada();
         nifs = new ArrayList<Integer>();
         atividades = new ArrayList<String>();
         
@@ -729,7 +725,7 @@ public class GUI_Register extends JFrame {
     }
     
     private void OnClickedRegistar (MouseEvent evt){
-        if(nif=="" || proprionif.equals("-1") || numerodedependentes==-1 || morada=="" || email=="" || nome=="" || password=="" ){
+        if(nif=="" || proprionif.equals("-1") || numerodedependentes.equals("-1") || morada=="" || email=="" || nome=="" || password=="" ){
             infoBox("Por favor preencha todos os campos", "Impossível registar");
             return;
         }
@@ -747,15 +743,8 @@ public class GUI_Register extends JFrame {
                 return;
             }
             else{
-                fichaPrivada.setPassword(password);
-                fichaPrivada.setnif(Integer.parseInt(proprionif));
-                fichaPrivada.setNumerosFiscais(nifs);
-                fichaPrivada.setEmail(email);
-                fichaPrivada.setMorada(morada);
-                fichaPrivada.setNome(nome);
-                fichaPrivada.setndependentes(numerodedependentes);
-                fichaPrivada.setAgregadoFamiliar(nifs.size());
-                gestorfichas.addFicha(fichaPrivada);
+                EntidadePrivada c = new EntidadePrivada(Integer.parseInt(proprionif),email,nome,morada,password,nifs.size(),nifs,Integer.parseInt(numerodedependentes));
+                gestorfichas.addFicha(c);
                 if(gestorfichas.existeFicha(Integer.parseInt(proprionif))){
                     infoBox("Registo com sucesso!", "Registo com sucesso");
                     HallentradaGUI hallentrada = new HallentradaGUI();
@@ -788,14 +777,8 @@ public class GUI_Register extends JFrame {
                 return;
             }
             else{
-                    fichaEmpresa.setregiao(regiao);
-                    fichaEmpresa.setPassword(password);
-                    fichaEmpresa.setnif(Integer.parseInt(nif));
-                    fichaEmpresa.setActividadeEconomica(atividades);
-                    fichaEmpresa.setEmail(email);
-                    fichaEmpresa.setMorada(morada);
-                    fichaEmpresa.setNome(nome);
-                    gestorfichas.addFicha(fichaEmpresa);
+                    EntidadeEmpresas c = new EntidadeEmpresas(Integer.parseInt(nif),email,nome,morada,password,atividades,regiao);
+                    gestorfichas.addFicha(c);
                     if(gestorfichas.existeFicha(Integer.parseInt(nif))){
                         infoBox("Registo com sucesso!", "Registo com sucesso");
                         HallentradaGUI hallentrada = new HallentradaGUI();
@@ -823,7 +806,7 @@ public class GUI_Register extends JFrame {
                 infoBox("Já adicionou esse Nif", "Impossível adicionar Nif");
                 NumerosFiscais.setText("");
             }
-            else{ if (fichaPrivada.getfichaType()==1){
+            else{ if (gestorfichas.getFicha(Integer.parseInt(nif)).getfichaType()==1){
                 infoBox("Este Nif não corresponde a uma entidade pessoal", "Impossível adicionar Nif");
                 NumerosFiscais.setText("");
             }
@@ -923,7 +906,7 @@ public class GUI_Register extends JFrame {
             infoBox("Numero de dependentes invalido", "Impossível ter um numero maior do que o agregado");
             return;
         }
-            numerodedependentes = Integer.parseInt(RNumerodedependentes.getText());
+            numerodedependentes = RNumerodedependentes.getText();
     }
     
         private void onKeyReleasedRPassword (KeyEvent evt) {

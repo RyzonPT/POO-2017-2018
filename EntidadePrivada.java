@@ -13,8 +13,7 @@ public class EntidadePrivada extends FichaCliente implements Serializable
         this.numerosFiscais = new ArrayList<Integer>();
     }
 
-    public EntidadePrivada(int numeroFiscal, String email, String nome, String morada, String password, int agregadoFamiliar, ArrayList<Integer> numerosFiscais,
-    int coeficienteFiscal,ArrayList<Integer> codigosAtividade, int ndependentes){
+    public EntidadePrivada(int numeroFiscal, String email, String nome, String morada, String password, int agregadoFamiliar, ArrayList<Integer> numerosFiscais, int ndependentes){
         super(numeroFiscal,email,nome,morada,password);
         this.agregadoFamiliar = agregadoFamiliar;
         this.numerosFiscais = numerosFiscais;

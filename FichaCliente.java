@@ -39,6 +39,7 @@ public class FichaCliente implements Serializable
        this.password = password;
        this.deducaototal = 0;
        moneyspent = 0;
+       imposto = 0.23;
        if(this instanceof EntidadeEmpresas){
            this.fichaType = 1;
        }
@@ -166,6 +167,7 @@ public class FichaCliente implements Serializable
    }
    
    void adicionadeducaototal(double x){
+       System.out.println(x+"ola"+deducaototal);
        deducaototal+= x;
    }
    
@@ -176,19 +178,22 @@ public class FichaCliente implements Serializable
    }
    
    public double reducaoImposto(){
+                    System.out.println("REKTERINOOO");
         if(fichaType == 1){
             EntidadeEmpresas fichaE =(EntidadeEmpresas) this;
             double impostoregiao = GestaoAtividadeEconomica.getEnumEmpresaMap().get(GestaoAtividadeEconomica.Regiao.valueOf(fichaE.getregiao()));
             imposto = impostoregiao;
         }
         else{
-            if( this instanceof EntidadePrivada){
+             System.out.println(imposto +"impostoiniiii");
              EntidadePrivada fichaP =(EntidadePrivada) this;
-                if(fichaP.getndependentes()> 4){
-                    imposto = 0.23 - 0.23*0.05*(fichaP.getndependentes()-4);
-                }
-            }
+
+             if(fichaP.getndependentes()> 4){
+                 imposto = 0.23 - 0.23*0.05*(fichaP.getndependentes()-4);
+                 System.out.println(imposto +"impostociclo");
+             }
         }
+        System.out.println(imposto +"imposto");
         return imposto;
    }
 }

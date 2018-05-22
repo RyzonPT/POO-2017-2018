@@ -87,6 +87,8 @@ public class GUI_FichaCliente extends JFrame {
     private double deducaoagregado;
     private JLabel defaultregiaotext;
     private JLabel regiaotext;
+    private JLabel DeducaoInvesText;
+    private JLabel DeducaoInvesDefaultText;
 
     //Constructor 
     public GUI_FichaCliente(FichaCliente fichas,GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
@@ -377,13 +379,31 @@ public class GUI_FichaCliente extends JFrame {
         });
         
         DeducaoqueficienteFiscalText = new JLabel();
-        DeducaoqueficienteFiscalText.setBounds(558 ,130,90,35);
+        DeducaoqueficienteFiscalText.setBounds(558 ,150,90,35);
         DeducaoqueficienteFiscalText.setBackground(new Color(214,217,223));
         DeducaoqueficienteFiscalText.setForeground(new Color(0,0,0));
         DeducaoqueficienteFiscalText.setEnabled(true);
         DeducaoqueficienteFiscalText.setFont(new Font("sansserif",0,12));
-        DeducaoqueficienteFiscalText.setText(df.format(ficha.getdeducaototal()));
+        DeducaoqueficienteFiscalText.setText(df.format(ficha.getdeducaototal())+"€");
         DeducaoqueficienteFiscalText.setVisible(true);
+        
+        DeducaoInvesDefaultText = new JLabel();
+        DeducaoInvesDefaultText.setBounds(437 ,150,150,35);
+        DeducaoInvesDefaultText.setBackground(new Color(214,217,223));
+        DeducaoInvesDefaultText.setForeground(new Color(0,0,0));
+        DeducaoInvesDefaultText.setEnabled(true);
+        DeducaoInvesDefaultText.setFont(new Font("sansserif",0,12));
+        DeducaoInvesDefaultText.setText("Deducao Faturacao:");
+        DeducaoInvesDefaultText.setVisible(true);
+        
+        DeducaoInvesText = new JLabel();
+        DeducaoInvesText.setBounds(558 ,130,90,35);
+        DeducaoInvesText.setBackground(new Color(214,217,223));
+        DeducaoInvesText.setForeground(new Color(0,0,0));
+        DeducaoInvesText.setEnabled(true);
+        DeducaoInvesText.setFont(new Font("sansserif",0,12));
+        DeducaoInvesText.setText(df.format(fichaE.getdeducaofaturacao())+"€");
+        DeducaoInvesText.setVisible(true);
         
         
         faturasLancadas = new JLabel();
@@ -426,12 +446,12 @@ public class GUI_FichaCliente extends JFrame {
         scrollfaturaslancadas.setBounds(52,540,250,200);
         
         defaultdeducaotext = new JLabel();
-        defaultdeducaotext.setBounds(458,130,130,35); 
+        defaultdeducaotext.setBounds(420,130,130,35); 
         defaultdeducaotext.setBackground(new Color(214,217,223));
         defaultdeducaotext.setForeground(new Color(0,0,0));
         defaultdeducaotext.setEnabled(true);
         defaultdeducaotext.setFont(new Font("sansserif",0,12));
-        defaultdeducaotext.setText("Deducao Fiscal:");
+        defaultdeducaotext.setText("Deducao Investimento:");
         defaultdeducaotext.setVisible(true);
         
         
@@ -520,6 +540,8 @@ public class GUI_FichaCliente extends JFrame {
         contentPane.add(faturasLancadas);
         contentPane.add(scrollfaturaslancadas);
         contentPane.add(scrollListaFaturas);
+        contentPane.add(DeducaoInvesText);
+        contentPane.add(DeducaoInvesDefaultText);
         
     }
     else{
@@ -599,7 +621,7 @@ public class GUI_FichaCliente extends JFrame {
         deducaoprivadatext.setForeground(new Color(0,0,0));
         deducaoprivadatext.setEnabled(true);
         deducaoprivadatext.setFont(new Font("sansserif",0,12));
-        deducaoprivadatext.setText(df.format(gestorfaturas.CalculaDecucaoCliente(fichaP))+ "€");
+        deducaoprivadatext.setText(df.format(ficha.getdeducaototal())+"€");
         deducaoprivadatext.setVisible(true);
         
 
@@ -688,7 +710,8 @@ public class GUI_FichaCliente extends JFrame {
            botoes2[m] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha,this);
            m++;
            EntidadePrivada fp = (EntidadePrivada) gestorfichas.getFicha(k);
-           deducaoagregado += h.calculoDeducaoPrivada(fp.getndependentes());
+           System.out.println(h.getdeducao()+"deducao");
+           deducaoagregado += h.getdeducao();
        }
     }
         list2 = new JList(botoes2);
@@ -852,10 +875,16 @@ public class GUI_FichaCliente extends JFrame {
         return deducaoagregadotext;
     }
     
+    public JLabel getDeducaoInvesText(){
+        return DeducaoInvesText;
+    }
+    
     public void setdeducaoagregado(double x){
         deducaoagregado = x;
     }
-    
+    public JLabel getDeducaoqueficienteFiscalText(){
+        return DeducaoqueficienteFiscalText;
+    }
     
     public double getdeducaoagregado(){
         return deducaoagregado;

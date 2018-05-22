@@ -479,6 +479,9 @@ public class GUI_Fatura extends JFrame {
          double deducaototal;
          if(ficha.getfichaType() == 1){
              fatura.calculoDeducaoEmpresa();
+             ficha.adicionadeducaototal(fatura.getdeducao());
+             gestorfichas.addFicha(ficha);
+             guificha.getDeducaoInvesText().setText(df.format(ficha.getdeducaototal()));
             }
          else{
              EntidadePrivada fichaP = (EntidadePrivada) ficha;
@@ -489,6 +492,9 @@ public class GUI_Fatura extends JFrame {
                  guificha.getdeducaoprivadatext().setText(df.format(ficha.getdeducaototal()));
              }
              else{
+                 FichaCliente fichap = gestorfichas.getFicha(fatura.getnifCliente());
+                 fichap.adicionadeducaototal(fatura.getdeducao());
+                 gestorfichas.addFicha(fichap);
                  deducaototal = guificha.getdeducaoagregado() + fatura.getdeducao();
                  guificha.setdeducaoagregado(deducaototal);
                  guificha.getdeducaoagregadotext().setText(df.format(deducaototal));

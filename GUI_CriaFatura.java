@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import javax.swing.table.*;
 import java.util.Arrays;
 import java.util.List;
+import java.text.*;
 
 public class GUI_CriaFatura extends JFrame {
 
@@ -698,17 +699,20 @@ public class GUI_CriaFatura extends JFrame {
         }
         EntidadeEmpresas fichaE = (EntidadeEmpresas) ficha;   
         Fatura c = new Fatura (ficha.getNome(), ficha.getMorada(), ficha.getEmail(),ficha.getnif(), produtos,fichaE.getActividadeEconomica(), nomeCliente, moradaCliente, emailCliente, Integer.parseInt(nifCliente), ficha.getimposto(),fichaE.getregiao(),fichaAssociada);
-
-        gestorfaturas.addFaturas(c);
+        
+        gestorfaturas.addnewFaturas(c);
         
         fichaAssociada.adicionaDinheiroGasto(c.getvalortotal());
         gestorfichas.addFicha(fichaAssociada);
         fichaE.valorFaturacao(c.getvalortotal());
+        fichaE.adicionadeducaofat(c.calculoDeducaoFatEmpresa());       
         gestorfichas.addFicha(ficha);
-
+        
+        DecimalFormat df = new DecimalFormat("0.00");
         JOptionPane.showMessageDialog(null,"Fatura criada com sucesso!", "Message" , JOptionPane.INFORMATION_MESSAGE);
         Botao botao = new Botao(Integer.toString(c.getfaturaID())+"   "+c.getnomeEmpresa(),c,ficha,guificha);
         guificha.getlistModel().addElement(botao);
+        guificha.getDeducaoqueficienteFiscalText().setText(df.format(fichaE.getdeducaofaturacao()));
         dispose();
         
     }

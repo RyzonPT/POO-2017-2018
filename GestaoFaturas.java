@@ -41,11 +41,24 @@ public class GestaoFaturas implements Serializable
         return this.mapfaturas.values().stream().collect(Collectors.toMap((e)->e.getfaturaID(),(e)->e.clone()));
     }
     
-    public void addFaturas(Fatura a){
+        public void addnewFaturas(Fatura a){
         a.setfaturaID(this.key);
         this.mapfaturas.put(a.getfaturaID(),a.clone()); 
         
         key+=1;
+        try{
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("gestorfaturas.txt"));
+            out.writeObject(this);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace ();
+        }
+    }
+    
+    public void addFaturas(Fatura a){
+        this.mapfaturas.put(a.getfaturaID(),a.clone()); 
+ 
         try{
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("gestorfaturas.txt"));
             out.writeObject(this);
