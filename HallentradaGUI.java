@@ -23,10 +23,12 @@ public class HallentradaGUI extends JFrame {
     private GestaoFaturas gestorfaturas;
     
     //Constructor 
-    public HallentradaGUI(){
+    public HallentradaGUI(GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
 
         this.setTitle("GUI_project");
         this.setSize(500,400);
+        this.gestorfichas=gestorfichas;
+        this.gestorfaturas=gestorfaturas;
         //menu generate method
         generateMenu();
         this.setJMenuBar(menuBar);
@@ -112,19 +114,13 @@ public class HallentradaGUI extends JFrame {
 
     //Method mouseClicked for Login
     private void gotologin (MouseEvent evt) {
-        GUI_Login login = new GUI_Login();
-        login.setgestorfichas(gestorfichas);
-        login.setgestorfaturas(gestorfaturas);
-        login.setVisible(true);
+        GUI_Login login = new GUI_Login(gestorfichas,gestorfaturas);
         dispose();
     }
 
     //Method mouseClicked for Register
     private void gotoregister (MouseEvent evt) {
-        GUI_Register register = new GUI_Register();
-        register.setgestorfichas(gestorfichas);
-        register.setgestorfaturas(gestorfaturas);
-        register.setVisible(true);
+        GUI_Register register = new GUI_Register(gestorfichas,gestorfaturas);
         dispose();
     }
 
@@ -158,7 +154,7 @@ public class HallentradaGUI extends JFrame {
         System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    new HallentradaGUI();
+                    new HallentradaGUI(null,null);
                 }
             });
     }

@@ -50,7 +50,7 @@ public class Interface
                 lolis4.add(2);
 
                 
-            HallentradaGUI hall = new HallentradaGUI();
+            HallentradaGUI hall = new HallentradaGUI(gestorfichas,gestorfaturas);
             GestaoAtividadeEconomica OLA = new GestaoAtividadeEconomica();
           /*
             ArrayList<Integer> olas= new ArrayList<Integer>();
@@ -60,7 +60,7 @@ public class Interface
             a.add("Educacao");
             a.add("Saude");
             
-            /*
+            
                              EntidadePrivada fichaPrivada7 = new EntidadePrivada(7,"Filipe-Cunha1@hotmail.com","Filipe","morada","tanos",0,lolis3,0);
             gestorfichas.addFicha(fichaPrivada7);
                                          EntidadePrivada fichaPrivada8 = new EntidadePrivada(8,"Filipe-Cunha1@hotmail.com","Filipe","morada","tanos",0,lolis3,0);
@@ -127,8 +127,7 @@ public class Interface
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("gestorfichas.txt"));
             out.writeObject(gestorfichas);
             */
-           hall.setgestorfichas(gestorfichas);
-           hall.setgestorfaturas(gestorfaturas); 
+ 
             
             
             

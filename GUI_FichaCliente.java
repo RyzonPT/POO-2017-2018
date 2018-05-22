@@ -89,6 +89,10 @@ public class GUI_FichaCliente extends JFrame {
     private JLabel regiaotext;
     private JLabel DeducaoInvesText;
     private JLabel DeducaoInvesDefaultText;
+    private JButton AdicionarButtonNifs;
+    private JTextField nifAgregadotext;
+    private String nifagregado;
+    private DefaultListModel listModelAgregados = new DefaultListModel();
 
     //Constructor 
     public GUI_FichaCliente(FichaCliente fichas,GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
@@ -198,6 +202,13 @@ public class GUI_FichaCliente extends JFrame {
         label1.setFont(new Font("SansSerif",0,50));
         label1.setText("Ficha de Cliente");
         label1.setVisible(true);
+        
+        
+        
+        
+        
+        
+        
 
         
         label5 = new JLabel();
@@ -230,7 +241,7 @@ public class GUI_FichaCliente extends JFrame {
 
         
         logOutbutton = new JButton();
-        logOutbutton.setBounds(330,690,150,60);
+        logOutbutton.setBounds(502,700,150,60);
         logOutbutton.setBackground(new Color(214,217,223));
         logOutbutton.setForeground(new Color(0,0,0));
         logOutbutton.setEnabled(true);
@@ -547,6 +558,38 @@ public class GUI_FichaCliente extends JFrame {
     else{
         EntidadePrivada fichaP = (EntidadePrivada) fichas;
         
+        
+        nifAgregadotext = new JTextField();
+        nifAgregadotext.setBounds(300,715,100,35);
+        nifAgregadotext.setBackground(new Color(255,255,255));
+        nifAgregadotext.setForeground(new Color(0,0,0));
+        nifAgregadotext.setEnabled(true);
+        nifAgregadotext.setFont(new Font("sansserif",0,12));
+        nifAgregadotext.setText("Nif");
+        nifAgregadotext.addKeyListener(new KeyAdapter(){
+            public void keyReleased(KeyEvent evt){
+                onNifAgregadoKeyReleased(evt);
+            }
+        });
+        
+        
+        AdicionarButtonNifs = new JButton();
+        AdicionarButtonNifs.setBounds(60,710,230,45);
+        AdicionarButtonNifs.setBackground(new Color(214,217,223));
+        AdicionarButtonNifs.setForeground(new Color(0,0,0));
+        AdicionarButtonNifs.setEnabled(true);
+        AdicionarButtonNifs.setFont(new Font("sansserif",0,12));
+        AdicionarButtonNifs.setText("Adicionar ao agregado Familiar");
+        AdicionarButtonNifs.setVisible(true);
+        //  Set methods for mouse events
+        AdicionarButtonNifs.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                NifAdded(evt);
+            }
+        });
+        
+        
+        
         defaultatividadeText = new JLabel();
         defaultatividadeText.setBounds(458,135,130,35);
         defaultatividadeText.setBackground(new Color(214,217,223));
@@ -593,18 +636,26 @@ public class GUI_FichaCliente extends JFrame {
         listaAgregadotext.setFont(new Font("SansSerif",0,20));
         listaAgregadotext.setText("Lista do Agregado Familiar");
         listaAgregadotext.setVisible(true);
+
         
-        ListaAgregadoFamiliar = new JList(fichaP.getNumerosFiscais().toArray());
+        
+        ListaAgregadoFamiliar = new JList(listModelAgregados);
+        for(Integer h : fichaP.getNumerosFiscais()){
+            listModelAgregados.addElement(h);
+        }
+            
         ListaAgregadoFamiliar.setBackground(new Color(255,255,255));
         ListaAgregadoFamiliar.setForeground(new Color(0,0,0));
         ListaAgregadoFamiliar.setEnabled(true);
         ListaAgregadoFamiliar.setFont(new Font("sansserif",0,12));
-        ListaAgregadoFamiliar.setVisible(true);
-        
+        ListaAgregadoFamiliar.setVisible(true);  
+
         JScrollPane scrollagregado = new JScrollPane();
         scrollagregado.setViewportView(ListaAgregadoFamiliar);
         scrollagregado.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollagregado.setBounds(52,550,236,117);
+        
+     
         
         labelk = new JLabel();
         labelk.setBounds(458,155,130,35);;
@@ -757,6 +808,8 @@ public class GUI_FichaCliente extends JFrame {
         deducaoagregadotext.setVisible(true);
         
         
+        contentPane.add(nifAgregadotext);
+        contentPane.add(AdicionarButtonNifs);
         contentPane.add(labelj);
         contentPane.add(deducaoagregadotext);
         contentPane.add(scrollagregado);
@@ -869,6 +922,10 @@ public class GUI_FichaCliente extends JFrame {
          dataf = TextFdataf.getText();
     }
     
+    private void onNifAgregadoKeyReleased(KeyEvent e){
+         nifagregado = nifAgregadotext.getText();
+    }
+    
     public JLabel getdeducaoprivadatext(){
         return deducaoprivadatext;
     }
@@ -948,11 +1005,34 @@ public class GUI_FichaCliente extends JFrame {
   
 
     private void onlogOutButtonClicked (MouseEvent evt) {      
-         GUI_Login login = new GUI_Login();
-         login.setgestorfichas(gestorfichas);
-         login.setgestorfaturas(gestorfaturas);
-         login.setVisible(true);
+         GUI_Login login = new GUI_Login(gestorfichas,gestorfaturas);
          dispose();
+    }
+    
+    private void NifAdded (MouseEvent evt) {
+        if(!gestorfichas.existeFicha(Integer.parseInt(nifagregado))){
+            JOptionPane.showMessageDialog(null,"Não existe registo com o Nif que adicionou.", "Message", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            EntidadePrivada fichaP = (EntidadePrivada) ficha;
+            if(fichaP.getNumerosFiscais().contains(Integer.parseInt(nifagregado))){
+                JOptionPane.showMessageDialog(null,"Já adicionou esse Nif.", "Message", JOptionPane.ERROR_MESSAGE);
+            }
+            else{ if (gestorfichas.getFicha(Integer.parseInt(nifagregado)).getfichaType()==1){
+                JOptionPane.showMessageDialog(null,"Este Nif não corresponde a uma entidade pessoal.", "Message", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                fichaP.adicionaAgregado(Integer.parseInt(nifagregado));
+                EntidadePrivada fichaObtida=(EntidadePrivada)gestorfichas.getFicha(Integer.parseInt(nifagregado));
+                fichaObtida.adicionaAgregado(fichaP.getnif());
+                System.out.println(fichaP.getNumerosFiscais()+"olaaa"+nifagregado);
+                listModelAgregados.addElement(Integer.parseInt(nifagregado));
+                gestorfichas.addFicha(ficha);
+                gestorfichas.addFicha(fichaObtida);
+                nifAgregadotext.setText("");
+                
+            }
+        }}
     }
     
     public GestaoFaturas getgestorfaturas(){

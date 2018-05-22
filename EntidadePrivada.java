@@ -64,4 +64,9 @@ public class EntidadePrivada extends FichaCliente implements Serializable
         this.numerosFiscais.equals(le.getNumerosFiscais());
     }
     
+    public void adicionaAgregado ( int nif){
+        numerosFiscais.add(nif);
+        ndependentes+=1;
+    }
+    
 }

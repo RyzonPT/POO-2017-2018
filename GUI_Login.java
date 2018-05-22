@@ -28,12 +28,15 @@ public class GUI_Login extends JFrame {
     private GestaoFichas gestorfichas;
     private GestaoFaturas gestorfaturas;
     private String save = "";
+    private JButton buttonvoltar;
 
     //Constructor 
-    public GUI_Login(){
+    public GUI_Login(GestaoFichas gestorfichas,GestaoFaturas gestorfaturas){
 
         this.setTitle("GUI_project");
         this.setSize(500,400);
+        this.gestorfichas=gestorfichas;
+        this.gestorfaturas=gestorfaturas;
         //menu generate method
         generateMenu();
         this.setJMenuBar(menuBar);
@@ -78,7 +81,7 @@ public class GUI_Login extends JFrame {
 
 
         button1 = new JButton();
-        button1.setBounds(205,229,90,35);
+        button1.setBounds(120,229,90,35);
         button1.setBackground(new Color(214,217,223));
         button1.setForeground(new Color(0,0,0));
         button1.setEnabled(true);
@@ -92,6 +95,24 @@ public class GUI_Login extends JFrame {
                 onLoginButtonClicked(evt);
             }
         });
+        
+        buttonvoltar = new JButton();
+        buttonvoltar.setBounds(260,229,90,35);
+        buttonvoltar.setBackground(new Color(214,217,223));
+        buttonvoltar.setForeground(new Color(0,0,0));
+        buttonvoltar.setEnabled(true);
+        buttonvoltar.setFont(new Font("sansserif",0,12));
+        buttonvoltar.setText("Voltar");
+        buttonvoltar.setVisible(true);
+        //Set methods for mouse events
+        //Call defined methods
+        buttonvoltar.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                onVoltarButtonClicked(evt);
+            }
+        });
+        
+        
 
 
         label1 = new JLabel();
@@ -113,6 +134,7 @@ public class GUI_Login extends JFrame {
         label2.setVisible(true);
 
         //adding components to contentPane panel
+        contentPane.add(buttonvoltar);
         contentPane.add(PasswordBox);
         contentPane.add(TextBox);
         contentPane.add(button1);
@@ -136,6 +158,11 @@ public class GUI_Login extends JFrame {
     //Method keyTyped for TextBox
         private void onNifKeyTyped (KeyEvent evt) {
             save = TextBox.getText();
+    }
+    
+    public void onVoltarButtonClicked (MouseEvent evt){
+        HallentradaGUI hall = new HallentradaGUI(gestorfichas,gestorfaturas);
+        dispose();
     }
 
     public static void infoBox(String infoMessage, String titleBar)
@@ -207,7 +234,7 @@ public class GUI_Login extends JFrame {
         System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new GUI_Login();
+                new GUI_Login(null,null);
             }
         });
     }

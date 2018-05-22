@@ -219,10 +219,7 @@ public class GUI_Administrador extends JFrame {
     }
     
     private void onlogOutButtonClicked (MouseEvent evt) {      
-         GUI_Login login = new GUI_Login();
-         login.setgestorfichas(gestorfichas);
-         login.setgestorfaturas(gestorfaturas);
-         login.setVisible(true);
+         GUI_Login login = new GUI_Login(gestorfichas,gestorfaturas);
          dispose();
     }
     
@@ -259,7 +256,7 @@ public class GUI_Administrador extends JFrame {
         System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new GUI_Login();
+                new GUI_Login(null,null);
             }
         });
     }

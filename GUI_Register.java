@@ -94,13 +94,14 @@ public class GUI_Register extends JFrame {
     private JLabel listaAgregadostext;
 
     //Constructor 
-    public GUI_Register(){
+    public GUI_Register(GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
         numerodedependentes="-1"; nif=password=morada=email=nome=atividadeEconomica=""; regiao = "EntreDouroMinho";
         proprionif="-1";
         visible = false; flag = false;
         nifs = new ArrayList<Integer>();
         atividades = new ArrayList<String>();
-        
+        this.gestorfichas=gestorfichas;
+        this.gestorfaturas=gestorfaturas;
         this.setTitle("GUI_project");
         this.setSize(499,480);
         //menu generate method
@@ -223,7 +224,7 @@ public class GUI_Register extends JFrame {
 
         NumerosFiscais = new JTextField();
         NumerosFiscais.setBounds(197,135,90,35);
-        NumerosFiscais.setBackground(new Color(214,217,223));
+        NumerosFiscais.setBackground(new Color(255,255,255));
         NumerosFiscais.setForeground(new Color(0,0,0));
         NumerosFiscais.setEnabled(true);
         NumerosFiscais.setFont(new Font("sansserif",0,12));
@@ -237,7 +238,7 @@ public class GUI_Register extends JFrame {
         
         ProprioNIF = new JTextField();
         ProprioNIF.setBounds(197,88,90,35);
-        ProprioNIF.setBackground(new Color(214,217,223));
+        ProprioNIF.setBackground(new Color(255,255,255));
         ProprioNIF.setForeground(new Color(0,0,0));
         ProprioNIF.setEnabled(true);
         ProprioNIF.setFont(new Font("sansserif",0,12));
@@ -309,12 +310,12 @@ public class GUI_Register extends JFrame {
         labelNumerosFiscais.setVisible(visible);
         
         labelProprioNif = new JLabel();
-        labelProprioNif.setBounds(127,88,100,35);
+        labelProprioNif.setBounds(155,88,100,35);
         labelProprioNif.setBackground(new Color(214,217,223));
         labelProprioNif.setForeground(new Color(0,0,0));
         labelProprioNif.setEnabled(true);
         labelProprioNif.setFont(new Font("sansserif",0,12));
-        labelProprioNif.setText("Proprio Nif");
+        labelProprioNif.setText("NIF");
         labelProprioNif.setVisible(visible);
 
         labelPassword = new JLabel();
@@ -747,9 +748,7 @@ public class GUI_Register extends JFrame {
                 gestorfichas.addFicha(c);
                 if(gestorfichas.existeFicha(Integer.parseInt(proprionif))){
                     infoBox("Registo com sucesso!", "Registo com sucesso");
-                    HallentradaGUI hallentrada = new HallentradaGUI();
-                    hallentrada.setgestorfichas(gestorfichas);
-                    hallentrada.setgestorfaturas(gestorfaturas);
+                    HallentradaGUI hallentrada = new HallentradaGUI(gestorfichas,gestorfaturas);
                     dispose();
                 }
             }
@@ -781,9 +780,7 @@ public class GUI_Register extends JFrame {
                     gestorfichas.addFicha(c);
                     if(gestorfichas.existeFicha(Integer.parseInt(nif))){
                         infoBox("Registo com sucesso!", "Registo com sucesso");
-                        HallentradaGUI hallentrada = new HallentradaGUI();
-                        hallentrada.setgestorfichas(gestorfichas);
-                        hallentrada.setgestorfaturas(gestorfaturas);
+                        HallentradaGUI hallentrada = new HallentradaGUI(gestorfichas,gestorfaturas);
                         dispose();
                     }
             }
@@ -830,10 +827,15 @@ public class GUI_Register extends JFrame {
     private void  NifRemoved (MouseEvent evt) {
         int selectedIndex = list1.getSelectedIndex();
         if (selectedIndex != -1) {
+            System.out.println("ola");
+            Object selected = list1.getSelectedValue();
+            if(selected!=null){
+                Integer escolhido= Integer.parseInt(selected.toString());
+                System.out.println(escolhido+ "trololo");
             listModel.remove(selectedIndex);
+            if(nifs.contains(escolhido)) nifs.remove(escolhido); 
+           }
         }
-        int selected = Integer.parseInt(list1.getSelectedValue().toString());
-        nifs.remove(selected);
     }
     
     
@@ -946,7 +948,7 @@ public class GUI_Register extends JFrame {
         System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new GUI_Register();
+                new GUI_Register(null,null);
             }
         });
     }
