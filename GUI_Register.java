@@ -75,6 +75,7 @@ public class GUI_Register extends JFrame {
     private JButton Registar;
     private JLabel Titulo;
     private JLabel labelAtividadeEconomica;
+    private JButton buttonvoltar;
     private JLabel labelEmailE;
     private JLabel labelMoradaE;
     private JLabel labelNif;
@@ -96,6 +97,7 @@ public class GUI_Register extends JFrame {
     public GUI_Register(GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
         nif=password=morada=email=nome=atividadeEconomica=""; regiao = "EntreDouroMinho";
         proprionif="-1";
+        nif ="-1";
         visible = false; flag = false;
         nifs = new ArrayList<Integer>();
         atividades = new ArrayList<String>();
@@ -114,7 +116,7 @@ public class GUI_Register extends JFrame {
 
 
         BRegistar = new JButton();
-        BRegistar.setBounds(195,389,110,50);
+        BRegistar.setBounds(195,383,110,50);
         BRegistar.setBackground(new Color(214,217,223));
         BRegistar.setForeground(new Color(0,0,0));
         BRegistar.setEnabled(true);
@@ -129,7 +131,7 @@ public class GUI_Register extends JFrame {
         });
 
         REmail = new JTextField();
-        REmail.setBounds(197,298,150,35);
+        REmail.setBounds(197,258,150,35);
         REmail.setBackground(new Color(255,255,255));
         REmail.setForeground(new Color(0,0,0));
         REmail.setEnabled(true);
@@ -144,7 +146,7 @@ public class GUI_Register extends JFrame {
         });
 
         RMorada = new JTextField();
-        RMorada.setBounds(197,338,150,35);
+        RMorada.setBounds(197,298,150,35);
         RMorada.setBackground(new Color(255,255,255));
         RMorada.setForeground(new Color(0,0,0));
         RMorada.setEnabled(true);
@@ -159,7 +161,7 @@ public class GUI_Register extends JFrame {
         });
 
         RNome = new JTextField();
-        RNome.setBounds(197,258,150,35);
+        RNome.setBounds(197,218,150,35);
         RNome.setBackground(new Color(255,255,255));
         RNome.setForeground(new Color(0,0,0));
         RNome.setEnabled(true);
@@ -174,7 +176,7 @@ public class GUI_Register extends JFrame {
         });
         
         checkbox1 = new JCheckBox();
-        checkbox1.setBounds(197,218,100,35);
+        checkbox1.setBounds(530,340,100,35);
         checkbox1.setBackground(new Color(214,217,223));
         checkbox1.setForeground(new Color(0,0,0));
         checkbox1.setEnabled(true);
@@ -249,23 +251,9 @@ public class GUI_Register extends JFrame {
                 onKeyReleasedProprioNif(evt);
             }
         });
-        
-        removerbotaoNifs = new JButton();
-        removerbotaoNifs.setBounds(540,360,90,35);
-        removerbotaoNifs.setBackground(new Color(214,217,223));
-        removerbotaoNifs.setForeground(new Color(0,0,0));
-        removerbotaoNifs.setEnabled(true);
-        removerbotaoNifs.setFont(new Font("sansserif",0,12));
-        removerbotaoNifs.setText("Remover");
-        removerbotaoNifs.setVisible(visible);
 
-        removerbotaoNifs.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                NifRemoved(evt);
-            }
-        });
         labelEmail = new JLabel();
-        labelEmail.setBounds(150,299,50,35);
+        labelEmail.setBounds(150,259,40,35);
         labelEmail.setBackground(new Color(214,217,223));
         labelEmail.setForeground(new Color(0,0,0));
         labelEmail.setEnabled(true);
@@ -274,7 +262,7 @@ public class GUI_Register extends JFrame {
         labelEmail.setVisible(visible);
 
         labelMorada = new JLabel();
-        labelMorada.setBounds(141,338,50,35);
+        labelMorada.setBounds(150,299,50,35);
         labelMorada.setBackground(new Color(214,217,223));
         labelMorada.setForeground(new Color(0,0,0));
         labelMorada.setEnabled(true);
@@ -283,7 +271,7 @@ public class GUI_Register extends JFrame {
         labelMorada.setVisible(visible);
 
         labelNome = new JLabel();
-        labelNome.setBounds(150,259,40,35);
+        labelNome.setBounds(150,218,100,35);
         labelNome.setBackground(new Color(214,217,223));
         labelNome.setForeground(new Color(0,0,0));
         labelNome.setEnabled(true);
@@ -330,7 +318,7 @@ public class GUI_Register extends JFrame {
         //Call defined methods
         AdicionarButtonNifs.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                NifAdded(evt);
+                AgregdadoAdded(evt);
             }
         });
         
@@ -613,7 +601,26 @@ public class GUI_Register extends JFrame {
             }
         });
         
+        
+        buttonvoltar = new JButton();
+        buttonvoltar.setBounds(400,383,110,50);
+        buttonvoltar.setBackground(new Color(214,217,223));
+        buttonvoltar.setForeground(new Color(0,0,0));
+        buttonvoltar.setEnabled(true);
+        buttonvoltar.setFont(new Font("sansserif",0,20));
+        buttonvoltar.setText("Voltar");
+        buttonvoltar.setVisible(true);
+        //Set methods for mouse events
+        //Call defined methods
+        buttonvoltar.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                onVoltarButtonClicked(evt);
+            }
+        });
+        
+        
         //adding components to contentPane panel
+        contentPane.add(buttonvoltar);
         contentPane.add(listaAgregadostext);
         contentPane.add(REmailE);
         contentPane.add(RMoradaE);
@@ -645,7 +652,6 @@ public class GUI_Register extends JFrame {
         contentPane.add(labelProprioNif);
         contentPane.add(labelPassword);
         contentPane.add(AdicionarButtonNifs);
-        contentPane.add(removerbotaoNifs);
         contentPane.add(AdicionarbotaoAtividadeEconomica);
         contentPane.add(removerbotaoAtividadeEconomica);
         contentPane.add(scroll);
@@ -661,10 +667,13 @@ public class GUI_Register extends JFrame {
         this.pack();
         this.setVisible(true);
     }
+
      
     private void setcomboboxregiao (ActionEvent evt) {
-        String itemSelecionado = (String) combobox1.getSelectedItem();
+        String itemSelecionado = (String) combobox2.getSelectedItem();
+
         regiao = itemSelecionado;
+                System.out.println(regiao+"leeel");
     }
     
     private void setvisibility (ActionEvent evt) {
@@ -715,7 +724,7 @@ public class GUI_Register extends JFrame {
     }
     
     private void OnClickedRegistar (MouseEvent evt){
-        if(nif=="" || proprionif.equals("-1") || morada=="" || email=="" || nome=="" || password=="" ){
+        if(proprionif.equals("-1") || morada=="" || email=="" || nome=="" || password=="" || !proprionif.matches("[0-9]+") || proprionif.length()>9){
             infoBox("Por favor preencha todos os campos", "Impossível registar");
             return;
         }
@@ -753,7 +762,7 @@ public class GUI_Register extends JFrame {
     }
     
     private void OnClickedRegistarE (MouseEvent evt){
-        if(nif=="" || morada=="" || email=="" || nome=="" || password=="" || atividades.size()<=0 ){
+        if(nif=="" || morada=="" || email=="" || nome=="" || password=="" || atividades.size()<=0 || !nif.matches("[0-9]+") || nif.length()>9){
             System.out.println(nif+morada+email+nome+atividades+password);
             infoBox("Por favor preencha todos os campos", "Impossível registar");
             
@@ -773,6 +782,7 @@ public class GUI_Register extends JFrame {
                 return;
             }
             else{
+                System.out.println(regiao+"ola");
                     EntidadeEmpresas c = new EntidadeEmpresas(Integer.parseInt(nif),email,nome,morada,password,atividades,regiao);
                     gestorfichas.addFicha(c);
                     if(gestorfichas.existeFicha(Integer.parseInt(nif))){
@@ -790,7 +800,7 @@ public class GUI_Register extends JFrame {
     }
     
     //Method mouseClicked for AdicionarButton
-    private void NifAdded (MouseEvent evt) {
+    private void AgregdadoAdded (MouseEvent evt) {
         if(!gestorfichas.existeFicha(Integer.parseInt(nif))){
             infoBox("Não existe registo com o Nif que adicionou", "Impossível adicionar Nif");
             NumerosFiscais.setText("");
@@ -819,27 +829,21 @@ public class GUI_Register extends JFrame {
         atividades.add(EmpDefautAtivlist.getSelectedValue().toString());         
     }
     
-    private void  NifRemoved (MouseEvent evt) {
-        int selectedIndex = list1.getSelectedIndex();
-        if (selectedIndex != -1) {
-            System.out.println("ola");
-            Object selected = list1.getSelectedValue();
-            if(selected!=null){
-                Integer escolhido= Integer.parseInt(selected.toString());
-                System.out.println(escolhido+ "trololo");
-            listModel.remove(selectedIndex);
-            if(nifs.contains(escolhido)) nifs.remove(escolhido); 
-           }
-        }
-    }
-    
-    
     private void  AtividadeRemoved (MouseEvent evt) {
         int selectedIndex = EmpAtividList.getSelectedIndex();
         if (selectedIndex != -1) {
-            listModel3.remove(selectedIndex);
-            atividades.remove(EmpAtividList.getSelectedValue());
+            Object selected = EmpAtividList.getSelectedValue();
+            if(selected!=null){      
+                String atividade = selected.toString();
+                listModel3.remove(selectedIndex);
+                if(atividades.contains(atividade)) atividades.remove(atividade);
+            }
         }
+    }
+    
+    public void onVoltarButtonClicked (MouseEvent evt){
+        HallentradaGUI hall = new HallentradaGUI(gestorfichas,gestorfaturas);
+        dispose();
     }
     
     public void setgestorfichas(GestaoFichas a){
@@ -863,7 +867,9 @@ public class GUI_Register extends JFrame {
     }
     
     private void onKeyReleasedNifE (KeyEvent evt) {
-            nif = RNifE.getText();
+            if(RNifE.getText().equals(""))
+            nif = "-1";
+            else nif =RNifE.getText();
     }
     
     private void onKeyReleasedRNomeE (KeyEvent evt) {

@@ -254,7 +254,7 @@ public class GUI_Fatura extends JFrame {
         ValorTotalText.setForeground(new Color(0,0,0));
         ValorTotalText.setEnabled(true);
         ValorTotalText.setFont(new Font("sansserif",0,12));
-        ValorTotalText.setText(String.valueOf(fatura.getvalortotal()));
+        ValorTotalText.setText(df.format(fatura.getvalortotal())+"€");
         ValorTotalText.setVisible(true);
 
         label10 = new JLabel();
@@ -474,7 +474,6 @@ public class GUI_Fatura extends JFrame {
          AtividadeEconoText.setText(a);
          button1.setEnabled(false);
          fatura.setAtivEconEscolhida(a);
-         gestorfaturas.addFaturas(fatura);
          DecimalFormat df = new DecimalFormat("0.00");
          double deducaototal;
          if(ficha.getfichaType() == 1){
@@ -500,7 +499,7 @@ public class GUI_Fatura extends JFrame {
                  guificha.getdeducaoagregadotext().setText(df.format(deducaototal));
              }
          }
-        
+        gestorfaturas.addFaturas(fatura);
         DeducaoText.setText(df.format(fatura.getdeducao()));
                      
     }

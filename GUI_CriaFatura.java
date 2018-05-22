@@ -614,7 +614,7 @@ public class GUI_CriaFatura extends JFrame {
     }
     
     private void OnTestaNif(MouseEvent evt){
-        if(!nifCliente.matches("[0-9]+") || nifCliente == ""){
+        if(!nifCliente.matches("[0-9]+") || nifCliente == "" || nifCliente.length()>9 ){
             JOptionPane.showMessageDialog(null,"Nif de Cliente Invalido.", "Message", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -705,7 +705,7 @@ public class GUI_CriaFatura extends JFrame {
         fichaAssociada.adicionaDinheiroGasto(c.getvalortotal());
         gestorfichas.addFicha(fichaAssociada);
         fichaE.valorFaturacao(c.getvalortotal());
-        fichaE.adicionadeducaofat(c.calculoDeducaoFatEmpresa());       
+        fichaE.adicionadeducaofat(c.getdeducaofat());       
         gestorfichas.addFicha(ficha);
         
         DecimalFormat df = new DecimalFormat("0.00");

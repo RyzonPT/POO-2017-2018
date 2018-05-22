@@ -391,7 +391,7 @@ public class GUI_FichaCliente extends JFrame {
         });
         
         DeducaoqueficienteFiscalText = new JLabel();
-        DeducaoqueficienteFiscalText.setBounds(558 ,150,90,35);
+        DeducaoqueficienteFiscalText.setBounds(558 ,130,90,35);
         DeducaoqueficienteFiscalText.setBackground(new Color(214,217,223));
         DeducaoqueficienteFiscalText.setForeground(new Color(0,0,0));
         DeducaoqueficienteFiscalText.setEnabled(true);
@@ -409,7 +409,7 @@ public class GUI_FichaCliente extends JFrame {
         DeducaoInvesDefaultText.setVisible(true);
         
         DeducaoInvesText = new JLabel();
-        DeducaoInvesText.setBounds(558 ,130,90,35);
+        DeducaoInvesText.setBounds(558 ,150,90,35);
         DeducaoInvesText.setBackground(new Color(214,217,223));
         DeducaoInvesText.setForeground(new Color(0,0,0));
         DeducaoInvesText.setEnabled(true);

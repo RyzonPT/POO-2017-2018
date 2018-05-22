@@ -33,6 +33,7 @@ public class Fatura implements Serializable
    private ArrayList<String> actividadeEconomica;
    private double valortotal;
    private double deducao;
+   private double deducaofat;
    private String nomeCliente;
    private String moradaCliente;
    private String emailCliente;
@@ -51,6 +52,7 @@ public class Fatura implements Serializable
        actividadeEconomica = new ArrayList<>();
        valortotal= 0.0;
        deducao = 0.0;
+       deducaofat = 0.0;
        nomeCliente = "n/a";
        moradaCliente = "n/a";
        emailCliente = "n/a";
@@ -86,11 +88,11 @@ public class Fatura implements Serializable
        if(ficha instanceof EntidadeEmpresas){
            deducao = calculoDeducaoEmpresa();
            ficha.adicionadeducaototal(deducao);
+           deducaofat = calculoDeducaoFatEmpresa();
        }
         else{
             EntidadePrivada fichaP = (EntidadePrivada) ficha;
             deducao = calculoDeducaoPrivada(fichaP.getndependentes());
-            System.out.println("CARALHO"+deducao);
             ficha.adicionadeducaototal(deducao);
         }
        
@@ -114,10 +116,15 @@ public class Fatura implements Serializable
        nifCliente = c.getnifCliente();
        ativEconEscolhida=c.getAtivEconEscolhida();
        regiao=c.getregiao();
+       deducaofat= c.getdeducaofat();
     }
     
     public int getfaturaID(){
         return this.faturaID;
+    }
+    
+    public double getdeducaofat(){
+        return deducaofat;
     }
     
     public String getnomeEmpresa(){
@@ -213,6 +220,10 @@ public class Fatura implements Serializable
         this.nifEmpresa = nifEmpresa;
     }
     
+    public void setdeducaofat(double x){
+        deducaofat = x;
+    }
+    
     public void setData(LocalDate data){
         this.data = data;
     }
@@ -274,6 +285,7 @@ public class Fatura implements Serializable
                moradaCliente.equals(c.getmoradaCliente()) &&
                emailCliente.equals(c.getemailCliente()) &&
                nifCliente == c.getnifCliente() &&
+               deducaofat == c.getdeducaofat() &&
                ativEconEscolhida.equals(c.getAtivEconEscolhida());
     }
     
