@@ -615,6 +615,7 @@ public class GUI_FichaCliente extends JFrame {
         labelk.setText("Deducao Fiscal:");
         labelk.setVisible(true);
         
+        System.out.println(ficha.getdeducaototal()+"DASSSSS");
         deducaoprivadatext = new JLabel();
         deducaoprivadatext.setBounds(583,155,300,35);;
         deducaoprivadatext.setBackground(new Color(214,217,223));
@@ -709,8 +710,9 @@ public class GUI_FichaCliente extends JFrame {
        for(Fatura h : listAgreg){
            botoes2[m] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha,this);
            m++;
+
            EntidadePrivada fp = (EntidadePrivada) gestorfichas.getFicha(k);
-           System.out.println(h.getdeducao()+"deducao");
+
            deducaoagregado += h.getdeducao();
        }
     }

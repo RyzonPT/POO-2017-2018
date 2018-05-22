@@ -82,6 +82,7 @@ public class Fatura implements Serializable
        else{
            ativEconEscolhida="n/a";
        }
+       
        if(ficha instanceof EntidadeEmpresas){
            deducao = calculoDeducaoEmpresa();
            ficha.adicionadeducaototal(deducao);

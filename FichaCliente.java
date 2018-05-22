@@ -56,7 +56,7 @@ public class FichaCliente implements Serializable
         this.password = c.getPassword();
         this.fichaType = c.getfichaType();
         this.moneyspent =c.getmoneyspent();
-        this.imposto=c.getimposto();
+        this.imposto = c.getimposto();
         this.deducaototal = c.getdeducaototal();
    }
     
@@ -167,33 +167,29 @@ public class FichaCliente implements Serializable
    }
    
    void adicionadeducaototal(double x){
-       System.out.println(x+"ola"+deducaototal);
+       System.out.println(x+"olaaaa"+deducaototal);
        deducaototal+= x;
+       System.out.println(getdeducaototal()+"DASSSSS");
    }
    
    public void adicionaDinheiroGasto(double a){
-       System.out.println(a+"ola"+moneyspent);
+       //System.out.println(a+"ola"+moneyspent);
        moneyspent += a;
         
    }
    
    public double reducaoImposto(){
-                    System.out.println("REKTERINOOO");
         if(fichaType == 1){
             EntidadeEmpresas fichaE =(EntidadeEmpresas) this;
             double impostoregiao = GestaoAtividadeEconomica.getEnumEmpresaMap().get(GestaoAtividadeEconomica.Regiao.valueOf(fichaE.getregiao()));
             imposto = impostoregiao;
         }
         else{
-             System.out.println(imposto +"impostoiniiii");
              EntidadePrivada fichaP =(EntidadePrivada) this;
-
              if(fichaP.getndependentes()> 4){
                  imposto = 0.23 - 0.23*0.05*(fichaP.getndependentes()-4);
-                 System.out.println(imposto +"impostociclo");
              }
         }
-        System.out.println(imposto +"imposto");
         return imposto;
    }
 }
