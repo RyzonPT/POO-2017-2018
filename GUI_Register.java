@@ -671,16 +671,16 @@ public class GUI_Register extends JFrame {
      
     private void setcomboboxregiao (ActionEvent evt) {
         String itemSelecionado = (String) combobox2.getSelectedItem();
-
         regiao = itemSelecionado;
-                System.out.println(regiao+"leeel");
     }
     
     private void setvisibility (ActionEvent evt) {
         String itemSelecionado = (String) combobox1.getSelectedItem();
-        if(itemSelecionado.equals("Empresa")) flag = false;
+        if(itemSelecionado.equals("Empresa")){ flag = false;
+        System.out.println(itemSelecionado);}
         else flag = true;
         if (flag!=visible){
+            System.out.println("lalalala");
             visible = !visible;
             REmailE.setVisible(!visible);
             RMoradaE.setVisible(!visible);
@@ -705,7 +705,6 @@ public class GUI_Register extends JFrame {
             Title.setVisible(visible);
             NumerosFiscais.setVisible(visible);
             ProprioNIF.setVisible(visible);
-            removerbotaoNifs.setVisible(visible);
             removerbotaoAtividadeEconomica.setVisible(!visible);
             labelEmail.setVisible(visible);
             labelMorada.setVisible(visible);
