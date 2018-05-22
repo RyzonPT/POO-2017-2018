@@ -147,4 +147,29 @@ public class GestaoFichas implements Serializable
            }
        return agregado;
    }
+   
+   public void mergeAgregado(int nif1, int nif2){
+       if(!existeFicha(nif1) || !existeFicha(nif2)) return;
+       
+       EntidadePrivada fichaP1 =(EntidadePrivada) getFicha(nif1);
+       EntidadePrivada fichaP2 =(EntidadePrivada) getFicha(nif2);
+       ArrayList<Integer> nifs = new ArrayList<>(fichaP1.getNumerosFiscais());
+       for(Integer k : fichaP2.getNumerosFiscais())
+            nifs.add(k);
+       
+       nifs.add(nif1);
+       nifs.add(nif2);
+       
+       for(Integer h : nifs){
+           ArrayList<Integer> nifsaux = new ArrayList<>(nifs);
+           nifsaux.remove(h);
+           EntidadePrivada fichaA = (EntidadePrivada) getFicha(h); 
+           fichaA.setNumerosFiscais(nifsaux);
+       }
+       nifs.remove(nif1);
+       fichaP1.setNumerosFiscais(nifs);
+       nifs.add(nif1);
+       nifs.remove(nif2);
+       fichaP2.setNumerosFiscais(nifs);
+   }
 }

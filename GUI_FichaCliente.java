@@ -76,6 +76,7 @@ public class GUI_FichaCliente extends JFrame {
     private String datai;
     private String dataf;
     private double moneyspent;
+    private JCheckBox checkbox1;
     private JLabel moneyspentText;
     private JLabel  moneyspentgetText;
     private JComboBox combobox1;
@@ -86,6 +87,7 @@ public class GUI_FichaCliente extends JFrame {
     private JLabel labelk;
     private double deducaoagregado;
     private JLabel defaultregiaotext;
+    private boolean dependenteflag;
     private JLabel regiaotext;
     private JLabel DeducaoInvesText;
     private JLabel DeducaoInvesDefaultText;
@@ -588,6 +590,22 @@ public class GUI_FichaCliente extends JFrame {
             }
         });
         
+
+    checkbox1 = new JCheckBox();
+    checkbox1.setBounds(180,157,90,35);
+    checkbox1.setBackground(new Color(214,217,223));
+    checkbox1.setForeground(new Color(0,0,0));
+    checkbox1.setEnabled(true);
+    checkbox1.setFont(new Font("sansserif",0,12));
+    checkbox1.setText("CheckBox");
+    checkbox1.setVisible(true);
+    //Set methods for mouse events
+    //Call defined methods
+    checkbox1.addMouseListener(new MouseAdapter() {
+        public void mouseClicked(MouseEvent evt) {
+            OnCheckBoxClicked(evt);
+        }
+    }); 
         
         
         defaultatividadeText = new JLabel();
@@ -822,6 +840,7 @@ public class GUI_FichaCliente extends JFrame {
         contentPane.add(lFatAgre);
         contentPane.add(scrolllistAgreg);
         contentPane.add(scrollListaFaturas);
+        contentPane.add(checkbox1);
 
     }
 
@@ -945,6 +964,10 @@ public class GUI_FichaCliente extends JFrame {
         return DeducaoqueficienteFiscalText;
     }
     
+    private void OnCheckBoxClicked(MouseEvent e){
+        dependenteflag = checkbox1.isSelected();
+    }
+    
     public double getdeducaoagregado(){
         return deducaoagregado;
     }
@@ -1030,9 +1053,9 @@ public class GUI_FichaCliente extends JFrame {
                 gestorfichas.addFicha(ficha);
                 gestorfichas.addFicha(fichaObtida);
                 nifAgregadotext.setText("");
-                
             }
-        }}
+        }
+    }
     }
     
     public GestaoFaturas getgestorfaturas(){
