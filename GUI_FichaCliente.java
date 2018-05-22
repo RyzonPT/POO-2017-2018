@@ -94,6 +94,8 @@ public class GUI_FichaCliente extends JFrame {
     private JTextField nifAgregadotext;
     private String nifagregado;
     private DefaultListModel listModelAgregados = new DefaultListModel();
+    private JLabel faturacaototaltext;
+    private JLabel faturacaototaltext2;
 
     //Constructor 
     public GUI_FichaCliente(FichaCliente fichas,GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
@@ -136,7 +138,7 @@ public class GUI_FichaCliente extends JFrame {
         
         
         moneyspentText = new JLabel();
-        moneyspentText.setBounds(458,200,110,35);
+        moneyspentText.setBounds(458,172,110,35);
         moneyspentText.setBackground(new Color(214,217,223));
         moneyspentText.setForeground(new Color(0,0,0));
         moneyspentText.setEnabled(true);
@@ -145,7 +147,7 @@ public class GUI_FichaCliente extends JFrame {
         moneyspentText.setVisible(true);
         
         moneyspentgetText = new JLabel();
-        moneyspentgetText.setBounds(560,200,90,35);
+        moneyspentgetText.setBounds(560,172,90,35);
         moneyspentgetText.setBackground(new Color(214,217,223));
         moneyspentgetText.setForeground(new Color(0,0,0));
         moneyspentgetText.setEnabled(true);
@@ -213,7 +215,7 @@ public class GUI_FichaCliente extends JFrame {
 
         
         label5 = new JLabel();
-        label5.setBounds(54,200,90,35);
+        label5.setBounds(54,198,90,35);
         label5.setBackground(new Color(214,217,223));
         label5.setForeground(new Color(0,0,0));
         label5.setEnabled(true);
@@ -223,7 +225,7 @@ public class GUI_FichaCliente extends JFrame {
         
         
         moradaText = new JLabel();
-        moradaText.setBounds(114,200,90,35);
+        moradaText.setBounds(114,198,90,35);
         moradaText.setBackground(new Color(214,217,223));
         moradaText.setForeground(new Color(0,0,0));
         moradaText.setEnabled(true);
@@ -417,7 +419,23 @@ public class GUI_FichaCliente extends JFrame {
         DeducaoInvesText.setText(df.format(ficha.getdeducaototal())+"€");
         DeducaoInvesText.setVisible(true);
         
+        faturacaototaltext = new JLabel();
+        faturacaototaltext.setBounds(430,196,140,35);
+        faturacaototaltext.setBackground(new Color(214,217,223));
+        faturacaototaltext.setForeground(new Color(0,0,0));
+        faturacaototaltext.setEnabled(true);
+        faturacaototaltext.setFont(new Font("sansserif",0,12));
+        faturacaototaltext.setText("Valor total da Faturacao:");
+        faturacaototaltext.setVisible(true);
         
+        faturacaototaltext2 = new JLabel();
+        faturacaototaltext2.setBounds(568,196,110,35);
+        faturacaototaltext2.setBackground(new Color(214,217,223));
+        faturacaototaltext2.setForeground(new Color(0,0,0));
+        faturacaototaltext2.setEnabled(true);
+        faturacaototaltext2.setFont(new Font("sansserif",0,12));
+        faturacaototaltext2.setText(df.format(fichaE.getFaturacao())+"€");
+        faturacaototaltext2.setVisible(true);
         
         
         faturasLancadas = new JLabel();
@@ -471,7 +489,7 @@ public class GUI_FichaCliente extends JFrame {
         
         
         defaultregiaotext = new JLabel();
-        defaultregiaotext.setBounds(465,170,130,35); 
+        defaultregiaotext.setBounds(54,215,90,35); 
         defaultregiaotext.setBackground(new Color(214,217,223));
         defaultregiaotext.setForeground(new Color(0,0,0));
         defaultregiaotext.setEnabled(true);
@@ -480,7 +498,7 @@ public class GUI_FichaCliente extends JFrame {
         defaultregiaotext.setVisible(true);
         
         regiaotext = new JLabel();
-        regiaotext.setBounds(520,170,130,35); 
+        regiaotext.setBounds(99,215,130,35); 
         regiaotext.setBackground(new Color(214,217,223));
         regiaotext.setForeground(new Color(0,0,0));
         regiaotext.setEnabled(true);
@@ -538,7 +556,8 @@ public class GUI_FichaCliente extends JFrame {
         scrollListaFaturas.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollListaFaturas.setBounds(52,286,250,200);
         
-        
+        contentPane.add(faturacaototaltext);
+        contentPane.add(faturacaototaltext2);
         contentPane.add(defaultregiaotext);
         contentPane.add(regiaotext);
         contentPane.add(faturacaotext1);
