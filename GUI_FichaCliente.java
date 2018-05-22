@@ -396,16 +396,16 @@ public class GUI_FichaCliente extends JFrame {
         DeducaoqueficienteFiscalText.setForeground(new Color(0,0,0));
         DeducaoqueficienteFiscalText.setEnabled(true);
         DeducaoqueficienteFiscalText.setFont(new Font("sansserif",0,12));
-        DeducaoqueficienteFiscalText.setText(df.format(ficha.getdeducaototal())+"€");
+        DeducaoqueficienteFiscalText.setText(df.format(fichaE.getdeducaofaturacao())+"€");
         DeducaoqueficienteFiscalText.setVisible(true);
         
         DeducaoInvesDefaultText = new JLabel();
-        DeducaoInvesDefaultText.setBounds(437 ,150,150,35);
+        DeducaoInvesDefaultText.setBounds(420 ,150,150,35);
         DeducaoInvesDefaultText.setBackground(new Color(214,217,223));
         DeducaoInvesDefaultText.setForeground(new Color(0,0,0));
         DeducaoInvesDefaultText.setEnabled(true);
         DeducaoInvesDefaultText.setFont(new Font("sansserif",0,12));
-        DeducaoInvesDefaultText.setText("Deducao Faturacao:");
+        DeducaoInvesDefaultText.setText("Deducao Investimento:");
         DeducaoInvesDefaultText.setVisible(true);
         
         DeducaoInvesText = new JLabel();
@@ -414,7 +414,7 @@ public class GUI_FichaCliente extends JFrame {
         DeducaoInvesText.setForeground(new Color(0,0,0));
         DeducaoInvesText.setEnabled(true);
         DeducaoInvesText.setFont(new Font("sansserif",0,12));
-        DeducaoInvesText.setText(df.format(fichaE.getdeducaofaturacao())+"€");
+        DeducaoInvesText.setText(df.format(ficha.getdeducaototal())+"€");
         DeducaoInvesText.setVisible(true);
         
         
@@ -458,12 +458,12 @@ public class GUI_FichaCliente extends JFrame {
         scrollfaturaslancadas.setBounds(52,540,250,200);
         
         defaultdeducaotext = new JLabel();
-        defaultdeducaotext.setBounds(420,130,130,35); 
+        defaultdeducaotext.setBounds(437,130,130,35); 
         defaultdeducaotext.setBackground(new Color(214,217,223));
         defaultdeducaotext.setForeground(new Color(0,0,0));
         defaultdeducaotext.setEnabled(true);
         defaultdeducaotext.setFont(new Font("sansserif",0,12));
-        defaultdeducaotext.setText("Deducao Investimento:");
+        defaultdeducaotext.setText("Deducao Faturacao:");
         defaultdeducaotext.setVisible(true);
         
         

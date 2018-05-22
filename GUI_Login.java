@@ -96,6 +96,7 @@ public class GUI_Login extends JFrame {
             }
         });
         
+        
         buttonvoltar = new JButton();
         buttonvoltar.setBounds(260,229,90,35);
         buttonvoltar.setBackground(new Color(214,217,223));

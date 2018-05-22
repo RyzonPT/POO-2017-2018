@@ -705,6 +705,7 @@ public class GUI_CriaFatura extends JFrame {
         fichaAssociada.adicionaDinheiroGasto(c.getvalortotal());
         gestorfichas.addFicha(fichaAssociada);
         fichaE.valorFaturacao(c.getvalortotal());
+        System.out.println(c.calculoDeducaoFatEmpresa()+"hello");
         fichaE.adicionadeducaofat(c.getdeducaofat());       
         gestorfichas.addFicha(ficha);
         

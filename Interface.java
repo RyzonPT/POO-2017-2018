@@ -42,12 +42,12 @@ public class Interface
             
             ArrayList<Integer> lolis3 = new ArrayList<Integer>();
                 
-              /* ObjectInputStream infaturas = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
+             /*  ObjectInputStream infaturas = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
                 GestaoFaturas gestorfaturas = (GestaoFaturas) infaturas.readObject();
                 ObjectInputStream infichas = new ObjectInputStream(new FileInputStream("gestorfichas.txt"));
-                GestaoFichas gestorfichas = (GestaoFichas) infichas.readObject();
+                GestaoFichas gestorfichas = (GestaoFichas) infichas.readObject();*/
             ArrayList<Integer> lolis4 = new ArrayList<Integer>();
-                lolis4.add(2);*/
+                lolis4.add(2);
 
                 
 

@@ -313,8 +313,8 @@ public class Fatura implements Serializable
    
    public double calculoDeducaoFatEmpresa(){
         double imposto = GestaoAtividadeEconomica.getEnumEmpresaMap().get(GestaoAtividadeEconomica.Regiao.valueOf(regiao));
-        deducao =(0.23-imposto)*valortotal;
-        return deducao;
+        deducaofat =(0.23-imposto)*valortotal;
+        return deducaofat;
    }
    
    public double calculoDeducaoEmpresa(){
