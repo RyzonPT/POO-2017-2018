@@ -23,7 +23,7 @@ public class EntidadePrivada extends FichaCliente implements Serializable
     
     public EntidadePrivada( EntidadePrivada c){
         super(c);
-        this.agregadoFamiliar =c.getAgregadoFamiliar();
+        this.agregadoFamiliar =c.getAgregadoFamiliar(); 
         this.numerosFiscais = c.getNumerosFiscais();
         this.ndependentes=c.getndependentes();
     }
