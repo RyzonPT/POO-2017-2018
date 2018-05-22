@@ -32,7 +32,6 @@ public class GUI_Register extends JFrame {
     private JTextField REmail;
     private JTextField RMorada;
     private JTextField RNome;
-    private JTextField RNumerodedependentes;
     private JTextField RRegiao;
     private JTextField RPassword;
     private JLabel Title;
@@ -41,7 +40,6 @@ public class GUI_Register extends JFrame {
     private JLabel labelEmail;
     private JLabel labelMorada;
     private JLabel labelNome;
-    private JLabel labelNumeroDeDependentes;
     private JLabel labelNumerosFiscais;
     private JLabel labelProprioNif;
     private JLabel labelPassword;
@@ -67,7 +65,6 @@ public class GUI_Register extends JFrame {
     private String email;
     private String morada;
     private String nome;
-    private String numerodedependentes;
     private String password;
     private JTextField RAtividadeEconomica;
     private JTextField REmailE;
@@ -92,10 +89,12 @@ public class GUI_Register extends JFrame {
     private ArrayList<Integer> nifs;
     private ArrayList<String> atividades;
     private JLabel listaAgregadostext;
+    private JCheckBox checkbox1;
+    private boolean dependenteflag;
 
     //Constructor 
     public GUI_Register(GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
-        numerodedependentes="-1"; nif=password=morada=email=nome=atividadeEconomica=""; regiao = "EntreDouroMinho";
+        nif=password=morada=email=nome=atividadeEconomica=""; regiao = "EntreDouroMinho";
         proprionif="-1";
         visible = false; flag = false;
         nifs = new ArrayList<Integer>();
@@ -173,21 +172,22 @@ public class GUI_Register extends JFrame {
                 onKeyReleasedRNome(evt);
             }
         });
-
-        RNumerodedependentes = new JTextField();
-        RNumerodedependentes.setBounds(197,218,90,35);
-        RNumerodedependentes.setBackground(new Color(255,255,255));
-        RNumerodedependentes.setForeground(new Color(0,0,0));
-        RNumerodedependentes.setEnabled(true);
-        RNumerodedependentes.setFont(new Font("sansserif",0,12));
-        RNumerodedependentes.setText("");
-        RNumerodedependentes.setVisible(visible);
         
-        RNumerodedependentes.addKeyListener(new KeyAdapter() {
-            public void keyReleased(KeyEvent evt){
-                onKeyReleasedRNumerodedependentes(evt);
+        checkbox1 = new JCheckBox();
+        checkbox1.setBounds(197,218,100,35);
+        checkbox1.setBackground(new Color(214,217,223));
+        checkbox1.setForeground(new Color(0,0,0));
+        checkbox1.setEnabled(true);
+        checkbox1.setFont(new Font("sansserif",0,12));
+        checkbox1.setText("Dependente");
+        checkbox1.setVisible(visible);
+        //Set methods for mouse events
+        //Call defined methods
+        checkbox1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                OnCheckBoxClicked(evt);
             }
-        });
+        }); 
 
         RPassword = new JPasswordField();
         RPassword.setBounds(197,177,110,35);
@@ -290,15 +290,6 @@ public class GUI_Register extends JFrame {
         labelNome.setFont(new Font("sansserif",0,12));
         labelNome.setText("Nome");
         labelNome.setVisible(visible);
-        
-        labelNumeroDeDependentes = new JLabel();
-        labelNumeroDeDependentes.setBounds(45,220,140,35);
-        labelNumeroDeDependentes.setBackground(new Color(214,217,223));
-        labelNumeroDeDependentes.setForeground(new Color(0,0,0));
-        labelNumeroDeDependentes.setEnabled(true);
-        labelNumeroDeDependentes.setFont(new Font("sansserif",0,12));
-        labelNumeroDeDependentes.setText("Numero de Dependentes");
-        labelNumeroDeDependentes.setVisible(visible);
 
         labelNumerosFiscais = new JLabel();
         labelNumerosFiscais.setBounds(97,135,100,35);
@@ -642,7 +633,7 @@ public class GUI_Register extends JFrame {
         contentPane.add(REmail);
         contentPane.add(RMorada);
         contentPane.add(RNome);
-        contentPane.add(RNumerodedependentes);
+        contentPane.add(checkbox1);
         contentPane.add(RPassword);
         contentPane.add(Title);
         contentPane.add(NumerosFiscais);
@@ -650,7 +641,6 @@ public class GUI_Register extends JFrame {
         contentPane.add(labelEmail);
         contentPane.add(labelMorada);
         contentPane.add(labelNome);
-        contentPane.add(labelNumeroDeDependentes);
         contentPane.add(labelNumerosFiscais);
         contentPane.add(labelProprioNif);
         contentPane.add(labelPassword);
@@ -702,7 +692,6 @@ public class GUI_Register extends JFrame {
             REmail.setVisible(visible);
             RMorada.setVisible(visible);
             RNome.setVisible(visible);
-            RNumerodedependentes.setVisible(visible);
             RPassword.setVisible(visible);
             Title.setVisible(visible);
             NumerosFiscais.setVisible(visible);
@@ -713,7 +702,7 @@ public class GUI_Register extends JFrame {
             labelMorada.setVisible(visible);
             AdicionarbotaoAtividadeEconomica.setVisible(!visible);
             labelNome.setVisible(visible);
-            labelNumeroDeDependentes.setVisible(visible);
+            checkbox1.setVisible(visible);
             labelNumerosFiscais.setVisible(visible);
             labelProprioNif.setVisible(visible);
             labelPassword.setVisible(visible);
@@ -726,7 +715,7 @@ public class GUI_Register extends JFrame {
     }
     
     private void OnClickedRegistar (MouseEvent evt){
-        if(nif=="" || proprionif.equals("-1") || numerodedependentes.equals("-1") || morada=="" || email=="" || nome=="" || password=="" ){
+        if(nif=="" || proprionif.equals("-1") || morada=="" || email=="" || nome=="" || password=="" ){
             infoBox("Por favor preencha todos os campos", "Impossível registar");
             return;
         }
@@ -744,8 +733,16 @@ public class GUI_Register extends JFrame {
                 return;
             }
             else{
-                EntidadePrivada c = new EntidadePrivada(Integer.parseInt(proprionif),email,nome,morada,password,nifs.size(),nifs,Integer.parseInt(numerodedependentes));
+                int aux;
+                if(dependenteflag == true)
+                     aux = 1;
+                else 
+                    aux = 0;
+                
+                EntidadePrivada c = new EntidadePrivada(Integer.parseInt(proprionif),email,nome,morada,password,aux);
                 gestorfichas.addFicha(c);
+                gestorfichas.mergeAgregado(Integer.parseInt(proprionif),Integer.parseInt(nif));
+               
                 if(gestorfichas.existeFicha(Integer.parseInt(proprionif))){
                     infoBox("Registo com sucesso!", "Registo com sucesso");
                     HallentradaGUI hallentrada = new HallentradaGUI(gestorfichas,gestorfaturas);
@@ -798,21 +795,19 @@ public class GUI_Register extends JFrame {
             infoBox("Não existe registo com o Nif que adicionou", "Impossível adicionar Nif");
             NumerosFiscais.setText("");
         }
-        else{
-            if(listModel.contains(nif)){
-                infoBox("Já adicionou esse Nif", "Impossível adicionar Nif");
-                NumerosFiscais.setText("");
-            }
             else{ if (gestorfichas.getFicha(Integer.parseInt(nif)).getfichaType()==1){
                 infoBox("Este Nif não corresponde a uma entidade pessoal", "Impossível adicionar Nif");
                 NumerosFiscais.setText("");
             }
             else{
                 NumerosFiscais.setText("");
-                listModel.addElement(nif);
-                nifs.add(Integer.parseInt(nif));
+                EntidadePrivada fichaP = (EntidadePrivada) gestorfichas.getFicha(Integer.parseInt(nif));
+                listModel.removeAllElements();
+                listModel.addElement(fichaP.getnif());
+                for(Integer k : fichaP.getNumerosFiscais())
+                listModel.addElement(k);
             }
-        }}
+        }
     }
     
     private void AtividadeAdded (MouseEvent evt) {
@@ -879,6 +874,10 @@ public class GUI_Register extends JFrame {
             password = RPasswordE.getText();
     }
     
+    private void OnCheckBoxClicked(MouseEvent e){
+        dependenteflag = checkbox1.isSelected();
+    }
+    
     private void onKeyReleasedAtividadeEconomica (KeyEvent evt) {
             atividadeEconomica = RAtividadeEconomica.getText();
     }
@@ -901,14 +900,6 @@ public class GUI_Register extends JFrame {
     
     private void onKeyReleasedRNome (KeyEvent evt) {
             nome = RNome.getText();
-    }
-    
-    private void onKeyReleasedRNumerodedependentes (KeyEvent evt) {
-        if(Integer.parseInt(RNumerodedependentes.getText())>nifs.size()){
-            infoBox("Numero de dependentes invalido", "Impossível ter um numero maior do que o agregado");
-            return;
-        }
-            numerodedependentes = RNumerodedependentes.getText();
     }
     
         private void onKeyReleasedRPassword (KeyEvent evt) {

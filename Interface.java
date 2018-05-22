@@ -42,32 +42,34 @@ public class Interface
             
             ArrayList<Integer> lolis3 = new ArrayList<Integer>();
                 
-                ObjectInputStream infaturas = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
+               ObjectInputStream infaturas = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
                 GestaoFaturas gestorfaturas = (GestaoFaturas) infaturas.readObject();
                 ObjectInputStream infichas = new ObjectInputStream(new FileInputStream("gestorfichas.txt"));
                 GestaoFichas gestorfichas = (GestaoFichas) infichas.readObject();
             ArrayList<Integer> lolis4 = new ArrayList<Integer>();
                 lolis4.add(2);
 
-                
-            HallentradaGUI hall = new HallentradaGUI(gestorfichas,gestorfaturas);
+                HallentradaGUI hall = new HallentradaGUI(gestorfichas,gestorfaturas);
+
             GestaoAtividadeEconomica OLA = new GestaoAtividadeEconomica();
           /*
             ArrayList<Integer> olas= new ArrayList<Integer>();
             GestaoFichas gestorfichas = new GestaoFichas();
             GestaoFaturas gestorfaturas = new GestaoFaturas();
+            
+                        
                         ArrayList<String> a =new ArrayList<String>();
             a.add("Educacao");
             a.add("Saude");
+            /*
             
-            
-                             EntidadePrivada fichaPrivada7 = new EntidadePrivada(7,"Filipe-Cunha1@hotmail.com","Filipe","morada","tanos",0,lolis3,0);
+                             EntidadePrivada fichaPrivada7 = new EntidadePrivada(7,"Filipe-Cunha1@hotmail.com","Filipe","morada","tanos",0);
             gestorfichas.addFicha(fichaPrivada7);
-                                         EntidadePrivada fichaPrivada8 = new EntidadePrivada(8,"Filipe-Cunha1@hotmail.com","Filipe","morada","tanos",0,lolis3,0);
+                                         EntidadePrivada fichaPrivada8 = new EntidadePrivada(8,"Filipe-Cunha1@hotmail.com","Filipe","morada","tanos",0);
             gestorfichas.addFicha(fichaPrivada8);
-            EntidadePrivada fichaPrivada0 = new EntidadePrivada(0,"email","nome","morada","",2,lolis,5);
-            EntidadePrivada fichaPrivada1 = new EntidadePrivada(100,"email","nome","morada","",1,lolis4,0);
-            EntidadePrivada fichaPrivada2 = new EntidadePrivada(2,"email","nome","morada","",0,lolis3,0);
+            EntidadePrivada fichaPrivada0 = new EntidadePrivada(0,"email","nome","morada","",5);
+            EntidadePrivada fichaPrivada1 = new EntidadePrivada(100,"email","nome","morada","",0);
+            EntidadePrivada fichaPrivada2 = new EntidadePrivada(2,"email","nome","morada","",0);
             gestorfichas.addFicha(fichaPrivada0);
             gestorfichas.addFicha(fichaPrivada1);
             gestorfichas.addFicha(fichaPrivada2);

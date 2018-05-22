@@ -151,25 +151,39 @@ public class GestaoFichas implements Serializable
    public void mergeAgregado(int nif1, int nif2){
        if(!existeFicha(nif1) || !existeFicha(nif2)) return;
        
+
        EntidadePrivada fichaP1 =(EntidadePrivada) getFicha(nif1);
        EntidadePrivada fichaP2 =(EntidadePrivada) getFicha(nif2);
+       int ndependentes = fichaP1.getndependentes() + fichaP2.getndependentes(); 
        ArrayList<Integer> nifs = new ArrayList<>(fichaP1.getNumerosFiscais());
        for(Integer k : fichaP2.getNumerosFiscais())
             nifs.add(k);
        
        nifs.add(nif1);
        nifs.add(nif2);
-       
+       int nagregado = nifs.size()-1;
        for(Integer h : nifs){
            ArrayList<Integer> nifsaux = new ArrayList<>(nifs);
            nifsaux.remove(h);
            EntidadePrivada fichaA = (EntidadePrivada) getFicha(h); 
            fichaA.setNumerosFiscais(nifsaux);
+           fichaA.setndependentes(ndependentes);
+           fichaA.setAgregadoFamiliar(nagregado);
+           addFicha(fichaA);
        }
-       nifs.remove(nif1);
+       int index = nifs.indexOf(nif1);
+       nifs.remove(index);
        fichaP1.setNumerosFiscais(nifs);
+       fichaP1.setndependentes(ndependentes);
+       fichaP1.setAgregadoFamiliar(nagregado);
        nifs.add(nif1);
-       nifs.remove(nif2);
+       index = nifs.indexOf(nif2);
+       nifs.remove(index);
        fichaP2.setNumerosFiscais(nifs);
+       fichaP2.setndependentes(ndependentes);
+       fichaP2.setAgregadoFamiliar(nagregado);
+       
+       addFicha(fichaP2);
+       addFicha(fichaP1);
    }
 }

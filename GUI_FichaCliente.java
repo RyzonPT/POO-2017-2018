@@ -76,7 +76,6 @@ public class GUI_FichaCliente extends JFrame {
     private String datai;
     private String dataf;
     private double moneyspent;
-    private JCheckBox checkbox1;
     private JLabel moneyspentText;
     private JLabel  moneyspentgetText;
     private JComboBox combobox1;
@@ -589,23 +588,7 @@ public class GUI_FichaCliente extends JFrame {
                 NifAdded(evt);
             }
         });
-        
-
-    checkbox1 = new JCheckBox();
-    checkbox1.setBounds(180,157,90,35);
-    checkbox1.setBackground(new Color(214,217,223));
-    checkbox1.setForeground(new Color(0,0,0));
-    checkbox1.setEnabled(true);
-    checkbox1.setFont(new Font("sansserif",0,12));
-    checkbox1.setText("CheckBox");
-    checkbox1.setVisible(true);
-    //Set methods for mouse events
-    //Call defined methods
-    checkbox1.addMouseListener(new MouseAdapter() {
-        public void mouseClicked(MouseEvent evt) {
-            OnCheckBoxClicked(evt);
-        }
-    }); 
+      
         
         
         defaultatividadeText = new JLabel();
@@ -840,7 +823,7 @@ public class GUI_FichaCliente extends JFrame {
         contentPane.add(lFatAgre);
         contentPane.add(scrolllistAgreg);
         contentPane.add(scrollListaFaturas);
-        contentPane.add(checkbox1);
+
 
     }
 
@@ -964,9 +947,6 @@ public class GUI_FichaCliente extends JFrame {
         return DeducaoqueficienteFiscalText;
     }
     
-    private void OnCheckBoxClicked(MouseEvent e){
-        dependenteflag = checkbox1.isSelected();
-    }
     
     public double getdeducaoagregado(){
         return deducaoagregado;
@@ -1045,14 +1025,14 @@ public class GUI_FichaCliente extends JFrame {
                 JOptionPane.showMessageDialog(null,"Este Nif não corresponde a uma entidade pessoal.", "Message", JOptionPane.ERROR_MESSAGE);
             }
             else{
-                fichaP.adicionaAgregado(Integer.parseInt(nifagregado));
-                EntidadePrivada fichaObtida=(EntidadePrivada)gestorfichas.getFicha(Integer.parseInt(nifagregado));
-                fichaObtida.adicionaAgregado(fichaP.getnif());
-                System.out.println(fichaP.getNumerosFiscais()+"olaaa"+nifagregado);
-                listModelAgregados.addElement(Integer.parseInt(nifagregado));
-                gestorfichas.addFicha(ficha);
-                gestorfichas.addFicha(fichaObtida);
                 nifAgregadotext.setText("");
+                gestorfichas.mergeAgregado(fichaP.getnif(),Integer.parseInt(nifagregado));
+                listModel.removeAllElements();
+                this.ficha = gestorfichas.getFicha(ficha.getnif());
+                fichaP = (EntidadePrivada) ficha;
+                listModelAgregados.removeAllElements();
+                for(Integer h : fichaP.getNumerosFiscais())
+                     listModelAgregados.addElement(h);
             }
         }
     }
