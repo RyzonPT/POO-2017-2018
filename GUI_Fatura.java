@@ -79,10 +79,15 @@ public class GUI_Fatura extends JFrame {
 
         //pane with null layout
         JPanel contentPane = new JPanel(null);
-        if(fatura.getAtivEconEscolhida()=="n/a" && (ficha.getfichaType()==0 || fatura.getnifCliente()==ficha.getnif())){
+        
+        if(fatura.getAtivEconEscolhida().equals("n/a") && (ficha.getfichaType()==0 || fatura.getnifCliente()==ficha.getnif())){
+            System.out.println("entrou no grande");
+            System.out.println("fatura.getnifCliente = "+fatura.getnifCliente()+"    "+"ficha.getnif = "+ficha.getnif()+"faturanome: "+fatura.getAtivEconEscolhida());
             contentPane.setPreferredSize(new Dimension(400,800));
         }
         else{
+            System.out.println("entrou no pequenoooo");
+            System.out.println("fatura.getnifCliente = "+fatura.getnifCliente()+"    "+"ficha.getnif = "+ficha.getnif()+"faturanome: "+fatura.getAtivEconEscolhida());
             contentPane.setPreferredSize(new Dimension(400,600));
         }
         contentPane.setBackground(new Color(192,192,192));
@@ -98,7 +103,7 @@ public class GUI_Fatura extends JFrame {
         AtividadeEconoText.setVisible(true);
         
 
-       if(fatura.getAtivEconEscolhida()=="n/a" && (ficha.getfichaType()==0 || fatura.getnifCliente()==ficha.getnif())){
+       if(fatura.getAtivEconEscolhida().equals("n/a") && (ficha.getfichaType()==0 || fatura.getnifCliente()==ficha.getnif())){
         listAtiv = new JList(fatura.getActividadeEconomica().toArray());
         listAtiv.setBackground(new Color(255,255,255));
         listAtiv.setForeground(new Color(0,0,0));

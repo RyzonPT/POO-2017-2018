@@ -498,7 +498,7 @@ public class GUI_FichaCliente extends JFrame {
         defaultregiaotext.setVisible(true);
         
         regiaotext = new JLabel();
-        regiaotext.setBounds(99,215,130,35); 
+        regiaotext.setBounds(110,215,130,35); 
         regiaotext.setBackground(new Color(214,217,223));
         regiaotext.setForeground(new Color(0,0,0));
         regiaotext.setEnabled(true);
@@ -968,6 +968,9 @@ public class GUI_FichaCliente extends JFrame {
         return DeducaoqueficienteFiscalText;
     }
     
+    public JLabel getfaturacaototaltext2(){
+        return faturacaototaltext2;
+    }
     
     public double getdeducaoagregado(){
         return deducaoagregado;

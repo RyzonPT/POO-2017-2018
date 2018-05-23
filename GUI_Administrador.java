@@ -37,11 +37,19 @@ public class GUI_Administrador extends JFrame {
     private JButton logOutbutton;
     private JLabel titulotext;
     private JLabel empresaslabeltext;
+    private JLabel NifLabel;
+    private JLabel NifTextDefault;
+    private JLabel label2;
+    private JLabel label3;
+    private JLabel moradaLabel;
+    private JLabel nomeLabel;
+    private FichaCliente ficha;
     //Constructor 
-    public GUI_Administrador(GestaoFichas gestorfichas,GestaoFaturas gestorfaturas){
+    public GUI_Administrador(GestaoFichas gestorfichas,GestaoFaturas gestorfaturas,FichaCliente ficha){
         numerodeempresas="";
         this.gestorfaturas = gestorfaturas;
         this.gestorfichas = gestorfichas;
+        this.ficha = ficha;
         this.setTitle("GUI_project");
         this.setSize(500,400);
         //menu generate method
@@ -50,7 +58,7 @@ public class GUI_Administrador extends JFrame {
 
         //pane with null layout
         JPanel contentPane = new JPanel(null);
-        contentPane.setPreferredSize(new Dimension(796,798));
+        contentPane.setPreferredSize(new Dimension(796,670));
         contentPane.setBackground(new Color(192,192,192));
 
         
@@ -62,6 +70,68 @@ public class GUI_Administrador extends JFrame {
         titulotext.setFont(new Font("sansserif",0,50));
         titulotext.setText("Acesso Administrador");
         titulotext.setVisible(true);
+        
+                NifLabel = new JLabel();
+        NifLabel.setBounds(115,125,130,35);
+        NifLabel.setBackground(new Color(214,217,223));
+        NifLabel.setForeground(new Color(0,0,0));
+        NifLabel.setEnabled(true);
+        NifLabel.setFont(new Font("sansserif",0,12));
+        NifLabel.setText(Integer.toString(ficha.getnif()));
+        NifLabel.setVisible(true);
+
+        NifTextDefault = new JLabel();
+        NifTextDefault.setBounds(82,127,90,35);
+        NifTextDefault.setBackground(new Color(214,217,223));
+        NifTextDefault.setForeground(new Color(0,0,0));
+        NifTextDefault.setEnabled(true);
+        NifTextDefault.setFont(new Font("sansserif",0,12));
+        NifTextDefault.setText("Nif:");
+        NifTextDefault.setVisible(true);
+
+        label2 = new JLabel();
+        label2.setBounds(65,152,90,35);
+        label2.setBackground(new Color(214,217,223));
+        label2.setForeground(new Color(0,0,0));
+        label2.setEnabled(true);
+        label2.setFont(new Font("sansserif",0,12));
+        label2.setText("Nome:");
+        label2.setVisible(true);
+
+        label3 = new JLabel();
+        label3.setBounds(59,177,90,35);
+        label3.setBackground(new Color(214,217,223));
+        label3.setForeground(new Color(0,0,0));
+        label3.setEnabled(true);
+        label3.setFont(new Font("sansserif",0,12));
+        label3.setText("Morada:");
+        label3.setVisible(true);
+
+        moradaLabel = new JLabel();
+        moradaLabel.setBounds(116,177,300,35);
+        moradaLabel.setBackground(new Color(214,217,223));
+        moradaLabel.setForeground(new Color(0,0,0));
+        moradaLabel.setEnabled(true);
+        moradaLabel.setFont(new Font("sansserif",0,12));
+        moradaLabel.setText(ficha.getMorada());
+        moradaLabel.setVisible(true);
+
+        nomeLabel = new JLabel();
+        nomeLabel.setBounds(116,153,300,35);
+        nomeLabel.setBackground(new Color(214,217,223));
+        nomeLabel.setForeground(new Color(0,0,0));
+        nomeLabel.setEnabled(true);
+        nomeLabel.setFont(new Font("sansserif",0,12));
+        nomeLabel.setText(ficha.getNome());
+        nomeLabel.setVisible(true);
+
+        //adding components to contentPane panel
+        contentPane.add(NifLabel);
+        contentPane.add(NifTextDefault);
+        contentPane.add(label2);
+        contentPane.add(label3);
+        contentPane.add(moradaLabel);
+        contentPane.add(nomeLabel);
         
         empresaslabeltext = new JLabel();
         empresaslabeltext.setBounds(447,220,240,35);
@@ -115,7 +185,7 @@ public class GUI_Administrador extends JFrame {
         scroll2 = new JScrollPane();
         scroll2.setViewportView(list2);
         scroll2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll2.setBounds(447,310,264,196);
+        scroll2.setBounds(447,310,300,196);
         scroll2.setVisible(true);
         
         xempresas = new JButton();
@@ -200,7 +270,7 @@ public class GUI_Administrador extends JFrame {
     
     private void gotoxempresas (MouseEvent evt) {
         listModel2.removeAllElements();
-        if(numerodeempresas.equals("")){
+        if(numerodeempresas.equals("")|| !numerodeempresas.matches("[0-9]+")){
             infoBox("Escreva o numero de empresas a mostrar", "Ação necessária");
         }
         else if(Integer.parseInt(numerodeempresas)>0) {
@@ -209,7 +279,7 @@ public class GUI_Administrador extends JFrame {
             xEmpresas = lista2;
             DecimalFormat df = new DecimalFormat("0.00");
             for(EntidadeEmpresas x : xEmpresas) {
-                listModel2.addElement("Nif: "+x.getnif()+" Faturas: "+df.format(x.getFaturacao())+" Dedução fiscal: "+df.format(gestorfaturas.totalDeducaoEmpresa(x.getnif())));
+                listModel2.addElement("Nif: "+x.getnif()+" Faturacao: "+df.format(x.getFaturacao())+" Dedução fiscal: "+df.format(x.getdeducaofaturacao()));
             }
         }
     }

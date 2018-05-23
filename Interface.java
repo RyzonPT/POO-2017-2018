@@ -46,17 +46,20 @@ public class Interface
                 GestaoFaturas gestorfaturas = (GestaoFaturas) infaturas.readObject();
                 ObjectInputStream infichas = new ObjectInputStream(new FileInputStream("gestorfichas.txt"));
                 GestaoFichas gestorfichas = (GestaoFichas) infichas.readObject();
+                HallentradaGUI hall = new HallentradaGUI(gestorfichas,gestorfaturas);
             ArrayList<Integer> lolis4 = new ArrayList<Integer>();
-                lolis4.add(2);
+                lolis4.add(2); 
 
                 
-             HallentradaGUI hall = new HallentradaGUI(gestorfichas,gestorfaturas);
+            /* FichaCliente admin = new FichaCliente(000000000,"costumeranafreitas@gmail.com","Ana Freitas","nº52 Rua dos Anjos, 4730-324 Porto","admin");
+             admin.setfichaType(3);
+             gestorfichas.addFicha(admin);
             GestaoAtividadeEconomica gestoratividade = new GestaoAtividadeEconomica();
          /*
             ArrayList<Integer> olas= new ArrayList<Integer>();
             GestaoFichas gestorfichas = new GestaoFichas();
             GestaoFaturas gestorfaturas = new GestaoFaturas();
-            
+            HallentradaGUI hall = new HallentradaGUI(gestorfichas,gestorfaturas);
                         
                         ArrayList<String> a =new ArrayList<String>();
             a.add("Educacao");

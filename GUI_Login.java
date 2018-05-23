@@ -173,25 +173,21 @@ public class GUI_Login extends JFrame {
     //Method mouseClicked for button1
     private void onLoginButtonClicked (MouseEvent evt) {
             int nif = Integer.parseInt(save);
-            if(nif==101010 && password.equals("admin")){
-                dispose();
-                GUI_Administrador admin = new GUI_Administrador(gestorfichas, gestorfaturas);
-                
-                
-            }
-            else {
                 FichaCliente fichaEncontrada = gestorfichas.autenticacao(password,nif);
 
                 if(fichaEncontrada != null){
                     infoBox("Login com sucesso!", "Login com sucesso");
                     dispose();
-                    GUI_FichaCliente fichagui = new GUI_FichaCliente(fichaEncontrada,gestorfichas,gestorfaturas);
-                    //fichagui.setgestorfichas(gestorfichas);
+                    if(fichaEncontrada.getfichaType()==3)
+                         new GUI_Administrador(gestorfichas, gestorfaturas,fichaEncontrada);
+                    else{
+                        GUI_FichaCliente fichagui = new GUI_FichaCliente(fichaEncontrada,gestorfichas,gestorfaturas);
+                    }
                 }
                 else{
-                    infoBox("Nif/Password inválida!", "Alerta");
+                    infoBox("Nif/Password inválido!", "Alerta");
                 }
-            }
+            
     }
 
     public void setgestorfichas(GestaoFichas a){

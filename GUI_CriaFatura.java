@@ -712,7 +712,8 @@ public class GUI_CriaFatura extends JFrame {
         JOptionPane.showMessageDialog(null,"Fatura criada com sucesso!", "Message" , JOptionPane.INFORMATION_MESSAGE);
         Botao botao = new Botao(Integer.toString(c.getfaturaID())+"   "+c.getnomeEmpresa(),c,ficha,guificha);
         guificha.getlistModel().addElement(botao);
-        guificha.getDeducaoqueficienteFiscalText().setText(df.format(fichaE.getdeducaofaturacao()));
+        guificha.getDeducaoqueficienteFiscalText().setText(df.format(fichaE.getdeducaofaturacao())+"€");
+        guificha.getfaturacaototaltext2().setText(df.format(fichaE.getFaturacao())+"€");
         dispose();
         
     }

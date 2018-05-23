@@ -803,10 +803,12 @@ public class GUI_Register extends JFrame {
         if(!gestorfichas.existeFicha(Integer.parseInt(nif))){
             infoBox("Não existe registo com o Nif que adicionou", "Impossível adicionar Nif");
             NumerosFiscais.setText("");
+            nif ="-1";
         }
             else{ if (gestorfichas.getFicha(Integer.parseInt(nif)).getfichaType()==1){
                 infoBox("Este Nif não corresponde a uma entidade pessoal", "Impossível adicionar Nif");
                 NumerosFiscais.setText("");
+                nif="-1";
             }
             else{
                 NumerosFiscais.setText("");
