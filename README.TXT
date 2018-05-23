@@ -8,3 +8,5 @@ Empresa -> nif: 777777777 pass: 77777
 Contribuinete nif: 222222222 pass: 22222
 Contribuinte nif: 444444444 pass: 44444
 Contribuinte nif: 555555555 pass: 55555
+
+FALTA ARRANJAR UMA MERDA NO REGISTO IM OUT
