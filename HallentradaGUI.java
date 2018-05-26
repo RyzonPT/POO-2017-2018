@@ -21,6 +21,7 @@ public class HallentradaGUI extends JFrame {
     private JButton Register;
     private GestaoFichas gestorfichas;
     private GestaoFaturas gestorfaturas;
+    private JButton Exit;
     
     //Constructor 
     public HallentradaGUI(GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
@@ -85,8 +86,25 @@ public class HallentradaGUI extends JFrame {
                     gotoregister(evt);
                 }
             });
+            
+        Exit = new JButton();
+        Exit.setBounds(197,320,90,35);
+        Exit.setBackground(new Color(214,217,223));
+        Exit.setForeground(new Color(0,0,0));
+        Exit.setEnabled(true);
+        Exit.setFont(new Font("sansserif",0,12));
+        Exit.setText("Exit");
+        Exit.setVisible(true);
+        //Set methods for mouse events
+        //Call defined methods
+        Exit.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent evt) {
+                    exitapp(evt);
+                }
+            });
     
         //adding components to contentPane panel
+        contentPane.add(Exit);
         contentPane.add(Forgotten);
         contentPane.add(Login);
         contentPane.add(Register);
@@ -110,6 +128,10 @@ public class HallentradaGUI extends JFrame {
     //Method mouseClicked for Forgotten
     private void forgottenPass (MouseEvent evt) {
         GUI_RecuperacaoPass recupera = new GUI_RecuperacaoPass(gestorfichas);
+    }
+    
+    private void exitapp (MouseEvent evt) {
+        System.exit(0);
     }
 
     //Method mouseClicked for Login

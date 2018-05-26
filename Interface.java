@@ -1,4 +1,3 @@
-import java.util.*;
 import javafx.util.Pair;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -42,29 +41,31 @@ public class Interface
             
             ArrayList<Integer> lolis3 = new ArrayList<Integer>();
                 
-             ObjectInputStream infaturas = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
+             /*ObjectInputStream infaturas = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
                 GestaoFaturas gestorfaturas = (GestaoFaturas) infaturas.readObject();
                 ObjectInputStream infichas = new ObjectInputStream(new FileInputStream("gestorfichas.txt"));
                 GestaoFichas gestorfichas = (GestaoFichas) infichas.readObject();
-                HallentradaGUI hall = new HallentradaGUI(gestorfichas,gestorfaturas);
+                HallentradaGUI hall = new HallentradaGUI(gestorfichas,gestorfaturas);*/
             ArrayList<Integer> lolis4 = new ArrayList<Integer>();
                 lolis4.add(2); 
 
                 
-            /* FichaCliente admin = new FichaCliente(000000000,"costumeranafreitas@gmail.com","Ana Freitas","nº52 Rua dos Anjos, 4730-324 Porto","admin");
-             admin.setfichaType(3);
-             gestorfichas.addFicha(admin);
-            GestaoAtividadeEconomica gestoratividade = new GestaoAtividadeEconomica();
-         /*
+           
+         
             ArrayList<Integer> olas= new ArrayList<Integer>();
             GestaoFichas gestorfichas = new GestaoFichas();
             GestaoFaturas gestorfaturas = new GestaoFaturas();
             HallentradaGUI hall = new HallentradaGUI(gestorfichas,gestorfaturas);
+            
+             FichaCliente admin = new FichaCliente(000000000,"costumeranafreitas@gmail.com","Ana Freitas","nº52 Rua dos Anjos, 4730-324 Porto","admin");
+             admin.setfichaType(3);
+             gestorfichas.addFicha(admin);
+            GestaoAtividadeEconomica gestoratividade = new GestaoAtividadeEconomica();
                         
                         ArrayList<String> a =new ArrayList<String>();
             a.add("Educacao");
             a.add("Saude");
-            /*
+            
             
                              EntidadePrivada fichaPrivada7 = new EntidadePrivada(7,"Filipe-Cunha1@hotmail.com","Filipe","morada","tanos",0);
             gestorfichas.addFicha(fichaPrivada7);

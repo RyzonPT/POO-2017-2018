@@ -12,7 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.*;
+import java.util.Comparator;
 
 public class GestaoFichas implements Serializable
 {
@@ -24,7 +24,7 @@ public class GestaoFichas implements Serializable
 
     }
     
-    public GestaoFichas(Map<Integer,FichaCliente> fch, GestaoFaturas c) {
+    public GestaoFichas(Map<Integer,FichaCliente> fch) {
        this.fichas = fch.values().stream().collect(Collectors.toMap((e) -> e.getnif(),(e) -> e.clone()));
 
     }

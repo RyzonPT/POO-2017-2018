@@ -23,7 +23,6 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.text.DateFormat;
 import java.util.List;
-import java.util.*;  
 import java.util.Map;
 import java.util.EnumMap;
 import java.text.*;
@@ -138,7 +137,7 @@ public class GUI_FichaCliente extends JFrame {
         
         
         moneyspentText = new JLabel();
-        moneyspentText.setBounds(458,172,110,35);
+        moneyspentText.setBounds(458,195,110,35);
         moneyspentText.setBackground(new Color(214,217,223));
         moneyspentText.setForeground(new Color(0,0,0));
         moneyspentText.setEnabled(true);
@@ -147,7 +146,7 @@ public class GUI_FichaCliente extends JFrame {
         moneyspentText.setVisible(true);
         
         moneyspentgetText = new JLabel();
-        moneyspentgetText.setBounds(560,172,90,35);
+        moneyspentgetText.setBounds(560,195,90,35);
         moneyspentgetText.setBackground(new Color(214,217,223));
         moneyspentgetText.setForeground(new Color(0,0,0));
         moneyspentgetText.setEnabled(true);
@@ -420,7 +419,7 @@ public class GUI_FichaCliente extends JFrame {
         DeducaoInvesText.setVisible(true);
         
         faturacaototaltext = new JLabel();
-        faturacaototaltext.setBounds(430,196,140,35);
+        faturacaototaltext.setBounds(430,173,140,35);
         faturacaototaltext.setBackground(new Color(214,217,223));
         faturacaototaltext.setForeground(new Color(0,0,0));
         faturacaototaltext.setEnabled(true);
@@ -429,7 +428,7 @@ public class GUI_FichaCliente extends JFrame {
         faturacaototaltext.setVisible(true);
         
         faturacaototaltext2 = new JLabel();
-        faturacaototaltext2.setBounds(568,196,110,35);
+        faturacaototaltext2.setBounds(568,173,110,35);
         faturacaototaltext2.setBackground(new Color(214,217,223));
         faturacaototaltext2.setForeground(new Color(0,0,0));
         faturacaototaltext2.setEnabled(true);
@@ -680,7 +679,7 @@ public class GUI_FichaCliente extends JFrame {
      
         
         labelk = new JLabel();
-        labelk.setBounds(458,155,130,35);;
+        labelk.setBounds(470,155,130,35);;
         labelk.setBackground(new Color(214,217,223));
         labelk.setForeground(new Color(0,0,0));
         labelk.setEnabled(true);
@@ -690,7 +689,7 @@ public class GUI_FichaCliente extends JFrame {
         
         System.out.println(ficha.getdeducaototal()+"DASSSSS");
         deducaoprivadatext = new JLabel();
-        deducaoprivadatext.setBounds(583,155,300,35);;
+        deducaoprivadatext.setBounds(570,155,300,35);;
         deducaoprivadatext.setBackground(new Color(214,217,223));
         deducaoprivadatext.setForeground(new Color(0,0,0));
         deducaoprivadatext.setEnabled(true);
