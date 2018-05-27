@@ -40,7 +40,7 @@ public class HallentradaGUI extends JFrame {
         contentPane.setBackground(new Color(192,192,192));
 
         Forgotten = new JButton();
-        Forgotten.setBounds(130,295,236,17);
+        Forgotten.setBounds(130,180,236,17);
         Forgotten.setBackground(new Color(214,217,223));
         Forgotten.setForeground(new Color(0,0,0));
         Forgotten.setEnabled(true);
@@ -56,7 +56,7 @@ public class HallentradaGUI extends JFrame {
             });
 
         Login = new JButton();
-        Login.setBounds(197,160,90,35);
+        Login.setBounds(147,135,90,35);
         Login.setBackground(new Color(214,217,223));
         Login.setForeground(new Color(0,0,0));
         Login.setEnabled(true);
@@ -72,7 +72,7 @@ public class HallentradaGUI extends JFrame {
             });
 
         Register = new JButton();
-        Register.setBounds(197,227,90,35);
+        Register.setBounds(257,135,90,35);
         Register.setBackground(new Color(214,217,223));
         Register.setForeground(new Color(0,0,0));
         Register.setEnabled(true);
@@ -88,7 +88,7 @@ public class HallentradaGUI extends JFrame {
             });
             
         Exit = new JButton();
-        Exit.setBounds(197,320,90,35);
+        Exit.setBounds(197,220,90,35);
         Exit.setBackground(new Color(214,217,223));
         Exit.setForeground(new Color(0,0,0));
         Exit.setEnabled(true);
