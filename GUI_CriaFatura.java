@@ -84,7 +84,7 @@ public class GUI_CriaFatura extends JFrame {
     }
 };
     
-    //Constructor 
+    /**Construtor vazio da classe*/
     public GUI_CriaFatura(FichaCliente ficha,GestaoFichas gestorfichas,GestaoFaturas gestorfaturas,GUI_FichaCliente guificha){
         this.gestorfichas = gestorfichas;
         this.gestorfaturas = gestorfaturas;
@@ -606,13 +606,19 @@ public class GUI_CriaFatura extends JFrame {
         JScrollPane scroll = new JScrollPane( c );
         setContentPane( scroll );
     }
-
+    
+    /** Metodo que transforma um LocalDate numa string.
+     * @return um LocalDate em forma de string
+        */
     public String getdatastring(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/LLLL/yyyy");
         String formattedString = LocalDate.now().format(formatter);
         return formattedString;
     }
     
+    /** Metodo que testa se é possivel criar fatura num determinado nif.
+     * @param evt  Click do rato.
+        */
     private void OnTestaNif(MouseEvent evt){
         if(!nifCliente.matches("[0-9]+") || nifCliente == "" || nifCliente.length()>9 ){
             JOptionPane.showMessageDialog(null,"Nif de Cliente Invalido.", "Message", JOptionPane.ERROR_MESSAGE);
@@ -642,7 +648,9 @@ public class GUI_CriaFatura extends JFrame {
         }
     }
     
-    //Method mouseClicked for AdicionarButton
+    /** Metodo para adicionar um produto.
+     * @param evt  Click do rato.
+        */
     private void OnProdutoAddedd (MouseEvent evt) {
         if(produto == ""){
             JOptionPane.showMessageDialog(null,"Produto Invalido.", "Message", JOptionPane.ERROR_MESSAGE);
@@ -675,6 +683,9 @@ public class GUI_CriaFatura extends JFrame {
         TextFPreco.setText("");
     }
 
+    /** Metodo para remover um produto.
+     * @param evt  Click do rato.
+        */
     private void  OnProdutoRemoved (MouseEvent evt) {
         int row = table.getSelectedRow();
         String auxproduto = table.getModel().getValueAt(row, 0).toString();
@@ -685,7 +696,9 @@ public class GUI_CriaFatura extends JFrame {
         dtm.removeRow(row);
     }
 
-    //Method mouseClicked for CriarFacturaButton
+    /** Metodo que cria uma fatura.
+     * @param evt  Evento da ação.
+        */
     private void OnClickedCriarFatura (ActionEvent evt) {
 
         if(!nifCliente.matches("[0-9]+")){
@@ -720,17 +733,23 @@ public class GUI_CriaFatura extends JFrame {
     }
     
 
-    //Method keyReleased for TextFEmailCliente
+    /** Metodo que define o email do Cliente.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedEmailCliente (KeyEvent evt) {
             emailCliente = TextFEmailCliente.getText();
     }
 
-    //Method keyReleased for TextFMoradaCliente
+    /** Metodo que define a morada do Cliente.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedMoradaCliente (KeyEvent evt) {
             moradaCliente = TextFMoradaCliente.getText();
     }
 
-    //Method keyReleased for TextFNifCliente
+    /** Metodo que define a nif do Cliente.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedNifCliente (KeyEvent evt) {
             nifCliente = TextFNifCliente.getText();
             nomeCliente="";
@@ -742,32 +761,43 @@ public class GUI_CriaFatura extends JFrame {
             CriarFacturaButton.setEnabled(false);
     }
 
-    //Method keyReleased for TextFNomeCliente
+    /** Metodo que define o nome do Cliente.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedNomeCliente (KeyEvent evt) {
             nomeCliente = TextFNomeCliente.getText();
     }
 
-    //Method keyReleased for TextFPreco
+    /** Metodo que define o preco do produto.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedPreco (KeyEvent evt) {
             preco = TextFPreco.getText();
     }
 
-    //Method keyReleased for TextFProduto
+    /** Metodo que define o nome do produto.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedProduto (KeyEvent evt) {
             produto = TextFProduto.getText();
     }
 
-    //Method keyReleased for TextFQuantidade
+    /** Metodo que define a quantidade do produto.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedQuantidade (KeyEvent evt) {
             quantidade = TextFQuantidade.getText();
     }
 
-    //Method keyReleased for textfield2
+    /** Metodo que define o ID da fatura.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedFaturaID (KeyEvent evt) {
             faturaID = textfield2.getText();
     }
 
-    //method for generate menu
+    /** Metodo que cria uma ToolBar.
+        */
     public void generateMenu(){
         menuBar = new JMenuBar();
 

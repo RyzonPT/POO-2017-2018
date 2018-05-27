@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.text.*;
 
 public class GUI_Fatura extends JFrame {
-
+    /**Variaveis de instancia*/
     private JMenuBar menuBar;
     private JLabel AtividadeEconoText;
     private JLabel DataText;
@@ -64,7 +64,7 @@ public class GUI_Fatura extends JFrame {
     private double deducao;
     private GestaoFaturas gestorfaturas;
     private GestaoFichas gestorfichas;
-    //Constructor 
+    /**Construtor vazio da classe*/
     public GUI_Fatura(Fatura fatura, FichaCliente ficha, GUI_FichaCliente guificha, GestaoFaturas gestorfaturas, GestaoFichas gestorfichas ){
         this.fatura=fatura;
         this.ficha = ficha;
@@ -474,6 +474,8 @@ public class GUI_Fatura extends JFrame {
        setContentPane(scroll);
     }
     
+    /** Metodo para definir a Atividade Economica da fatura.
+        */
     public void corfirmaAtividade(){
         String a = listAtiv.getSelectedValue().toString();
          AtividadeEconoText.setText(a);
@@ -509,6 +511,9 @@ public class GUI_Fatura extends JFrame {
                      
     }
     
+    /** Metodo para dar display dum aviso.
+     * @param evt  Evento da ação.
+        */
     private void onConfirmarButtonClicked (ActionEvent evt) {  
          int reply = JOptionPane.showConfirmDialog(null, "TEM A CERTEZA? A SUA ACAO E PERMANENTE!!", "Message", JOptionPane.YES_NO_OPTION);
          if (reply == JOptionPane.YES_OPTION){
@@ -521,7 +526,9 @@ public class GUI_Fatura extends JFrame {
         Botao item = (Botao) listAtiv.getModel().getElementAt(index);
         item.getButton().doClick();
     }
-    //method for generate menu
+    
+    /** Metodo que cria uma ToolBar.
+        */
     public void generateMenu(){
         menuBar = new JMenuBar();
 

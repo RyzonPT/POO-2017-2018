@@ -28,7 +28,7 @@ import java.util.EnumMap;
 import java.text.*;
 
 public class GUI_FichaCliente extends JFrame {
-
+    /**Variaveis de instancia*/
     private JMenuBar menuBar;
     private JLabel AtividadeEconoagregadoText;
     private JLabel DeducaoqueficienteFiscalText;
@@ -102,7 +102,7 @@ public class GUI_FichaCliente extends JFrame {
     private JLabel defaultNdependnet;
     private JLabel DependenteText;
 
-    //Constructor 
+    /**Construtor vazio da classe*/
     public GUI_FichaCliente(FichaCliente fichas,GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
         ficha=fichas;
         nifCliente = "-1";
@@ -926,6 +926,9 @@ public class GUI_FichaCliente extends JFrame {
         setContentPane( scroll );
     }
     
+    /** Metodo que ordena as faturas por Data ou Valor.
+     * @param evt  Evento ação.
+        */
     private void onComboBoxClicked(ActionEvent e){
         if(combobox1.getSelectedItem().equals("Data")){
             List<Fatura> aux = gestorfaturas.OrdFaturasData(ficha.getnif());
@@ -976,6 +979,9 @@ public class GUI_FichaCliente extends JFrame {
         item.getButton().doClick();
     }
             
+    /** Metodo abre uma aba para a criacao de fatura.
+     * @param evt  Click do rato.
+        */
     private void onCriarFaturaButtonClicked (MouseEvent evt) {          
          GUI_CriaFatura criafaturagui = new GUI_CriaFatura(ficha,gestorfichas,gestorfaturas,this);
     }
@@ -992,33 +998,58 @@ public class GUI_FichaCliente extends JFrame {
          nifagregado = nifAgregadotext.getText();
     }
     
+    /** Get deducao privada.
+    * @return deducao privada.
+      */
     public JLabel getdeducaoprivadatext(){
         return deducaoprivadatext;
     }
     
+    /** Get deducao privada do agregado.
+    * @return deducao privada do agregado.
+      */
     public JLabel getdeducaoagregadotext(){
         return deducaoagregadotext;
     }
     
+    /** Get deducao das empresas.
+    * @return deducao deducao das empresas.
+      */
     public JLabel getDeducaoInvesText(){
         return DeducaoInvesText;
     }
     
+    /** Define a deducao do agregado Familiar
+    * @parem x deducao do agregado Familiar
+      */
     public void setdeducaoagregado(double x){
         deducaoagregado = x;
     }
+    
+    /** Get DeducaoqueficienteFiscal.
+    * @return DeducaoqueficienteFiscal.
+      */
     public JLabel getDeducaoqueficienteFiscalText(){
         return DeducaoqueficienteFiscalText;
     }
     
+    /** Get faturacao total.
+    * @return faturacao total.
+      */
     public JLabel getfaturacaototaltext2(){
         return faturacaototaltext2;
     }
     
+    /** Get  deducao do agregado Familia.
+    * @return  deducao do agregado Familia.
+      */
     public double getdeducaoagregado(){
         return deducaoagregado;
     }
     
+    /** Get  listModel1.
+    * @return  listModel1.
+      */
     public DefaultListModel getlistModel(){
         return listModel;
     }
@@ -1128,19 +1159,29 @@ public class GUI_FichaCliente extends JFrame {
     }
     }
     
+    /** Get gestor de faturas GestaoFaturas.
+    * @return gestor de faturas GestaoFaturas.
+      */
     public GestaoFaturas getgestorfaturas(){
         return gestorfaturas;
     }
     
+    /** Get gestor de fichas GestaoFichas.
+    * @return gestor de fichas GestaoFichas.
+      */
     public GestaoFichas getgestorfichas(){
         return gestorfichas;
     }
     
+    /** Define o  gestor de fichas GestaoFichas.
+    * @param gestor de fichas GestaoFichas.
+      */
     public void setgestorfichas(GestaoFichas a){
         gestorfichas = a;
     }
     
-    //method for generate menu
+    /** Metodo que cria uma ToolBar.
+        */
     public void generateMenu(){
         menuBar = new JMenuBar();
 
