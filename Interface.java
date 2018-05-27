@@ -37,6 +37,10 @@ public class Interface
             HallentradaGUI hall = new HallentradaGUI(gestorfichas,gestorfaturas);
             GestaoAtividadeEconomica gestoratividade = new GestaoAtividadeEconomica();
             
+            FichaCliente admin =new FichaCliente(0,"abilio4cunha@gmail.com","Abilio Cunha","Vila Verde","admin");
+            admin.setfichaType(3);
+            gestorfichas.addFicha(admin);
+            
         }
         catch (Exception e)
         {

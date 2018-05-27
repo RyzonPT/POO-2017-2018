@@ -779,7 +779,6 @@ public class GUI_Register extends JFrame {
     
     private void OnClickedRegistarE (MouseEvent evt){
         if(nif=="" || morada=="" || email=="" || nome=="" || password=="" || atividades.size()<=0 || !nif.matches("[0-9]+") || nif.length()>9){
-            System.out.println(nif+morada+email+nome+atividades+password);
             infoBox("Por favor preencha todos os campos", "Impossível registar");
             
             return;
@@ -798,7 +797,6 @@ public class GUI_Register extends JFrame {
                 return;
             }
             else{
-                System.out.println(regiao+"ola");
                     EntidadeEmpresas c = new EntidadeEmpresas(Integer.parseInt(nif),email,nome,morada,password,atividades,regiao);
                     gestorfichas.addFicha(c);
                     if(gestorfichas.existeFicha(Integer.parseInt(nif))){

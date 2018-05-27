@@ -7,12 +7,14 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
    private String regiao;
    private double faturacao;
    private double deducaofaturacao;
+   private int nfaturas;
    public EntidadeEmpresas(){
        super();
        this.actividadeEconomica = new ArrayList<>();
        this.regiao="EntreDouroMinho";
        reducaoImposto();
        deducaofaturacao = 0;
+       nfaturas=0;
     }
 
    public EntidadeEmpresas(int nif,String email, String nome, String morada, String password, ArrayList<String> actividadeEconomica, String regiao){
@@ -24,6 +26,7 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
        ola.setfichaType(1);
        this.regiao=regiao;
        reducaoImposto();
+       nfaturas=0;
    }
     
     public EntidadeEmpresas(EntidadeEmpresas c){
@@ -32,11 +35,17 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
         this.regiao =c.getregiao();
         this.faturacao = c.getFaturacao();
         this.deducaofaturacao = c.getdeducaofaturacao();
+        this.nfaturas =c.getnfaturas();
     }
     
-       void adicionadeducaofat(double x){
+    void adicionadeducaofat(double x){
        deducaofaturacao += x;
-   }
+    }
+    
+    void adicionafatura(){
+        nfaturas+=1;
+    }
+   
    
     public void valorFaturacao(double valortotal){
           faturacao = faturacao + valortotal;
@@ -44,6 +53,14 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
     
     public double getdeducaofaturacao(){
         return deducaofaturacao;
+    }
+    
+    public int getnfaturas(){
+        return nfaturas;
+    }
+    
+    public void setnfaturas(int nfaturas){
+        this.nfaturas=nfaturas;
     }
     
     public ArrayList<String> getActividadeEconomica(){
@@ -82,7 +99,7 @@ public class EntidadeEmpresas extends FichaCliente implements Serializable
         if(obj==this) return true;
         if(obj==null || obj.getClass() != this.getClass()) return false;
         EntidadeEmpresas le = (EntidadeEmpresas) obj;
-        return le.getActividadeEconomica()==this.actividadeEconomica && deducaofaturacao == le.getdeducaofaturacao();
+        return le.getActividadeEconomica()==this.actividadeEconomica && deducaofaturacao == le.getdeducaofaturacao()&& faturacao==le.getFaturacao() && nfaturas==le.getnfaturas();
     }
     
 

@@ -131,7 +131,7 @@ public class GestaoFichas implements Serializable
                 a.add((EntidadeEmpresas)b.clone());
             }
         }
-        a.sort(Comparator.comparingDouble(EntidadeEmpresas::getFaturacao).reversed());
+        a.sort(Comparator.comparingDouble(EntidadeEmpresas::getnfaturas).reversed());
         a = a.stream().limit(x).collect(Collectors.toList());
         return a;
     }
