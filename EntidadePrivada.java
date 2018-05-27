@@ -6,18 +6,21 @@ public class EntidadePrivada extends FichaCliente implements Serializable
     private int agregadoFamiliar;
     private ArrayList<Integer> numerosFiscais;
     private int ndependentes;
+    private boolean isdependente;
     public EntidadePrivada()
     {
         super();
         this.agregadoFamiliar = 0;
         this.numerosFiscais = new ArrayList<Integer>();
+        isdependente = false;
     }
 
-    public EntidadePrivada(int numeroFiscal, String email, String nome, String morada, String password, int ndependentes){
+    public EntidadePrivada(int numeroFiscal, String email, String nome, String morada, String password, int ndependentes, boolean isdependente){
         super(numeroFiscal,email,nome,morada,password);
         this.agregadoFamiliar = 0;
         this.ndependentes = ndependentes;
         this.numerosFiscais = new ArrayList<Integer>();
+        this.isdependente = isdependente;
         reducaoImposto();
     }
     
@@ -26,12 +29,17 @@ public class EntidadePrivada extends FichaCliente implements Serializable
         this.agregadoFamiliar =c.getAgregadoFamiliar(); 
         this.numerosFiscais = c.getNumerosFiscais();
         this.ndependentes=c.getndependentes();
+        this.isdependente = c.getisdependente();
     }
 
     public int getAgregadoFamiliar(){
         return this.agregadoFamiliar;
     }
 
+    public boolean getisdependente(){
+        return isdependente;
+    }
+    
     public int getndependentes(){
         return ndependentes;
     }
@@ -51,6 +59,9 @@ public class EntidadePrivada extends FichaCliente implements Serializable
     public void setndependentes(int ndependentes){
         this.ndependentes = ndependentes;
     }
+    public void serisdependente(boolean x){
+        isdependente = x;
+    }
 
     public EntidadePrivada clone() {
         return new EntidadePrivada(this);
@@ -61,7 +72,8 @@ public class EntidadePrivada extends FichaCliente implements Serializable
         if(obj==null || obj.getClass() != this.getClass()) return false;
         EntidadePrivada le = (EntidadePrivada) obj;
         return le.getAgregadoFamiliar() == this.agregadoFamiliar &&
-        this.numerosFiscais.equals(le.getNumerosFiscais());
+        this.numerosFiscais.equals(le.getNumerosFiscais()) &&
+        this.isdependente == le.getisdependente();
     }
     
     public void adicionaAgregado ( int nif){

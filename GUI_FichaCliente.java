@@ -36,6 +36,7 @@ public class GUI_FichaCliente extends JFrame {
     private JList ListaAtividadeEconomica;
     private JList ListaAgregadoFamiliar;
     private JList ListaCodigos;
+    private JLabel defaultDependente;
     private JLabel NameText;
     private JLabel NifText;
     private JLabel codigosText;
@@ -45,6 +46,7 @@ public class GUI_FichaCliente extends JFrame {
     private JLabel label2;
     private JLabel faturacaotext1;
     private JLabel label3;
+    private JLabel ndependentText;
     private JLabel label4;
     private JLabel label5;
     private JLabel textinhoText;
@@ -97,6 +99,8 @@ public class GUI_FichaCliente extends JFrame {
     private JLabel faturacaototaltext;
     private DecimalFormat df = new DecimalFormat("0.00");
     private JLabel faturacaototaltext2;
+    private JLabel defaultNdependnet;
+    private JLabel DependenteText;
 
     //Constructor 
     public GUI_FichaCliente(FichaCliente fichas,GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
@@ -618,12 +622,29 @@ public class GUI_FichaCliente extends JFrame {
         defaultatividadeText.setForeground(new Color(0,0,0));
         defaultatividadeText.setEnabled(true);
         defaultatividadeText.setFont(new Font("sansserif",0,12));
-        defaultatividadeText.setText("AgregadoFamiliar:");
+        defaultatividadeText.setText("Agregado Familiar:");
         defaultatividadeText.setVisible(true);
         
+        ndependentText = new JLabel();
+        ndependentText.setBounds(578,120,300,35);
+        ndependentText.setBackground(new Color(214,217,223));
+        ndependentText.setForeground(new Color(0,0,0));
+        ndependentText.setEnabled(true);
+        ndependentText.setFont(new Font("sansserif",0,12));
+        ndependentText.setText(Integer.toString(fichaP.getndependentes()));
+        ndependentText.setVisible(true);
+        
+        defaultNdependnet = new JLabel();
+        defaultNdependnet.setBounds(440,120,130,35);
+        defaultNdependnet.setBackground(new Color(214,217,223));
+        defaultNdependnet.setForeground(new Color(0,0,0));
+        defaultNdependnet.setEnabled(true);
+        defaultNdependnet.setFont(new Font("sansserif",0,12));
+        defaultNdependnet.setText("NumeroDependentes:");
+        defaultNdependnet.setVisible(true);
         
         AtividadeEconoagregadoText = new JLabel();
-        AtividadeEconoagregadoText.setBounds(583,135,300,35);
+        AtividadeEconoagregadoText.setBounds(578,135,300,35);
         AtividadeEconoagregadoText.setBackground(new Color(214,217,223));
         AtividadeEconoagregadoText.setForeground(new Color(0,0,0));
         AtividadeEconoagregadoText.setEnabled(true);
@@ -658,12 +679,17 @@ public class GUI_FichaCliente extends JFrame {
         listaAgregadotext.setFont(new Font("SansSerif",0,20));
         listaAgregadotext.setText("Lista do Agregado Familiar");
         listaAgregadotext.setVisible(true);
-
         
         
         ListaAgregadoFamiliar = new JList(listModelAgregados);
         for(Integer h : fichaP.getNumerosFiscais()){
-            listModelAgregados.addElement(h);
+            String aux;
+            EntidadePrivada fichapaux = (EntidadePrivada) gestorfichas.getFicha(h);
+            if(fichapaux.getisdependente())
+             aux = h + "   Dependente   " +gestorfichas.getFicha(h).getNome();
+            else
+             aux = h + "   Nao Dependente   " +gestorfichas.getFicha(h).getNome();
+            listModelAgregados.addElement(aux );
         }
             
         ListaAgregadoFamiliar.setBackground(new Color(255,255,255));
@@ -675,7 +701,7 @@ public class GUI_FichaCliente extends JFrame {
         JScrollPane scrollagregado = new JScrollPane();
         scrollagregado.setViewportView(ListaAgregadoFamiliar);
         scrollagregado.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollagregado.setBounds(52,550,236,117);
+        scrollagregado.setBounds(52,550,299,117);
         
      
         
@@ -698,7 +724,28 @@ public class GUI_FichaCliente extends JFrame {
         deducaoprivadatext.setText(df.format(ficha.getdeducaototal())+"€");
         deducaoprivadatext.setVisible(true);
         
-
+        defaultDependente = new JLabel();
+        defaultDependente.setBounds(27,220,90,35);
+        defaultDependente.setBackground(new Color(214,217,223));
+        defaultDependente.setForeground(new Color(0,0,0));
+        defaultDependente.setEnabled(true);
+        defaultDependente.setFont(new Font("sansserif",0,12));
+        defaultDependente.setText("Dependente:");
+        defaultDependente.setVisible(true);
+        
+        
+        DependenteText = new JLabel();
+        DependenteText.setBounds(114,220,90,35);
+        DependenteText.setBackground(new Color(214,217,223));
+        DependenteText.setForeground(new Color(0,0,0));
+        DependenteText.setEnabled(true);
+        DependenteText.setFont(new Font("sansserif",0,12));
+        if(fichaP.getisdependente())
+        DependenteText.setText("SIM");
+        else
+        DependenteText.setText("Nao");
+        DependenteText.setVisible(true);
+        
         codigosText = new JLabel();
         codigosText.setBounds(465,495,300,35);
         codigosText.setBackground(new Color(214,217,223));
@@ -836,6 +883,10 @@ public class GUI_FichaCliente extends JFrame {
         contentPane.add(lFatAgre);
         contentPane.add(scrolllistAgreg);
         contentPane.add(scrollListaFaturas);
+        contentPane.add(defaultNdependnet);
+        contentPane.add(ndependentText);
+        contentPane.add(defaultDependente);
+        contentPane.add(DependenteText);
 
 
     }
@@ -1047,9 +1098,18 @@ public class GUI_FichaCliente extends JFrame {
                 this.ficha = gestorfichas.getFicha(ficha.getnif());
                 fichaP = (EntidadePrivada) ficha;
                 listModelAgregados.removeAllElements();
-                for(Integer h : fichaP.getNumerosFiscais())
-                     listModelAgregados.addElement(h);
+                for(Integer h : fichaP.getNumerosFiscais()){
+                    String aux;
+                    EntidadePrivada fichapaux = (EntidadePrivada) gestorfichas.getFicha(h);
+                    if(fichapaux.getisdependente())
+                        aux = h + "   Dependente   " +gestorfichas.getFicha(h).getNome();
+                    else
+                        aux = h + "   Nao Dependente   " +gestorfichas.getFicha(h).getNome();
+                    listModelAgregados.addElement(aux );
+                }
                 
+                     
+                             
                 fatAgregado.removeAllElements();
                 List<Fatura> listAgreg = new ArrayList();
                 deducaoagregado = 0;
@@ -1062,7 +1122,7 @@ public class GUI_FichaCliente extends JFrame {
                     }
                 }
                 deducaoagregadotext.setText(df.format(deducaoagregado)+ "€");
-                
+                ndependentText.setText(Integer.toString(fichaP.getndependentes()));
             }
         }
     }

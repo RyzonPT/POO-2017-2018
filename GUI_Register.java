@@ -86,7 +86,6 @@ public class GUI_Register extends JFrame {
     private JList EmpDefautAtivlist;
     public GestaoFichas gestorfichas;
     public GestaoFaturas gestorfaturas;
-    private ArrayList<Integer> nifs;
     private ArrayList<String> atividades;
     private JLabel listaAgregadostext;
     private JCheckBox checkbox1;
@@ -98,7 +97,6 @@ public class GUI_Register extends JFrame {
         proprionif="-1";
         nif ="-1";
         visible = false; flag = false;
-        nifs = new ArrayList<Integer>();
         atividades = new ArrayList<String>();
         this.gestorfichas=gestorfichas;
         this.gestorfaturas=gestorfaturas;
@@ -689,7 +687,6 @@ public class GUI_Register extends JFrame {
         listModel3.removeAllElements();
         atividades.clear();
         listModel.removeAllElements();
-        nifs.clear();
         
         NumerosFiscais.setText("");
         ProprioNIF.setText("");
@@ -740,18 +737,26 @@ public class GUI_Register extends JFrame {
     }
     
     private void OnClickedRegistar (MouseEvent evt){
-        if(proprionif.equals("-1") || morada=="" || email=="" || nome=="" || password=="" || !proprionif.matches("[0-9]+") || proprionif.length()>9){
+        if(proprionif.length()!=9){
+            infoBox("Nif tem de conter 9 numeros", "Impossível registar");
+            return;
+        }
+        
+        if(nif.length()!=9){
+            infoBox("Nif de Agregado tem de conter 9 numeros", "Impossível registar");
+            return;
+        }
+        
+        if(proprionif.equals("-1") || morada=="" || email=="" || nome=="" || password=="" || !proprionif.matches("[0-9]+") || nif.matches("[0-9]+")){
             infoBox("Por favor preencha todos os campos", "Impossível registar");
             return;
         }
+        
         if(password.length()<5){
             infoBox("Password tem de conter pelo menos 5 carateres", "Impossível registar");
             return;
         }
-        if(proprionif.length()<9){
-            infoBox("Nif tem de conter pelo menos 9 carateres", "Impossível registar");
-            return;
-        }
+
         else{
             if(gestorfichas.existeFicha(Integer.parseInt(proprionif))){
                 infoBox("Já existe um registo com este proprio Nif", "Impossível registar");
@@ -764,7 +769,7 @@ public class GUI_Register extends JFrame {
                 else 
                     aux = 0;
                 
-                EntidadePrivada c = new EntidadePrivada(Integer.parseInt(proprionif),email,nome,morada,password,aux);
+                EntidadePrivada c = new EntidadePrivada(Integer.parseInt(proprionif),email,nome,morada,password,aux,dependenteflag);
                 gestorfichas.addFicha(c);
                 gestorfichas.mergeAgregado(Integer.parseInt(proprionif),Integer.parseInt(nif));
                
@@ -778,17 +783,17 @@ public class GUI_Register extends JFrame {
     }
     
     private void OnClickedRegistarE (MouseEvent evt){
-        if(nif=="" || morada=="" || email=="" || nome=="" || password=="" || atividades.size()<=0 || !nif.matches("[0-9]+") || nif.length()>9){
+        if(nif.length()!=9){
+            infoBox("Nif tem de conter 9 numeros", "Impossível registar");
+            return;
+        }
+        if(nif=="" || morada=="" || email=="" || nome=="" || password=="" || atividades.size()<=0 || !nif.matches("[0-9]+")){
             infoBox("Por favor preencha todos os campos", "Impossível registar");
             
             return;
         }
         if(password.length()<5){
             infoBox("Password tem de conter pelo menos 5 carateres", "Impossível registar");
-            return;
-        }
-        if(nif.length()<9){
-            infoBox("Nif tem de conter pelo menos 9 carateres", "Impossível registar");
             return;
         }
         else {
@@ -815,6 +820,12 @@ public class GUI_Register extends JFrame {
     
     //Method mouseClicked for AdicionarButton
     private void AgregdadoAdded (MouseEvent evt) {
+        if(!nif.matches("[0-9]+") || nif.length()!=9){
+            infoBox("Nif de Agregado tem de conter 9 numeros", "Impossível registar");
+            NumerosFiscais.setText("");
+            return;
+        }
+        
         if(!gestorfichas.existeFicha(Integer.parseInt(nif))){
             infoBox("Não existe registo com o Nif que adicionou", "Impossível adicionar Nif");
             NumerosFiscais.setText("");
@@ -826,7 +837,6 @@ public class GUI_Register extends JFrame {
                 nif="-1";
             }
             else{
-                NumerosFiscais.setText("");
                 EntidadePrivada fichaP = (EntidadePrivada) gestorfichas.getFicha(Integer.parseInt(nif));
                 listModel.removeAllElements();
                 listModel.addElement(fichaP.getnif());
@@ -906,6 +916,9 @@ public class GUI_Register extends JFrame {
     
     private void onKeyReleasedNif (KeyEvent evt) {
             nif = NumerosFiscais.getText();
+            if(NumerosFiscais.getText().equals(""))
+            nif = "-1";
+            else nif = NumerosFiscais.getText();
     }
     
     private void onKeyReleasedProprioNif (KeyEvent evt) {
