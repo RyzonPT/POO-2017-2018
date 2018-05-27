@@ -4,7 +4,7 @@ import java.io.Serializable;
 public class EntidadeEmpresas extends FichaCliente implements Serializable
 {
    private ArrayList<String> actividadeEconomica;
-   private String regiao;
+   private String regiao; 
    private double faturacao;
    private double deducaofaturacao;
    private int nfaturas;
