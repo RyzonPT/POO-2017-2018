@@ -20,7 +20,6 @@ public class Botao
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            System.out.println(fatura.getdeducao()+"FODASSE");
           GUI_Fatura faturagui = new GUI_Fatura(fatura,ficha,gui,gui.getgestorfaturas(),gui.getgestorfichas());
         }
       });

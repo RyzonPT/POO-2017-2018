@@ -714,7 +714,6 @@ public class GUI_FichaCliente extends JFrame {
         labelk.setText("Deducao Fiscal:");
         labelk.setVisible(true);
         
-        System.out.println(ficha.getdeducaototal()+"DASSSSS");
         deducaoprivadatext = new JLabel();
         deducaoprivadatext.setBounds(570,155,300,35);;
         deducaoprivadatext.setBackground(new Color(214,217,223));

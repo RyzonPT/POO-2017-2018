@@ -81,13 +81,9 @@ public class GUI_Fatura extends JFrame {
         JPanel contentPane = new JPanel(null);
         
         if(fatura.getAtivEconEscolhida().equals("n/a") && (ficha.getfichaType()==0 || fatura.getnifCliente()==ficha.getnif())){
-            System.out.println("entrou no grande");
-            System.out.println("fatura.getnifCliente = "+fatura.getnifCliente()+"    "+"ficha.getnif = "+ficha.getnif()+"faturanome: "+fatura.getAtivEconEscolhida());
             contentPane.setPreferredSize(new Dimension(400,800));
         }
         else{
-            System.out.println("entrou no pequenoooo");
-            System.out.println("fatura.getnifCliente = "+fatura.getnifCliente()+"    "+"ficha.getnif = "+ficha.getnif()+"faturanome: "+fatura.getAtivEconEscolhida());
             contentPane.setPreferredSize(new Dimension(400,600));
         }
         contentPane.setBackground(new Color(192,192,192));
