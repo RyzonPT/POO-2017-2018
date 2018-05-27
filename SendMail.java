@@ -9,7 +9,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class SendMail {
-
+        /** Construtor parametrizado da classe SendMail.
+     *  @param ficha FichaCliente correspondente à ficha do cliente que perdeu a password.
+    */
 	public SendMail(FichaCliente ficha) {
 
 		final String user = "costumeranafreitas@gmail.com";

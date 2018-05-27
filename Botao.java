@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class Botao
   {
-    /** Construtor vazio da classe Fatura. */
+    /** Variáveis de Instância. */
     private JButton Botao;
         /** Construtor parametrizado da classe Botao.
      *  @param name Nome Da empresa que passou a fatura.

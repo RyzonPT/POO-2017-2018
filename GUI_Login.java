@@ -16,7 +16,7 @@ import javax.swing.*;
 import java.util.List;
 
 public class GUI_Login extends JFrame {
-
+    /** Variáveis de Instância. */
     private JMenuBar menuBar;
     private JPasswordField PasswordBox;
     private JTextField TextBox;
@@ -30,7 +30,10 @@ public class GUI_Login extends JFrame {
     private String save = "";
     private JButton buttonvoltar;
 
-    //Constructor 
+    /** Construtor parametrizado da classe GUI_Login.
+     *  @param gestorfichas gestorfichas passado da classe interface.
+     *  @param gestorfaturas gestorfaturas passado da classe interface.
+    */     
     public GUI_Login(GestaoFichas gestorfichas,GestaoFaturas gestorfaturas){
 
         this.setTitle("GUI_project");
@@ -161,6 +164,9 @@ public class GUI_Login extends JFrame {
             save = TextBox.getText();
     }
     
+    /** Metodo que volta para o hall de entrada
+     * param evt Clique do rato.
+     */
     public void onVoltarButtonClicked (MouseEvent evt){
         HallentradaGUI hall = new HallentradaGUI(gestorfichas,gestorfaturas);
         dispose();
@@ -170,7 +176,10 @@ public class GUI_Login extends JFrame {
     {
         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
-    //Method mouseClicked for button1
+    
+    /** Metodo que testa se as credenciais introduzaidas estao corretas e abre a aba da ficha correspondente.
+     * @param evt Clique do rato.
+     */
     private void onLoginButtonClicked (MouseEvent evt) {
             if(save.length() > 9){ 
                 infoBox("Nif pode apenas conter 9 numeros.", "Nif Errado!");
@@ -203,7 +212,8 @@ public class GUI_Login extends JFrame {
         gestorfaturas = a;
     }
     
-    //method for generate menu
+    /** Metodo que cria um toolBar
+     */
     public void generateMenu(){
         menuBar = new JMenuBar();
 

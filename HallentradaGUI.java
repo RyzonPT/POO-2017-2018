@@ -15,6 +15,7 @@ import javax.swing.border.Border;
 import javax.swing.*;
 
 public class HallentradaGUI extends JFrame {
+    /** Variáveis de Instância. */
     private JMenuBar menuBar;
     private JButton Forgotten;
     private JButton Login;
@@ -23,7 +24,10 @@ public class HallentradaGUI extends JFrame {
     private GestaoFaturas gestorfaturas;
     private JButton Exit;
     
-    //Constructor 
+    /** Construtor parametrizado da classe HallentradaGUI.
+     *  @param gestorfichas gestorfichas passado da classe interface.
+     *  @param gestorfaturas gestorfaturas passado da classe interface.
+    */ 
     public HallentradaGUI(GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
 
         this.setTitle("GUI_project");
@@ -125,7 +129,7 @@ public class HallentradaGUI extends JFrame {
         gestorfaturas=a;
     }
 
-    //Method mouseClicked for Forgotten
+
     private void forgottenPass (MouseEvent evt) {
         GUI_RecuperacaoPass recupera = new GUI_RecuperacaoPass(gestorfichas);
     }
@@ -133,20 +137,25 @@ public class HallentradaGUI extends JFrame {
     private void exitapp (MouseEvent evt) {
         System.exit(0);
     }
-
-    //Method mouseClicked for Login
+    
+    /** Metodo que Abre a aba login
+     * @ param evt clique do rato
+     */
     private void gotologin (MouseEvent evt) {
         GUI_Login login = new GUI_Login(gestorfichas,gestorfaturas);
         dispose();
     }
 
-    //Method mouseClicked for Register
+    /** Metodo que Abre a aba registo
+     * @ param evt clique do rato
+     */
     private void gotoregister (MouseEvent evt) {
         GUI_Register register = new GUI_Register(gestorfichas,gestorfaturas);
         dispose();
     }
 
-    //method for generate menu
+    /** Metodo que cria um toolBar
+     */
     public void generateMenu(){
         menuBar = new JMenuBar();
 

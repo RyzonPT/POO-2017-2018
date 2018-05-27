@@ -16,7 +16,7 @@ import javax.swing.*;
 
 
 public class GUI_RecuperacaoPass extends JFrame {
-
+    /** Variáveis de Instância. */
     private JMenuBar menuBar;
     private JButton ButtonPasswordRecover;
     private JTextField TextFNif;
@@ -28,7 +28,9 @@ public class GUI_RecuperacaoPass extends JFrame {
     private String nif;
     private GestaoFichas gestorfichas;
 
-    //Constructor 
+    /** Construtor parametrizado da classe GUI_RecuperacaoPass.
+     *  @param gestorfichas gestorfichas passado da classe interface.
+    */ 
         public GUI_RecuperacaoPass(GestaoFichas gestorfichas){
         this.gestorfichas = gestorfichas;
         this.setTitle("GUI_RecuperacaoPass");
@@ -142,13 +144,16 @@ public class GUI_RecuperacaoPass extends JFrame {
         }
     }
 
-    //Method keyReleased for TextFNif
+    /** Metodo que define o email do cliente
+     * @param evt Evento da Acao
+     */
     private void onTextFNifKeyReleased (KeyEvent evt) {
             nif = TextFNif.getText();
     }
 
 
-    //method for generate menu
+    /** Metodo que cria um toolBar
+     */
     public void generateMenu(){
         menuBar = new JMenuBar();
 

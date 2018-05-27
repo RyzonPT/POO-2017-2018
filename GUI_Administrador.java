@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.text.*;
 
 public class GUI_Administrador extends JFrame {
-
+    /** Variáveis de Instância. */
     private JMenuBar menuBar;
     private JButton dezQueMaisGastam; //10 contribuintes que mais gastam em todo o sistema
     private JButton xempresas; // x empresas com mais faturas  em todo o sistema
@@ -44,7 +44,11 @@ public class GUI_Administrador extends JFrame {
     private JLabel moradaLabel;
     private JLabel nomeLabel;
     private FichaCliente ficha;
-    //Constructor 
+    /** Construtor parametrizado da classe GUI_Login.
+     *  @param gestorfichas gestorfichas passado da classe interface.
+     *  @param gestorfaturas gestorfaturas passado da classe interface.
+     *  @param ficha FichaCliente do Admin
+    */    
     public GUI_Administrador(GestaoFichas gestorfichas,GestaoFaturas gestorfaturas,FichaCliente ficha){
         numerodeempresas="";
         this.gestorfaturas = gestorfaturas;
@@ -257,6 +261,9 @@ public class GUI_Administrador extends JFrame {
         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
     
+    /** Metodo que dá display dos 10 contribuintes que mais gastam em todo o sistema
+     * @param evt Evento acao
+     */
     private void gotodezQueMaisGastam (ActionEvent evt) {
             List<FichaCliente> dezmaisgastam = gestorfichas.gettenUsersMostRich();
             DecimalFormat df = new DecimalFormat("0.00");
@@ -267,7 +274,9 @@ public class GUI_Administrador extends JFrame {
            
         } 
             
-    
+    /** Metodo que dá display das X empresas que contêm o maior numero de faturas
+     * @param evt Clique rato
+     */
     private void gotoxempresas (MouseEvent evt) {
         listModel2.removeAllElements();
         if(numerodeempresas.equals("")|| !numerodeempresas.matches("[0-9]+")){
@@ -287,13 +296,15 @@ public class GUI_Administrador extends JFrame {
     private void onKeyReleasednempresas (KeyEvent evt) {
             numerodeempresas = nempresas.getText();
     }
-    
+    /** Metodo que abre a aba do login e fecha esta.
+     */
     private void onlogOutButtonClicked (MouseEvent evt) {      
          GUI_Login login = new GUI_Login(gestorfichas,gestorfaturas);
          dispose();
     }
     
-    //method for generate menu
+    /** Metodo que cria um toolBar
+     */
     public void generateMenu(){
         menuBar = new JMenuBar();
 
