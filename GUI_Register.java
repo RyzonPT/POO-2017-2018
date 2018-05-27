@@ -82,7 +82,6 @@ public class GUI_Register extends JFrame {
     private JLabel labelNomeE;
     private JLabel labelPasswordE;
     private DefaultListModel listModel = new DefaultListModel();
-    private DefaultListModel listModel2 = new DefaultListModel();
     private DefaultListModel listModel3 = new DefaultListModel();
     private JList EmpDefautAtivlist;
     public GestaoFichas gestorfichas;
@@ -676,11 +675,29 @@ public class GUI_Register extends JFrame {
     
     private void setvisibility (ActionEvent evt) {
         String itemSelecionado = (String) combobox1.getSelectedItem();
-        if(itemSelecionado.equals("Empresa")){ flag = false;
-        System.out.println(itemSelecionado);}
+        if(itemSelecionado.equals("Empresa")){ 
+            flag = false;
+        }
         else flag = true;
+        
+        RMoradaE.setText("");
+        REmailE.setText("");
+        RNifE.setText("");
+        RNomeE.setText("");
+        RPasswordE.setText("");
+        
+        listModel3.removeAllElements();
+        atividades.clear();
+        listModel.removeAllElements();
+        nifs.clear();
+        
+        NumerosFiscais.setText("");
+        ProprioNIF.setText("");
+        RMorada.setText("");
+        REmail.setText("");
+        RPassword.setText("");
+        RNome.setText("");
         if (flag!=visible){
-            System.out.println("lalalala");
             visible = !visible;
             REmailE.setVisible(!visible);
             RMoradaE.setVisible(!visible);
