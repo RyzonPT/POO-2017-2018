@@ -104,7 +104,7 @@ public class Fatura implements Serializable
        moradaEmpresa = c.getmoradaEmpresa();
        emailEmpresa = c.getemailEmpresa();
        nifEmpresa = c.getnifEmpresa();
-       data = LocalDate.now();
+       data = c.getData();
        produto = c.getProduto();
        imposto =c.getimposto();
        actividadeEconomica = c.getActividadeEconomica();

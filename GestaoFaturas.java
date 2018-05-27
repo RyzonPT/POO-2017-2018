@@ -2,6 +2,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
+import java.util.Collections;
 import java.util.List;
 import java.util.Comparator;
 import java.util.ArrayList;
@@ -124,6 +125,7 @@ public class GestaoFaturas implements Serializable
     public List<Fatura> OrdFaturasData(int nif){
         List<Fatura> aux = new ArrayList<Fatura>(getmadefaturas(nif));
         aux.sort((o1, o2) -> o1.getData().compareTo(o2.getData()));
+        Collections.reverse(aux);
         return aux;
     }
     
@@ -142,6 +144,8 @@ public class GestaoFaturas implements Serializable
                 aux.add(h.clone());
             }
         }
+        aux.sort((o1, o2) -> o1.getData().compareTo(o2.getData()));
+        Collections.reverse(aux);
         return aux;
     }
     
@@ -150,6 +154,7 @@ public class GestaoFaturas implements Serializable
         aux.sort(Comparator.comparingDouble(Fatura::getvalortotal).reversed());
         return aux;
     }
+    
     
     public double getIntervalFaturacao(Date datai, Date dataf, int nifEmpresa, int nifCliente){
        List <Fatura> a = new ArrayList<Fatura>();
@@ -164,14 +169,6 @@ public class GestaoFaturas implements Serializable
        
         return total;
     }
-    
-    /*public double CalculaDecucaoCliente(EntidadePrivada fichaP){
-        double deducaototal = 0;        
-        for(Fatura h : getmyfaturas(fichaP.getnif())){
-             deducaototal += h.calculoDeducaoPrivada(fichaP.getndependentes());
-        }
-        return deducaototal;
-    }*/
     
     public double totalDeducaoEmpresa (int nif){
         double totalDeducao=0;

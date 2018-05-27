@@ -309,7 +309,7 @@ public class GUI_Register extends JFrame {
         AdicionarButtonNifs.setForeground(new Color(0,0,0));
         AdicionarButtonNifs.setEnabled(true);
         AdicionarButtonNifs.setFont(new Font("sansserif",0,12));
-        AdicionarButtonNifs.setText("Adicionar");
+        AdicionarButtonNifs.setText("Check");
         AdicionarButtonNifs.setVisible(visible);
         //  Set methods for mouse events
         //Call defined methods
@@ -737,17 +737,22 @@ public class GUI_Register extends JFrame {
     }
     
     private void OnClickedRegistar (MouseEvent evt){
-        if(proprionif.length()!=9){
+        if(proprionif.length()!=9 || !proprionif.matches("[0-9]+")){
             infoBox("Nif tem de conter 9 numeros", "Impossível registar");
             return;
         }
         
-        if(nif.length()!=9){
+        if((nif.length()!=9 && !nif.equals("-1")) || (!nif.matches("[0-9]+") && !nif.equals("-1"))){
             infoBox("Nif de Agregado tem de conter 9 numeros", "Impossível registar");
             return;
         }
         
-        if(proprionif.equals("-1") || morada=="" || email=="" || nome=="" || password=="" || !proprionif.matches("[0-9]+") || nif.matches("[0-9]+")){
+        if(!gestorfichas.existeFicha(Integer.parseInt(nif)) && !nif.equals("-1")){
+            infoBox("Nif de Agregado Não Existe", "Impossível registar");
+            return;
+        }
+        
+        if( morada.equals("") || email.equals("") || nome.equals("") || password.equals("")){
             infoBox("Por favor preencha todos os campos", "Impossível registar");
             return;
         }

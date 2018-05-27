@@ -261,7 +261,7 @@ public class GUI_Administrador extends JFrame {
             List<FichaCliente> dezmaisgastam = gestorfichas.gettenUsersMostRich();
             DecimalFormat df = new DecimalFormat("0.00");
             for(FichaCliente h : dezmaisgastam) {
-                listModel.addElement("Nif: "+h.getnif()+" Total Gasto: "+df.format(h.getmoneyspent()));
+                listModel.addElement("Nif: "+h.getnif()+" -  Total Gasto: "+df.format(h.getmoneyspent())+"€");
             }
             dezQueMaisGastam.setEnabled(false);
            
@@ -279,7 +279,7 @@ public class GUI_Administrador extends JFrame {
             xEmpresas = lista2;
             DecimalFormat df = new DecimalFormat("0.00");
             for(EntidadeEmpresas x : xEmpresas) {
-                listModel2.addElement("Nif: "+x.getnif()+" Faturas: "+df.format(x.getnfaturas())+" Dedução fiscal: "+df.format(x.getdeducaofaturacao()));
+                listModel2.addElement("Nif: "+x.getnif()+" -  Faturas: "+Integer.toString(x.getnfaturas())+" -  Dedução fiscal: "+df.format(x.getdeducaofaturacao())+"€");
             }
         }
     }
