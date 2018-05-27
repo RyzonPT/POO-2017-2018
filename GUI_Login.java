@@ -172,6 +172,11 @@ public class GUI_Login extends JFrame {
     }
     //Method mouseClicked for button1
     private void onLoginButtonClicked (MouseEvent evt) {
+            if(save.length() > 9){ 
+                infoBox("Nif pode apenas conter 9 numeros.", "Nif Errado!");
+                return;
+            }
+            
             int nif = Integer.parseInt(save);
                 FichaCliente fichaEncontrada = gestorfichas.autenticacao(password,nif);
 

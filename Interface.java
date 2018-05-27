@@ -40,32 +40,50 @@ public class Interface
             
             
             ArrayList<Integer> lolis3 = new ArrayList<Integer>();
-                
-             /*ObjectInputStream infaturas = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
-                GestaoFaturas gestorfaturas = (GestaoFaturas) infaturas.readObject();
-                ObjectInputStream infichas = new ObjectInputStream(new FileInputStream("gestorfichas.txt"));
-                GestaoFichas gestorfichas = (GestaoFichas) infichas.readObject();
-                HallentradaGUI hall = new HallentradaGUI(gestorfichas,gestorfaturas);*/
+                    
+            GestaoFaturas gestorfaturas;
+            GestaoFichas gestorfichas;
+            
+            try{
+             ObjectInputStream infaturas = new ObjectInputStream(new FileInputStream("gestorfaturas.txt"));
+                gestorfaturas = (GestaoFaturas) infaturas.readObject();
+            }
+            catch ( FileNotFoundException exception){
+                gestorfaturas = new GestaoFaturas();
+            }
+            
+            try{
+                            ObjectInputStream infichas = new ObjectInputStream(new FileInputStream("gestorfichas.txt"));
+                gestorfichas = (GestaoFichas) infichas.readObject();
+            }
+            catch ( FileNotFoundException exception){
+                gestorfichas = new GestaoFichas();
+            }
+            
+            
+            HallentradaGUI hall = new HallentradaGUI(gestorfichas,gestorfaturas);
+            GestaoAtividadeEconomica gestoratividade = new GestaoAtividadeEconomica();
+            
             ArrayList<Integer> lolis4 = new ArrayList<Integer>();
                 lolis4.add(2); 
+                
+                if(gestorfaturas == null) System.out.println("DEU");
 
                 
-           
-         
+            /* FichaCliente admin = new FichaCliente(000000000,"costumeranafreitas@gmail.com","Ana Freitas","nº52 Rua dos Anjos, 4730-324 Porto","admin");
+             admin.setfichaType(3);
+             gestorfichas.addFicha(admin);
+            
+         /*
             ArrayList<Integer> olas= new ArrayList<Integer>();
             GestaoFichas gestorfichas = new GestaoFichas();
             GestaoFaturas gestorfaturas = new GestaoFaturas();
             HallentradaGUI hall = new HallentradaGUI(gestorfichas,gestorfaturas);
-            
-             FichaCliente admin = new FichaCliente(000000000,"costumeranafreitas@gmail.com","Ana Freitas","nº52 Rua dos Anjos, 4730-324 Porto","admin");
-             admin.setfichaType(3);
-             gestorfichas.addFicha(admin);
-            GestaoAtividadeEconomica gestoratividade = new GestaoAtividadeEconomica();
                         
                         ArrayList<String> a =new ArrayList<String>();
             a.add("Educacao");
             a.add("Saude");
-            
+            /*
             
                              EntidadePrivada fichaPrivada7 = new EntidadePrivada(7,"Filipe-Cunha1@hotmail.com","Filipe","morada","tanos",0);
             gestorfichas.addFicha(fichaPrivada7);
@@ -137,7 +155,6 @@ public class Interface
             
             
             
-            Interface obj = new Interface ();
             //obj.run (gestorFichas);
         }
         catch (Exception e)

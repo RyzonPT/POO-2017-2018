@@ -894,7 +894,9 @@ public class GUI_Register extends JFrame {
     }
     
     private void onKeyReleasedProprioNif (KeyEvent evt) {
-            proprionif = ProprioNIF.getText();
+            if(ProprioNIF.getText().equals(""))
+            proprionif = "-1";
+            else proprionif =ProprioNIF.getText();
     }
     
     private void onKeyReleasedREmail (KeyEvent evt) {

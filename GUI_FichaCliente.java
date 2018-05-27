@@ -93,14 +93,15 @@ public class GUI_FichaCliente extends JFrame {
     private JTextField nifAgregadotext;
     private String nifagregado;
     private DefaultListModel listModelAgregados = new DefaultListModel();
+    private DefaultListModel fatAgregado = new DefaultListModel();
     private JLabel faturacaototaltext;
+    private DecimalFormat df = new DecimalFormat("0.00");
     private JLabel faturacaototaltext2;
 
     //Constructor 
     public GUI_FichaCliente(FichaCliente fichas,GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
         ficha=fichas;
         nifCliente = "-1";
-        DecimalFormat df = new DecimalFormat("0.00");
         this.gestorfaturas = gestorfaturas;
         this.gestorfichas = gestorfichas;
         this.setTitle("GUI_FichaCliente");
@@ -769,26 +770,18 @@ public class GUI_FichaCliente extends JFrame {
         lFatAgre.setText("Faturas dos Agregados");
         lFatAgre.setVisible(true);
         
-        List <Fatura> listAgreg = new ArrayList<>();
-        int l = 0;
-    for(Integer k : fichaP.getNumerosFiscais()){
-           l += gestorfaturas.getmyfaturas(k).size();
-    }
     
-    Object[] botoes2 = new Botao[l];
-    int m = 0;
-     for(Integer k : fichaP.getNumerosFiscais()){
-       listAgreg = gestorfaturas.getmyfaturas(k);
-       for(Fatura h : listAgreg){
-           botoes2[m] = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha,this);
-           m++;
-
-           EntidadePrivada fp = (EntidadePrivada) gestorfichas.getFicha(k);
-
-           deducaoagregado += h.getdeducao();
-       }
-    }
-        list2 = new JList(botoes2);
+        list2 = new JList(fatAgregado);
+        List <Fatura> listAgreg = new ArrayList<>();
+        deducaoagregado = 0;
+        for(Integer k : fichaP.getNumerosFiscais()){
+            listAgreg = gestorfaturas.getmyfaturas(k);
+            for(Fatura h : listAgreg){
+                Botao botao2 = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha,this);
+                fatAgregado.addElement(botao2);
+                deducaoagregado += h.getdeducao();
+            }
+        }
         list2.setBackground(new Color(255,255,255));
         list2.setForeground(new Color(0,0,0));
         list2.setEnabled(true);
@@ -1056,6 +1049,20 @@ public class GUI_FichaCliente extends JFrame {
                 listModelAgregados.removeAllElements();
                 for(Integer h : fichaP.getNumerosFiscais())
                      listModelAgregados.addElement(h);
+                
+                fatAgregado.removeAllElements();
+                List<Fatura> listAgreg = new ArrayList();
+                deducaoagregado = 0;
+                for(Integer k : fichaP.getNumerosFiscais()){
+                    listAgreg = gestorfaturas.getmyfaturas(k);
+                    for(Fatura h : listAgreg){
+                        Botao botao2 = new Botao(Integer.toString(h.getfaturaID())+"   "+h.getnomeEmpresa(),h,ficha,this);
+                        fatAgregado.addElement(botao2);
+                        deducaoagregado += h.getdeducao();
+                    }
+                }
+                deducaoagregadotext.setText(df.format(deducaoagregado)+ "€");
+                
             }
         }
     }

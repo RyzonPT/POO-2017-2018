@@ -307,7 +307,8 @@ public class Fatura implements Serializable
    public double calculoDeducaoPrivada(int ndependentes){
         if (ativEconEscolhida.equals("n/a")) return 0;
         Pair<Double,Integer> pair = GestaoAtividadeEconomica.getEnumPrivadaMap().get(GestaoAtividadeEconomica.AtividadeEconomica.valueOf(ativEconEscolhida));
-        deducao = pair.getKey() * 0.23 * (ndependentes) * valortotal;
+        deducao = pair.getKey() * 0.23 * (ndependentes+1) *0.1 * valortotal;
+        System.out.println(deducao+"  " +"ndependentes:"+ndependentes);
         return deducao;
    }
    
