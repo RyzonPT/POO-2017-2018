@@ -24,7 +24,7 @@ import java.util.List;
 import java.text.*;
 
 public class GUI_CriaFatura extends JFrame {
-
+    /**Variaveis de instancia*/
     private JMenuBar menuBar;
     private JButton AdicionarButton;
     private JButton removerbotao;

@@ -26,7 +26,7 @@ import javax.swing.event.ListSelectionListener;
 import java.lang.*;
 
 public class GUI_Register extends JFrame {
-    //Registo de individuo
+    /**Variaveis de instancia*/
     private JMenuBar menuBar;
     private JButton BRegistar;
     private JTextField REmail;
@@ -91,7 +91,7 @@ public class GUI_Register extends JFrame {
     private JCheckBox checkbox1;
     private boolean dependenteflag;
 
-    //Constructor 
+    /**Construtor vazio da classe*/
     public GUI_Register(GestaoFichas gestorfichas, GestaoFaturas gestorfaturas){
         nif=password=morada=email=nome=atividadeEconomica=""; regiao = "EntreDouroMinho";
         proprionif="-1";
@@ -665,12 +665,17 @@ public class GUI_Register extends JFrame {
         this.setVisible(true);
     }
 
-     
+    /** Metodo para defenir a regiao duma EntidadeEmpresa.
+     * @param evt  Evento da ação.
+        */
     private void setcomboboxregiao (ActionEvent evt) {
         String itemSelecionado = (String) combobox2.getSelectedItem();
         regiao = itemSelecionado;
     }
     
+    /** Metodo para alternar entre a interface de registo de EntidadeEmpresas e EntidadePrivada.
+     * @param evt  Evento da ação.
+        */
     private void setvisibility (ActionEvent evt) {
         String itemSelecionado = (String) combobox1.getSelectedItem();
         if(itemSelecionado.equals("Empresa")){ 
@@ -736,6 +741,9 @@ public class GUI_Register extends JFrame {
         }
     }
     
+    /** Metodo registar uma EntidadePrivada.
+     * @param evt  Click do rato.
+        */
     private void OnClickedRegistar (MouseEvent evt){
         if(proprionif.length()!=9 || !proprionif.matches("[0-9]+")){
             infoBox("Nif tem de conter 9 numeros", "Impossível registar");
@@ -787,6 +795,9 @@ public class GUI_Register extends JFrame {
         }
     }
     
+    /** Metodo registar uma EntidadeEmpresas.
+     * @param evt  Click do rato.
+        */
     private void OnClickedRegistarE (MouseEvent evt){
         if(nif.length()!=9){
             infoBox("Nif tem de conter 9 numeros", "Impossível registar");
@@ -818,12 +829,18 @@ public class GUI_Register extends JFrame {
         }
     }
     
+    /** Metodo que da display num aviso.
+     * @param String  mensagem do aviso.
+     * @param tittleBar titulo do aviso.
+        */
     public static void infoBox(String infoMessage, String titleBar)
     {
         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
     
-    //Method mouseClicked for AdicionarButton
+    /** Metodo Adicionar um Agregado Familiar.
+     * @param evt  Click do rato.
+        */
     private void AgregdadoAdded (MouseEvent evt) {
         if(!nif.matches("[0-9]+") || nif.length()!=9){
             infoBox("Nif de Agregado tem de conter 9 numeros", "Impossível registar");
@@ -851,6 +868,9 @@ public class GUI_Register extends JFrame {
         }
     }
     
+    /** Metodo para adicionar uma Atividade Economica a uma  EntidadeEmpresas.
+     * @param evt  Click do rato.
+        */
     private void AtividadeAdded (MouseEvent evt) {
         if(listModel3.contains(EmpDefautAtivlist.getSelectedValue())){
             infoBox("Já adicionou esta atividade", "Impossível adicionar atividade");
@@ -860,6 +880,9 @@ public class GUI_Register extends JFrame {
         atividades.add(EmpDefautAtivlist.getSelectedValue().toString());         
     }
     
+     /** Metodo para remover uma Atividade Economica a uma EntidadeEmpresas.
+     * @param evt  Click do rato.
+        */
     private void  AtividadeRemoved (MouseEvent evt) {
         int selectedIndex = EmpAtividList.getSelectedIndex();
         if (selectedIndex != -1) {
@@ -872,53 +895,82 @@ public class GUI_Register extends JFrame {
         }
     }
     
+    /** Metodo para sair do registo.
+     * @param evt  Click do rato.
+        */
     public void onVoltarButtonClicked (MouseEvent evt){
         HallentradaGUI hall = new HallentradaGUI(gestorfichas,gestorfaturas);
         dispose();
     }
     
+    /** Define o gestorfichas.
+    * @param a GestaoFichas.
+      */
     public void setgestorfichas(GestaoFichas a){
         gestorfichas = a;
     }
     
+    /** Define o gestorfaturas.
+    * @param a GestaoFaturas.
+      */
     public void setgestorfaturas(GestaoFaturas a){
         gestorfaturas = a;
     }
-    
-    private void onKeyReleasedRegiao (KeyEvent evt) {
-            regiao = RRegiao.getText();
-    }
-    
+
+    /** Metodo para defenir a morada duma EntidadeEmpresa.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedMoradaE (KeyEvent evt) {
             morada = RMoradaE.getText();
     }
     
+    /** Metodo para defenir o email duma EntidadeEmpresa.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedEmailE (KeyEvent evt) {
             email = REmailE.getText();
     }
     
+    /** Metodo para defenir o nif duma EntidadeEmpresa.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedNifE (KeyEvent evt) {
             if(RNifE.getText().equals(""))
             nif = "-1";
             else nif =RNifE.getText();
     }
     
+    /** Metodo para defenir o nome duma EntidadeEmpresa.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedRNomeE (KeyEvent evt) {
             nome = RNomeE.getText();
     }
     
+    /** Metodo para defenir a password duma EntidadeEmpresa.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedRPasswordE (KeyEvent evt) {
             password = RPasswordE.getText();
     }
     
+    /** Metodo para defenir se uma EntidadePrivada é dependente.
+     * @param evt  Click do rato.
+        */
     private void OnCheckBoxClicked(MouseEvent e){
         dependenteflag = checkbox1.isSelected();
     }
     
+    /** Metodo para defenir a AtividadeEconomica duma EntidadeEmpresa.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedAtividadeEconomica (KeyEvent evt) {
             atividadeEconomica = RAtividadeEconomica.getText();
     }
     
+    /** Metodo para defenir o nif do agregado duma EntidadePrivada.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedNif (KeyEvent evt) {
             nif = NumerosFiscais.getText();
             if(NumerosFiscais.getText().equals(""))
@@ -926,29 +978,45 @@ public class GUI_Register extends JFrame {
             else nif = NumerosFiscais.getText();
     }
     
+    /** Metodo para defenir o nif  duma EntidadePrivada.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedProprioNif (KeyEvent evt) {
             if(ProprioNIF.getText().equals(""))
             proprionif = "-1";
             else proprionif =ProprioNIF.getText();
     }
     
+    /** Metodo para defenir o email  duma EntidadePrivada.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedREmail (KeyEvent evt) {
             email = REmail.getText();
     }
     
+    /** Metodo para defenir a morada  duma EntidadePrivada.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedRMorada (KeyEvent evt) {
             morada = RMorada.getText();
     }
     
+    /** Metodo para defenir o nome  duma EntidadePrivada.
+     * @param evt  Evento da ação.
+        */
     private void onKeyReleasedRNome (KeyEvent evt) {
             nome = RNome.getText();
     }
     
+    /** Metodo para defenir a password  duma EntidadePrivada.
+     * @param evt  Evento da ação.
+        */
         private void onKeyReleasedRPassword (KeyEvent evt) {
             password = RPassword.getText();
     }
     
-    //method for generate menu
+    /** Metodo que cria uma ToolBar.
+        */
     public void generateMenu(){
         menuBar = new JMenuBar();
 

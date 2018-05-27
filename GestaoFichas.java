@@ -16,28 +16,43 @@ import java.util.Comparator;
 
 public class GestaoFichas implements Serializable
 {
+    /**Variaveis de instancia*/
     private Map<Integer,FichaCliente> fichas;
     
+    /**Construtor vazio da classe*/
     public GestaoFichas()
     {
         this.fichas = new HashMap<Integer,FichaCliente>(); 
 
     }
     
-    public GestaoFichas(Map<Integer,FichaCliente> fch) {
-       this.fichas = fch.values().stream().collect(Collectors.toMap((e) -> e.getnif(),(e) -> e.clone()));
+     /**Construtor paremetizado da classe
+       * @param ficha  Fichas da GestaoFichas
+         */
+    public GestaoFichas(Map<Integer,FichaCliente> ficha) {
+       this.fichas = ficha.values().stream().collect(Collectors.toMap((e) -> e.getnif(),(e) -> e.clone()));
 
     }
     
+    /** Construtor de copia da Classe GestaoFichas 
+       * @param a Paramentro externo para fazer a cópia.
+        */
     public GestaoFichas(GestaoFichas a){
         this.fichas=a.getfichas();
 
     }
     
+    /** Get fichas gravadas na GestaoFichas.
+    * @return fichas gravadas na GestaoFichas.
+      */
     public Map<Integer,FichaCliente> getfichas(){
         return this.fichas.values().stream().collect(Collectors.toMap((e)->e.getnif(),(e)->e.clone()));
     }
     
+    
+    /**Metodo para adicionar uma ficha na GestaoFichas.
+     *  @param a FichaCliente que vai ser adicionada. 
+        */
     public void addFicha (FichaCliente a){
         this.fichas.put(a.getnif(),a.clone());
         try{
@@ -50,6 +65,9 @@ public class GestaoFichas implements Serializable
         }
     }
     
+    /**Metodo para remover uma ficha na GestaoFichas.
+     *  @param nif nif da FichaCliente que vai ser removida. 
+        */
     public void removeFicha (Integer nif){
         this.fichas.remove(nif);
         try{
@@ -62,18 +80,25 @@ public class GestaoFichas implements Serializable
         }
     }
     
-    public boolean existeFicha(int nif){
+   /**Metodo que testa se existe uma determina ficha na GestaoFichas.
+     *  @param nif nif da FichaCliente que vai ser testada. 
+     *  @return booleano, true se exitir false se nao existir.
+        */
+   public boolean existeFicha(int nif){
        return fichas.containsKey(nif);
-    }
+   }
     
-    public int quantasFichas(){
-        return fichas.size();
-    }
-    
-    public FichaCliente getFicha(Integer nif){
+   /** Get uma determinada ficha gravada na GestaoFichas.
+    * *param nif nif da FichaCliente que vamos procurar.
+    * @return  A ficha gravada na GestaoFichas.
+      */
+   public FichaCliente getFicha(Integer nif){
         return fichas.get(nif).clone();
-    }
-    
+   }
+   
+   /** Metodo para transformar a informação das variavies de instancia em String.
+    * @return Uma String com a info da GestaoFichas.
+      */
     public String toString() {
      StringBuffer sb = new StringBuffer();
      for (FichaCliente e: this.fichas.values())
@@ -81,6 +106,9 @@ public class GestaoFichas implements Serializable
      return sb.toString(); 
    }
     
+   /**Metodo para verificar se duas GestaoFichas sao iguais.
+     *  @return Um boolean (true ou false).
+        */
     public boolean equals( Object a ){
         if(this==a)
         return true;
@@ -89,12 +117,21 @@ public class GestaoFichas implements Serializable
         GestaoFichas b = (GestaoFichas) a;
         return this.fichas.equals(b.getfichas());
     }
-    
+   
+    /** Metodo para clonar a GestaoFichas.
+     *  @return uma  GestaoFichas clonada atraves do construtor copia.
+        */
     public GestaoFichas clone(){
         return new GestaoFichas(this);
     }
 
     
+    /** Metodo para testar se alguma FichaCliente com password e o nif na GestaoFichas.
+     * @param password password a testar.
+     * @param nif nif a testar
+     *  @return true se a ficha existir false se nao existir.
+        */
+       
     public boolean testaautenticacao(String password, int nif){
                      if (!this.existeFicha(nif)){
                 return false;
@@ -108,6 +145,11 @@ public class GestaoFichas implements Serializable
             return true;
     }
     
+    /** Metodo para devolver uma FichaCliente do GestaoFichas.
+     * @param password password da FichaCliente que queremos.
+     * @param nif nif da FichaCliente que queremos.
+     *  @return A FichaCliente ,null caso nao existe.
+        */   
     public FichaCliente autenticacao(String password, int nif){
         if(testaautenticacao(password,nif)){
             FichaCliente fichaEncontrada = this.getFicha(nif);
@@ -116,6 +158,9 @@ public class GestaoFichas implements Serializable
         return null;
     }    
     
+    /** Metodo para criar um ArrayList com as 10 FichaClientes que mais gastaram em toda GestaoFichas.
+     *  @return um ArrayList com as 10 FichaClientes que mais gastaram em toda GestaoFichas.
+        */
    public List<FichaCliente> gettenUsersMostRich(){
         List<FichaCliente> richppl = new ArrayList<FichaCliente>(fichas.values());
         richppl.sort(Comparator.comparingDouble(FichaCliente::getmoneyspent).reversed());
@@ -123,8 +168,11 @@ public class GestaoFichas implements Serializable
         return richppl;
    }
     
-    
-   public List<EntidadeEmpresas> getMoneyEmpresas(int x){
+    /** Metodo para criar um ArrayList com as N EntidadeEmpresas com mais faturas em toda GestaoFichas.
+     * @param N tamanho do ArrayList.
+     *  @return um ArrayList com as N EntidadeEmpresas com mais faturas em toda GestaoFichas.
+        */
+   public List<EntidadeEmpresas> getMoneyEmpresas(int N){
         List<EntidadeEmpresas> a = new ArrayList<EntidadeEmpresas>();
         for( FichaCliente b : fichas.values()){
             if( b instanceof EntidadeEmpresas){
@@ -132,10 +180,15 @@ public class GestaoFichas implements Serializable
             }
         }
         a.sort(Comparator.comparingDouble(EntidadeEmpresas::getnfaturas).reversed());
-        a = a.stream().limit(x).collect(Collectors.toList());
+        a = a.stream().limit(N).collect(Collectors.toList());
         return a;
     }
     
+    
+    /** Metodo para criar um ArrayList com as FichaCliente do agregado Familiar de uma FichaCliente.
+     * @param nif nif da FichaCliente.
+     *  @return um ArrayList com as FichaCliente do agregado Familiar de uma FichaCliente.
+        */
    public List<FichaCliente> getAgregadoFichas(int nif){
        List<FichaCliente> agregado = new ArrayList();
        if( getFicha(nif) instanceof EntidadeEmpresas){
@@ -148,6 +201,10 @@ public class GestaoFichas implements Serializable
        return agregado;
    }
    
+   /** Metodo para dar merge em 2 listas de agregados familiares.
+     * @param nif1 nif da FichaCliente do primeiro agregado.
+     * @param nif2 nif da FichaCliente do segundo agregado.
+        */
    public void mergeAgregado(int nif1, int nif2){
        if(!existeFicha(nif1) || !existeFicha(nif2)) return;
        

@@ -9,8 +9,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 public class Interface
 {
-    /**NOTAS/ToDo
-       No registo de privados, falta os NumerosFiscais, CoeficienteFiscal e CodigosAtividades*/
     public static void main (String[] args)
     {
         try
