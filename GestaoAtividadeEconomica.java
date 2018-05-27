@@ -5,6 +5,7 @@ import java.lang.Object;
 
 public class  GestaoAtividadeEconomica
 {
+    /** Variáveis de Instância. */
    public enum AtividadeEconomica{
        Saude,
        Educacao,
@@ -33,7 +34,7 @@ public class  GestaoAtividadeEconomica
    
    public static EnumMap<Regiao,Double> EnumEmpresaMap;
    public static EnumMap<AtividadeEconomica,Pair<Double,Integer>> EnumPrivadaMap;
-
+   /** Construtor vazio da classe GestaoAtividadeEconomica. */
    public GestaoAtividadeEconomica(){
        EnumEmpresaMap = new EnumMap<Regiao,Double>(Regiao.class);
        EnumEmpresaMap.put(Regiao.EntreDouroMinho, 0.23);
@@ -71,10 +72,16 @@ public class  GestaoAtividadeEconomica
        EnumPrivadaMap.put(AtividadeEconomica.PassesMensais, PassesMensais);
    }
    
+       /** Get EnumEmpresaMap da GestaoAtividadeEconomica
+      * @return EnumEmpresaMap da GestaoAtividadeEconomica.
+      */
    public static EnumMap<Regiao,Double> getEnumEmpresaMap(){
        return EnumEmpresaMap;
     }
     
+        /** Get getEnumPrivadaMap da GestaoAtividadeEconomica
+      * @return getEnumPrivadaMap da GestaoAtividadeEconomica.
+      */
    public static EnumMap<AtividadeEconomica,Pair<Double,Integer>> getEnumPrivadaMap(){
        return EnumPrivadaMap;
     }
